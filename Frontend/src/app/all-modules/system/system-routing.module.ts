@@ -15,7 +15,8 @@ const routes: Routes = [
 
       {
         path:'menu/create',
-        component:MenuCreateComponent
+        component:MenuCreateComponent,
+        canActivate:[MenuGuard]
       },
       {
         path:'menu/list',
@@ -24,11 +25,13 @@ const routes: Routes = [
       },
       {
         path:'menu/show/:id',
-        component:MenuShowComponent
+        component:MenuShowComponent,
+        canActivate:[MenuGuard]
       },
       {
         path:'menu/edit/:id',
-        component:MenuEditComponent
+        component:MenuEditComponent,
+        canActivate:[MenuGuard]
       },
 
 

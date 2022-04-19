@@ -94,13 +94,12 @@ export class LoginComponent implements OnInit {
       }
 
 
-
-      // if( authorities.includes("ROLE_USER") || authorities.includes("ROLE_ADMIN") || authorities.includes("ROLE_SUPER_ADMIN") || authorities.includes("ROLE_BBS_USER") || authorities.includes("ROLE_TIRE1_USER") ){
-      //   this.toastr.success('You are now authenticated','Success', { positionClass:'toast-custom' })
-      //   this.spinnerService.hide();
-      //   this.router.navigate(['/dashboard/admin']);
-      //   this.loginService.loginStatusSubject.next(true);
-      // }
+      else if(authorities.includes("ROLE_SUPER_ADMIN")){
+        this.toastr.success('You are now authenticated','Success', { positionClass:'toast-custom' })
+        this.spinnerService.hide();
+        this.router.navigate(['/dashboard/admin']);
+        this.loginService.loginStatusSubject.next(true);
+      }
 
       else{
         this.spinnerService.hide();

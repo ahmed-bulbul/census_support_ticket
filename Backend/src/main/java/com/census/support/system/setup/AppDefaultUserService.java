@@ -122,27 +122,7 @@ public class AppDefaultUserService {
         }
     }
 
-    public void createMenu(){
-        if(!menuRepository.findByCode("Dashboard").isPresent()){
-            SystemMenu systemMenu = new SystemMenu();
-            systemMenu.setId(1L);
-            systemMenu.setCode("Dashboard");
-            systemMenu.setIconHtml("fa fa-dashboard");
-            systemMenu.setOpenUrl("/dashboard");
-            systemMenu.setIsActive(true);
-            systemMenu.setHasChild(true);
-            menuRepository.save(systemMenu);
-        }
-        if(!menuRepository.findByCode("User").isPresent()){
-            SystemMenu systemMenu = new SystemMenu();
-            systemMenu.setId(2L);
-            systemMenu.setCode("User");
-            systemMenu.setIconHtml("fa fa-user");
-            systemMenu.setOpenUrl("/user");
-            menuRepository.save(systemMenu);
-        }
 
-    }
 
     //@PostConstruct
     public void createDefaultUserAndRoles(){
