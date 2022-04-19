@@ -5,6 +5,8 @@ import com.census.support.acl.role.RoleRepository;
 import com.census.support.acl.user.User;
 import com.census.support.acl.user.UserRepository;
 import com.census.support.system.constants.SystemRole;
+import com.census.support.system.menu.SystemMenu;
+import com.census.support.system.menu.SystemMenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,9 @@ public class AppDefaultUserService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private SystemMenuRepository menuRepository;
 
     public void createRoles(){
 
@@ -117,10 +122,33 @@ public class AppDefaultUserService {
         }
     }
 
+    public void createMenu(){
+        if(!menuRepository.findByCode("Dashboard").isPresent()){
+            SystemMenu systemMenu = new SystemMenu();
+            systemMenu.setId(1L);
+            systemMenu.setCode("Dashboard");
+            systemMenu.setIconHtml("fa fa-dashboard");
+            systemMenu.setOpenUrl("/dashboard");
+            systemMenu.setIsActive(true);
+            systemMenu.setHasChild(true);
+            menuRepository.save(systemMenu);
+        }
+        if(!menuRepository.findByCode("User").isPresent()){
+            SystemMenu systemMenu = new SystemMenu();
+            systemMenu.setId(2L);
+            systemMenu.setCode("User");
+            systemMenu.setIconHtml("fa fa-user");
+            systemMenu.setOpenUrl("/user");
+            menuRepository.save(systemMenu);
+        }
+
+    }
+
     //@PostConstruct
     public void createDefaultUserAndRoles(){
         this.createRoles();
         this.createUser();
+        //this.createMenu();
     }
 
 

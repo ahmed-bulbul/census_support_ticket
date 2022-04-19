@@ -1,0 +1,150 @@
+<!-- Page Content -->
+<div class="content container-fluid">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="page-title">User</h3>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/dashboard">Home</a></li>
+          <li class="breadcrumb-item active">User</li>
+          <li class="breadcrumb-item active">Create</li>
+        </ul>
+      </div>
+      <div class="col-auto float-right ml-auto">
+        <a class="btn add-btn" routerLink="/users/user/list"><i class="fa fa-share"></i> Back To List</a>
+      </div>
+    </div>
+  </div>
+  <!-- /Page Header -->
+
+
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <!-- <div class="card-header"> -->
+        <!-- <h4 class="card-title mb-0">Payroll Item Value</h4> -->
+        <!-- </div>  -->
+        <div class="card-body">
+          <form novalidate (ngSubmit)="myFormSubmit()" [formGroup]="myForm">
+
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Username</label>
+                  <input type="text" class="form-control" formControlName="username">
+                  <span style="font-size: 12px;" class="text-danger"
+                    *ngIf="f.username && f.username.invalid && f.username.touched">Username not valid</span>
+                </div>
+
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="email" class="form-control" formControlName="email">
+                  <span style="font-size: 12px;" class="text-danger"
+                    *ngIf="f.email && f.email.invalid && f.email.touched">Email not valid</span>
+                </div>
+
+
+                <div class="form-group">
+                  <label>Password</label>
+
+                  <input type="password" class="form-control" formControlName="password">
+                  <span style="font-size: 12px;" class="text-danger"
+                    *ngIf="f.password && f.password.invalid && f.password.touched">Password not valid[min
+                    length:4]</span>
+                </div>
+
+                <div class="form-group">
+                  <label>Is Group User ? &nbsp; &nbsp; </label>
+                  <input  style="margin-top: 10px;" id="groupUserId"
+                    (change)="checkGroupUser($event.target.value,'groupUser')" formControlName="groupUser"
+                    type="checkbox">
+                </div>
+
+                <div class="form-group">
+                  <label>Roles: &nbsp; &nbsp; </label>
+                  <label *ngFor="let role of rolesData; let i = index ">
+                      <input (click)="checkRole($event,role.authority)" id="roleId"
+                        formControlName="role" type="checkbox"> &nbsp; &nbsp; {{role.authority?role.authority:null}}
+                      &nbsp; &nbsp;
+                  </label>
+                </div>
+
+
+
+              </div>
+              <div class="col-md-6">
+
+                <div class="form-group">
+                  <label>User title</label>
+                  <input type="text" class="form-control" formControlName="userTitle">
+                  <span style="font-size: 12px;" class="text-danger"
+                    *ngIf="f.userTitle && f.userTitle.invalid && f.userTitle.touched">User title required</span>
+                </div>
+
+                <div class="form-group">
+                  <label>Phone</label>
+                  <input type="text" class="form-control" formControlName="phone">
+                  <span style="font-size: 12px;" class="text-danger"
+                    *ngIf="f.phone && f.phone.invalid && f.phone.touched">Phone not valid</span>
+                </div>
+
+                <div class="form-group">
+                  <label>Confirm Password</label>
+                  <input [ngClass]="{ 'is-invalid': isSubmitted && f.confirmPassword.errors }" type="password"
+                    class="form-control" formControlName="confirmPassword">
+                  <span style="font-size: 12px;" class="text-danger"
+                    *ngIf="f.confirmPassword && f.confirmPassword.invalid && f.confirmPassword.touched ">Password does
+                    not matched </span>
+                </div>
+
+
+
+                <div class="form-group" *ngIf="groupUserData && isGroupUser">
+                  <label>Group User</label>
+                  <select class="select form-control" formControlName="groupUsername">
+                    <option value="">Select Group User</option>
+                    <option *ngFor="let data of groupUserData" [ngValue]='data.username'>{{data.userTitle}}
+                    </option>
+                  </select>
+                </div>
+
+              </div> <br> <br> <br>
+
+
+            </div>
+
+
+
+
+            <div class="text-right">
+              <a class="btn btn-warning btn-ripple" routerLink="/users/user/list"><i class="fa fa-share"></i>
+                Cancel</a>
+              &nbsp; &nbsp;
+              <button type="button" class="btn btn-secondary btn-ripple" (click)="resetFormValues()">
+                <i class="fa fa-undo" aria-hidden="true"></i> Reset
+              </button>
+              &nbsp; &nbsp;
+              <button type="submit" class="btn btn-primary btn-ripple">
+                <i class="fa fa-check" aria-hidden="true"></i> Save &nbsp;&nbsp;&nbsp;
+              </button>
+            </div>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<!-- /Page Content -->
+
+
+<ngx-spinner bdColor="rgba(255,255,255,0.5)" size="medium" color="#667eea" type="ball-clip-rotate" [fullScreen]="false">
+  <p style="color: black"> Processing... </p>
+</ngx-spinner>

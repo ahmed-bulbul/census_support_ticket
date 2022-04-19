@@ -1,0 +1,29 @@
+
+requirements
+
+=============================
+1. Installing spinner
+  npm i ngx-spinner@11.0.2
+2.
+
+
+# Generate module by cli
+ng g m [ModuleName] --routing
+
+#For Generate Dist
+
+ng build --prod --base-href="/hrms/" --deploy-url="/hrms/"
+
+# For github published
+ng build --prod --output-path docs --base-href /hrms
+
+
+#npm install ngx-pagination --save
+
+# Create Flat Component
+ng g c dev/home-button --flat
+
+
+
+
+
