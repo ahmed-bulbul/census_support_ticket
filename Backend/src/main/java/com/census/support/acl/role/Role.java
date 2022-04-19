@@ -36,4 +36,12 @@ public class Role {
     private Date lastUpdateDateTime;
     @Column(name = "LAST_UPDATE_USER")
     private String lastUpdateUser;
+
+    public Role(Long id, String authority, String description, Date creationDateTime, String creationUser) {
+        this.id = id;
+        this.authority = authority;
+        this.description = description;
+        this.creationDateTime=creationDateTime;
+        this.creationUser=creationUser;
+    }
 }

@@ -72,7 +72,7 @@ public class AuthController {
             long timeout = jwtUtils.getJwtExpirationMs();
 
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-            Optional<User> optionalUser = userRepository.findByEmail(userDetails.getEmail());
+            Optional<User> optionalUser = userRepository.findByUsername(userDetails.getUsername());
 
 
             return ResponseEntity.ok(new JwtResponse(true, optionalUser.orElse(null), token, "Bearer", timeout));

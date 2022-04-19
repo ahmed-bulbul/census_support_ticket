@@ -20,7 +20,6 @@ public class UserDetailsImpl implements UserDetails {
 
     private String username;
 
-    private String email;
 
     @JsonIgnore
     private String password;
@@ -64,9 +63,6 @@ public class UserDetailsImpl implements UserDetails {
         return id;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
     @Override
     public String getPassword() {

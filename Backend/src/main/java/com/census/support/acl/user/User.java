@@ -1,24 +1,20 @@
 package com.census.support.acl.user;
 
 import com.census.support.acl.role.Role;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-@Setter
-@Getter
+
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="USER")
+@Entity
+@Table(name = "USER")
 public class User {
 
     @Id
@@ -31,7 +27,7 @@ public class User {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(	name = "acl_user_role",
+    @JoinTable(	name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
@@ -55,6 +51,5 @@ public class User {
         this.username = username;
         this.password = encode;
     }
-
 
 }

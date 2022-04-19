@@ -1,8 +1,8 @@
 package com.census.support.acl.security;
 
-import com.example.basicecommerce.acl.security.jwt.config.AuthEntryPointJwt;
-import com.example.basicecommerce.acl.security.jwt.config.AuthTokenFilter;
-import com.example.basicecommerce.acl.security.service.UserDetailsServiceImpl;
+import com.census.support.acl.security.jwt.config.AuthEntryPointJwt;
+import com.census.support.acl.security.jwt.config.AuthTokenFilter;
+import com.census.support.acl.security.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -69,6 +69,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/api/test/**")
                 .permitAll()
+                .antMatchers("/ticket/bbs/**").hasAnyAuthority("ROLE_BBS_USER")
+                .antMatchers("/ticket/tire1/**").hasAnyAuthority("ROLE_TIRE1_USER")
+                .antMatchers("/ticket/tire2/**").hasAnyAuthority("ROLE_TIRE2_USER")
                 .anyRequest()
                 .authenticated();
 

@@ -1,7 +1,7 @@
 package com.census.support.helper.exception;
 
 
-import com.example.basicecommerce.helper.response.BaseResponse;
+import com.census.support.helper.response.BaseResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
