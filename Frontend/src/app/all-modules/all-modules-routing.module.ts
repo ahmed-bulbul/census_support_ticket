@@ -25,11 +25,6 @@ const routes: Routes = [
         canActivate: [UserGuard],
       },
       {
-        path: 'products',
-        loadChildren: () => import('./product/product.module').then(m => m.ProductModule),
-        canActivate: [UserGuard],
-      },
-      {
         path: 'system',
         loadChildren: () => import('./system/system.module').then(m => m.SystemModule),
         canActivate: [UserGuard],
