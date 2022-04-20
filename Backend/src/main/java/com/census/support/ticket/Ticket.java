@@ -29,6 +29,7 @@ public class Ticket {
     private String code;
     @ManyToOne(fetch = FetchType.EAGER)
     private User createdBy;
+    private String createdByUsername;
     private String status;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date holdTime;
@@ -36,6 +37,8 @@ public class Ticket {
     private String solutionDescription;
     @ManyToOne(fetch = FetchType.EAGER)
     private User solvedBy;
+    private String solvedByUsername;
+
 
     // System log fields
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)

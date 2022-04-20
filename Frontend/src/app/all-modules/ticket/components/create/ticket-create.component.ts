@@ -79,6 +79,7 @@ export class TicketCreateComponent implements OnInit {
         if(response.status === true){
           console.log(response);
           this.spinnerService.hide().then(r => console.log('spinner stopped'));
+          this.toastr.success('Ticket created successfully', 'Success', { positionClass:'toast-custom' });
           this.router.navigate(['/ticket/bbs/list'], {relativeTo: this.route}).then(r => console.log('navigated'));
         }else{
           this.spinnerService.hide().then(r => console.log('spinner stopped'));

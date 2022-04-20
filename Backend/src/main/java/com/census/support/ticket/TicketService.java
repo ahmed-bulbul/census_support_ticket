@@ -66,6 +66,11 @@ public class TicketService {
                         p = cb.and(p, cb.equal(root.get("code"), clientParams.get("code")));
                     }
                 }
+                if (clientParams.containsKey("creationUser")) {
+                    if (StringUtils.hasLength(clientParams.get("creationUser"))) {
+                        p = cb.and(p, cb.equal(root.get("creationUser"), clientParams.get("creationUser")));
+                    }
+                }
             }
             return p;
         }, pageable);
