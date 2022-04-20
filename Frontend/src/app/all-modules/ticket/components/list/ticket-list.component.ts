@@ -10,6 +10,12 @@ export class TicketListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    // run every 5 sec
+    setInterval(() => {
+      console.log('tick');
+    }
+    , 5000);
+
   }
 
 }

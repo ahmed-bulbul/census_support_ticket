@@ -5,6 +5,8 @@ import com.census.support.acl.role.RoleRepository;
 import com.census.support.acl.user.User;
 import com.census.support.acl.user.UserRepository;
 import com.census.support.system.constants.SystemRole;
+import com.census.support.system.counter.SystemCounter;
+import com.census.support.system.counter.SystemCounterRepository;
 import com.census.support.system.menu.SystemMenu;
 import com.census.support.system.menu.SystemMenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,8 @@ public class AppDefaultUserService {
 
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private SystemCounterRepository counterRepository;
 
     @Autowired
     private SystemMenuRepository menuRepository;
@@ -122,6 +126,24 @@ public class AppDefaultUserService {
         }
     }
 
+    public void ticketCodeCounter(){
+        if (!counterRepository.getByCode("TICKET_CODE_CNT").isPresent()){
+            SystemCounter systemCounter = new SystemCounter();
+            systemCounter.setId(1L);
+            systemCounter.setActive(true);
+            systemCounter.setCode("TICKET_CODE_CNT");
+            systemCounter.setCounterName("Ticket Code");
+            systemCounter.setCounterType("TICKET_CODE");
+            systemCounter.setNextNumber(1L);
+            systemCounter.setNumerationType("2");
+            systemCounter.setPrefix("T");
+            systemCounter.setPrefixSeparator("-");
+            systemCounter.setStep(1);
+            systemCounter.setCounterWidth(5);
+            counterRepository.save(systemCounter);
+        }
+    }
+
 
 
     //@PostConstruct
@@ -129,6 +151,7 @@ public class AppDefaultUserService {
         this.createRoles();
         this.createUser();
         //this.createMenu();
+        this.ticketCodeCounter();
     }
 
 

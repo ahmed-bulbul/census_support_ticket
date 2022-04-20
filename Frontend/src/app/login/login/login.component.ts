@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
       if(authorities.includes("ROLE_BBS_USER")){
         this.toastr.success('You are now authenticated','Success', { positionClass:'toast-custom' })
         this.spinnerService.hide();
-        this.router.navigate(['/dashboard/admin']);
+        this.router.navigate(['/ticket/bbs/list']);
         this.loginService.loginStatusSubject.next(true);
 
       }else if(authorities.includes("ROLE_TIRE1_USER")){

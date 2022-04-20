@@ -38,13 +38,13 @@ export class TicketCreateComponent implements OnInit {
 
       this.myForm = this.formBuilder.group({
         id: [''],
-        deviceUserPhone: ['', [Validators.required,Validators.minLength(12)]],
+        deviceUserPhone: ['', [Validators.required,Validators.minLength(11)]],
         deviceUserId: ['', [Validators.required]],
         tabletSerialNo: ['', [Validators.required]],
         problemCategory: ['', [Validators.required]],
         problemType: [''],
         problemDescription:[''],
-        code: ['', [Validators.required,Validators.minLength(3)]],
+        code: [''],
         createdBy:[''],
         status:[''],
         holdTime:[''],
@@ -53,6 +53,58 @@ export class TicketCreateComponent implements OnInit {
         solvedBy:[''],
       });
 
+  }
+
+  myFormSubmit(){
+
+    const apiURL = this.baseUrl + '/ticket/bbs/create';
+    this.isSubmitted = true;
+    if(this.myForm.invalid){
+      return;
+    }
+
+    let formData: any;
+    formData = Object.assign(this.myForm.value,{
+      createdBy: this._getCreatedUser().value ? {id: this._getCreatedUser().value} : null,
+      solvedBy: this._getSolvedByUser().value ? {id: this._getSolvedByUser().value} : null,
+
+    });
+    formData.status='OPEN';
+    formData.rEntityName = 'Ticket';
+    formData.rActiveOperation = 'Create';
+
+    this.spinnerService.show();
+    this.ticketService.sendPostRequest(apiURL, formData).subscribe(
+      (response: any) => {
+        if(response.status === true){
+          console.log(response);
+          this.spinnerService.hide().then(r => console.log('spinner stopped'));
+          this.router.navigate(['/ticket/bbs/list'], {relativeTo: this.route}).then(r => console.log('navigated'));
+        }else{
+          this.spinnerService.hide().then(r => console.log('spinner stopped'));
+          this.toastr.error(response.message, 'Error');
+        }
+      },
+      (error) => {
+        console.log(error.message);
+        this.toastr.show(error.error.message, 'Show');
+        this.spinnerService.hide().then(r => console.log('spinner stopped'));
+      }
+    );
+
+
+  }
+
+  get f() { return this.myForm.controls; }
+  resetFormValues(){
+
+  }
+
+  _getCreatedUser(){
+    return this.myForm.get('createdBy');
+  }
+  _getSolvedByUser(){
+    return this.myForm.get('solvedBy');
   }
 
 }

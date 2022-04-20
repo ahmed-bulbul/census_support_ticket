@@ -1,6 +1,8 @@
 package com.census.support.ticket;
 
 import com.census.support.helper.response.BaseResponse;
+import com.census.support.message.MessageService;
+import com.census.support.system.counter.SystemCounterService;
 import com.census.support.util.SetAttributeUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.Predicate;
+import javax.transaction.Transactional;
 import java.util.Map;
 import java.util.Optional;
 
@@ -22,8 +25,15 @@ public class TicketService {
 
     @Autowired
     private TicketRepository ticketRepository;
+    @Autowired
+    private SystemCounterService counterService;
+    @Autowired
+    private MessageService messageService;
 
+
+    @Transactional
     public ResponseEntity<?> create(Ticket entity) {
+        entity.setCode(counterService.getNextFormattedValue("TICKET_CODE_CNT"));
         try {
             Ticket ticket = ticketRepository.getByCode(entity.getCode());
             if (ticket != null) {
@@ -31,6 +41,8 @@ public class TicketService {
             }else {
                 SetAttributeUpdate.setSysAttributeForCreateUpdate(entity,"Create");
                 ticketRepository.save(entity);
+                //send user ticket created message
+                messageService.sendTicketCreatedMessage(entity);
                 return new ResponseEntity<>(new BaseResponse(true, "Ticket created successfully", 201), HttpStatus.OK);
             }
         }catch (Exception e){

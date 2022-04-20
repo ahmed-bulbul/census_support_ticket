@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BbsGuard } from 'src/app/core/guards/bbs.guard';
+import { TicketCreateComponent } from './components/create/ticket-create.component';
+import { TicketListComponent } from './components/list/ticket-list.component';
 import { TicketComponent } from './ticket.component';
 
 const routes: Routes = [
@@ -8,11 +11,16 @@ const routes: Routes = [
     component:TicketComponent,
     children:[
 
-      // {
-      //   path:'menu/create',
-      //   component:MenuCreateComponent,
-      //   canActivate:[MenuGuard]
-      // },
+      {
+        path:'bbs/create',
+        component:TicketCreateComponent,
+        canActivate:[BbsGuard]
+      },
+      {
+        path:'bbs/list',
+        component:TicketListComponent,
+        canActivate:[BbsGuard]
+      }
     ]
   }
 ];
