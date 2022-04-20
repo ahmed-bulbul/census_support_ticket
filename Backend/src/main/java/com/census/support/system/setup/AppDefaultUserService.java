@@ -126,7 +126,7 @@ public class AppDefaultUserService {
         }
     }
 
-    public void ticketCodeCounter(){
+    public void CreateTicketCodeCounter(){
         if (!counterRepository.getByCode("TICKET_CODE_CNT").isPresent()){
             SystemCounter systemCounter = new SystemCounter();
             systemCounter.setId(1L);
@@ -139,7 +139,7 @@ public class AppDefaultUserService {
             systemCounter.setPrefix("T");
             systemCounter.setPrefixSeparator("-");
             systemCounter.setStep(1);
-            systemCounter.setCounterWidth(5);
+            systemCounter.setCounterWidth(9);
             counterRepository.save(systemCounter);
         }
     }
@@ -151,7 +151,7 @@ public class AppDefaultUserService {
         this.createRoles();
         this.createUser();
         //this.createMenu();
-        this.ticketCodeCounter();
+        this.CreateTicketCodeCounter();
     }
 
 

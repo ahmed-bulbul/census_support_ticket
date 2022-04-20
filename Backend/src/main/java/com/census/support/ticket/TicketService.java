@@ -98,8 +98,10 @@ public class TicketService {
             try {
                 SetAttributeUpdate.setSysAttributeForCreateUpdate(entity.get(), "Update");
                 Ticket ticket = entity.get();
-                ticket.setCode(entityDTO.getCode());
-                ticket.setId(entityDTO.getId());
+                ticket.setDeviceUserPhone(entityDTO.getDeviceUserPhone());
+                ticket.setTabletSerialNo(entityDTO.getTabletSerialNo());
+                ticket.setDeviceUserId(entityDTO.getDeviceUserId());
+                ticket.setProblemCategory(entityDTO.getProblemCategory());
 
                 ticketRepository.save(ticket);
                 return new ResponseEntity<>(new BaseResponse(true, "Ticket updated successfully", 201), HttpStatus.OK);
