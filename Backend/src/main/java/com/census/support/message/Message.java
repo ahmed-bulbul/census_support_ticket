@@ -1,40 +1,29 @@
-package com.census.support.ticket;
+package com.census.support.message;
 
-import com.census.support.acl.user.User;
+import com.census.support.ticket.Ticket;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.tomcat.jni.Local;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "TICKET")
-public class Ticket {
+@Table(name = "MESSAGE")
+public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String deviceUserPhone;
-    private String deviceUserId;
-    private String tabletSerialNo;
-    private String problemCategory;
-    private String problemType;
-    private String problemDescription;
-    private String code;
-    @ManyToOne(fetch = FetchType.EAGER)
-    private User createByUserId;
+    @ManyToOne( fetch = FetchType.EAGER)
+    private Ticket ticketId;
+    private String body;
+    private String sender;
+    private String receiver;
     private String status;
-    private LocalDateTime holdTime;
-    private String solutionType;
-    private String solutionDescription;
-    @ManyToOne(fetch = FetchType.EAGER)
-    private User solvedByUserId;
 
     // System log fields
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -47,6 +36,4 @@ public class Ticket {
     private Date lastUpdateDateTime;
     @Column(name = "LAST_UPDATE_USER")
     private String lastUpdateUser;
-
-
 }
