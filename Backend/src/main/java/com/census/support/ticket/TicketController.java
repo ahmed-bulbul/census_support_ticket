@@ -1,25 +1,59 @@
 package com.census.support.ticket;
 
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.census.support.util.PaginatorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.xml.ws.Action;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/ticket")
 public class TicketController {
+    @Autowired
+    private TicketService ticketService;
 
-    @GetMapping("/bbs/list")
-    public String getTicketListForBBS() {
-        // create dummy json response
-        return "{\"data\":[{\"id\":\"1\",\"title\":\"Ticket 1\",\"description\":\"Ticket 1 description\",\"status\":\"Open\",\"created_at\":\"2020-01-01 00:00:00\",\"updated_at\":\"2020-01-01 00:00:00\"},{\"id\":\"2\",\"title\":\"Ticket 2\",\"description\":\"Ticket 2 description\",\"status\":\"Open\",\"created_at\":\"2020-01-01 00:00:00\",\"updated_at\":\"2020-01-01 00:00:00\"},{\"id\":\"3\",\"title\":\"Ticket 3\",\"description\":\"Ticket 3 description\",\"status\":\"Open\",\"created_at\":\"2020-01-01 00:00:00\",\"updated_at\":\"2020-01-01 00:00:00\"}]}";
+    @PostMapping("/create")
+    public Ticket createTicket(@RequestBody Ticket ticket) {
+        return ticketService.createTicket(ticket);
     }
-    @GetMapping("/tire1/list")
-    public String getTicketListForTire1() {
-        // create dummy json response
-        return "{\"data\":[{\"id\":\"1\",\"title\":\"Ticket 1\",\"description\":\"Ticket 1 description\",\"status\":\"Open\",\"created_at\":\"2020-01-01 00:00:00\",\"updated_at\":\"2020-01-01 00:00:00\"},{\"id\":\"2\",\"title\":\"Ticket 2\",\"description\":\"Ticket 2 description\",\"status\":\"Open\",\"created_at\":\"2020-01-01 00:00:00\",\"updated_at\":\"2020-01-01 00:00:00\"},{\"id\":\"3\",\"title\":\"Ticket 3\",\"description\":\"Ticket 3 description\",\"status\":\"Open\",\"created_at\":\"2020-01-01 00:00:00\",\"updated_at\":\"2020-01-01 00:00:00\"}]}";
+
+    @GetMapping("getTicket/{ticketId}")
+    public Ticket getTicket(@PathVariable("ticketId") Long ticketId) {
+        return ticketService.getTicket(ticketId);
     }
+
+    @GetMapping("/getAll")
+    ResponseEntity<Map<String, Object>> getAllPaginatedHrCrEmpLeave(HttpServletRequest request, @RequestParam Map<String,String> clientParams){
+
+
+        PaginatorService pSrv = new PaginatorService(request);
+        Page<Ticket> page = this.ticketService.getAllPaginate(clientParams,pSrv.pageNum, pSrv.pageSize, pSrv.sortField, pSrv.sortDir);
+        List<Ticket> listData = page.getContent();
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("objectList", listData);
+        response.put("currentPage", page.getNumber());
+        response.put("totalPages", page.getTotalPages());
+        response.put("totalItems", page.getTotalElements());
+        response.put("reverseSortDir", (pSrv.sortDir.equals("asc") ? "desc" : "asc"));
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
+    }
+
 
 }
+
+
+
+
+
