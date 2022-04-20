@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { ProductService } from 'src/app/all-modules/product/service/product.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -26,7 +25,6 @@ export class UserEditComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private spinnerService: NgxSpinnerService,
-    private productService:ProductService,
     private toastr:ToastrService
   ) { }
 
