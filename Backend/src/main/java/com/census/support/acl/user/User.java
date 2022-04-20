@@ -25,9 +25,6 @@ public class User {
 
     private String name;
 
-    @Size(max = 15)
-    @NotBlank(message = "*Phone is mandatory")
-    @Column(name = "PHONE", length = 15, nullable = false, unique = true)
     private String phone;
 
     @Size(max = 15)
@@ -36,9 +33,6 @@ public class User {
     private String username;
 
 
-    @Size(max = 15,min = 5)
-    @NotBlank(message = "*Password is mandatory")
-    @Column(name = "PASSWORD")
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)

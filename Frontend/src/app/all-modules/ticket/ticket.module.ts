@@ -10,11 +10,12 @@ import { DataTablesModule } from 'angular-datatables';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { Tire1ListComponent } from './components/tire1/list/tire1-list.component';
 
 
 
 @NgModule({
-  declarations: [TicketComponent, TicketCreateComponent, TicketListComponent],
+  declarations: [TicketComponent, TicketCreateComponent, TicketListComponent, Tire1ListComponent],
   imports: [
     CommonModule,
     TicketRoutingModule,
