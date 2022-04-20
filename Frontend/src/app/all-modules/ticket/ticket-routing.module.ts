@@ -4,6 +4,7 @@ import { BbsGuard } from 'src/app/core/guards/bbs.guard';
 import { TicketCreateComponent } from './components/create/ticket-create.component';
 import { TicketEditComponent } from './components/edit/ticket-edit.component';
 import { TicketListComponent } from './components/list/ticket-list.component';
+import { TicketShowComponent } from './components/show/ticket-show.component';
 import { TicketComponent } from './ticket.component';
 
 const routes: Routes = [
@@ -25,6 +26,11 @@ const routes: Routes = [
       {
         path:'bbs/edit/:id',
         component:TicketEditComponent,
+        canActivate:[BbsGuard]
+      },
+      {
+        path:'bbs/show/:id',
+        component:TicketShowComponent,
         canActivate:[BbsGuard]
       }
     ]

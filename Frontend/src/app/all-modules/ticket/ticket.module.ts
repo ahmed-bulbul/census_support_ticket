@@ -11,11 +11,12 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { TicketEditComponent } from './components/edit/ticket-edit.component';
+import { TicketShowComponent } from './components/show/ticket-show.component';
 
 
 
 @NgModule({
-  declarations: [TicketComponent, TicketCreateComponent, TicketListComponent, TicketEditComponent],
+  declarations: [TicketComponent, TicketCreateComponent, TicketListComponent, TicketEditComponent, TicketShowComponent],
   imports: [
     CommonModule,
     TicketRoutingModule,
