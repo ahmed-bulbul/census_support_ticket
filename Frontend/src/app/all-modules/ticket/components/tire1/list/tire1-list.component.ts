@@ -63,8 +63,6 @@ export class Tire1ListComponent implements OnInit {
   }
 
   _getListData(){
-    alert("okok")
-
     const apiURL = this.baseUrl + '/ticket/tire1/getList';
 
     let queryParams: any = {};
@@ -98,6 +96,18 @@ export class Tire1ListComponent implements OnInit {
 
   }
 
+
+  searchByCode(val) {
+    this.code = val;
+  }
+  searchBySearchButton(){
+    this._getListData();
+  }
+  clearFilter(){
+    this.code = '';
+    $('.filter-row').find('input, select, textarea').val('');
+    this._getListData();
+  }
   private getUserQueryParams(page: number, pageSize: number): any {
 
     const params: any = {};
