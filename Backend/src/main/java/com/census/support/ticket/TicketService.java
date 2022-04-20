@@ -4,6 +4,7 @@ import com.census.support.helper.response.BaseResponse;
 import com.census.support.message.MessageService;
 import com.census.support.system.counter.SystemCounterService;
 import com.census.support.util.SetAttributeUpdate;
+import com.census.support.util.SysMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -42,7 +43,7 @@ public class TicketService {
                 SetAttributeUpdate.setSysAttributeForCreateUpdate(entity,"Create");
                 ticketRepository.save(entity);
                 //send user ticket created message
-                messageService.sendTicketCreatedMessage(entity);
+                messageService.sendTicketCreatedMessage(entity, SysMessage.OPEN);
                 return new ResponseEntity<>(new BaseResponse(true, "Ticket created successfully", 201), HttpStatus.OK);
             }
         }catch (Exception e){
