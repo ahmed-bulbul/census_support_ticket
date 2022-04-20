@@ -69,43 +69,49 @@ export class LoginComponent implements OnInit {
     console.log("@Send post request for login");
     this.spinnerService.show();
     this.loginService.login(apiURL,formData).pipe(delay(1300)).subscribe((data:any) =>{
-      console.log(data);
-      this.loginService.setLocalStorage(data);
-      let authorities = this.loginService.getLoginUserRole();
+      if(data.status=== true){
+        console.log(data);
+        this.loginService.setLocalStorage(data);
+        let authorities = this.loginService.getLoginUserRole();
 
-      if(authorities.includes("ROLE_BBS_USER")){
-        this.toastr.success('You are now authenticated','Success', { positionClass:'toast-custom' })
-        this.spinnerService.hide();
-        this.router.navigate(['/ticket/bbs/list']);
-        this.loginService.loginStatusSubject.next(true);
+        if(authorities.includes("ROLE_BBS_USER")){
+          this.toastr.success('You are now authenticated','Success', { positionClass:'toast-custom' })
+          this.spinnerService.hide();
+          this.router.navigate(['/ticket/bbs/list']);
+          this.loginService.loginStatusSubject.next(true);
 
-      }else if(authorities.includes("ROLE_TIRE1_USER")){
-        this.toastr.success('You are now authenticated','Success', { positionClass:'toast-custom' })
+        }else if(authorities.includes("ROLE_TIRE1_USER")){
+          this.toastr.success('You are now authenticated','Success', { positionClass:'toast-custom' })
+          this.spinnerService.hide();
+          this.router.navigate(['/dashboard/admin2']);
+          this.loginService.loginStatusSubject.next(true);
+        }
+
+        else if(authorities.includes("ROLE_TIRE2_USER")){
+          this.toastr.success('You are now authenticated','Success', { positionClass:'toast-custom' })
+          this.spinnerService.hide();
+          this.router.navigate(['/dashboard/admin3']);
+          this.loginService.loginStatusSubject.next(true);
+        }
+
+
+        else if(authorities.includes("ROLE_SUPER_ADMIN")){
+          this.toastr.success('You are now authenticated','Success', { positionClass:'toast-custom' })
+          this.spinnerService.hide();
+          this.router.navigate(['/dashboard/admin']);
+          this.loginService.loginStatusSubject.next(true);
+        }
+
+        else{
+          this.spinnerService.hide();
+          this.toastr.error('Something went wrong','error', { positionClass:'toast-custom' });
+          this.loginService.logout();
+        }
+      }else{
         this.spinnerService.hide();
-        this.router.navigate(['/dashboard/admin2']);
-        this.loginService.loginStatusSubject.next(true);
+        this.toastr.info(data.message,'error', { positionClass:'toast-custom' });
       }
 
-      else if(authorities.includes("ROLE_TIRE2_USER")){
-        this.toastr.success('You are now authenticated','Success', { positionClass:'toast-custom' })
-        this.spinnerService.hide();
-        this.router.navigate(['/dashboard/admin3']);
-        this.loginService.loginStatusSubject.next(true);
-      }
-
-
-      else if(authorities.includes("ROLE_SUPER_ADMIN")){
-        this.toastr.success('You are now authenticated','Success', { positionClass:'toast-custom' })
-        this.spinnerService.hide();
-        this.router.navigate(['/dashboard/admin']);
-        this.loginService.loginStatusSubject.next(true);
-      }
-
-      else{
-        this.spinnerService.hide();
-        this.toastr.error('Something went wrong','error', { positionClass:'toast-custom' });
-        this.loginService.logout();
-      }
 
     },(error) =>{this.toastr.error(''+error.error.code)});
 

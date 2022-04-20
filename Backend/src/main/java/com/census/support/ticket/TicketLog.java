@@ -1,22 +1,24 @@
 package com.census.support.ticket;
 
+
 import com.census.support.acl.user.User;
-import com.census.support.ticket.entityListener.TicketListener;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "TICKET")
-@EntityListeners(TicketListener.class)
-public class Ticket {
+@Table(name = "TICKET_LOG")
+public class TicketLog {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -52,5 +54,25 @@ public class Ticket {
     @Column(name = "LAST_UPDATE_USER")
     private String lastUpdateUser;
 
-
+    public TicketLog(Ticket entity, String action) {
+        this.deviceUserPhone = entity.getDeviceUserPhone();
+        this.deviceUserId = entity.getDeviceUserId();
+        this.tabletSerialNo = entity.getTabletSerialNo();
+        this.problemCategory = entity.getProblemCategory();
+        this.problemType = entity.getProblemType();
+        this.problemDescription = entity.getProblemDescription();
+        this.code = entity.getCode();
+        this.createdBy = entity.getCreatedBy()!=null?entity.getCreatedBy():null;
+        this.createdByUsername = entity.getCreatedBy()!=null?entity.getCreatedBy().getUsername():null;
+        this.status = entity.getStatus();
+        this.holdTime = entity.getHoldTime();
+        this.solutionType = entity.getSolutionType();
+        this.solutionDescription = entity.getSolutionDescription();
+        this.solvedBy = entity.getSolvedBy()!=null?entity.getSolvedBy():null;
+        this.solvedByUsername = entity.getSolvedBy()!=null?entity.getSolvedBy().getUsername():null;
+        this.creationDateTime = entity.getCreationDateTime();
+        this.creationUser = entity.getCreationUser();
+        this.lastUpdateDateTime = entity.getLastUpdateDateTime();
+        this.lastUpdateUser = entity.getLastUpdateUser();
+    }
 }

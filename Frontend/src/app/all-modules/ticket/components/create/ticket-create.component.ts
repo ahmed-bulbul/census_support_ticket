@@ -98,7 +98,8 @@ export class TicketCreateComponent implements OnInit {
 
   get f() { return this.myForm.controls; }
   resetFormValues(){
-
+    //reset form
+    this.myForm.reset();
   }
 
   _getCreatedUser(){

@@ -1,0 +1,8 @@
+
+//For Basic Menu
+
+insert  into `system_menu`(`id`,`admin_access_only`,`chk_authorization`,`chk_authorization_char`,`code`,`creation_datetime`,`creation_user`,`dashboard_menu`,`description`,`entity_name`,`has_child`,`icon_html`,`is_active`,`is_child`,`is_open_new_tab`,`last_update_datetime`,`last_update_user`,`left_side_menu`,`main_header_menu`,`main_url`,`open_url`,`parent_menu_code`,`sequence`,`sub_url`,`super_admin_access_only`,`visible_to_all`,`parent_menu_id`) values
+(3,NULL,NULL,NULL,'TICKET','2022-04-19 13:27:34.602000','bbs-user',NULL,'Ticket',NULL,'','fa fa-ticket','',NULL,NULL,NULL,NULL,'',NULL,NULL,'/ticket',NULL,1,NULL,NULL,'',NULL),
+(4,NULL,NULL,NULL,'BBS','2022-04-19 13:33:45.085000','bbs-user',NULL,'BBS',NULL,NULL,'','','',NULL,NULL,NULL,'',NULL,NULL,'/ticket/bbs/list',NULL,2,NULL,NULL,'',3),
+(5,NULL,NULL,NULL,'TIRE1','2022-04-19 13:39:43.830000','bbs-user',NULL,'Tire 1',NULL,NULL,'','','',NULL,NULL,NULL,'',NULL,NULL,'/ticket/tire1/list',NULL,3,NULL,NULL,'',3),
+(6,NULL,NULL,NULL,'TIRE2','2022-04-19 14:17:19.506000','super-admin',NULL,'Tire 2',NULL,NULL,'','','',NULL,NULL,NULL,'',NULL,NULL,'/ticket/tire2/list',NULL,4,NULL,NULL,'',3);

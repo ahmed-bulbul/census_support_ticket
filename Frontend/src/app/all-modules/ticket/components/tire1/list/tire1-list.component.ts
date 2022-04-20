@@ -63,6 +63,7 @@ export class Tire1ListComponent implements OnInit {
   }
 
   _getListData(){
+    alert("okok")
 
     const apiURL = this.baseUrl + '/ticket/tire1/getList';
 
