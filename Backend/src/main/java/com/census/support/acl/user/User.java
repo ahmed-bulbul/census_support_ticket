@@ -5,6 +5,8 @@ import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,8 +25,13 @@ public class User {
 
     private String name;
     private String phone;
-    @Column()
+
+    @Size(max = 15)
+    @NotBlank(message = "*Username is mandatory")
+    @Column(name = "USERNAME", length = 15, nullable = false, unique = true)
     private String username;
+
+
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
