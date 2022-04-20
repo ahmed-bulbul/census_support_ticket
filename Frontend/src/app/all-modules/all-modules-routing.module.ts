@@ -28,7 +28,10 @@ const routes: Routes = [
         path: 'system',
         loadChildren: () => import('./system/system.module').then(m => m.SystemModule),
         canActivate: [UserGuard],
-
+      },
+      {
+        path: 'ticket',
+        loadChildren: () => import('./ticket/ticket.module').then(m => m.TicketModule),
       }
 
 
