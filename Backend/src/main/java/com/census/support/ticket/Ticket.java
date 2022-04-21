@@ -28,8 +28,6 @@ public class Ticket {
     private String problemDescription;
     private String code;
 
-
-
     private String status;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date holdTime;
@@ -37,12 +35,10 @@ public class Ticket {
     private String solutionType;
     private String solutionDescription;
 
-
     private String solvedBy;
     private String receivedFromT1;
     private String receivedFromT2;
     private String holdBy;
-
 
 
     // System log fields

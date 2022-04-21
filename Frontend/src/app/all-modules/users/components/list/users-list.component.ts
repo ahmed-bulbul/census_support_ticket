@@ -104,7 +104,7 @@ export class UsersListComponent implements OnInit {
 
   private _getListData() {
 
-    let apiURL = this.baseUrl + "/user/getUsers";
+    let apiURL = this.baseUrl + "/acl/user/getUserList";
 
     let queryParams: any = {};
     const params = this.getUserQueryParams(this.configPgn.pageNum, this.configPgn.pageSize);

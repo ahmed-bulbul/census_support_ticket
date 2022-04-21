@@ -35,7 +35,7 @@ export class UserShowComponent implements OnInit {
   _getFormData(){
 
     let id =  this.route.snapshot.params.id;
-    let apiURL = this.baseUrl + "/user/get/" + id;
+    let apiURL = this.baseUrl + "/acl/user/get/" + id;
 
     let queryParams: any = {};
     queryParams.rEntityName = "User";

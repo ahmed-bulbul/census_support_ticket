@@ -15,12 +15,16 @@ import java.util.Set;
 public class SignupRequest {
 
     private String name;
+
+
     @NotBlank
-    @Email
     private String phone;
+
     @NotBlank
     @Size(min=6,max=40)
     private String username;
+
+
     @NotBlank
     @Size(min = 4, max = 40)
     private String password;

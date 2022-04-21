@@ -93,7 +93,6 @@
                   <th>username</th>
                   <th>Role</th>
                   <th>Phone</th>
-
                   <th>Action</th>
                 </tr>
               </thead>
@@ -105,8 +104,8 @@
                   <td class="d-none">{{thisObj.id}}</td>
                   <td>{{thisObj.username}}</td>
                   <td>
-                    <span *ngFor="let role of thisObj.roles">
-                      {{role.authority + ", "}}
+                    <span *ngFor="let role of thisObj.role">
+                      {{role + ", "}}
                     </span>
                   </td>
                   <td>{{thisObj.phone}}</td>

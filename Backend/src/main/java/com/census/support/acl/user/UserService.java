@@ -1,6 +1,7 @@
 package com.census.support.acl.user;
 
 import com.census.support.acl.role.Role;
+import com.census.support.acl.role.RoleRepository;
 import com.census.support.helper.response.BaseResponse;
 import com.census.support.util.SetAttributeUpdate;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,9 @@ public class UserService {
 
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     public ResponseEntity<?> createUser(User createEntity) {
         Optional<User> local = this.repository.findByUsername(createEntity.getUsername());
@@ -64,7 +68,7 @@ public class UserService {
             // Conversion logic
             dto.setId(entity.getId());
             dto.setUsername(entity.getUsername());
-            dto.setEmail(entity.getPhone());
+            dto.setPhone(entity.getPhone());
             dto.setName(entity.getName());
             dto.setPassword(entity.getPassword());
             dto.setCreationDateTime(entity.getCreationDateTime());
@@ -74,5 +78,30 @@ public class UserService {
             dto.setRole(entity.getRoles().stream().map(Role::getAuthority).collect(Collectors.toSet()));
             return dto;
         });
+    }
+
+    public ResponseEntity<?> getById(Long id, Map<String, String> clientParams) {
+        log.info("Client params: {}", clientParams);
+        try {
+            Optional<User> entityInst = this.repository.findById(id);
+            if (entityInst.isPresent()) {
+                //convert to dto
+                UserDto userDto = new UserDto(entityInst.get());
+                return new ResponseEntity<>(new BaseResponse(true, "Success", 200, userDto), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(new BaseResponse(false, "User not found", 404), HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(new BaseResponse(false, "User not found", 404), HttpStatus.OK);
+        }
+
+    }
+
+    public ResponseEntity<?> getAllRoles() {
+        try {
+            return new ResponseEntity<>(new BaseResponse(true, "Success", 200, this.roleRepository.findAll()), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new BaseResponse(false, "Role not found", 404), HttpStatus.OK);
+        }
     }
 }

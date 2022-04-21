@@ -20,8 +20,7 @@ export class UserCreateComponent implements OnInit {
   public isSubmitted: boolean = false;
   public rolesData: any = [];
   public selectedRoles : any =[];
-  public isGroupUser: boolean = true;
-  public groupUserData :any = [];
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,7 +35,6 @@ export class UserCreateComponent implements OnInit {
   ngOnInit(): void {
 
     this._initForm();
-    this._getGroupUsers();
     this._getRoles();
 
 
@@ -48,11 +46,7 @@ export class UserCreateComponent implements OnInit {
     this.myForm = this.formBuilder.group({
       id: [""],
       username: ["", [Validators.required,Validators.minLength(3)]],
-      email: ["", [Validators.required,Validators.email]],
       phone: ["", [Validators.required,Validators.minLength(11), Validators.pattern("[0-9]+")]],
-      groupUser: [""],
-      userTitle:["", [Validators.required]],
-      groupUsername: [""],
       password: ["", [Validators.required,Validators.minLength(4)]],
       confirmPassword: ['', Validators.required],
       role:[],
@@ -72,32 +66,10 @@ export class UserCreateComponent implements OnInit {
 
   }
 
-  checkGroupUser(event, value){
-    if(value == "groupUser"){
-      let isChecked =  $('#groupUserId').prop('checked');
-      if(isChecked){
-        this.isGroupUser = false;
-      }else{
-        this.isGroupUser = true;
-      }
-    }
-  }
-
-  _getGroupUsers() {
-    let apiURL = this.baseUrl + "/user/getGroupUser";
-    let queryParams: any = {};
-    this.userService.sendGetRequest(apiURL,queryParams).subscribe((response: any) => {
-      if(response.status == true){
-        this.groupUserData = response.data;
-      }else{
-        this.toastr.error(response.message, 'Error');
-      }
-    });
-  }
 
   myFormSubmit(){
 
-    let apiURL = this.baseUrl + "/auth/register";
+    let apiURL = this.baseUrl + "/acl/register";
 
     this.isSubmitted = true;
     if(this.myForm.invalid){
@@ -133,7 +105,7 @@ export class UserCreateComponent implements OnInit {
   }
 
   _getRoles(){
-    let apiURL = this.baseUrl + "/auth/roles";
+    let apiURL = this.baseUrl + "/acl/roles";
     let queryParams: any = {};
     this.userService.sendGetRequest(apiURL,queryParams).subscribe((response: any) => {
       if(response.status == true){

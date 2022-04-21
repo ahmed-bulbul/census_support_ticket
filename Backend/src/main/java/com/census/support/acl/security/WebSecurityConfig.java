@@ -65,13 +65,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/acl/login","/acl/register")
+                .antMatchers("/acl/login","/acl/register","/acl/roles")
                 .permitAll()
                 .antMatchers("/api/test/**")
                 .permitAll()
                 .antMatchers("/ticket/bbs/**").hasAnyAuthority("ROLE_BBS_USER","ROLE_SUPER_ADMIN")
                 .antMatchers("/ticket/tire1/**").hasAnyAuthority("ROLE_TIRE1_USER","ROLE_SUPER_ADMIN")
                 .antMatchers("/ticket/tire2/**").hasAnyAuthority("ROLE_TIRE2_USER","ROLE_SUPER_ADMIN")
+                .antMatchers("/acl/user/**").hasAnyAuthority("ROLE_SUPER_ADMIN")
                 .anyRequest()
                 .authenticated();
 

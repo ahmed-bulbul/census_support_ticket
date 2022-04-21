@@ -17,15 +17,10 @@ public class UserDto {
     private String username;
     private String name;
     private String password;
-    private String email;
     private String phone;
     private Set<String> role;
-    private String photo;
-    private String userTitle;
-    private Long organizationId;
-    private String organizationName;
-    private String groupUsername;
-    private Boolean groupUser;  // 0 or 1
+
+
     private Date creationDateTime;
     private Date lastUpdateDateTime;
     private String creationUser;
@@ -36,6 +31,7 @@ public class UserDto {
         this.id = user.getId();
         this.username = user.getUsername();
         this.password = user.getPassword();
+        this.phone = user.getPhone();
 
 
         this.role = user.getRoles().stream().map(role1 -> {
