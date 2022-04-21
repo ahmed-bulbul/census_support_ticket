@@ -132,7 +132,7 @@ export class Tire1ListComponent implements OnInit {
     const formData: any = {};
 
     this.spinnerService.show();
-    this.ticketService.sendStstusUpdateRequest(apiURL, formData).subscribe(
+    this.ticketService.sendPutRequest(apiURL, formData).subscribe(
       (response: any) => {
 
         if(response.status === true){
