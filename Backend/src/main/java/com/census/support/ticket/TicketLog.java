@@ -78,6 +78,8 @@ public class TicketLog {
         this.receivedFromT1 = entity.getReceivedFromT1();
         this.receivedFromT2 = entity.getReceivedFromT2();
         this.holdBy = entity.getHoldBy();
+
+
         this.creationDateTime = entity.getCreationDateTime();
         this.creationUser = entity.getCreationUser();
         this.lastUpdateDateTime = entity.getLastUpdateDateTime();
