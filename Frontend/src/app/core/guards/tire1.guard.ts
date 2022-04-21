@@ -12,7 +12,7 @@ import { LoginService } from 'src/app/login/services/login.services';
 @Injectable({
   providedIn: 'root'
 })
-export class BbsGuard implements CanActivate {
+export class Tire1Guard implements CanActivate {
 
   constructor(private login:LoginService,private router:Router,private toastr:ToastrService){
 
@@ -26,7 +26,7 @@ export class BbsGuard implements CanActivate {
 
     let authorities = this.login.getLoginUserRole();
 
-    if(this.login.isLoggedIn() && (authorities != null && (authorities.includes("ROLE_BBS_USER")) ||(authorities.includes("ROLE_SUPER_ADMIN")) )){
+    if(this.login.isLoggedIn() && (authorities != null && (authorities.includes("ROLE_TIRE1_USER")) ||(authorities.includes("ROLE_SUPER_ADMIN")) )){
 
         return true;
     }
