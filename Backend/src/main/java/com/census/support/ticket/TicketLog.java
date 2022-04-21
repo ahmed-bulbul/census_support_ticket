@@ -29,17 +29,16 @@ public class TicketLog {
     private String problemType;
     private String problemDescription;
     private String code;
-    @ManyToOne(fetch = FetchType.EAGER)
-    private User createdBy;
-    private String createdByUsername;
     private String status;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date holdTime;
     private String solutionType;
     private String solutionDescription;
-    @ManyToOne(fetch = FetchType.EAGER)
-    private User solvedBy;
-    private String solvedByUsername;
+    private String solvedBy;
+    private String receivedFromT1;
+    private String receivedFromT2;
+    private String holdBy;
+
 
 
     // System log fields
@@ -62,14 +61,16 @@ public class TicketLog {
         this.problemType = entity.getProblemType();
         this.problemDescription = entity.getProblemDescription();
         this.code = entity.getCode();
-        this.createdBy = entity.getCreatedBy()!=null?entity.getCreatedBy():null;
-        this.createdByUsername = entity.getCreatedBy()!=null?entity.getCreatedBy().getUsername():null;
         this.status = entity.getStatus();
         this.holdTime = entity.getHoldTime();
         this.solutionType = entity.getSolutionType();
         this.solutionDescription = entity.getSolutionDescription();
-        this.solvedBy = entity.getSolvedBy()!=null?entity.getSolvedBy():null;
-        this.solvedByUsername = entity.getSolvedBy()!=null?entity.getSolvedBy().getUsername():null;
+        this.solvedBy = entity.getSolvedBy();
+        this.receivedFromT1 = entity.getReceivedFromT1();
+        this.receivedFromT2 = entity.getReceivedFromT2();
+        this.holdBy = entity.getHoldBy();
+
+
         this.creationDateTime = entity.getCreationDateTime();
         this.creationUser = entity.getCreationUser();
         this.lastUpdateDateTime = entity.getLastUpdateDateTime();

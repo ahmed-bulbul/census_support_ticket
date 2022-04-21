@@ -18,14 +18,16 @@ public class TicketDTO {
     private String problemType;
     private String problemDescription;
     private String code;
-    private Long createById;
-    private String createByUsername;
     private String status;
     private Date holdTime;
     private String solutionType;
     private String solutionDescription;
-    private Long solvedById;
-    private String solvedByUsername;
+
+    private String solvedBy;
+    private String receivedFromT1;
+    private String receivedFromT2;
+    private String holdBy;
+
 
 
     //system logs
@@ -43,14 +45,14 @@ public class TicketDTO {
         this.problemType = ticket.getProblemType();
         this.problemDescription = ticket.getProblemDescription();
         this.code = ticket.getCode();
-        this.createById = ticket.getCreatedBy()!=null?ticket.getCreatedBy().getId():null;
-        this.createByUsername = ticket.getCreatedBy()!=null?ticket.getCreatedBy().getUsername():null;
         this.status = ticket.getStatus();
         this.holdTime = ticket.getHoldTime();
         this.solutionType = ticket.getSolutionType();
         this.solutionDescription = ticket.getSolutionDescription();
-        this.solvedById = ticket.getSolvedBy()!=null?ticket.getSolvedBy().getId():null;
-        this.solvedByUsername = ticket.getSolvedBy()!=null?ticket.getSolvedBy().getUsername():null;
+        this.solvedBy = ticket.getSolvedBy();
+        this.receivedFromT1 = ticket.getReceivedFromT1();
+        this.receivedFromT2 = ticket.getReceivedFromT2();
+        this.holdBy = ticket.getHoldBy();
 
         //system logs
         this.creationDateTime = ticket.getCreationDateTime();
