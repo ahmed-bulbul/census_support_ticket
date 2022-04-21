@@ -50,18 +50,17 @@ public class TireOneService {
                         p = cb.and(p, cb.equal(root.get("problemCategory"), clientParams.get("problemCategory")));
                     }
                 }
-                if (clientParams.containsKey("status") ) {
-                    if (clientParams.containsKey("status")) {
-                        if (StringUtils.hasLength(clientParams.get("status"))) {
-                            p = cb.and(p, cb.equal(root.get("status"), clientParams.get("status")));
-                        }
+
+                if (clientParams.containsKey("status")) {
+                    if (StringUtils.hasLength(clientParams.get("status"))) {
+                        p = cb.and(p, cb.equal(root.get("status"), clientParams.get("status")));
                     }
+                }
 
-                    if (clientParams.containsKey("status")) {
-                        if (StringUtils.hasLength(clientParams.get("status"))) {
-                            p = cb.or(p, cb.equal(root.get("receivedFromT1"), UserUtil.getLoginUser()));
+                if (clientParams.containsKey("receivedFromT1")) {
+                    if (StringUtils.hasLength(clientParams.get("receivedFromT1"))) {
+                        p = cb.or(p, cb.equal(root.get("receivedFromT1"),  clientParams.get("receivedFromT1")));
 
-                        }
                     }
                 }
 
