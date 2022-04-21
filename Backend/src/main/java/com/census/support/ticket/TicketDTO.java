@@ -27,6 +27,11 @@ public class TicketDTO {
     private Long solvedById;
     private String solvedByUsername;
 
+    private String receivedFromT1;
+    private String receivedFromT2;
+    private String holdBy;
+
+
 
     //system logs
     private Date creationDateTime;
@@ -51,6 +56,9 @@ public class TicketDTO {
         this.solutionDescription = ticket.getSolutionDescription();
         this.solvedById = ticket.getSolvedBy()!=null?ticket.getSolvedBy().getId():null;
         this.solvedByUsername = ticket.getSolvedBy()!=null?ticket.getSolvedBy().getUsername():null;
+        this.receivedFromT1 = ticket.getReceivedFromT1();
+        this.receivedFromT2 = ticket.getReceivedFromT2();
+        this.holdBy = ticket.getHoldBy();
 
         //system logs
         this.creationDateTime = ticket.getCreationDateTime();

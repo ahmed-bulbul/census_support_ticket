@@ -39,6 +39,11 @@ public class Ticket {
     private User solvedBy;
     private String solvedByUsername;
 
+    private String receivedFromT1;
+    private String receivedFromT2;
+    private String holdBy;
+
+
 
     // System log fields
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)

@@ -41,6 +41,11 @@ public class TicketLog {
     private User solvedBy;
     private String solvedByUsername;
 
+    private String receivedFromT1;
+    private String receivedFromT2;
+    private String holdBy;
+
+
 
     // System log fields
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -70,6 +75,9 @@ public class TicketLog {
         this.solutionDescription = entity.getSolutionDescription();
         this.solvedBy = entity.getSolvedBy()!=null?entity.getSolvedBy():null;
         this.solvedByUsername = entity.getSolvedBy()!=null?entity.getSolvedBy().getUsername():null;
+        this.receivedFromT1 = entity.getReceivedFromT1();
+        this.receivedFromT2 = entity.getReceivedFromT2();
+        this.holdBy = entity.getHoldBy();
         this.creationDateTime = entity.getCreationDateTime();
         this.creationUser = entity.getCreationUser();
         this.lastUpdateDateTime = entity.getLastUpdateDateTime();
