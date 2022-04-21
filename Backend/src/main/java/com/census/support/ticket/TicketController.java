@@ -40,6 +40,11 @@ public class TicketController {
                 page.getTotalPages(),ps.sortDir.equals("asc") ? "desc": "asc",page.getNumber(), Arrays.asList(listData.toArray())), HttpStatus.OK);
     }
 
+//    @GetMapping("/status")
+//    public ResponseEntity<?> status(){
+//        return ResponseEntity.ok(ticketService.getStatus());
+//    }
+
     @GetMapping("/get/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id){
         return ticketService.getById(id);

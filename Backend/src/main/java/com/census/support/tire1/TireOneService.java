@@ -1,5 +1,6 @@
 package com.census.support.tire1;
 
+import com.census.support.acl.user.User;
 import com.census.support.helper.response.BaseResponse;
 import com.census.support.ticket.Ticket;
 import com.census.support.ticket.TicketDTO;
@@ -49,14 +50,18 @@ public class TireOneService {
                         p = cb.and(p, cb.equal(root.get("problemCategory"), clientParams.get("problemCategory")));
                     }
                 }
-                if (clientParams.containsKey("receivedFromT1")) {
-                    if (StringUtils.hasLength(clientParams.get("receivedFromT1"))) {
-                        p = cb.and(p, cb.equal(root.get("receivedFromT1"), clientParams.get("receivedFromT1")));
+                if (clientParams.containsKey("status") ) {
+                    if (clientParams.containsKey("status")) {
+                        if (StringUtils.hasLength(clientParams.get("status"))) {
+                            p = cb.and(p, cb.equal(root.get("status"), clientParams.get("status")));
+                        }
                     }
-                }
-                if (clientParams.containsKey("status")) {
-                    if (StringUtils.hasLength(clientParams.get("status"))) {
-                        p = cb.and(p, cb.equal(root.get("status"), clientParams.get("status")));
+
+                    if (clientParams.containsKey("status")) {
+                        if (StringUtils.hasLength(clientParams.get("status"))) {
+                            p = cb.or(p, cb.equal(root.get("receivedFromT1"), UserUtil.getLoginUser()));
+
+                        }
                     }
                 }
 

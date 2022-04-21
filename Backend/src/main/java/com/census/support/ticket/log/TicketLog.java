@@ -1,7 +1,8 @@
-package com.census.support.ticket;
+package com.census.support.ticket.log;
 
 
 import com.census.support.acl.user.User;
+import com.census.support.ticket.Ticket;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

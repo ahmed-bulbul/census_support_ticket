@@ -1,7 +1,7 @@
 package com.census.support.ticket.entityListener;
 
 import com.census.support.ticket.Ticket;
-import com.census.support.ticket.TicketLog;
+import com.census.support.ticket.log.TicketLog;
 import com.census.support.util.BeanUtil;
 
 import javax.persistence.EntityManager;
