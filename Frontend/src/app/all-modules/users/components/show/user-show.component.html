@@ -43,14 +43,6 @@
                   </div>
 
 
-
-                  <div class="form-group row">
-                    <label class="col-form-label col-md-2">Email</label>
-                    <div class="col-md-10">
-                      <span>: &nbsp;</span><span>{{myFormData.email}}</span>
-                    </div>
-                  </div>
-
                   <div class="form-group row">
                     <label class="col-form-label col-md-2">Phone</label>
                     <div class="col-md-10">
@@ -58,26 +50,13 @@
                     </div>
                   </div>
 
-                  <div class="form-group row">
-                    <label class="col-form-label col-md-2">User Title</label>
-                    <div class="col-md-10">
-                      <span>: &nbsp;</span><span>{{myFormData.userTitle ? myFormData.userTitle : null }}</span>
-                    </div>
-                  </div>
-
-                  <div class="form-group row">
-                    <label class="col-form-label col-md-2">Group Username</label>
-                    <div class="col-md-10">
-                      <span>: &nbsp;</span><span>{{myFormData.groupUsername ?myFormData.groupUsername : null }}</span>
-                    </div>
-                  </div>
 
 
                   <div class="form-group row">
                     <label class="col-form-label col-md-2">Roles</label>
                     <div class="col-md-10">
-                      <span *ngFor="let role of myFormData.roles">
-                        <span>: &nbsp;</span><span>{{role.authority}}</span>
+                      <span *ngFor="let role of myFormData.role">
+                        <span>: &nbsp;</span><span>{{role}}</span>
                       </span>
                     </div>
                   </div>

@@ -46,6 +46,17 @@
                   <span style="font-size: 12px;" class="text-danger"
                     *ngIf="f.deviceUserId && f.deviceUserId.invalid && f.deviceUserId.touched">Device User Id not valid</span>
                 </div>
+
+                <div class="form-group" >
+                  <label>Problem Type</label>
+                  <select class="select form-control" formControlName="problemType">
+                    <option value="">-Select Type-</option>
+                    <option value="SOFTWARE"> Software </option>
+                    <option value="IINTERNET"> Internet </option>
+
+                  </select>
+                </div>
+
               </div>
               <div class="col-md-6">
 
@@ -64,6 +75,12 @@
                     <option value="TECHNICAL"> Technical </option>
 
                   </select>
+                </div>
+
+                <div class="form-group" >
+                  <label>Problem Description</label>
+                  <!-- input type text area -->
+                  <textarea class="form-control" rows="5" formControlName="problemDescription"></textarea>
                 </div>
 
 

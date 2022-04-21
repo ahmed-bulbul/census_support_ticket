@@ -25,6 +25,7 @@ public class User {
 
     private String name;
 
+    @Column(name = "PHONE", unique = true)
     private String phone;
 
     @Size(max = 15)

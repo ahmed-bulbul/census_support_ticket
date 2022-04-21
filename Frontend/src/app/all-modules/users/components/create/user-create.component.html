@@ -40,12 +40,6 @@
                     *ngIf="f.username && f.username.invalid && f.username.touched">Username not valid</span>
                 </div>
 
-                <div class="form-group">
-                  <label>Email</label>
-                  <input type="email" class="form-control" formControlName="email">
-                  <span style="font-size: 12px;" class="text-danger"
-                    *ngIf="f.email && f.email.invalid && f.email.touched">Email not valid</span>
-                </div>
 
 
                 <div class="form-group">
@@ -57,33 +51,14 @@
                     length:4]</span>
                 </div>
 
-                <div class="form-group">
-                  <label>Is Group User ? &nbsp; &nbsp; </label>
-                  <input  style="margin-top: 10px;" id="groupUserId"
-                    (change)="checkGroupUser($event.target.value,'groupUser')" formControlName="groupUser"
-                    type="checkbox">
-                </div>
 
-                <div class="form-group">
-                  <label>Roles: &nbsp; &nbsp; </label>
-                  <label *ngFor="let role of rolesData; let i = index ">
-                      <input (click)="checkRole($event,role.authority)" id="roleId"
-                        formControlName="role" type="checkbox"> &nbsp; &nbsp; {{role.authority?role.authority:null}}
-                      &nbsp; &nbsp;
-                  </label>
-                </div>
+
 
 
 
               </div>
               <div class="col-md-6">
 
-                <div class="form-group">
-                  <label>User title</label>
-                  <input type="text" class="form-control" formControlName="userTitle">
-                  <span style="font-size: 12px;" class="text-danger"
-                    *ngIf="f.userTitle && f.userTitle.invalid && f.userTitle.touched">User title required</span>
-                </div>
 
                 <div class="form-group">
                   <label>Phone</label>
@@ -102,17 +77,22 @@
                 </div>
 
 
+              </div> <br> <br> <br>
 
-                <div class="form-group" *ngIf="groupUserData && isGroupUser">
-                  <label>Group User</label>
-                  <select class="select form-control" formControlName="groupUsername">
-                    <option value="">Select Group User</option>
-                    <option *ngFor="let data of groupUserData" [ngValue]='data.username'>{{data.userTitle}}
-                    </option>
-                  </select>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Roles: &nbsp; &nbsp; </label>
+                    <label *ngFor="let role of rolesData; let i = index ">
+                        <input (click)="checkRole($event,role.authority)" id="roleId"
+                          formControlName="role" type="checkbox"> &nbsp; &nbsp; {{role.authority?role.authority:null}}
+                        &nbsp; &nbsp;
+                    </label>
+                  </div>
                 </div>
 
-              </div> <br> <br> <br>
+
+              </div>
 
 
             </div>
