@@ -29,4 +29,9 @@ export class TicketService {
     return this.http.delete(apiURL, formData);
 
   }
+  public sendStstusUpdateRequest(apiURL, formData){
+    console.log('@sendStatusUpdateRequest');
+    return this.http.put(apiURL, formData);
+
+  }
 }

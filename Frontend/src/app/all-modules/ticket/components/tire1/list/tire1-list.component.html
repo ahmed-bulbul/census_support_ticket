@@ -101,10 +101,10 @@
                   <td>
                     <a  class="btn btn-sm btn-primary" routerLink="/ticket/tire1/show/{{thisObj.id}}"><i
                       class="fa fa-eye m-r-5"></i></a> &nbsp;
-                    <a  class="btn btn-sm btn-success">Receive</a> &nbsp;
-                    <a  class="btn btn-sm btn-warning">Hold</a> &nbsp;
-                    <a  class="btn btn-sm btn-info">Solved</a> &nbsp;
-                    <a  class="btn btn-sm btn-primary">Send To Tire 2</a> &nbsp;
+                    <a *ngIf="thisObj.status=='OPEN'" class="btn btn-sm btn-success" (click)="receive(thisObj.id)">Receive</a> &nbsp;
+                    <a *ngIf="thisObj.status=='RECEIVED'" class="btn btn-sm btn-warning">Hold</a> &nbsp;
+                    <a *ngIf="thisObj.status=='RECEIVED'" class="btn btn-sm btn-info">Solved</a> &nbsp;
+                    <a *ngIf="thisObj.status=='RECEIVED'" class="btn btn-sm btn-primary">Send To Tire 2</a> &nbsp;
                     <!-- <a  class="btn btn-sm btn-primary" routerLink="/system/menu/show/{{thisObj.id}}"><i
                         class="fa fa-eye m-r-5"></i>View</a> &nbsp;
                     <a  class="btn btn-sm btn-info" routerLink="/system/menu/edit/{{thisObj.id}}"><i

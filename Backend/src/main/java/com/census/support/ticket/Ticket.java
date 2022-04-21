@@ -44,6 +44,10 @@ public class Ticket {
     private String holdBy;
 
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date receiveTime;
+
+
 
     // System log fields
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)

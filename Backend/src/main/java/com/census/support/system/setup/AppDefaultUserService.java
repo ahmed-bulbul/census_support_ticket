@@ -109,6 +109,20 @@ public class AppDefaultUserService {
             user.setCreationUser("SYSTEM");
             this.userRepository.save(user);
         }
+        //tire1 user2
+        if(!userRepository.findByUsername("tire1-user2").isPresent()){
+            Set<Role> rolesTire1UserSet = new HashSet<>();
+            User user = new User();
+
+            user.setUsername("tire1-user2");
+            user.setPassword(bCryptPasswordEncoder.encode("tire1-user2"));
+            user.setPhone("01678862528");
+            rolesTire1UserSet.add(roleTire1User);
+            user.setRoles(rolesTire1UserSet);
+            user.setCreationDateTime(new Date());
+            user.setCreationUser("SYSTEM");
+            this.userRepository.save(user);
+        }
 
         //tire2 user
         if(!userRepository.findByUsername("tire2-user").isPresent()){

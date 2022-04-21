@@ -33,4 +33,9 @@ public class TireOneController {
         return new ResponseEntity<>(new PaginatedResponse(true,200,"ok",page.getTotalElements(),
                 page.getTotalPages(),ps.sortDir.equals("asc") ? "desc": "asc",page.getNumber(), Arrays.asList(listData.toArray())), HttpStatus.OK);
     }
+
+    @PutMapping("/stsUpdate/{id}")
+    public ResponseEntity<?> stsUpdate(@PathVariable("id") Long id){
+        return tireOneService.stsUpdate(id);
+    }
 }

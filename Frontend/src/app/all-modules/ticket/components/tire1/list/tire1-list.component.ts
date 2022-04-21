@@ -35,6 +35,8 @@ export class Tire1ListComponent implements OnInit {
   private code: string;
   private creationUser: string;
   private problemCategory:string;
+  private receivedFromT1:string;
+  private status:string;
 
   constructor(
     private route: ActivatedRoute,
@@ -69,11 +71,14 @@ export class Tire1ListComponent implements OnInit {
 
     let queryParams: any = {};
     this.problemCategory = "TECHNICAL";
+    this.status="OPEN";
+    this.receivedFromT1=this.loginService.getUser();
     const params = this.getUserQueryParams(this.configPgn.pageNum, this.configPgn.pageSize);
     queryParams = params;
 
     queryParams.rEntityName = 'Ticket';
     queryParams.rReqType = 'getListData';
+
 
 
     this.spinnerService.show();
@@ -117,6 +122,38 @@ export class Tire1ListComponent implements OnInit {
     $('.filter-row').find('input, select, textarea').val('');
     this._getListData();
   }
+
+
+  receive(id)
+  {
+    const apiURL = this.baseUrl + '/ticket/tire1/stsUpdate/' + id;
+    console.log(apiURL);
+
+    const formData: any = {};
+
+    this.spinnerService.show();
+    this.ticketService.sendStstusUpdateRequest(apiURL, formData).subscribe(
+      (response: any) => {
+
+        if(response.status === true){
+          console.log(response);
+          this.spinnerService.hide();
+          this.toastr.success(response.message, 'Success');
+          this._getListData();
+        }else{
+          this.spinnerService.hide();
+          this.toastr.info(response.message, 'Info');
+        }
+
+      },
+      (error) => {
+        console.log(error);
+        this.spinnerService.hide();
+      }
+    );
+  }
+
+
   private getUserQueryParams(page: number, pageSize: number): any {
 
     const params: any = {};
@@ -138,6 +175,14 @@ export class Tire1ListComponent implements OnInit {
     if(this.problemCategory)
     {
       params['problemCategory']= this.problemCategory;
+    }
+    if(this.problemCategory)
+    {
+      params['status']= this.status;
+    }
+    if(this.receivedFromT1)
+    {
+      params['receivedFromT1']= this.receivedFromT1;
     }
 
 

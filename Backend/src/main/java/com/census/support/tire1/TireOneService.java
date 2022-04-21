@@ -1,18 +1,23 @@
 package com.census.support.tire1;
 
+import com.census.support.helper.response.BaseResponse;
 import com.census.support.ticket.Ticket;
 import com.census.support.ticket.TicketDTO;
 import com.census.support.ticket.TicketRepository;
+import com.census.support.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.Predicate;
+import java.util.Date;
 import java.util.Map;
 
 @Service
@@ -26,6 +31,7 @@ public class TireOneService {
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize, sort);
         Page<Ticket> entities = ticketRepository.findAll((Specification<Ticket>) (root, cq, cb) -> {
             Predicate p = cb.conjunction();
+
             if (!clientParams.isEmpty()) {
 
                 if (clientParams.containsKey("code")) {
@@ -43,10 +49,44 @@ public class TireOneService {
                         p = cb.and(p, cb.equal(root.get("problemCategory"), clientParams.get("problemCategory")));
                     }
                 }
+                if (clientParams.containsKey("receivedFromT1")) {
+                    if (StringUtils.hasLength(clientParams.get("receivedFromT1"))) {
+                        p = cb.and(p, cb.equal(root.get("receivedFromT1"), clientParams.get("receivedFromT1")));
+                    }
+                }
+                if (clientParams.containsKey("status")) {
+                    if (StringUtils.hasLength(clientParams.get("status"))) {
+                        p = cb.and(p, cb.equal(root.get("status"), clientParams.get("status")));
+                    }
+                }
+
+
+
+
             }
             return p;
         }, pageable);
 
         return entities.map(TicketDTO::new);
+    }
+
+    public ResponseEntity<?> stsUpdate(Long id) {
+        try {
+            Ticket ticket = ticketRepository.findById(id).orElse(null);
+            if (ticket != null) {
+                ticket.setStatus("RECEIVED");
+                ticket.setReceivedFromT1(UserUtil.getLoginUser());
+                ticket.setReceiveTime(new Date());
+                ticketRepository.save(ticket);
+                return new ResponseEntity<>(new BaseResponse(true, "Ticket receive successfully", 200), HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(new BaseResponse(false, "Ticket not found", 404), HttpStatus.OK);
+            }
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(new BaseResponse(false, "Error: " + e.getMessage(), 500), HttpStatus.OK);
+        }
+
     }
 }
