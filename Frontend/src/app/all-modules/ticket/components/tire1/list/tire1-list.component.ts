@@ -60,9 +60,11 @@ export class Tire1ListComponent implements OnInit {
 
   ngOnInit(): void {
     this._getListData();
+    this.refreshData()
   }
 
   _getListData(){
+
     const apiURL = this.baseUrl + '/ticket/tire1/getList';
 
     let queryParams: any = {};
@@ -94,6 +96,13 @@ export class Tire1ListComponent implements OnInit {
       }
     );
 
+  }
+  refreshData(){
+    this.listData =
+      setInterval(() => {
+        this._getListData();
+
+      }, 6000);
   }
 
 
