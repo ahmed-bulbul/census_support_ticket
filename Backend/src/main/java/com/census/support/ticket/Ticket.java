@@ -33,10 +33,9 @@ public class Ticket {
     private String status;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date holdTime;
+    private String holdDuration;
     private String solutionType;
     private String solutionDescription;
-
-
 
 
     private String solvedBy;

@@ -38,6 +38,7 @@ public class TicketLog {
     private String receivedFromT1;
     private String receivedFromT2;
     private String holdBy;
+    private String holdDuration;
 
 
 
@@ -69,6 +70,7 @@ public class TicketLog {
         this.receivedFromT1 = entity.getReceivedFromT1();
         this.receivedFromT2 = entity.getReceivedFromT2();
         this.holdBy = entity.getHoldBy();
+        this.holdDuration = entity.getHoldDuration();
 
 
         this.creationDateTime = entity.getCreationDateTime();
