@@ -9,6 +9,7 @@ import { TicketListComponent } from './components/list/ticket-list.component';
 import { TicketShowComponent } from './components/show/ticket-show.component';
 
 import { Tire1ListComponent } from './components/tire1/list/tire1-list.component';
+import { Tire1ShowComponent } from './components/tire1/show/tire1-show.component';
 
 
 
@@ -87,6 +88,11 @@ const routes: Routes = [
       {
         path:'tire1/list',
         component:Tire1ListComponent,
+        canActivate:[Tire1Guard]
+      },
+      {
+        path:'tire1/show/:id',
+        component:Tire1ShowComponent,
         canActivate:[Tire1Guard]
       },
 

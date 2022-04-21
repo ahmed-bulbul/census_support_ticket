@@ -14,6 +14,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { TicketEditComponent } from './components/edit/ticket-edit.component';
 import { TicketShowComponent } from './components/show/ticket-show.component';
 import { Tire1ListComponent } from './components/tire1/list/tire1-list.component';
+import { Tire1ShowComponent } from './components/tire1/show/tire1-show.component';
 
 
 
@@ -21,7 +22,7 @@ import { Tire1ListComponent } from './components/tire1/list/tire1-list.component
 @NgModule({
 
 
-  declarations: [TicketComponent, TicketCreateComponent, TicketListComponent, TicketEditComponent, TicketShowComponent,Tire1ListComponent],
+  declarations: [TicketComponent, TicketCreateComponent, TicketListComponent, TicketEditComponent, TicketShowComponent,Tire1ListComponent, Tire1ShowComponent],
 
   imports: [
     CommonModule,
