@@ -27,18 +27,19 @@ public class Ticket {
     private String problemType;
     private String problemDescription;
     private String code;
-    @ManyToOne(fetch = FetchType.EAGER)
-    private User createdBy;
-    private String createdByUsername;
+
+
+
     private String status;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date holdTime;
     private String solutionType;
     private String solutionDescription;
-    @ManyToOne(fetch = FetchType.EAGER)
-    private User solvedBy;
-    private String solvedByUsername;
 
+
+
+
+    private String solvedBy;
     private String receivedFromT1;
     private String receivedFromT2;
     private String holdBy;
