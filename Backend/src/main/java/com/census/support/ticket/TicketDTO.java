@@ -1,8 +1,11 @@
 package com.census.support.ticket;
 
+import com.census.support.ticket.log.TicketLog;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 @Data
@@ -19,6 +22,7 @@ public class TicketDTO {
     private String problemDescription;
     private String code;
     private String status;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date holdTime;
     private String solutionType;
     private String solutionDescription;
@@ -29,10 +33,17 @@ public class TicketDTO {
     private String holdBy;
     private String holdDuration;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date solvedTime;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date receiveTime;
+
 
 
     //system logs
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date creationDateTime;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date lastUpdateDateTime;
     private String creationUser;
     private String lastUpdateUser;
@@ -55,6 +66,37 @@ public class TicketDTO {
         this.receivedFromT2 = ticket.getReceivedFromT2();
         this.holdBy = ticket.getHoldBy();
         this.holdDuration = ticket.getHoldDuration();
+        this.receiveTime = ticket.getReceiveTime();
+        this.solvedTime = ticket.getSolvedTime();
+
+        //system logs
+        this.creationDateTime = ticket.getCreationDateTime();
+        this.lastUpdateDateTime = ticket.getLastUpdateDateTime();
+        this.creationUser = ticket.getCreationUser();
+        this.lastUpdateUser = ticket.getLastUpdateUser();
+    }
+
+    public TicketDTO(TicketLog ticket) {
+
+        this.id = ticket.getId();
+        this.deviceUserPhone = ticket.getDeviceUserPhone();
+        this.deviceUserId = ticket.getDeviceUserId();
+        this.tabletSerialNo = ticket.getTabletSerialNo();
+        this.problemCategory = ticket.getProblemCategory();
+        this.problemType = ticket.getProblemType();
+        this.problemDescription = ticket.getProblemDescription();
+        this.code = ticket.getCode();
+        this.status = ticket.getStatus();
+        this.holdTime = ticket.getHoldTime();
+        this.solutionType = ticket.getSolutionType();
+        this.solutionDescription = ticket.getSolutionDescription();
+        this.solvedBy = ticket.getSolvedBy();
+        this.receivedFromT1 = ticket.getReceivedFromT1();
+        this.receivedFromT2 = ticket.getReceivedFromT2();
+        this.holdBy = ticket.getHoldBy();
+        this.holdDuration = ticket.getHoldDuration();
+        this.receiveTime = ticket.getReceiveTime();
+        this.solvedTime = ticket.getSolvedTime();
 
         //system logs
         this.creationDateTime = ticket.getCreationDateTime();

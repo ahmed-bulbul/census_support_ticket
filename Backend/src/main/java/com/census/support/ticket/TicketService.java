@@ -3,6 +3,8 @@ package com.census.support.ticket;
 import com.census.support.helper.response.BaseResponse;
 import com.census.support.message.MessageService;
 import com.census.support.system.counter.SystemCounterService;
+import com.census.support.ticket.log.TicketLog;
+import com.census.support.ticket.log.TicketLogRepository;
 import com.census.support.util.SetAttributeUpdate;
 import com.census.support.util.SysMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,8 @@ public class TicketService {
     private SystemCounterService counterService;
     @Autowired
     private MessageService messageService;
+    @Autowired
+    private TicketLogRepository ticketLogRepository;
 
 
     @Transactional
@@ -125,5 +129,31 @@ public class TicketService {
         }catch (Exception e){
             return new ResponseEntity<>(new BaseResponse(false, "Error: " + e.getMessage(), 500), HttpStatus.OK);
         }
+    }
+
+    public Page<TicketDTO> getAllPaginatedStatus(Map<String, String> clientParams, int pageNum, int pageSize, String sortField, String sortDir) {
+
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() : Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(pageNum - 1, pageSize, sort);
+        Page<TicketLog> entities = ticketLogRepository.findAll((Specification<TicketLog>) (root, cq, cb) -> {
+            Predicate p = cb.conjunction();
+            if (!clientParams.isEmpty()) {
+
+                if (clientParams.containsKey("code")) {
+                    if (StringUtils.hasLength(clientParams.get("code"))) {
+                        p = cb.and(p, cb.equal(root.get("code"), clientParams.get("code")));
+                    }
+                }
+                if (clientParams.containsKey("creationUser")) {
+                    if (StringUtils.hasLength(clientParams.get("creationUser"))) {
+                        p = cb.and(p, cb.equal(root.get("creationUser"), clientParams.get("creationUser")));
+                    }
+                }
+            }
+            return p;
+        }, pageable);
+
+        return entities.map(TicketDTO::new);
     }
 }
