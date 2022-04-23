@@ -26,18 +26,18 @@ export class AuthInterceptor implements HttpInterceptor{
             this.toastr.error('you are not athorized or token has been expired','error');
             this.router.navigate(['error/error403']);
             return of(err.message); // or EMPTY may be appropriate here
-        }else if(err.status==500){
+        }else if(err.status === 500){
             console.log(err.message);
             if(err.message.includes('jwt token has expired')){
                 this.loginService.logout();
                 this.router.navigate(['login']);
             }
            // this.router.navigate(['error/error500']);
-        }else if(err.status==401){
+        }else if(err.status === 401){
             console.log("From 401");
             this.loginService.logout();
             this.router.navigate(['login']);
-        }else if(err.status==404){
+        }else if(err.status === 404){
             this.router.navigate(['error/error404']);
         }
         return throwError(err);

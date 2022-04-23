@@ -1,0 +1,35 @@
+<div class="page-content page-container" id="page-content">
+  <div class="padding">
+      <div class="row container d-flex justify-content-center">
+          <div class="col-lg-8 grid-margin stretch-card">
+              <div class="card">
+                  <div class="card-body">
+                      <h3 class="text-center">Ticket Status</h3>
+                      <input (input)="searchByCode($event.target.value)" type="text" class="form-control floating" placeholder="Enter Ticket Number"> <br> <br>
+                      <div class="table-responsive">
+                          <table class="table table-hover">
+                              <thead>
+                                  <tr>
+                                      <th> Ticket No </th>
+                                      <th>Problem Type</th>
+                                      <th>Phone</th>
+                                      <th>Status</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let thisObj of listData">
+                                      <td>{{thisObj.code}}</td>
+                                      <td>{{thisObj.problemType}}</td>
+                                      <td>{{thisObj.deviceUserPhone}}</td>
+                                      <td><label class="badge badge-success">{{thisObj.status}}</label></td>
+                                  </tr>
+
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
