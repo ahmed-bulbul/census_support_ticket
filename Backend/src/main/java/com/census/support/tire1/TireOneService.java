@@ -108,4 +108,26 @@ public class TireOneService {
             return new ResponseEntity<>(new BaseResponse(false, "Something went wrong: "+e.getMessage(), 500), HttpStatus.OK);
         }
     }
+
+    public ResponseEntity<?> holdTicket(TicketDTO entityDTO,Long id) {
+        try {
+            Ticket ticket = ticketRepository.findById(id).orElse(null);
+            if (ticket != null) {
+                ticket.setStatus("HOLD");
+                ticket.setHoldBy(UserUtil.getLoginUser());
+                ticket.setHoldTime(new Date());
+                ticket.setHoldDuration(entityDTO.getHoldDuration());
+                ticket.setSolutionType(entityDTO.getSolutionType());
+                ticket.setSolutionDescription(entityDTO.getSolutionDescription());
+                ticketRepository.save(ticket);
+                return new ResponseEntity<>(new BaseResponse(true, "Ticket Hold successfully", 200), HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(new BaseResponse(false, "Ticket not found", 404), HttpStatus.OK);
+            }
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(new BaseResponse(false, "Error: " + e.getMessage(), 500), HttpStatus.OK);
+        }
+    }
 }

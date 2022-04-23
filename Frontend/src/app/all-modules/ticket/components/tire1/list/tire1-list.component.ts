@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { LoginService } from 'src/app/login/services/login.services';
 import { environment } from 'src/environments/environment';
 import { TicketService } from '../../../service/ticket.service';
-
+declare var $: any;
 @Component({
   selector: 'app-tire1-list',
   templateUrl: './tire1-list.component.html',
@@ -74,10 +74,9 @@ export class Tire1ListComponent implements OnInit {
   _initForm(){
 
     this.myForm = this.formBuilder.group({
-      id: [''],
-      solutionType:[''],
-      solutionDescription:[''],
-      holdTime:[''],
+      solutionType:['',[Validators.required]],
+      solutionDescription:['',[Validators.required]],
+      holdDuration:['',[Validators.required]]
     });
 
 }
@@ -205,9 +204,44 @@ export class Tire1ListComponent implements OnInit {
       }
     );
   }
-  ticketHold(id)
+  ticketHold(holdId)
   {
-    alert('Hold '+id);
+    // alert("ok")
+    // if(this.myForm.invalid){
+    //   alert("ok2")
+    //   return;
+    // }
+
+    const apiURL = this.baseUrl + '/ticket/tire1/holdTicket/' + holdId;
+
+    let formData: any;
+    formData = Object.assign(this.myForm.value);
+    this.spinnerService.show();
+    this.ticketService.sendPutRequest(apiURL, formData).subscribe(
+      (response: any) => {
+        if(response.status === true){
+          console.log(response);
+          this.spinnerService.hide().then(r => console.log('spinner stopped'));
+          this.toastr.success('Ticket hold successfully', 'Success', { positionClass:'toast-custom' });
+          this._getListData();
+          this.myForm.reset();
+          $("#hold_modal").modal("hide")
+        }else{
+          this.spinnerService.hide().then(r => console.log('spinner stopped'));
+          this.toastr.error(response.message, 'Error');
+        }
+      },
+      (error) => {
+        console.log(error.message);
+        this.toastr.show(error.error.message, 'Show');
+        this.spinnerService.hide().then(r => console.log('spinner stopped'));
+      }
+    );
+
+  }
+  resetFormValues()
+  {
+    this.myForm.reset();
   }
 
 

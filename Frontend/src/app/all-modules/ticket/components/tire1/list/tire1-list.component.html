@@ -89,6 +89,7 @@
                   <td>{{thisObj.code}}</td>
                   <td>{{thisObj.problemType}}</td>
                   <td>
+                    <span style="color: rgb(170, 155, 72);" *ngIf="thisObj.status=='HOLD'" class="">{{thisObj.status}}-{{getDiffTime(currentTime,thisObj.holdTime)}} </span>
                     <span style="color: rgb(6, 154, 53);" *ngIf="thisObj.status=='RECEIVED'" class="">{{thisObj.status}}-{{getDiffTime(currentTime,thisObj.receiveTime)}} </span>
                     <span style="color: rgb(7, 107, 110);" *ngIf="thisObj.status=='OPEN'"  class="">{{thisObj.status}} - {{getDiffTime(currentTime,thisObj.creationDateTime)}} </span>
                   </td>
@@ -97,9 +98,10 @@
                     <a  class="btn btn-sm btn-primary" routerLink="/ticket/tire1/show/{{thisObj.id}}"><i
                       class="fa fa-eye m-r-5"></i></a> &nbsp;
                     <a *ngIf="thisObj.status=='OPEN'" class="btn btn-sm btn-success" (click)="ticketReceive(thisObj.id)">Receive</a> &nbsp;
-                    <a *ngIf="thisObj.status=='RECEIVED'" class="btn btn-sm btn-warning"  data-toggle="modal" data-target="#hold_modal" (click)="tempId = thisObj.id">Hold</a> &nbsp;
-                    <a *ngIf="thisObj.status=='RECEIVED'" class="btn btn-sm btn-info">Solved</a> &nbsp;
-                    <a *ngIf="thisObj.status=='RECEIVED'" class="btn btn-sm btn-primary">Send To Tire 2</a> &nbsp;
+                    <a *ngIf="thisObj.status=='RECEIVED'" class="btn btn-sm btn-warning"  data-toggle="modal" data-target="#hold_modal" (click)="holdId = thisObj.id">Hold</a> &nbsp;
+                    <a *ngIf="thisObj.status=='RECEIVED'||thisObj.status=='HOLD'" class="btn btn-sm btn-info">Solved</a> &nbsp;
+                    <a *ngIf="thisObj.status=='RECEIVED'||thisObj.status=='HOLD'" class="btn btn-sm btn-primary">Send To Tire 2</a> &nbsp;
+
                     <!-- <a  class="btn btn-sm btn-primary" routerLink="/system/menu/show/{{thisObj.id}}"><i
                         class="fa fa-eye m-r-5"></i>View</a> &nbsp;
                     <a  class="btn btn-sm btn-info" routerLink="/system/menu/edit/{{thisObj.id}}"><i
@@ -122,7 +124,7 @@
 
             <div class="d-flex justify-content-end ">
 
-              <div class="" [formGroup]="myFromGroup">
+              <div>
                 Items per Page
                 <select (change)="handlePageSizeChange($event)" class="pgn-pageSizeOption" formControlName="pageSize">
                   <option *ngFor="let size of configPgn.pageSizes" [value]="size">
@@ -149,32 +151,6 @@
 
 </div>
 
-
-
-<!-- Delete Modal -->
-<div class="modal custom-modal fade" id="delete_entity" role="dialog">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="form-header">
-          <h3>Delete Item</h3>
-          <p>Are you sure want to delete?</p>
-        </div>
-        <div class="modal-btn delete-action">
-          <div class="row">
-            <div class="col-6">
-              <a class="btn btn-primary continue-btn" (click)="deleteEntityData(tempId)">Delete</a>
-            </div>
-            <div class="col-6">
-              <a data-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- /Delete Modal -->
 <!-- Hold Modal -->
 <div class="modal custom-modal fade" id="hold_modal" role="dialog">
   <div class="modal-dialog modal-dialog-centered">
@@ -184,7 +160,7 @@
           <h3>Hold Item</h3>
         </div>
         <div class="card-body">
-          <form novalidate (ngSubmit)="myFormSubmit()" [formGroup]="myForm">
+          <form novalidate (ngSubmit)="ticketHold(holdId)" [formGroup]="myForm">
 
             <div class="form-group">
               <label>Solution Type</label>
@@ -201,10 +177,14 @@
               <textarea class="form-control" formControlName="solutionDescription" rows="2"></textarea>
             </div>
             <div class="form-group">
-              <label>Hold Time</label>
-              <input type="number" class="form-control" formControlName="holdTime">
+              <label>Hold Duration</label>
+              <input type="number" class="form-control" formControlName="holdDuration">
             </div>
+
             <div class="text-right">
+              <button class="btn btn-warning btn-ripple" data-dismiss="modal"><i class="fa fa-share"></i>
+                Cancel</button>
+              &nbsp; &nbsp;
               <button type="button" class="btn btn-secondary btn-ripple" (click)="resetFormValues()">
                 <i class="fa fa-undo" aria-hidden="true"></i> Reset
               </button>
