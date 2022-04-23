@@ -13,6 +13,7 @@ import { interval } from 'rxjs';
 export class AdminDashboardComponent implements OnInit {
 
   public baseUrl = environment.baseUrl;
+  private polling: any;
   public user:any;
   public totalTickets = 0;
   public totalReceivedTickets = 0;
@@ -27,29 +28,19 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.loginService.getUser();
-    // set interval 5 sec
-    // interval(1000)
-    // .pipe(takeWhile(() => !stop))
-    // .subscribe(() => {
-    //   // place you code here
-    //   this.getTotalTicket();
-    //   this.getTotalReceivedTicket();
-    //   this.getTotalHoldTicket();
-    // });
-
-    interval(2000).subscribe(x => {
-        this.getTotalTicket();
-        this.getTotalReceivedTicket();
-        this.getTotalHoldTicket();
-  });
-
-
-
+    this.pollData();
 
   }
-  battleInit() {
-    throw new Error('Method not implemented.');
-  }
+
+  pollData () {
+    this.polling = setInterval(() => {
+      this.getTotalTicket();
+      this.getTotalReceivedTicket();
+      this.getTotalHoldTicket();
+      this.getTotalResolvedTicket();
+
+  },2000);
+}
 
   // getTotalTicket
   getTotalTicket() {
@@ -110,4 +101,8 @@ export class AdminDashboardComponent implements OnInit {
       }
     );
   }
+
+  ngOnDestroy() {
+    clearInterval(this.polling);
+}
 }
