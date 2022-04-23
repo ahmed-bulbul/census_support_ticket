@@ -106,7 +106,9 @@
                     <a  class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_entity"
                       (click)="tempId = thisObj.id">
                       <i class="fa fa-trash-o m-r-5"></i>
-                    </a>
+                    </a> &nbsp;
+                    <a  class="btn btn-sm btn-primary" routerLink="/shared/status" [queryParams]="{code: thisObj.code}"><i
+                      class="fa fa-history m-r-5"></i>Log</a>
                   </td>
                 </tr>
 
