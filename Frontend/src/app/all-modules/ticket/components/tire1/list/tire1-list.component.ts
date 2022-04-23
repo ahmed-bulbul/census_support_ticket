@@ -88,7 +88,7 @@ export class Tire1ListComponent implements OnInit {
    // return Math.abs(Math.round(diff));
 
     if(diff < 60){
-      return Math.round(diff) + "sec ago";
+      return Math.round(diff) + " sec ago";
     }else if(diff < 3600){
       diff /= 60;
       return Math.round(diff) + " min ago";
@@ -206,11 +206,11 @@ export class Tire1ListComponent implements OnInit {
   }
   ticketHold(holdId)
   {
-    // alert("ok")
-    // if(this.myForm.invalid){
-    //   alert("ok2")
-    //   return;
-    // }
+    alert("ok")
+    if(this.myForm.invalid){
+      alert("ok2")
+      return;
+    }
 
     const apiURL = this.baseUrl + '/ticket/tire1/holdTicket/' + holdId;
 

@@ -89,7 +89,7 @@
                   <td>{{thisObj.code}}</td>
                   <td>{{thisObj.problemType}}</td>
                   <td>
-                    <span style="color: rgb(170, 155, 72);" *ngIf="thisObj.status=='HOLD'" class="">{{thisObj.status}}-{{getDiffTime(currentTime,thisObj.holdTime)}} </span>
+                    <span style="color: rgb(170, 155, 72);" *ngIf="thisObj.status=='HOLD'" class="">{{thisObj.status}} <small>{{getDiffTime(currentTime,thisObj.holdTime)}} </small></span>
                     <span style="color: rgb(6, 154, 53);" *ngIf="thisObj.status=='RECEIVED'" class="">{{thisObj.status}}-{{getDiffTime(currentTime,thisObj.receiveTime)}} </span>
                     <span style="color: rgb(7, 107, 110);" *ngIf="thisObj.status=='OPEN'"  class="">{{thisObj.status}} - {{getDiffTime(currentTime,thisObj.creationDateTime)}} </span>
                   </td>
@@ -189,7 +189,7 @@
                 <i class="fa fa-undo" aria-hidden="true"></i> Reset
               </button>
               &nbsp; &nbsp;
-              <button type="submit" class="btn btn-primary btn-ripple" >
+              <button [disabled]="!myForm.valid" type="submit" class="btn btn-primary btn-ripple" >
                 <i class="fa fa-check" aria-hidden="true"></i> Save &nbsp;&nbsp;&nbsp;
               </button>
             </div>
