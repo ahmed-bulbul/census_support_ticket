@@ -18,6 +18,7 @@ declare const $: any;
 export class TicketListComponent implements OnInit {
 
   public baseUrl = environment.baseUrl;
+  private polling: any;
 
   public pipe = new DatePipe('en-US');
   public myFromGroup: FormGroup;
@@ -62,11 +63,6 @@ export class TicketListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // run every 5 sec
-    setInterval(() => {
-      console.log('tick');
-    }
-    , 5000);
 
      // set init params
      this.myFromGroup = new FormGroup({
@@ -76,9 +72,18 @@ export class TicketListComponent implements OnInit {
 
     // bind event & action
     this._bindFromFloatingLabel();
+    this.pollData();
     this._getListData();
 
 
+  }
+
+  pollData () {
+    this.polling = setInterval(() => {
+      this._getListData();
+
+
+    },2000);
   }
 
   searchByCode(val) {
@@ -240,5 +245,9 @@ export class TicketListComponent implements OnInit {
     this._getListData();
   }
   // pagination handling methods end -------------------------------------------------------------------------
+
+  ngOnDestroy() {
+    clearInterval(this.polling);
+  }
 
 }

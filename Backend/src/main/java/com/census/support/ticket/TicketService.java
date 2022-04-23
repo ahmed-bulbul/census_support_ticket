@@ -47,7 +47,7 @@ public class TicketService {
                 SetAttributeUpdate.setSysAttributeForCreateUpdate(entity,"Create");
                 ticketRepository.save(entity);
                 //send user ticket created message
-                messageService.sendTicketCreatedMessage(entity, SysMessage.OPEN);
+                messageService.sendTicketCreatedMessage(entity, SysMessage.OPEN_MSG);
                 return new ResponseEntity<>(new BaseResponse(true, "Ticket created successfully", 201), HttpStatus.OK);
             }
         }catch (Exception e){
@@ -98,7 +98,7 @@ public class TicketService {
 
     public ResponseEntity<?> update(TicketDTO entityDTO) {
         Optional<Ticket> entity = ticketRepository.findById(entityDTO.getId());
-        if (entity.isPresent()) {
+        if (entity.isPresent() && entity.get().getStatus().equals(SysMessage.OPEN_STS)) {
             try {
                 SetAttributeUpdate.setSysAttributeForCreateUpdate(entity.get(), "Update");
                 Ticket ticket = entity.get();
@@ -120,7 +120,7 @@ public class TicketService {
     public ResponseEntity<?> delete(Long id) {
         try {
             Optional<Ticket> entity = ticketRepository.findById(id);
-            if (entity.isPresent()) {
+            if (entity.isPresent() && entity.get().getStatus().equals(SysMessage.OPEN_STS)) {
                 ticketRepository.delete(entity.get());
                 return new ResponseEntity<>(new BaseResponse(true, "Ticket deleted successfully", 200), HttpStatus.OK);
             }else{

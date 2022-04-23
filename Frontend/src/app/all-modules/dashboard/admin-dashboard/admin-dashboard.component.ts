@@ -39,8 +39,8 @@ export class AdminDashboardComponent implements OnInit {
       this.getTotalHoldTicket();
       this.getTotalResolvedTicket();
 
-  },2000);
-}
+    },2000);
+  }
 
   // getTotalTicket
   getTotalTicket() {
@@ -104,5 +104,5 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnDestroy() {
     clearInterval(this.polling);
-}
+  }
 }

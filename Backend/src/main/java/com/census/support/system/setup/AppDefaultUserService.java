@@ -243,7 +243,7 @@ public class AppDefaultUserService {
             menu.setId(5L);
             menu.setCode("USER");
             menu.setDescription("User");
-            menu.setOpenUrl("//users/user/list");
+            menu.setOpenUrl("/users/user/list");
             menu.setIconHtml("fa fa-user");
             menu.setSequence(5);
             menu.setHasChild(false);

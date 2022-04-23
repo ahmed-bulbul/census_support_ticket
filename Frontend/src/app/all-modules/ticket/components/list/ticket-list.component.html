@@ -101,9 +101,9 @@
                   <td>
                     <a  class="btn btn-sm btn-primary" routerLink="/ticket/bbs/show/{{thisObj.id}}"><i
                         class="fa fa-eye m-r-5"></i>View</a> &nbsp;
-                    <a  class="btn btn-sm btn-info" routerLink="/ticket/bbs/edit/{{thisObj.id}}"><i
+                    <a *ngIf="thisObj.status=='OPEN'" class="btn btn-sm btn-info" routerLink="/ticket/bbs/edit/{{thisObj.id}}"><i
                         class="fa fa-pencil m-r-5"></i></a>&nbsp;&nbsp;
-                    <a  class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_entity"
+                    <a  *ngIf="thisObj.status=='OPEN'" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_entity"
                       (click)="tempId = thisObj.id">
                       <i class="fa fa-trash-o m-r-5"></i>
                     </a> &nbsp;
