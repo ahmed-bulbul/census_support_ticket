@@ -20,18 +20,30 @@
                 <div class="card-body">
                     <span class="dash-widget-icon"><i class="fa fa-cubes"></i></span>
                     <div class="dash-widget-info">
-                        <h3>112</h3>
+                        <h3>{{totalTickets}}</h3>
                         <span>Total Ticket</span>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+          <div class="card dash-widget">
+              <div class="card-body">
+                  <span class="dash-widget-icon"><i class="fa fa-user"></i></span>
+                  <div class="dash-widget-info">
+                      <h3>{{totalReceivedTickets}}</h3>
+                      <span>Received</span>
+                  </div>
+              </div>
+          </div>
+      </div>
         <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
             <div class="card dash-widget">
                 <div class="card-body">
                     <span class="dash-widget-icon"><i class="fa fa-usd"></i></span>
                     <div class="dash-widget-info">
-                        <h3>44</h3>
+                        <h3>{{totalHoldTickets}}</h3>
                         <span>Hold</span>
                     </div>
                 </div>
@@ -42,23 +54,13 @@
                 <div class="card-body">
                     <span class="dash-widget-icon"><i class="fa fa-diamond"></i></span>
                     <div class="dash-widget-info">
-                        <h3>37</h3>
-                        <span>Solved</span>
+                        <h3>{{totalResolvedTickets}}</h3>
+                        <span>Resolved</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-            <div class="card dash-widget">
-                <div class="card-body">
-                    <span class="dash-widget-icon"><i class="fa fa-user"></i></span>
-                    <div class="dash-widget-info">
-                        <h3>20</h3>
-                        <span>Tire2 Hold</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
 <!-- /Page Content -->

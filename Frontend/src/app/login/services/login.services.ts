@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { Observable, Subject } from "rxjs";
 import { retry } from "rxjs/operators";
@@ -13,10 +14,11 @@ export class LoginService {
   baseUrl = environment.baseUrl;
 
 
+
   public loginStatusSubject = new Subject<boolean>();
   clearTimeout: any;
 
-  constructor(private http: HttpClient, private toastr: ToastrService) {}
+  constructor(private http: HttpClient, private toastr: ToastrService,private router: Router,) {}
 
   // user login
   public login(apiUrl,formData){
@@ -46,11 +48,14 @@ export class LoginService {
   public logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    localStorage.removeItem("activeTabName");
     if (this.clearTimeout) {
       clearTimeout(this.clearTimeout);
     }
     this.toastr.warning("Goodbye", "logout");
+    this.loginStatusSubject.next(false);
+    //relode page
+    window.location.reload();
+
     return true;
   }
 
