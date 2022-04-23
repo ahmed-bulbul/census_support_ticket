@@ -5,6 +5,7 @@ import { UserGuard } from './core/guards/user.guard';
 const routes: Routes = [
   { path: 'login', loadChildren: () => import(`./login/login.module`).then(m => m.LoginModule) },
   { path: 'error', loadChildren: () => import(`./errorpages/errorpages.module`).then(m => m.ErrorpagesModule) },
+  { path: 'shared', loadChildren: () => import(`./shared/shared.module`).then(m => m.SharedModule) },
   { path: '', loadChildren: () => import(`./all-modules/all-modules.module`).then(m => m.AllModulesModule), },
   { path: '**', loadChildren: () => import(`./login/login.module`).then(m => m.LoginModule) },
 

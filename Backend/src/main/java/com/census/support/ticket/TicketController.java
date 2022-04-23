@@ -40,10 +40,17 @@ public class TicketController {
                 page.getTotalPages(),ps.sortDir.equals("asc") ? "desc": "asc",page.getNumber(), Arrays.asList(listData.toArray())), HttpStatus.OK);
     }
 
-//    @GetMapping("/status")
-//    public ResponseEntity<?> status(){
-//        return ResponseEntity.ok(ticketService.getStatus());
-//    }
+    @GetMapping("/getStatus")
+    public ResponseEntity<?> getAllPaginatedStatus(HttpServletRequest request,
+                                                     @RequestParam Map<String,String> clientParams) {
+        this.clientParams = clientParams;
+        PaginatorService ps = new PaginatorService(request);
+        Page<TicketDTO> page = this.ticketService.getAllPaginatedStatus(this.clientParams, ps.pageNum, ps.pageSize, ps.sortField, ps.sortDir);
+        List<TicketDTO> listData = page.getContent();
+
+        return new ResponseEntity<>(new PaginatedResponse(true,200,"ok",page.getTotalElements(),
+                page.getTotalPages(),ps.sortDir.equals("asc") ? "desc": "asc",page.getNumber(), Arrays.asList(listData.toArray())), HttpStatus.OK);
+    }
 
     @GetMapping("/get/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id){

@@ -31,6 +31,12 @@ public class Ticket {
     private String code;
 
     private String status;
+
+
+
+
+
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date holdTime;
     private String holdDuration;
@@ -42,11 +48,12 @@ public class Ticket {
     private String receivedFromT2;
     private String holdBy;
 
-
-
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date receiveTime;
     private String receiveDuration;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date solvedTime;
 
 
 
