@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   public baseUrl = environment.baseUrl;
 
   public isLoggedIn = false;
+  public user: any;
 
   jsonData: any = {
     notification: [],
@@ -28,6 +29,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn = this.login.isLoggedIn();
+    this.user = this.login.getUser();
 
     // this.getDatas("notification");
     // this.getDatas("message");

@@ -37,6 +37,7 @@ export class AuthInterceptor implements HttpInterceptor{
             console.log("From 401");
             this.loginService.logout();
             this.router.navigate(['login']);
+            window.location.reload();
         }else if(err.status === 404){
             this.router.navigate(['error/error404']);
         }
