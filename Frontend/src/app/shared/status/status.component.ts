@@ -40,9 +40,24 @@ export class StatusComponent implements OnInit {
     this.code = this.route.snapshot.queryParamMap.get('code');
     if(this.code != null){
       this._getListData();
+      //set interval 1 sec
+      setInterval(() => {
+        this.refreshTime();
+      }
+        , 1000);
     }
 
   }
+
+
+  refreshTime() {
+    var dateString = new Date().toLocaleString("en-US", {timeZone: "Asia/Dhaka"});
+    var formattedString = dateString.replace(", ", " - ");
+    document.getElementById("time").innerHTML = formattedString;
+  }
+
+
+
 
   _getListData(){
     const apiURL = this.baseUrl + '/ticket/bbs/getStatus';
