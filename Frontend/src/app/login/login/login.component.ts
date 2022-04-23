@@ -45,7 +45,6 @@ export class LoginComponent implements OnInit {
 
   _checkIsLoogedIn(){
     if(this.loginService.isLoggedIn()){
-      alert("You are already logged in");
       this.router.navigate(['dashboard']);
     }
   }

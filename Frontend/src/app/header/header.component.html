@@ -4,7 +4,7 @@
     <!-- Logo -->
     <div class="header-left">
         <a [routerLink]="['/dashboard']" class="logo">
-            <img src="assets/img/logo.png" width="40" height="40" alt="">
+            <img src="assets/img/logo_bbs.png" width="40" height="40" alt="">
         </a>
     </div>
     <!-- /Logo -->
@@ -19,7 +19,7 @@
 
     <!-- Header Title -->
     <div class="page-title-box">
-        <h3> Census Ticket Support </h3>
+        <h3> আদমশুমারী ২০২১ - (বাংলাদেশ পরিসংখ্যান ব্যুরো) </h3>
     </div>
     <!-- /Header Title -->
 
@@ -41,106 +41,12 @@
         </li>
         <!-- /Search -->
 
-        <!-- Flag -->
-        <li class="nav-item dropdown has-arrow flag-nav">
-            <a href="javascript:" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                <img src="assets/img/flags/us.png" alt="" height="20"> <span>English</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right">
-                <a  class="dropdown-item">
-                    <img src="assets/img/flags/us.png" alt="" height="16"> English
-                </a>
-                <a  class="dropdown-item">
-                    <img src="assets/img/flags/fr.png" alt="" height="16"> French
-                </a>
-                <a  class="dropdown-item">
-                    <img src="assets/img/flags/es.png" alt="" height="16"> Spanish
-                </a>
-                <a  class="dropdown-item">
-                    <img src="assets/img/flags/de.png" alt="" height="16"> German
-                </a>
-            </div>
-        </li>
-        <!-- /Flag -->
 
-        <!-- Notifications -->
-        <!-- <li class="nav-item dropdown">
-            <a href="javascript:" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                <i class="fa fa-bell-o"></i> <span class="badge badge-pill">3</span>
-            </a>
-            <div class="dropdown-menu notifications">
-                <div class="topnav-dropdown-header">
-                    <span class="notification-title">Notifications</span>
-                    <a (click)="clearData('notification')" href="javascript:" class="clear-noti"> Clear All </a>
-                </div>
-                <div class="noti-content">
-                    <ul class="notification-list">
-                        <li class="notification-message" *ngFor="let item of notifications;let i = index">
-                            <a routerLink="/activities/activities-main">
-                                <div class="media">
-                                    <span class="avatar">
-                                        <img alt="" src="assets/img/profiles/avatar-{{i+ 1}}.jpg">
-                                    </span>
-                                    <div class="media-body">
-                                        <p class="noti-details"><span class="noti-title">{{ item.author }}</span>
-                                            {{ item.function }} <span class="noti-title">{{ item.message }}</span></p>
-                                        <p class="noti-time"><span class="notification-time">{{ item.time }}</span></p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="topnav-dropdown-footer">
-                    <a routerLink="/activities/activities-main">View all Notifications</a>
-                </div>
-            </div>
-        </li> -->
-        <!-- /Notifications -->
 
-        <!-- Message Notifications -->
-        <!-- <li class="nav-item dropdown">
-            <a href="javascript:" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                <i class="fa fa-comment-o"></i> <span class="badge badge-pill">8</span>
-            </a>
-            <div class="dropdown-menu notifications">
-                <div class="topnav-dropdown-header">
-                    <span class="notification-title">Messages</span>
-                    <a (click)="clearData('message')" href="javascript:" class="clear-noti"> Clear All </a>
-                </div>
-                <div class="noti-content">
-                    <ul class="notification-list">
-                        <li class="notification-message" *ngFor="let data of messagesData;let i = index">
-                            <a routerLink="/apps/chat">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">
-                                            <img alt="" src="assets/img/profiles/avatar-{{i+ 1}}.jpg">
-                                        </span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author">{{data.author}}</span>
-                                        <span class="message-time">{{data.time}}</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">{{data.message}}</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="topnav-dropdown-footer">
-                    <a routerLink="/apps/chat">View all Messages</a>
-                </div>
-            </div>
-        </li> -->
-        <!-- /Message Notifications -->
 
         <li class="nav-item dropdown has-arrow main-drop">
             <a href="javascript:" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                <span class="user-img"><img src="assets/img/profiles/avatar-21.jpg" alt="">
-                    <span class="status online"></span></span>
-                <span>Admin</span>
+                <span>{{user.username}}</span>
             </a>
             <div class="dropdown-menu">
                 <!-- <a class="dropdown-item" routerLink="/employees/employeeprofile">My Profile</a>

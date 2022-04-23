@@ -52,9 +52,8 @@ export class LoginService {
       clearTimeout(this.clearTimeout);
     }
     this.toastr.warning("Goodbye", "logout");
-    this.loginStatusSubject.next(false);
-    //relode page
-    window.location.reload();
+    this.router.navigate(["/login"]);
+    
 
     return true;
   }
