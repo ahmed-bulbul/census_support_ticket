@@ -273,4 +273,8 @@ export class Tire1ListComponent implements OnInit {
   // pagination handling methods end -------------------------------------------------------------------------
 
 
+  ngOnDestroy() {
+    clearInterval(this.listData);
+}
+
 }
