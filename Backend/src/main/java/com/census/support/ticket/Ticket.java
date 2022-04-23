@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Data
@@ -25,6 +26,7 @@ public class Ticket {
     private String tabletSerialNo;
     private String problemCategory;
     private String problemType;
+
     private String problemDescription;
     private String code;
 
@@ -44,6 +46,7 @@ public class Ticket {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date receiveTime;
+    private String receiveDuration;
 
 
 

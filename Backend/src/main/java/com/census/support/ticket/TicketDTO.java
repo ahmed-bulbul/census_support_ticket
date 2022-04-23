@@ -28,6 +28,7 @@ public class TicketDTO {
     private String receivedFromT2;
     private String holdBy;
     private String holdDuration;
+    private Date receiveTime;
 
 
 
@@ -55,6 +56,7 @@ public class TicketDTO {
         this.receivedFromT2 = ticket.getReceivedFromT2();
         this.holdBy = ticket.getHoldBy();
         this.holdDuration = ticket.getHoldDuration();
+        this.receiveTime = ticket.getReceiveTime();
 
         //system logs
         this.creationDateTime = ticket.getCreationDateTime();

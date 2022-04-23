@@ -38,4 +38,9 @@ public class TireOneController {
     public ResponseEntity<?> stsUpdate(@PathVariable("id") Long id){
         return tireOneService.stsUpdate(id);
     }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<?> getById(@PathVariable("id") Long id){
+        return tireOneService.getById(id);
+    }
 }

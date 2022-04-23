@@ -20,6 +20,7 @@ import org.springframework.util.StringUtils;
 import javax.persistence.criteria.Predicate;
 import java.util.Date;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class TireOneService {
@@ -92,5 +93,19 @@ public class TireOneService {
             return new ResponseEntity<>(new BaseResponse(false, "Error: " + e.getMessage(), 500), HttpStatus.OK);
         }
 
+    }
+
+    public ResponseEntity<?> getById(Long id) {
+        try {
+            Optional<Ticket> entity = ticketRepository.findById(id);
+            if (entity.isPresent()) {
+                TicketDTO dto = new TicketDTO(entity.get());
+                return new ResponseEntity<>(new BaseResponse(true, "Ticket found successfully", 200, dto), HttpStatus.OK);
+            }else {
+                return new ResponseEntity<>(new BaseResponse(false, "Ticket not found", 404), HttpStatus.OK);
+            }
+        }catch (Exception e){
+            return new ResponseEntity<>(new BaseResponse(false, "Something went wrong: "+e.getMessage(), 500), HttpStatus.OK);
+        }
     }
 }

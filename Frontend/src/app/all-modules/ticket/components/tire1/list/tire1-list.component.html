@@ -75,9 +75,6 @@
                   <th>SL</th>
                   <th class="d-none">TB_ROW_ID</th>
                   <th>Code</th>
-                  <th>Device User ID </th>
-                  <th>Device User Phone</th>
-                  <th>Problem Category </th>
                   <th>Problem Type </th>
                   <th>Status</th>
                   <th>Action</th>
@@ -90,19 +87,17 @@
                   <td>{{ ( ((configPgn.pageNum-1) * configPgn.pageSize) + (i+1) ) }}</td>
                   <td class="d-none">{{thisObj.id}}</td>
                   <td>{{thisObj.code}}</td>
-                  <td>{{thisObj.deviceUserId}}</td>
-                  <td>{{thisObj.deviceUserPhone}}</td>
-                  <td>{{thisObj.problemCategory}}</td>
                   <td>{{thisObj.problemType}}</td>
                   <td>
-                    <span class="badge badge-success ml-auto">{{thisObj.status}}</span>
+                    <span class="badge badge-success ml-auto">{{thisObj.status}}</span> ({{(thisObj.receiveTime|date:'hh:MM' )}} min)
+                    <span class="badge badge-success ml-auto">{{thisObj.status}}</span> ({{(currentTime|date:'hh:MM:ss' )}} min)
                   </td>
 
                   <td>
                     <a  class="btn btn-sm btn-primary" routerLink="/ticket/tire1/show/{{thisObj.id}}"><i
                       class="fa fa-eye m-r-5"></i></a> &nbsp;
-                    <a *ngIf="thisObj.status=='OPEN'" class="btn btn-sm btn-success" (click)="receive(thisObj.id)">Receive</a> &nbsp;
-                    <a *ngIf="thisObj.status=='RECEIVED'" class="btn btn-sm btn-warning">Hold</a> &nbsp;
+                    <a *ngIf="thisObj.status=='OPEN'" class="btn btn-sm btn-success" (click)="ticketReceive(thisObj.id)">Receive</a> &nbsp;
+                    <a *ngIf="thisObj.status=='RECEIVED'" class="btn btn-sm btn-warning" (click)="ticketHold(thisObj.id)">Hold</a> &nbsp;
                     <a *ngIf="thisObj.status=='RECEIVED'" class="btn btn-sm btn-info">Solved</a> &nbsp;
                     <a *ngIf="thisObj.status=='RECEIVED'" class="btn btn-sm btn-primary">Send To Tire 2</a> &nbsp;
                     <!-- <a  class="btn btn-sm btn-primary" routerLink="/system/menu/show/{{thisObj.id}}"><i

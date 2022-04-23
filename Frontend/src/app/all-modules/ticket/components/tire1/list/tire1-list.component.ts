@@ -31,6 +31,9 @@ export class Tire1ListComponent implements OnInit {
     delete: false
   };
 
+ //for time duration
+ currentTime : any;
+
   // search fields for
   private code: string;
   private creationUser: string;
@@ -46,6 +49,7 @@ export class Tire1ListComponent implements OnInit {
     private ticketService:TicketService,
     private loginService:LoginService
   ) {
+    setInterval(() => {this.currentTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Dhaka"})}, 1000);
     this.configPgn = {
       // my props
       pageNum: 1,
@@ -62,7 +66,8 @@ export class Tire1ListComponent implements OnInit {
 
   ngOnInit(): void {
     this._getListData();
-    this.refreshData()
+    this.refreshData();
+
   }
 
   _getListData(){
@@ -90,6 +95,8 @@ export class Tire1ListComponent implements OnInit {
           this.configPgn.totalItems = response.totalItems;
           this.setDisplayLastSequence();
           this.spinnerService.hide();
+
+
         }else{
           this.spinnerService.hide();
           this.toastr.info(response.message, 'Info');
@@ -100,6 +107,7 @@ export class Tire1ListComponent implements OnInit {
         console.log(error)
       }
     );
+
 
   }
   refreshData(){
@@ -124,7 +132,7 @@ export class Tire1ListComponent implements OnInit {
   }
 
 
-  receive(id)
+  ticketReceive(id)
   {
     const apiURL = this.baseUrl + '/ticket/tire1/stsUpdate/' + id;
     console.log(apiURL);
@@ -151,6 +159,10 @@ export class Tire1ListComponent implements OnInit {
         this.spinnerService.hide();
       }
     );
+  }
+  ticketHold(id)
+  {
+    alert('Hold '+id);
   }
 
 
