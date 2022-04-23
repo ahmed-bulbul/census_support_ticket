@@ -158,13 +158,112 @@ public class AppDefaultUserService {
         }
     }
 
+    public void createMenu() {
+
+
+        //Ticket root menu
+        if (!menuRepository.findByCode("TICKET").isPresent()) {
+            SystemMenu menu = new SystemMenu();
+            menu.setId(1L);
+            menu.setCode("TICKET");
+            menu.setDescription("Ticket");
+            menu.setOpenUrl("/ticket");
+            menu.setIconHtml("fa fa-ticket");
+            menu.setSequence(1);
+            menu.setHasChild(true);
+            menu.setVisibleToAll(true);
+            menu.setLeftSideMenu(true);
+            menu.setIsActive(true);
+            menu.setCreationDateTime(new Date());
+            menu.setCreationUser("SYSTEM");
+            menuRepository.save(menu);
+        }
+
+        // ticket-BBS child menu
+        if (!menuRepository.findByCode("BBS").isPresent()) {
+            SystemMenu menu = new SystemMenu();
+            menu.setId(2L);
+            menu.setCode("BBS");
+            menu.setDescription("BBS");
+            menu.setOpenUrl("/ticket/bbs/list");
+            menu.setIconHtml("");
+            menu.setSequence(2);
+            menu.setHasChild(false);
+            menu.setVisibleToAll(true);
+            menu.setLeftSideMenu(true);
+            menu.setIsActive(true);
+            menu.setCreationDateTime(new Date());
+            menu.setCreationUser("SYSTEM");
+            menu.setParentMenu((SystemMenu) menuRepository.findByCode("TICKET").get());
+            menuRepository.save(menu);
+        }
+        // ticket-TIRE1 child menu
+        if (!menuRepository.findByCode("TIRE1").isPresent()) {
+            SystemMenu menu = new SystemMenu();
+            menu.setId(3L);
+            menu.setCode("TIRE1");
+            menu.setDescription("Tire1");
+            menu.setOpenUrl("/ticket/tire1/list");
+            menu.setIconHtml("");
+            menu.setSequence(3);
+            menu.setHasChild(false);
+            menu.setVisibleToAll(true);
+            menu.setLeftSideMenu(true);
+            menu.setIsActive(true);
+            menu.setCreationDateTime(new Date());
+            menu.setCreationUser("SYSTEM");
+            menu.setParentMenu((SystemMenu) menuRepository.findByCode("TICKET").get());
+            menuRepository.save(menu);
+
+        }
+
+        // ticket-TIRE2 child menu
+        if (!menuRepository.findByCode("TIRE2").isPresent()) {
+            SystemMenu menu = new SystemMenu();
+            menu.setId(4L);
+            menu.setCode("TIRE2");
+            menu.setDescription("Tire2");
+            menu.setOpenUrl("/ticket/tire2/list");
+            menu.setIconHtml("");
+            menu.setSequence(4);
+            menu.setHasChild(false);
+            menu.setVisibleToAll(true);
+            menu.setLeftSideMenu(true);
+            menu.setIsActive(true);
+            menu.setCreationDateTime(new Date());
+            menu.setCreationUser("SYSTEM");
+            menu.setParentMenu((SystemMenu) menuRepository.findByCode("TICKET").get());
+            menuRepository.save(menu);
+
+        }
+
+
+        if (!menuRepository.findByCode("User").isPresent()) {
+            SystemMenu menu = new SystemMenu();
+            menu.setId(5L);
+            menu.setCode("USER");
+            menu.setDescription("User");
+            menu.setOpenUrl("//users/user/list");
+            menu.setIconHtml("fa fa-user");
+            menu.setSequence(5);
+            menu.setHasChild(false);
+            menu.setVisibleToAll(true);
+            menu.setLeftSideMenu(true);
+            menu.setIsChild(true);
+            menu.setIsActive(true);
+            menu.setCreationDateTime(new Date());
+            menu.setCreationUser("SYSTEM");
+            menuRepository.save(menu);
+        }
+    }
+
 
 
     //@PostConstruct
     public void createDefaultUserAndRoles(){
         this.createRoles();
         this.createUser();
-        //this.createMenu();
+        this.createMenu();
         this.CreateTicketCodeCounter();
     }
 

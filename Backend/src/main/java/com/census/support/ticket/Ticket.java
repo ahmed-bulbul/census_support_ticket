@@ -1,6 +1,5 @@
 package com.census.support.ticket;
 
-import com.census.support.acl.user.User;
 import com.census.support.ticket.entityListener.TicketListener;
 import lombok.AllArgsConstructor;
 import lombok.Data;
