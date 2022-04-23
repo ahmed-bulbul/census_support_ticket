@@ -49,7 +49,7 @@ export class Tire1ListComponent implements OnInit {
     private ticketService:TicketService,
     private loginService:LoginService
   ) {
-    setInterval(() => {this.currentTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Dhaka"})}, 1000);
+    setInterval(() => { this.currentTime = new Date()} ,1000);
     this.configPgn = {
       // my props
       pageNum: 1,
@@ -69,6 +69,39 @@ export class Tire1ListComponent implements OnInit {
     this.refreshData();
 
   }
+  getDiffTime(t1,t2){
+    var time1=new Date(t1).getTime();
+    var time2=new Date(t2).getTime();
+    var diff = (time1 - time2) / 1000;
+    //diff /= 60;
+   // return Math.abs(Math.round(diff));
+
+    if(diff < 60){
+      return Math.round(diff) + "sec ago";
+    }else if(diff < 3600){
+      diff /= 60;
+      return Math.round(diff) + " min ago";
+    }else if(diff < 86400){
+      diff /= 3600;
+      return Math.round(diff) + " hours ago";
+    }else if(diff < 604800){
+      diff /= 86400;
+      return Math.round(diff) + " days ago";
+    }else if(diff < 2592000){
+      diff /= 604800;
+      return Math.round(diff) + " weeks ago";
+    }else if(diff < 31104000){
+      diff /= 2592000;
+      return Math.round(diff) + " months ago";
+    }else if(diff < 311040000){
+      diff /= 31104000;
+      return Math.round(diff) + " years ago";
+    }
+
+
+
+  }
+
 
   _getListData(){
 
