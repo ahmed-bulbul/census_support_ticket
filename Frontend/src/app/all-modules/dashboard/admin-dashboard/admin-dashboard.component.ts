@@ -3,6 +3,8 @@ import { Component, OnInit } from "@angular/core";
 import { LoginService } from "src/app/login/services/login.services";
 import { environment } from "src/environments/environment";
 import { DashboardService } from "../service/dashboard.service";
+import { interval } from 'rxjs';
+
 @Component({
   selector: "app-admin-dashboard",
   templateUrl: "./admin-dashboard.component.html",
@@ -17,6 +19,7 @@ export class AdminDashboardComponent implements OnInit {
   public totalHoldTickets = 0;
   public totalResolvedTickets = 0;
 
+
   constructor(
     private loginService:LoginService,
     private dashboardService:DashboardService
@@ -24,16 +27,28 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.loginService.getUser();
-
     // set interval 5 sec
-    setInterval(() => {
-      this.getTotalTicket();
-      this.getTotalReceivedTicket();
-      this.getTotalHoldTicket();
-    }
-      , 2000);
+    // interval(1000)
+    // .pipe(takeWhile(() => !stop))
+    // .subscribe(() => {
+    //   // place you code here
+    //   this.getTotalTicket();
+    //   this.getTotalReceivedTicket();
+    //   this.getTotalHoldTicket();
+    // });
+
+    interval(2000).subscribe(x => {
+        this.getTotalTicket();
+        this.getTotalReceivedTicket();
+        this.getTotalHoldTicket();
+  });
 
 
+
+
+  }
+  battleInit() {
+    throw new Error('Method not implemented.');
   }
 
   // getTotalTicket
