@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -17,7 +17,7 @@ export class Tire1ListComponent implements OnInit {
   public baseUrl = environment.baseUrl;
 
   public pipe = new DatePipe('en-US');
-  public myFromGroup: FormGroup;
+  public myForm: FormGroup;
 
   public configPgn: any;
   public listData: any = [];
@@ -41,7 +41,9 @@ export class Tire1ListComponent implements OnInit {
   private receivedFromT1:string;
   private status:string;
 
+
   constructor(
+    private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private spinnerService: NgxSpinnerService,
@@ -67,8 +69,18 @@ export class Tire1ListComponent implements OnInit {
   ngOnInit(): void {
     this._getListData();
     this.refreshData();
-
+    this._initForm();
   }
+  _initForm(){
+
+    this.myForm = this.formBuilder.group({
+      id: [''],
+      solutionType:[''],
+      solutionDescription:[''],
+      holdTime:[''],
+    });
+
+}
   getDiffTime(t1,t2){
     var time1=new Date(t1).getTime();
     var time2=new Date(t2).getTime();
