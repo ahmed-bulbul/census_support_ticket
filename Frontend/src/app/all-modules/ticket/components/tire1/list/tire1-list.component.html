@@ -90,7 +90,7 @@
                   <td >{{thisObj.problemType}}</td>
                   <td >
                     <!-- <span style="color: rgb(170, 155, 72);" *ngIf="thisObj.status=='HOLD'" class="">{{thisObj.status}} <small>{{getDiffTime(currentTime,thisObj.holdTime)}} </small></span> -->
-                    <span style="color: rgb(170, 155, 72);" *ngIf="thisObj.status=='HOLD'" class="">{{thisObj.status}} <small>{{getTimeLeft(thisObj.holdTime,thisObj.holdDuration)}}   {{getDiffTime(currentTime,thisObj.holdTime)}} </small> </span>
+                    <span style="color: rgb(170, 155, 72);" *ngIf="thisObj.status=='HOLD'" class="">{{thisObj.status}} <small>{{getTimeLeft(thisObj.holdTime,thisObj.holdDuration)}}   </small> </span>
                     <span style="color: rgb(6, 154, 53);" *ngIf="thisObj.status=='RECEIVED'" class="">{{thisObj.status}} <small> {{getDiffTime(currentTime,thisObj.receiveTime)}}</small> </span>
                     <span style="color: rgb(7, 107, 110);" *ngIf="thisObj.status=='OPEN'"  class="">{{thisObj.status}} <small>  {{getDiffTime(currentTime,thisObj.creationDateTime)}}</small> </span>
                   </td>

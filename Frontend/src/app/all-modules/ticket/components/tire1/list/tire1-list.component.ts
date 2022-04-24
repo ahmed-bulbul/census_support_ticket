@@ -139,7 +139,7 @@ export class Tire1ListComponent implements OnInit {
     if(timeLeftInMin > 0){
       return timeLeftInMin + " min left";
     }else{
-      return ;
+      return "time over";
     }
 
   }
