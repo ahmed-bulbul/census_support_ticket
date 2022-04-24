@@ -24,6 +24,8 @@ export class Tire1ListComponent implements OnInit {
   public listData: any = [];
   public editId: any;
   public tempId: any;
+  public solveId:any;
+  public holdId:any;
   // Action auth for user
   public authObj: any = {
     create: false,
