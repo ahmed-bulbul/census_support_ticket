@@ -46,9 +46,14 @@ public class TicketService {
             }else {
                 SetAttributeUpdate.setSysAttributeForCreateUpdate(entity,"Create");
                 ticketRepository.save(entity);
-                //send user ticket created message
-                messageService.sendTicketCreatedMessage(entity, SysMessage.OPEN_MSG);
-                return new ResponseEntity<>(new BaseResponse(true, "Ticket created successfully", 201), HttpStatus.OK);
+                try {
+                    //send user ticket created message
+                    messageService.sendTicketCreatedMessage(entity, SysMessage.OPEN_MSG);
+                    return new ResponseEntity<>(new BaseResponse(true, "Ticket created successfully", 201), HttpStatus.OK);
+                }catch (Exception e){
+                    return new ResponseEntity<>(new BaseResponse(false, "Ticket created successfully but failed to send message: "
+                            +e.getMessage(), 201), HttpStatus.OK);
+                }
             }
         }catch (Exception e){
             return new ResponseEntity<>(new BaseResponse(false, "Ticket creation failed: "+e.getMessage(), 500), HttpStatus.OK);
