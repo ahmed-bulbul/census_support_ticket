@@ -22,6 +22,7 @@ public class TicketDTO {
     private String problemDescription;
     private String code;
     private String status;
+    private Long statusSequence;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date holdTime;
     private String solutionType;
@@ -35,9 +36,11 @@ public class TicketDTO {
 
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Date solvedTime;
+    private Date solveTime;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date receiveTime;
+
+    String message;
 
 
 
@@ -59,6 +62,7 @@ public class TicketDTO {
         this.problemDescription = ticket.getProblemDescription();
         this.code = ticket.getCode();
         this.status = ticket.getStatus();
+        this.statusSequence = ticket.getStatusSequence();
         this.holdTime = ticket.getHoldTime();
         this.solutionType = ticket.getSolutionType();
         this.solutionDescription = ticket.getSolutionDescription();
@@ -69,7 +73,8 @@ public class TicketDTO {
         this.holdDuration = ticket.getHoldDuration();
         this.receiveTime = ticket.getReceiveTime();
 
-        this.solvedTime = ticket.getSolvedTime();
+        this.solveTime = ticket.getSolveTime();
+
 
         //system logs
         this.creationDateTime = ticket.getCreationDateTime();
@@ -89,6 +94,7 @@ public class TicketDTO {
         this.problemDescription = ticket.getProblemDescription();
         this.code = ticket.getCode();
         this.status = ticket.getStatus();
+        this.statusSequence = ticket.getStatusSequence();
         this.holdTime = ticket.getHoldTime();
         this.solutionType = ticket.getSolutionType();
         this.solutionDescription = ticket.getSolutionDescription();
@@ -98,7 +104,7 @@ public class TicketDTO {
         this.holdBy = ticket.getHoldBy();
         this.holdDuration = ticket.getHoldDuration();
         this.receiveTime = ticket.getReceiveTime();
-        this.solvedTime = ticket.getSolvedTime();
+        this.solveTime = ticket.getSolveTime();
 
 
         //system logs

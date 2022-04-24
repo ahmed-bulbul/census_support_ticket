@@ -20,6 +20,10 @@ public class Message {
     private Long id;
     @ManyToOne( fetch = FetchType.EAGER)
     private Ticket ticket;
+    private String ticketCode;
+
+
+    @Lob
     private String body;
     private String sender;
     private String receiver;
@@ -36,4 +40,7 @@ public class Message {
     private Date lastUpdateDateTime;
     @Column(name = "LAST_UPDATE_USER")
     private String lastUpdateUser;
+
+    public Message(Message message) {
+    }
 }

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription, timer } from 'rxjs';
 import { LoginService } from 'src/app/login/services/login.services';
 import { environment } from 'src/environments/environment';
 import { TicketService } from '../../../service/ticket.service';
@@ -18,11 +19,13 @@ export class Tire1ListComponent implements OnInit {
 
   public pipe = new DatePipe('en-US');
   public myForm: FormGroup;
-
+  public myForm2: FormGroup;
   public configPgn: any;
   public listData: any = [];
   public editId: any;
   public tempId: any;
+  public solveId:any;
+  public holdId:any;
   // Action auth for user
   public authObj: any = {
     create: false,
@@ -31,15 +34,17 @@ export class Tire1ListComponent implements OnInit {
     delete: false
   };
 
- //for time duration
- currentTime : any;
+  //for time duration
+  currentTime: any;
+
+
 
   // search fields for
   private code: string;
   private creationUser: string;
-  private problemCategory:string;
-  private receivedFromT1:string;
-  private status:string;
+  private problemCategory: string;
+  private receivedFromT1: string;
+  private status: string;
 
 
   constructor(
@@ -47,11 +52,11 @@ export class Tire1ListComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private spinnerService: NgxSpinnerService,
-    private toastr:ToastrService,
-    private ticketService:TicketService,
-    private loginService:LoginService
+    private toastr: ToastrService,
+    private ticketService: TicketService,
+    private loginService: LoginService
   ) {
-    setInterval(() => { this.currentTime = new Date()} ,1000);
+    setInterval(() => { this.currentTime = new Date() }, 1000);
     this.configPgn = {
       // my props
       pageNum: 1,
@@ -67,44 +72,52 @@ export class Tire1ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this._getListData();
     this.refreshData();
-    this._initForm();
+    this._initHoldForm();
+    this._initSolveForm();
   }
-  _initForm(){
+  _initHoldForm() {
 
     this.myForm = this.formBuilder.group({
-      solutionType:['',[Validators.required]],
-      solutionDescription:['',[Validators.required]],
-      holdDuration:['',[Validators.required]]
+      solutionType: ['', [Validators.required]],
+      solutionDescription: ['', [Validators.required]],
+      holdDuration: ['', [Validators.required]]
     });
 
-}
-  getDiffTime(t1,t2){
-    var time1=new Date(t1).getTime();
-    var time2=new Date(t2).getTime();
+  }
+  _initSolveForm() {
+    this.myForm2 = this.formBuilder.group({
+      solutionType: ['', [Validators.required]],
+      solutionDescription: ['', [Validators.required]],
+    });
+  }
+  getDiffTime(t1, t2) {
+    var time1 = new Date(t1).getTime();
+    var time2 = new Date(t2).getTime();
     var diff = (time1 - time2) / 1000;
     //diff /= 60;
-   // return Math.abs(Math.round(diff));
+    // return Math.abs(Math.round(diff));
 
-    if(diff < 60){
+    if (diff < 60) {
       return Math.round(diff) + " sec ago";
-    }else if(diff < 3600){
+    } else if (diff < 3600) {
       diff /= 60;
       return Math.round(diff) + " min ago";
-    }else if(diff < 86400){
+    } else if (diff < 86400) {
       diff /= 3600;
       return Math.round(diff) + " hours ago";
-    }else if(diff < 604800){
+    } else if (diff < 604800) {
       diff /= 86400;
       return Math.round(diff) + " days ago";
-    }else if(diff < 2592000){
+    } else if (diff < 2592000) {
       diff /= 604800;
       return Math.round(diff) + " weeks ago";
-    }else if(diff < 31104000){
+    } else if (diff < 31104000) {
       diff /= 2592000;
       return Math.round(diff) + " months ago";
-    }else if(diff < 311040000){
+    } else if (diff < 311040000) {
       diff /= 31104000;
       return Math.round(diff) + " years ago";
     }
@@ -112,16 +125,43 @@ export class Tire1ListComponent implements OnInit {
 
 
   }
+  getDiffTimeInMin(t1, t2) {
+    var time1 = new Date(t1).getTime();
+    var time2 = new Date(t2).getTime();
+    var diff = (time1 - time2) / 1000;
+    diff /= 60;
+    return Math.abs(Math.round(diff));
+  }
+  getDiffTimeInSec(t1, t2) {
+    var time1 = new Date(t1).getTime();
+    var time2 = new Date(t2).getTime();
+    var diff = (time1 - time2) / 1000;
+    return Math.abs(Math.round(diff));
+  }
+
+  getTimeLeft(holdTime, holdDuration) {
+
+    //make countdown hold Duration to minutes and seconds and return it
+    var timeLeftInMin = holdDuration - this.getDiffTimeInMin(holdTime, this.currentTime);
 
 
-  _getListData(){
+    if (timeLeftInMin > 0) {
+      return timeLeftInMin + " min left";
+    } else {
+      return "time over";
+    }
+
+  }
+
+
+  _getListData() {
 
     const apiURL = this.baseUrl + '/ticket/tire1/getList';
 
     let queryParams: any = {};
     this.problemCategory = "TECHNICAL";
-    this.status="OPEN";
-    this.receivedFromT1=this.loginService.getUser().username;
+    this.status = "OPEN";
+    this.receivedFromT1 = this.loginService.getUser().username;
     const params = this.getUserQueryParams(this.configPgn.pageNum, this.configPgn.pageSize);
     queryParams = params;
 
@@ -130,18 +170,18 @@ export class Tire1ListComponent implements OnInit {
 
 
 
-    this.spinnerService.show();
+    //this.spinnerService.show();
     this.ticketService.sendGetRequest(apiURL, queryParams).subscribe(
       (response: any) => {
-        if(response.status === true){
+        if (response.status === true) {
           this.listData = response.data;
           this.configPgn.totalItem = response.totalItems;
           this.configPgn.totalItems = response.totalItems;
           this.setDisplayLastSequence();
-          this.spinnerService.hide();
+          // this.spinnerService.hide();
 
 
-        }else{
+        } else {
           this.spinnerService.hide();
           this.toastr.info(response.message, 'Info');
         }
@@ -154,7 +194,7 @@ export class Tire1ListComponent implements OnInit {
 
 
   }
-  refreshData(){
+  refreshData() {
     this.listData =
       setInterval(() => {
         this._getListData();
@@ -166,18 +206,17 @@ export class Tire1ListComponent implements OnInit {
   searchByCode(val) {
     this.code = val;
   }
-  searchBySearchButton(){
+  searchBySearchButton() {
     this._getListData();
   }
-  clearFilter(){
+  clearFilter() {
     this.code = '';
     $('.filter-row').find('input, select, textarea').val('');
     this._getListData();
   }
 
 
-  ticketReceive(id)
-  {
+  ticketReceive(id) {
     const apiURL = this.baseUrl + '/ticket/tire1/stsUpdate/' + id;
     console.log(apiURL);
 
@@ -187,12 +226,12 @@ export class Tire1ListComponent implements OnInit {
     this.ticketService.sendPutRequest(apiURL, formData).subscribe(
       (response: any) => {
 
-        if(response.status === true){
+        if (response.status === true) {
           console.log(response);
           this.spinnerService.hide();
           this.toastr.success(response.message, 'Success');
           this._getListData();
-        }else{
+        } else {
           this.spinnerService.hide();
           this.toastr.info(response.message, 'Info');
         }
@@ -204,11 +243,9 @@ export class Tire1ListComponent implements OnInit {
       }
     );
   }
-  ticketHold(holdId)
-  {
-    alert("ok")
-    if(this.myForm.invalid){
-      alert("ok2")
+  ticketHold(holdId) {
+
+    if (this.myForm.invalid) {
       return;
     }
 
@@ -219,14 +256,15 @@ export class Tire1ListComponent implements OnInit {
     this.spinnerService.show();
     this.ticketService.sendPutRequest(apiURL, formData).subscribe(
       (response: any) => {
-        if(response.status === true){
+        if (response.status === true) {
+          console.log("======")
           console.log(response);
           this.spinnerService.hide().then(r => console.log('spinner stopped'));
-          this.toastr.success('Ticket hold successfully', 'Success', { positionClass:'toast-custom' });
+          this.toastr.success('Ticket hold successfully', 'Success', { positionClass: 'toast-custom' });
           this._getListData();
           this.myForm.reset();
           $("#hold_modal").modal("hide")
-        }else{
+        } else {
           this.spinnerService.hide().then(r => console.log('spinner stopped'));
           this.toastr.error(response.message, 'Error');
         }
@@ -239,9 +277,44 @@ export class Tire1ListComponent implements OnInit {
     );
 
   }
-  resetFormValues()
+
+  ticketSolve(solveId)
   {
+    if (this.myForm2.invalid) {
+      return;
+    }
+
+    const apiURL = this.baseUrl + '/ticket/tire1/solveTicket/' + solveId;
+
+    let formData: any;
+    formData = Object.assign(this.myForm.value);
+    this.spinnerService.show();
+    this.ticketService.sendPutRequest(apiURL, formData).subscribe(
+      (response: any) => {
+        if (response.status === true) {
+          console.log("======")
+          console.log(response);
+          this.spinnerService.hide().then(r => console.log('spinner stopped'));
+          this.toastr.success('Ticket solve successfully', 'Success', { positionClass: 'toast-custom' });
+          this._getListData();
+          this.myForm2.reset();
+          $("#solve_modal").modal("hide")
+        } else {
+          this.spinnerService.hide().then(r => console.log('spinner stopped'));
+          this.toastr.error(response.message, 'Error');
+        }
+      },
+      (error) => {
+        console.log(error.message);
+        this.toastr.show(error.error.message, 'Show');
+        this.spinnerService.hide().then(r => console.log('spinner stopped'));
+      }
+    );
+  }
+
+  resetFormValues() {
     this.myForm.reset();
+    this.myForm2.reset();
   }
 
 
@@ -257,23 +330,20 @@ export class Tire1ListComponent implements OnInit {
     }
 
     // push other attributes
-    if(this.code){
+    if (this.code) {
       params[`code`] = this.code;
     }
-    if(this.creationUser){
-      params['creationUser']= this.creationUser;
+    if (this.creationUser) {
+      params['creationUser'] = this.creationUser;
     }
-    if(this.problemCategory)
-    {
-      params['problemCategory']= this.problemCategory;
+    if (this.problemCategory) {
+      params['problemCategory'] = this.problemCategory;
     }
-    if(this.problemCategory)
-    {
-      params['status']= this.status;
+    if (this.problemCategory) {
+      params['status'] = this.status;
     }
-    if(this.receivedFromT1)
-    {
-      params['receivedFromT1']= this.receivedFromT1;
+    if (this.receivedFromT1) {
+      params['receivedFromT1'] = this.receivedFromT1;
     }
 
 
@@ -282,16 +352,16 @@ export class Tire1ListComponent implements OnInit {
   }
 
   // pagination handling methods start -----------------------------------------------------------------------
-  setDisplayLastSequence(){
-    this.configPgn.pngDiplayLastSeq = (((this.configPgn.pageNum - 1 ) * this.configPgn.pageSize) + this.configPgn.pageSize);
-    if(this.listData.length < this.configPgn.pageSize){
-      this.configPgn.pngDiplayLastSeq = (((this.configPgn.pageNum - 1 ) * this.configPgn.pageSize) + this.configPgn.pageSize);
+  setDisplayLastSequence() {
+    this.configPgn.pngDiplayLastSeq = (((this.configPgn.pageNum - 1) * this.configPgn.pageSize) + this.configPgn.pageSize);
+    if (this.listData.length < this.configPgn.pageSize) {
+      this.configPgn.pngDiplayLastSeq = (((this.configPgn.pageNum - 1) * this.configPgn.pageSize) + this.configPgn.pageSize);
     }
-    if(this.configPgn.totalItem < this.configPgn.pngDiplayLastSeq){
+    if (this.configPgn.totalItem < this.configPgn.pngDiplayLastSeq) {
       this.configPgn.pngDiplayLastSeq = this.configPgn.totalItem;
     }
   }
-  handlePageChange(event: number){
+  handlePageChange(event: number) {
     this.configPgn.pageNum = event;
     // set for ngx
     this.configPgn.currentPage = this.configPgn.pageNum;
@@ -309,6 +379,6 @@ export class Tire1ListComponent implements OnInit {
 
   ngOnDestroy() {
     clearInterval(this.listData);
-}
+  }
 
 }

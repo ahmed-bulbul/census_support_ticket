@@ -1,6 +1,8 @@
 package com.census.support.ticket;
 
 import com.census.support.helper.response.BaseResponse;
+import com.census.support.message.Message;
+import com.census.support.message.MessageRepository;
 import com.census.support.message.MessageService;
 import com.census.support.system.counter.SystemCounterService;
 import com.census.support.ticket.log.TicketLog;
@@ -18,6 +20,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.transaction.Transactional;
 import java.util.Map;
@@ -33,7 +37,10 @@ public class TicketService {
     @Autowired
     private MessageService messageService;
     @Autowired
+    private MessageRepository messageRepository;
+    @Autowired
     private TicketLogRepository ticketLogRepository;
+
 
 
     @Transactional
@@ -45,10 +52,16 @@ public class TicketService {
                 return new ResponseEntity<>(new BaseResponse(false, "Ticket already exists", 302), HttpStatus.OK);
             }else {
                 SetAttributeUpdate.setSysAttributeForCreateUpdate(entity,"Create");
+                entity.setStatusSequence(2L);
                 ticketRepository.save(entity);
-                //send user ticket created message
-                messageService.sendTicketCreatedMessage(entity, SysMessage.OPEN_MSG);
-                return new ResponseEntity<>(new BaseResponse(true, "Ticket created successfully", 201), HttpStatus.OK);
+                try {
+                    //send user ticket created message
+                    messageService.sendTicketCreatedMessage(entity, SysMessage.OPEN_MSG);
+                    return new ResponseEntity<>(new BaseResponse(true, "Ticket created successfully", 201), HttpStatus.OK);
+                }catch (Exception e){
+                    return new ResponseEntity<>(new BaseResponse(false, "Ticket created successfully but failed to send message: "
+                            +e.getMessage(), 201), HttpStatus.OK);
+                }
             }
         }catch (Exception e){
             return new ResponseEntity<>(new BaseResponse(false, "Ticket creation failed: "+e.getMessage(), 500), HttpStatus.OK);
@@ -62,6 +75,7 @@ public class TicketService {
 
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize, sort);
         Page<Ticket> entities = ticketRepository.findAll((Specification<Ticket>) (root, cq, cb) -> {
+
             Predicate p = cb.conjunction();
             if (!clientParams.isEmpty()) {
 
@@ -75,6 +89,13 @@ public class TicketService {
                         p = cb.and(p, cb.equal(root.get("creationUser"), clientParams.get("creationUser")));
                     }
                 }
+
+//                if (clientParams.containsKey("code")) {
+//                    if (StringUtils.hasLength(clientParams.get("code"))) {
+//                        Message message = messageRepository.getByCode(clientParams.get("code"));
+//                        p=cb.and(p,cb.equal(joinMessage.get("ticket"),message));
+//                    }
+//                }
             }
             return p;
         }, pageable);

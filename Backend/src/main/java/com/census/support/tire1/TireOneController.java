@@ -47,4 +47,9 @@ public class TireOneController {
     public ResponseEntity<?> holdTicket(@RequestBody TicketDTO entityDTO,@PathVariable("id") Long id){
         return tireOneService.holdTicket(entityDTO,id);
     }
+
+    @PutMapping("/solveTicket/{id}")
+    public ResponseEntity<?> solveTicket(@RequestBody TicketDTO entityDTO,@PathVariable("id") Long id){
+        return tireOneService.solveTicket(entityDTO,id);
+    }
 }

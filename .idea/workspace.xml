@@ -5,49 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6c7182c4-d264-406e-a933-ca78416773f5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/CensusSupportApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/ServletInitializer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/acl/auth/AuthController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/acl/config/BeanConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/acl/role/Role.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/acl/role/RoleRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/acl/security/WebSecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/acl/security/jwt/config/AuthEntryPointJwt.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/acl/security/jwt/config/AuthTokenFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/acl/security/jwt/config/JwtUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/acl/security/jwt/payload/request/LogOutRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/acl/security/jwt/payload/request/LoginRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/acl/security/jwt/payload/request/SignupRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/acl/security/jwt/payload/response/JwtResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/acl/security/service/UserDetailsImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/acl/security/service/UserDetailsServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/acl/user/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/acl/user/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/acl/user/UserDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/acl/user/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/acl/user/UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/helper/exception/AlreadyExistsException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/helper/exception/JwtTokenMalformedException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/helper/exception/JwtTokenMissingException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/helper/exception/ResourceNotFoundException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/helper/exception/RestResponseEntityExceptionHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/helper/response/BaseResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/helper/response/PaginatedResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/system/constants/SystemRole.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/util/PaginatorService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/util/SetAttributeUpdate.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/census/support/util/UserUtil.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-prod.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/census/support/CensusSupportApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/census/support/message/MessageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/census/support/message/MessageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/shared/status/status.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/shared/status/status.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/shared/status/status.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/shared/status/status.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,6 +117,7 @@
       <updated>1650258956570</updated>
       <workItem from="1650258958004" duration="10857000" />
       <workItem from="1650338011061" duration="3112000" />
+      <workItem from="1650770162642" duration="48000" />
     </task>
     <servers />
   </component>

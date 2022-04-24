@@ -71,12 +71,41 @@
                   </div>
 
 
-                  <div class="form-group row">
+                  <div class="form-group row" >
                     <label class="col-form-label col-md-2">Problem Description</label>
                     <div class="col-md-10">
                       <span>: &nbsp;</span><span>{{myFormData.problemDescription }}</span>
                     </div>
                   </div>
+                    <!-- Message List shows -->
+                    <div class="form-group row">
+                      <label class="col-form-label col-md-2">Message List</label>
+                      <div class="col-md-10">
+                        <div class="table">
+                          <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th>No</th>
+                                <th>Body</th>
+                                <th>Sent at</th>
+                                <th>Status</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let item of msgListData; let i = index">
+                                <td>{{i+1}}</td>
+                                <td>{{item.body}}</td>
+                                <td>{{item.creationDateTime  | date: 'yyyy/MM/dd hh:mm:ss a'}} </td>
+                                <td>
+                                  <span *ngIf="item.status == 'SENT'"><i class="fa fa-check-circle text-success"></i></span>
+                                  <span *ngIf="item.status == 'FAILED'"><i class="fa fa-exclamation-circle text-danger" aria-hidden="true"></i></span>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      </div>
 
 
                 </div>

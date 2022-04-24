@@ -31,6 +31,7 @@ public class TicketLog {
     private String problemDescription;
     private String code;
     private String status;
+    private Long statusSequence;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date holdTime;
     private String solutionType;
@@ -42,7 +43,7 @@ public class TicketLog {
     private String holdDuration;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Date solvedTime;
+    private Date solveTime;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date receiveTime;
 
@@ -78,7 +79,7 @@ public class TicketLog {
         this.holdBy = entity.getHoldBy();
         this.holdDuration = entity.getHoldDuration();
         this.receiveTime = entity.getReceiveTime();
-        this.solvedTime = entity.getSolvedTime();
+        this.solveTime = entity.getSolveTime();
 
 
         this.creationDateTime = entity.getCreationDateTime();
