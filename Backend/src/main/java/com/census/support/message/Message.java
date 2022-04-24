@@ -20,6 +20,8 @@ public class Message {
     private Long id;
     @ManyToOne( fetch = FetchType.EAGER)
     private Ticket ticket;
+
+    @Lob
     private String body;
     private String sender;
     private String receiver;

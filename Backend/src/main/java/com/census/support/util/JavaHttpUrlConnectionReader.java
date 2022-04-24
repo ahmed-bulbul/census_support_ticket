@@ -1,8 +1,20 @@
 package com.census.support.util;
 
-public class Test {
+import javax.net.ssl.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.security.SecureRandom;
+import java.security.Security;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 
-    public static void main(String[] args)
+public class JavaHttpUrlConnectionReader {
+
+   /* public static void main(String[] args)
             throws Exception
     {
         new JavaHttpUrlConnectionReader();
@@ -12,8 +24,15 @@ public class Test {
     {
         try
         {
-            String myUrl = "http://localhost:8080/";
-            // if your url can contain weird characters you will want to
+
+            doTrustToCertificates();
+            String sms_body = "SMS Body";
+            String charset = "UTF-8";
+
+            String myUrl = String.format("https://wapi.waltonbd.com:444/SMSAPI/public/sms_api?project=BBS&creator=System&mobile=01753155400&sms_body=%s",
+            URLEncoder.encode(sms_body, charset));
+
+                    // if your url can contain weird characters you will want to
             // encode it here, something like this:
             // myUrl = URLEncoder.encode(myUrl, "UTF-8");
 
@@ -26,7 +45,7 @@ public class Test {
         }
     }
 
-    /**
+    *//**
      * Returns the output from the given URL.
      *
      * I tried to hide some of the ugliness of the exception-handling
@@ -36,7 +55,7 @@ public class Test {
      * @param desiredUrl
      * @return
      * @throws Exception
-     */
+     *//*
     private String doHttpUrlConnectionAction(String desiredUrl)
             throws Exception
     {
@@ -93,4 +112,37 @@ public class Test {
             }
         }
     }
+
+    // trusting all certificate
+    public void doTrustToCertificates() throws Exception {
+        Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+        TrustManager[] trustAllCerts = new TrustManager[]{
+                new X509TrustManager() {
+                    public X509Certificate[] getAcceptedIssuers() {
+                        return null;
+                    }
+
+                    public void checkServerTrusted(X509Certificate[] certs, String authType) throws CertificateException {
+                        return;
+                    }
+
+                    public void checkClientTrusted(X509Certificate[] certs, String authType) throws CertificateException {
+                        return;
+                    }
+                }
+        };
+
+        SSLContext sc = SSLContext.getInstance("SSL");
+        sc.init(null, trustAllCerts, new SecureRandom());
+        HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+        HostnameVerifier hv = new HostnameVerifier() {
+            public boolean verify(String urlHostName, SSLSession session) {
+                if (!urlHostName.equalsIgnoreCase(session.getPeerHost())) {
+                    System.out.println("Warning: URL host '" + urlHostName + "' is different to SSLSession host '" + session.getPeerHost() + "'.");
+                }
+                return true;
+            }
+        };
+        HttpsURLConnection.setDefaultHostnameVerifier(hv);
+    }*/
 }
