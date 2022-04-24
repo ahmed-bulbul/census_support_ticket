@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription, timer } from 'rxjs';
 import { LoginService } from 'src/app/login/services/login.services';
 import { environment } from 'src/environments/environment';
 import { TicketService } from '../../../service/ticket.service';
@@ -33,6 +34,8 @@ export class Tire1ListComponent implements OnInit {
 
  //for time duration
  currentTime : any;
+
+
 
   // search fields for
   private code: string;
@@ -67,6 +70,7 @@ export class Tire1ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this._getListData();
     this.refreshData();
     this._initForm();
@@ -112,6 +116,33 @@ export class Tire1ListComponent implements OnInit {
 
 
   }
+  getDiffTimeInMin(t1,t2){
+    var time1=new Date(t1).getTime();
+    var time2=new Date(t2).getTime();
+    var diff = (time1 - time2) / 1000;
+    diff /= 60;
+   return Math.abs(Math.round(diff));
+  }
+  getDiffTimeInSec(t1,t2){
+    var time1=new Date(t1).getTime();
+    var time2=new Date(t2).getTime();
+    var diff = (time1 - time2) / 1000;
+   return Math.abs(Math.round(diff));
+  }
+
+  getTimeLeft(holdTime,holdDuration) {
+
+    //make countdown hold Duration to minutes and seconds and return it
+    var timeLeftInMin = holdDuration - this.getDiffTimeInMin(holdTime,this.currentTime);
+
+
+    if(timeLeftInMin > 0){
+      return timeLeftInMin + " min left";
+    }else{
+      return ;
+    }
+
+  }
 
 
   _getListData(){
@@ -130,7 +161,7 @@ export class Tire1ListComponent implements OnInit {
 
 
 
-    this.spinnerService.show();
+    //this.spinnerService.show();
     this.ticketService.sendGetRequest(apiURL, queryParams).subscribe(
       (response: any) => {
         if(response.status === true){
@@ -138,7 +169,7 @@ export class Tire1ListComponent implements OnInit {
           this.configPgn.totalItem = response.totalItems;
           this.configPgn.totalItems = response.totalItems;
           this.setDisplayLastSequence();
-          this.spinnerService.hide();
+         // this.spinnerService.hide();
 
 
         }else{
@@ -206,9 +237,8 @@ export class Tire1ListComponent implements OnInit {
   }
   ticketHold(holdId)
   {
-    alert("ok")
+
     if(this.myForm.invalid){
-      alert("ok2")
       return;
     }
 
@@ -220,6 +250,7 @@ export class Tire1ListComponent implements OnInit {
     this.ticketService.sendPutRequest(apiURL, formData).subscribe(
       (response: any) => {
         if(response.status === true){
+          console.log("======")
           console.log(response);
           this.spinnerService.hide().then(r => console.log('spinner stopped'));
           this.toastr.success('Ticket hold successfully', 'Success', { positionClass:'toast-custom' });
@@ -239,6 +270,7 @@ export class Tire1ListComponent implements OnInit {
     );
 
   }
+
   resetFormValues()
   {
     this.myForm.reset();
