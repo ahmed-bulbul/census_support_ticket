@@ -40,4 +40,7 @@ public class Message {
     private Date lastUpdateDateTime;
     @Column(name = "LAST_UPDATE_USER")
     private String lastUpdateUser;
+
+    public Message(Message message) {
+    }
 }

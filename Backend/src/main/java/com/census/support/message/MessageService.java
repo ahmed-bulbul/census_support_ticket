@@ -1,12 +1,19 @@
 package com.census.support.message;
 
+import com.census.support.helper.response.BaseResponse;
 import com.census.support.ticket.Ticket;
+import com.census.support.ticket.TicketDTO;
+import com.census.support.ticket.TicketRepository;
 import com.census.support.util.SetAttributeUpdate;
 import com.census.support.util.SmsServiceUtil;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.net.URLEncoder;
+import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -15,6 +22,9 @@ public class MessageService {
 
     @Autowired
     private MessageRepository messageRepository;
+
+    @Autowired
+    private TicketRepository ticketRepository;
 
 
     public void sendTicketCreatedMessage(Ticket entity,String message) {
@@ -57,5 +67,23 @@ public class MessageService {
     }
 
 
+    public ResponseEntity<?> getByTicketId(Long id) {
+        try {
 
+            Optional<Ticket> ticket = ticketRepository.findById(id);
+
+            if (ticket.isPresent()) {
+                List<Message> entityList = messageRepository.findByTicket(ticket);
+                if (entityList.size() > 0) {
+                    return new ResponseEntity<>(new BaseResponse(true, "Message found successfully", 200, entityList.toArray()), HttpStatus.OK);
+                } else {
+                    return new ResponseEntity<>(new BaseResponse(false, "Message not found", 404), HttpStatus.OK);
+                }
+            } else {
+                return new ResponseEntity<>(new BaseResponse(false, "Ticket not found", 404), HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(new BaseResponse(false, "Something went wrong: " + e.getMessage(), 500), HttpStatus.OK);
+        }
+    }
 }

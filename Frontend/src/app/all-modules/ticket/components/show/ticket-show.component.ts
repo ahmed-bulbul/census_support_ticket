@@ -17,6 +17,7 @@ export class TicketShowComponent implements OnInit {
   public baseUrl = environment.baseUrl;
   public myForm: FormGroup;
   public myFormData: any = {};
+  public msgListData: any = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,6 +31,7 @@ export class TicketShowComponent implements OnInit {
 
   ngOnInit(): void {
     this._getFormData();
+    this._getMessageByCode();
   }
 
   _getFormData(){
@@ -59,5 +61,34 @@ export class TicketShowComponent implements OnInit {
         }
       );
 }
+  _getMessageByCode(){
+
+    const id =  this.route.snapshot.params.id;
+    const apiURL = this.baseUrl + '/message/getByTicketId/' + id;
+
+    const queryParams: any = {};
+    queryParams.rEntityName = 'Message';
+    queryParams.rActiveOperation = 'read';
+
+    this.spinnerService.show();
+    this.ticketService.sendGetRequest(apiURL, queryParams)
+      .subscribe(
+        response => {
+          if(response.status === true){
+            this.spinnerService.hide();
+            this.msgListData = response.data;
+            console.log(this.msgListData);
+          }else{
+            this.spinnerService.hide();
+            this.toastr.error(response.message, 'Error');
+          }
+        },
+        error => {
+          this.spinnerService.hide();
+          console.log('Error: ', error);
+        }
+      );
+
+  }
 
 }
