@@ -33,7 +33,9 @@ public class TireOneService {
     private MessageService messageService;
 
     public Page<TicketDTO> getAllPaginatedLists(Map<String, String> clientParams, int pageNum, int pageSize, String sortField, String sortDir) {
-        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() : Sort.by(sortField).descending();
+
+        sortField = "statusSequence";
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.DESC.name()) ? Sort.by(sortField).ascending() : Sort.by(sortField).descending();
 
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize, sort);
         Page<Ticket> entities = ticketRepository.findAll((Specification<Ticket>) (root, cq, cb) -> {
@@ -70,6 +72,7 @@ public class TireOneService {
                     }
                 }
 
+                p = cb.and(p, cb.notEqual(root.get("status"), "SOLVED"));
 
 
 
@@ -124,6 +127,7 @@ public class TireOneService {
                 ticket.setHoldDuration(entityDTO.getHoldDuration());
                 ticket.setSolutionType(entityDTO.getSolutionType());
                 ticket.setSolutionDescription(entityDTO.getSolutionDescription());
+                ticket.setStatusSequence(1L);
                 ticketRepository.save(ticket);
                 return new ResponseEntity<>(new BaseResponse(true, "Ticket Hold successfully", 200), HttpStatus.OK);
             }

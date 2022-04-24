@@ -22,6 +22,7 @@ public class TicketDTO {
     private String problemDescription;
     private String code;
     private String status;
+    private Long statusSequence;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date holdTime;
     private String solutionType;
@@ -61,6 +62,7 @@ public class TicketDTO {
         this.problemDescription = ticket.getProblemDescription();
         this.code = ticket.getCode();
         this.status = ticket.getStatus();
+        this.statusSequence = ticket.getStatusSequence();
         this.holdTime = ticket.getHoldTime();
         this.solutionType = ticket.getSolutionType();
         this.solutionDescription = ticket.getSolutionDescription();
@@ -92,6 +94,7 @@ public class TicketDTO {
         this.problemDescription = ticket.getProblemDescription();
         this.code = ticket.getCode();
         this.status = ticket.getStatus();
+        this.statusSequence = ticket.getStatusSequence();
         this.holdTime = ticket.getHoldTime();
         this.solutionType = ticket.getSolutionType();
         this.solutionDescription = ticket.getSolutionDescription();

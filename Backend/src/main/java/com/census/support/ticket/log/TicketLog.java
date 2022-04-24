@@ -31,6 +31,7 @@ public class TicketLog {
     private String problemDescription;
     private String code;
     private String status;
+    private Long statusSequence;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date holdTime;
     private String solutionType;

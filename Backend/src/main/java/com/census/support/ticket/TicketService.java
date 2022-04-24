@@ -52,6 +52,7 @@ public class TicketService {
                 return new ResponseEntity<>(new BaseResponse(false, "Ticket already exists", 302), HttpStatus.OK);
             }else {
                 SetAttributeUpdate.setSysAttributeForCreateUpdate(entity,"Create");
+                entity.setStatusSequence(2L);
                 ticketRepository.save(entity);
                 try {
                     //send user ticket created message

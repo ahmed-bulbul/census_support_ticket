@@ -30,6 +30,7 @@ public class Ticket {
     private String code;
 
     private String status;
+    private Long statusSequence;
 
 
 
