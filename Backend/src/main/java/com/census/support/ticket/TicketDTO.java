@@ -35,7 +35,7 @@ public class TicketDTO {
 
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Date solvedTime;
+    private Date solveTime;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date receiveTime;
 
@@ -71,7 +71,7 @@ public class TicketDTO {
         this.holdDuration = ticket.getHoldDuration();
         this.receiveTime = ticket.getReceiveTime();
 
-        this.solvedTime = ticket.getSolvedTime();
+        this.solveTime = ticket.getSolveTime();
 
 
         //system logs
@@ -101,7 +101,7 @@ public class TicketDTO {
         this.holdBy = ticket.getHoldBy();
         this.holdDuration = ticket.getHoldDuration();
         this.receiveTime = ticket.getReceiveTime();
-        this.solvedTime = ticket.getSolvedTime();
+        this.solveTime = ticket.getSolveTime();
 
 
         //system logs

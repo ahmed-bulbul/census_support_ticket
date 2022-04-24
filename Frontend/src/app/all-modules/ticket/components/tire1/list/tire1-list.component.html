@@ -93,6 +93,7 @@
                     <span style="color: rgb(170, 155, 72);" *ngIf="thisObj.status=='HOLD'" class="">{{thisObj.status}} <small>{{getTimeLeft(thisObj.holdTime,thisObj.holdDuration)}}   </small> </span>
                     <span style="color: rgb(6, 154, 53);" *ngIf="thisObj.status=='RECEIVED'" class="">{{thisObj.status}} <small> {{getDiffTime(currentTime,thisObj.receiveTime)}}</small> </span>
                     <span style="color: rgb(7, 107, 110);" *ngIf="thisObj.status=='OPEN'"  class="">{{thisObj.status}} <small>  {{getDiffTime(currentTime,thisObj.creationDateTime)}}</small> </span>
+                    <span style="color: rgb(16, 228, 34);" *ngIf="thisObj.status=='SOLVED'"  class="">{{thisObj.status}} <small>  {{getDiffTime(currentTime,thisObj.solveTime)}}</small> </span>
                   </td>
 
                   <td>
@@ -100,7 +101,7 @@
                       class="fa fa-eye m-r-5"></i></a> &nbsp;
                     <a *ngIf="thisObj.status=='OPEN'" class="btn btn-sm btn-success" (click)="ticketReceive(thisObj.id)">Receive</a> &nbsp;
                     <a *ngIf="thisObj.status=='RECEIVED'" class="btn btn-sm btn-warning"  data-toggle="modal" data-target="#hold_modal" (click)="holdId = thisObj.id">Hold</a> &nbsp;
-                    <a *ngIf="thisObj.status=='RECEIVED'||thisObj.status=='HOLD'" class="btn btn-sm btn-info">Solved</a> &nbsp;
+                    <a *ngIf="thisObj.status=='RECEIVED'||thisObj.status=='HOLD'" class="btn btn-sm btn-info" data-toggle="modal" data-target="#solve_modal" (click)="solveId = thisObj.id">Solved</a> &nbsp;
                     <a *ngIf="thisObj.status=='RECEIVED'||thisObj.status=='HOLD'" class="btn btn-sm btn-primary">Send To Tire 2</a> &nbsp;
 
 
@@ -189,21 +190,56 @@
             </div>
           </form>
         </div>
-        <!-- <div class="modal-btn delete-action">
-          <div class="row">
-            <div class="col-6">
-              <a class="btn btn-primary continue-btn" (click)="ticketHold(tempId)">Delete</a>
-            </div>
-            <div class="col-6">
-              <a data-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
 </div>
 <!-- /Hold Modal -->
+<!-- Solve Modal -->
+<div class="modal custom-modal fade" id="solve_modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <h3>Solve Item</h3>
+        </div>
+        <div class="card-body">
+          <form novalidate (ngSubmit)="ticketSolve(solveId)" [formGroup]="myForm2">
+
+            <div class="form-group">
+              <label>Solution Type</label>
+              <select class="form-control" formControlName="solutionType">
+                <option value="">Select Solution Type</option>
+                <option value="1">Solution 1</option>
+                <option value="2">Solution 2</option>
+              </select>
+            </div>
+
+
+            <div class="form-group">
+              <label>Solution Description</label>
+              <textarea class="form-control" formControlName="solutionDescription" rows="2"></textarea>
+            </div>
+            <div class="text-right">
+              <button class="btn btn-warning btn-ripple" data-dismiss="modal"><i class="fa fa-share"></i>
+                Cancel</button>
+              &nbsp; &nbsp;
+              <button type="button" class="btn btn-secondary btn-ripple" (click)="resetFormValues()">
+                <i class="fa fa-undo" aria-hidden="true"></i> Reset
+              </button>
+              &nbsp; &nbsp;
+              <button [disabled]="!myForm2.valid" type="submit" class="btn btn-primary btn-ripple" >
+                <i class="fa fa-check" aria-hidden="true"></i> Save &nbsp;&nbsp;&nbsp;
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Solve Modal -->
+
 
 
 <ngx-spinner bdColor="rgba(255,255,255,0.5)" size="medium" color="#667eea" type="ball-clip-rotate" [fullScreen]="false">
