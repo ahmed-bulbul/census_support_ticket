@@ -2,9 +2,11 @@ package com.census.support.tire1;
 
 import com.census.support.acl.user.User;
 import com.census.support.helper.response.BaseResponse;
+import com.census.support.message.MessageService;
 import com.census.support.ticket.Ticket;
 import com.census.support.ticket.TicketDTO;
 import com.census.support.ticket.TicketRepository;
+import com.census.support.util.SysMessage;
 import com.census.support.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.Predicate;
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
@@ -26,6 +29,8 @@ import java.util.Optional;
 public class TireOneService {
     @Autowired
     private TicketRepository ticketRepository;
+    @Autowired
+    private MessageService messageService;
 
     public Page<TicketDTO> getAllPaginatedLists(Map<String, String> clientParams, int pageNum, int pageSize, String sortField, String sortDir) {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() : Sort.by(sortField).descending();
@@ -131,6 +136,7 @@ public class TireOneService {
         }
     }
 
+    @Transactional
     public ResponseEntity<?> solveTicket(TicketDTO entityDTO, Long id) {
         try {
             Ticket ticket = ticketRepository.findById(id).orElse(null);
@@ -141,6 +147,8 @@ public class TireOneService {
                 ticket.setSolutionType(entityDTO.getSolutionType());
                 ticket.setSolutionDescription(entityDTO.getSolutionDescription());
                 ticketRepository.save(ticket);
+                //send user ticket created message
+                messageService.sendTicketCreatedMessage(ticket, SysMessage.SOLVED_MSG);
                 return new ResponseEntity<>(new BaseResponse(true, "Ticket solved successfully", 200), HttpStatus.OK);
             }
             else {
