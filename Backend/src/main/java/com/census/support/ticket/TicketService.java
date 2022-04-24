@@ -1,6 +1,8 @@
 package com.census.support.ticket;
 
 import com.census.support.helper.response.BaseResponse;
+import com.census.support.message.Message;
+import com.census.support.message.MessageRepository;
 import com.census.support.message.MessageService;
 import com.census.support.system.counter.SystemCounterService;
 import com.census.support.ticket.log.TicketLog;
@@ -18,6 +20,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.transaction.Transactional;
 import java.util.Map;
@@ -33,7 +37,10 @@ public class TicketService {
     @Autowired
     private MessageService messageService;
     @Autowired
+    private MessageRepository messageRepository;
+    @Autowired
     private TicketLogRepository ticketLogRepository;
+
 
 
     @Transactional
@@ -67,6 +74,9 @@ public class TicketService {
 
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize, sort);
         Page<Ticket> entities = ticketRepository.findAll((Specification<Ticket>) (root, cq, cb) -> {
+
+            Join<Ticket,Message> joinMessage= root.join("message", JoinType.LEFT);
+
             Predicate p = cb.conjunction();
             if (!clientParams.isEmpty()) {
 
@@ -80,6 +90,13 @@ public class TicketService {
                         p = cb.and(p, cb.equal(root.get("creationUser"), clientParams.get("creationUser")));
                     }
                 }
+
+//                if (clientParams.containsKey("code")) {
+//                    if (StringUtils.hasLength(clientParams.get("code"))) {
+//                        Message message = messageRepository.getByCode(clientParams.get("code"));
+//                        p=cb.and(p,cb.equal(joinMessage.get("ticket"),message));
+//                    }
+//                }
             }
             return p;
         }, pageable);

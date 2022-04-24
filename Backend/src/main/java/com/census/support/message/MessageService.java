@@ -32,6 +32,7 @@ public class MessageService {
                 Message entityInst = new Message();
                 entityInst.setBody(sms_body);
                 entityInst.setTicket(entity);
+                entityInst.setTicketCode(entity.getCode());
                 entityInst.setStatus("SENT");
                 entityInst.setReceiver(entity.getDeviceUserPhone());
                 SetAttributeUpdate.setSysAttributeForCreateUpdate(entityInst,"Create");
@@ -41,6 +42,7 @@ public class MessageService {
                 Message entityInst = new Message();
                 entityInst.setBody(sms_body);
                 entityInst.setTicket(entity);
+                entityInst.setTicketCode(entity.getCode());
                 entityInst.setStatus("FAILED");
                 entityInst.setReceiver(entity.getDeviceUserPhone());
                 SetAttributeUpdate.setSysAttributeForCreateUpdate(entityInst,"Create");
@@ -52,4 +54,6 @@ public class MessageService {
         }
 
     }
+
+
 }
