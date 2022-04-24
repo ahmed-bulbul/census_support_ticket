@@ -42,6 +42,8 @@ public class Ticket {
     private String solutionType;
     private String solutionDescription;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date solveTime;
     private String solvedBy;
     private String receivedFromT1;
     private String receivedFromT2;

@@ -130,4 +130,25 @@ public class TireOneService {
             return new ResponseEntity<>(new BaseResponse(false, "Error: " + e.getMessage(), 500), HttpStatus.OK);
         }
     }
+
+    public ResponseEntity<?> solveTicket(TicketDTO entityDTO, Long id) {
+        try {
+            Ticket ticket = ticketRepository.findById(id).orElse(null);
+            if (ticket != null) {
+                ticket.setStatus("SOLVED");
+                ticket.setSolvedBy(UserUtil.getLoginUser());
+                ticket.setSolveTime(new Date());
+                ticket.setSolutionType(entityDTO.getSolutionType());
+                ticket.setSolutionDescription(entityDTO.getSolutionDescription());
+                ticketRepository.save(ticket);
+                return new ResponseEntity<>(new BaseResponse(true, "Ticket solved successfully", 200), HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(new BaseResponse(false, "Ticket not found", 404), HttpStatus.OK);
+            }
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(new BaseResponse(false, "Error: " + e.getMessage(), 500), HttpStatus.OK);
+        }
+    }
 }
