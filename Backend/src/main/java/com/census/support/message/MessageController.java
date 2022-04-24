@@ -13,8 +13,8 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
-//    @GetMapping("/getByTicketCode/{code}")
-//    public ResponseEntity<?>  getByTicketCode(@PathVariable("code") String code) {
-//        return ResponseEntity.ok(messageService.getByTicketCode(code));
-//    }
+    @GetMapping("/getByTicketId/{id}")
+    public ResponseEntity<?>  getByTicketId(@PathVariable("id") Long id) {
+        return messageService.getByTicketId(id);
+    }
 }
