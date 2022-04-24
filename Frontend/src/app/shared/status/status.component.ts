@@ -53,7 +53,7 @@ export class StatusComponent implements OnInit {
   refreshTime() {
     var dateString = new Date().toLocaleString("en-US", {timeZone: "Asia/Dhaka"});
     var formattedString = dateString.replace(", ", " - ");
-    document.getElementById("time").innerHTML = formattedString;
+    //document.getElementById("time").innerHTML = formattedString;
   }
 
 

@@ -39,6 +39,8 @@ public class TicketDTO {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date receiveTime;
 
+    String message;
+
 
 
     //system logs
@@ -70,6 +72,7 @@ public class TicketDTO {
         this.receiveTime = ticket.getReceiveTime();
 
         this.solvedTime = ticket.getSolvedTime();
+
 
         //system logs
         this.creationDateTime = ticket.getCreationDateTime();
