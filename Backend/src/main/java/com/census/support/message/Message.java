@@ -22,6 +22,7 @@ public class Message {
     private Ticket ticket;
     private String ticketCode;
 
+
     @Lob
     private String body;
     private String sender;

@@ -16,6 +16,7 @@ public class MessageService {
     @Autowired
     private MessageRepository messageRepository;
 
+
     public void sendTicketCreatedMessage(Ticket entity,String message) {
         try {
             // Send request to the API servers over HTTPS
@@ -54,6 +55,7 @@ public class MessageService {
         }
 
     }
+
 
 
 }

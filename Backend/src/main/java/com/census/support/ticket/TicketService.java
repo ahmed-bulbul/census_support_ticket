@@ -75,8 +75,6 @@ public class TicketService {
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize, sort);
         Page<Ticket> entities = ticketRepository.findAll((Specification<Ticket>) (root, cq, cb) -> {
 
-            Join<Ticket,Message> joinMessage= root.join("message", JoinType.LEFT);
-
             Predicate p = cb.conjunction();
             if (!clientParams.isEmpty()) {
 

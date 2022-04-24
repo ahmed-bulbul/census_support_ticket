@@ -1,7 +1,8 @@
 package com.census.support.message;
 
+import org.json.JSONObject;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MessageRepository extends JpaRepository<Message, Long> {
-    Message getByCode(String code);
+    JSONObject findByTicketCode(String code);
 }
