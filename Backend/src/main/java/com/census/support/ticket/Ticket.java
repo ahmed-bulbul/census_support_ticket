@@ -21,6 +21,7 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String deviceUserPhone;
+    private String devicePhone;
     private String deviceUserId;
     private String tabletSerialNo;
     private String problemCategory;
