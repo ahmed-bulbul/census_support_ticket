@@ -27,7 +27,7 @@ public class DashboardService {
     }
 
     public ResponseEntity<?> getResolvedTickets() {
-        String sql = "SELECT COUNT(*) FROM ticket WHERE status = 'RESOLVED'";
+        String sql = "SELECT COUNT(*) FROM ticket WHERE status = 'SOLVED'";
         return ResponseEntity.ok(jdbcTemplate.queryForObject(sql, Integer.class));
     }
 }

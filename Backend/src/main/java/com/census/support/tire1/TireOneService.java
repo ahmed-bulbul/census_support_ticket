@@ -121,7 +121,7 @@ public class TireOneService {
         try {
             Ticket ticket = ticketRepository.findById(id).orElse(null);
             if (ticket != null) {
-                ticket.setStatus("HOLD");
+                ticket.setStatus(SysMessage.HOLD_STS);
                 ticket.setHoldBy(UserUtil.getLoginUser());
                 ticket.setHoldTime(new Date());
                 ticket.setHoldDuration(entityDTO.getHoldDuration());
