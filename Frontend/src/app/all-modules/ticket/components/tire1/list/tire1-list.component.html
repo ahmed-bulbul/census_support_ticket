@@ -102,6 +102,7 @@
                     <a *ngIf="thisObj.status=='OPEN'" class="btn btn-sm btn-success" (click)="ticketReceive(thisObj.id)">Receive</a> &nbsp;
                     <a *ngIf="thisObj.status=='RECEIVED'" class="btn btn-sm btn-warning"  data-toggle="modal" data-target="#hold_modal" (click)="holdId = thisObj.id">Hold</a> &nbsp;
                     <a *ngIf="thisObj.status=='RECEIVED'||thisObj.status=='HOLD'" class="btn btn-sm btn-info" data-toggle="modal" data-target="#solve_modal" (click)="solveId = thisObj.id">Solved</a> &nbsp;
+                    <a *ngIf="thisObj.status=='RECEIVED'||thisObj.status=='HOLD'" class="btn btn-sm btn-info" data-toggle="modal" data-target="#solve_modal" (click)="solveId = thisObj.id">Solved</a> &nbsp;
                     <a *ngIf="thisObj.status=='RECEIVED'||thisObj.status=='HOLD'" class="btn btn-sm btn-primary">Send To Tire 2</a> &nbsp;
 
 
