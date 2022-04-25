@@ -163,4 +163,27 @@ public class TireOneService {
             return new ResponseEntity<>(new BaseResponse(false, "Error: " + e.getMessage(), 500), HttpStatus.OK);
         }
     }
+    @Transactional
+    public ResponseEntity<?> terminateTicket(Long id) {
+        try {
+            Ticket ticket = ticketRepository.findById(id).orElse(null);
+            if (ticket != null) {
+                ticket.setStatus(SysMessage.TERMINATE_STS);
+                ticket.setTerminateBy(UserUtil.getLoginUser()); //terminate by
+                ticket.setTerminateTime(new Date());
+                ticketRepository.save(ticket);
+                //send user ticket terminate message
+                messageService.sendTicketCreatedMessage(ticket, SysMessage.TERMINATE_MSG);
+                return new ResponseEntity<>(new BaseResponse(true, "Ticket terminated successfully", 200), HttpStatus.OK);
+
+
+            }
+            else {
+                return new ResponseEntity<>(new BaseResponse(false, "Ticket not found", 404), HttpStatus.OK);
+            }
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(new BaseResponse(false, "Error: " + e.getMessage(), 500), HttpStatus.OK);
+        }
+    }
 }

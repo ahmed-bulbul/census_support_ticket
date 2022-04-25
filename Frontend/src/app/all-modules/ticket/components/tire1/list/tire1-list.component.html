@@ -102,7 +102,7 @@
                     <a *ngIf="thisObj.status=='OPEN'" class="btn btn-sm btn-success" (click)="ticketReceive(thisObj.id)">Receive</a> &nbsp;
                     <a *ngIf="thisObj.status=='RECEIVED'" class="btn btn-sm btn-warning"  data-toggle="modal" data-target="#hold_modal" (click)="holdId = thisObj.id">Hold</a> &nbsp;
                     <a *ngIf="thisObj.status=='RECEIVED'||thisObj.status=='HOLD'" class="btn btn-sm btn-info" data-toggle="modal" data-target="#solve_modal" (click)="solveId = thisObj.id">Solved</a> &nbsp;
-                    <a *ngIf="thisObj.status=='RECEIVED'||thisObj.status=='HOLD'" class="btn btn-sm btn-info" data-toggle="modal" data-target="#solve_modal" (click)="solveId = thisObj.id">Solved</a> &nbsp;
+                    <a *ngIf="thisObj.status=='RECEIVED'||thisObj.status=='HOLD'" class="btn btn-sm btn-info" style="background-color: blueviolet;" data-toggle="modal" data-target="#terminate_modal" (click)="terminateId = thisObj.id">Terminate</a> &nbsp;
                     <a *ngIf="thisObj.status=='RECEIVED'||thisObj.status=='HOLD'" class="btn btn-sm btn-primary">Send To Tire 2</a> &nbsp;
 
 
@@ -240,6 +240,31 @@
   </div>
 </div>
 <!-- /Solve Modal -->
+
+<!-- Terminate Modal -->
+<div class="modal custom-modal fade" id="terminate_modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <h3>Terminate Item</h3>
+          <p>Are you sure want to Terminate?</p>
+        </div>
+        <div class="modal-btn delete-action">
+          <div class="row">
+            <div class="col-6">
+              <a class="btn btn-primary continue-btn" (click)="ticketTerminate(terminateId)">Terminate</a>
+            </div>
+            <div class="col-6">
+              <a data-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Delete Modal -->
 
 
 

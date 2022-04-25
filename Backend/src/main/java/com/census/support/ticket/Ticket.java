@@ -55,7 +55,8 @@ public class Ticket {
     private String receiveDuration;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Date solvedTime;
+    private Date terminateTime;
+    private String terminateBy;
 
 
 

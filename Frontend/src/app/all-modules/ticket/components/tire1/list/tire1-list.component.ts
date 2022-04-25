@@ -26,6 +26,7 @@ export class Tire1ListComponent implements OnInit {
   public tempId: any;
   public solveId:any;
   public holdId:any;
+  public terminateId:any;
   // Action auth for user
   public authObj: any = {
     create: false,
@@ -308,6 +309,36 @@ export class Tire1ListComponent implements OnInit {
         console.log(error.message);
         this.toastr.show(error.error.message, 'Show');
         this.spinnerService.hide().then(r => console.log('spinner stopped'));
+      }
+    );
+  }
+
+  ticketTerminate(terminateId)
+  {
+    const apiURL = this.baseUrl + '/ticket/tire1/terminateTicket/' + terminateId;
+    const formData: any = {};
+
+
+    this.spinnerService.show();
+    this.ticketService.sendPutRequest(apiURL, formData).subscribe(
+      (response: any) => {
+
+        if(response.status === true){
+          console.log(response);
+          this.spinnerService.hide();
+          $('#terminate_modal').modal('hide');
+          this.toastr.success(response.message, 'Success');
+          this._getListData();
+        }else{
+          this.spinnerService.hide();
+          $('#terminate_modal').modal('hide');
+          this.toastr.info(response.message, 'Info');
+        }
+
+      },
+      (error) => {
+        console.log(error);
+        this.spinnerService.hide();
       }
     );
   }
