@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -73,9 +74,10 @@ public class MessageService {
             Optional<Ticket> ticket = ticketRepository.findById(id);
 
             if (ticket.isPresent()) {
-                List<Message> entityList = messageRepository.findByTicket(ticket);
-                if (entityList.size() > 0) {
-                    return new ResponseEntity<>(new BaseResponse(true, "Message found successfully", 200, entityList.toArray()), HttpStatus.OK);
+                List<MessageDTO> dtoList = messageRepository.findByTicket(ticket).stream().map(MessageDTO::new)
+                        .collect(Collectors.toList());
+                if (dtoList.size() > 0) {
+                    return new ResponseEntity<>(new BaseResponse(true, "Message found successfully", 200, dtoList.toArray()), HttpStatus.OK);
                 } else {
                     return new ResponseEntity<>(new BaseResponse(false, "Message not found", 404), HttpStatus.OK);
                 }

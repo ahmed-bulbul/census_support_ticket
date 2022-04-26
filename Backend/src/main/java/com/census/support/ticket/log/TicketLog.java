@@ -24,6 +24,7 @@ public class TicketLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String deviceUserPhone;
+    private String devicePhone;
     private String deviceUserId;
     private String tabletSerialNo;
     private String problemCategory;
@@ -64,6 +65,7 @@ public class TicketLog {
     public TicketLog(Ticket entity, String action) {
         this.deviceUserPhone = entity.getDeviceUserPhone();
         this.deviceUserId = entity.getDeviceUserId();
+        this.devicePhone = entity.getDevicePhone();
         this.tabletSerialNo = entity.getTabletSerialNo();
         this.problemCategory = entity.getProblemCategory();
         this.problemType = entity.getProblemType();
