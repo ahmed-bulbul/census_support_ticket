@@ -149,6 +149,7 @@ export class Tire1ListComponent implements OnInit {
     if (timeLeftInMin > 0) {
       return timeLeftInMin + " min left";
     } else {
+
       return "time over";
     }
 
@@ -342,6 +343,8 @@ export class Tire1ListComponent implements OnInit {
       }
     );
   }
+
+ 
 
   resetFormValues() {
     this.myForm.reset();
