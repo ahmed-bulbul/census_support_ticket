@@ -72,7 +72,8 @@ public class TireOneService {
                     }
                 }
 
-                p = cb.and(p, cb.notEqual(root.get("status"), "SOLVED"));
+                p = cb.and(p, cb.notEqual(root.get("status"), SysMessage.RESOLVED_STS));
+                p=cb.and(p,cb.notEqual(root.get("status"),SysMessage.TERMINATE_STS));
 
 
 
@@ -127,7 +128,7 @@ public class TireOneService {
                 ticket.setHoldDuration(entityDTO.getHoldDuration());
                 ticket.setSolutionType(entityDTO.getSolutionType());
                 ticket.setSolutionDescription(entityDTO.getSolutionDescription());
-                ticket.setStatusSequence(1L);
+                ticket.setStatusSequence(2L);
                 ticketRepository.save(ticket);
                 return new ResponseEntity<>(new BaseResponse(true, "Ticket Hold successfully", 200), HttpStatus.OK);
             }
@@ -186,4 +187,6 @@ public class TireOneService {
             return new ResponseEntity<>(new BaseResponse(false, "Error: " + e.getMessage(), 500), HttpStatus.OK);
         }
     }
+
+
 }
