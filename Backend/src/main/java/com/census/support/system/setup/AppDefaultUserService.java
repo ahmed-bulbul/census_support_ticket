@@ -198,11 +198,11 @@ public class AppDefaultUserService {
             menuRepository.save(menu);
         }
         // ticket-TIRE1 child menu
-        if (!menuRepository.findByCode("TIRE1").isPresent()) {
+        if (!menuRepository.findByCode("TIER1").isPresent()) {
             SystemMenu menu = new SystemMenu();
             menu.setId(3L);
-            menu.setCode("TIRE1");
-            menu.setDescription("Tire1");
+            menu.setCode("TIER1");
+            menu.setDescription("Tier1");
             menu.setOpenUrl("/ticket/tire1/list");
             menu.setIconHtml("");
             menu.setSequence(3);
@@ -218,11 +218,11 @@ public class AppDefaultUserService {
         }
 
         // ticket-TIRE2 child menu
-        if (!menuRepository.findByCode("TIRE2").isPresent()) {
+        if (!menuRepository.findByCode("TIER2").isPresent()) {
             SystemMenu menu = new SystemMenu();
             menu.setId(4L);
-            menu.setCode("TIRE2");
-            menu.setDescription("Tire2");
+            menu.setCode("TIER2");
+            menu.setDescription("Tier2");
             menu.setOpenUrl("/ticket/tire2/list");
             menu.setIconHtml("");
             menu.setSequence(4);

@@ -30,4 +30,11 @@ public class DashboardService {
         String sql = "SELECT COUNT(*) FROM ticket WHERE status = 'SOLVED'";
         return ResponseEntity.ok(jdbcTemplate.queryForObject(sql, Integer.class));
     }
+
+
+//
+//    public ResponseEntity<?> countMaximumTicketSolver() {
+//        String sql = "SELECT COUNT(*) FROM ticket WHERE status = 'SOLVED' GROUP BY solved_by ORDER BY COUNT(*) DESC LIMIT 1";
+//        return ResponseEntity.ok(jdbcTemplate.queryForObject(sql, Integer.class));
+//    }
 }
