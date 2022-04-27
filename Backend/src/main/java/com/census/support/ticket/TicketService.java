@@ -90,12 +90,11 @@ public class TicketService {
                     }
                 }
 
-//                if (clientParams.containsKey("code")) {
-//                    if (StringUtils.hasLength(clientParams.get("code"))) {
-//                        Message message = messageRepository.getByCode(clientParams.get("code"));
-//                        p=cb.and(p,cb.equal(joinMessage.get("ticket"),message));
-//                    }
-//                }
+                if (clientParams.containsKey("status")) {
+                    if (StringUtils.hasLength(clientParams.get("status"))) {
+                        p = cb.and(p, cb.equal(root.get("status"), clientParams.get("status")));
+                    }
+                }
             }
             return p;
         }, pageable);

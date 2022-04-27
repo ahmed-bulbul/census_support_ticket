@@ -38,6 +38,7 @@ export class TicketListComponent implements OnInit {
   // search fields for
   private code: string;
   private creationUser: string;
+  private status : string;
 
   constructor(
     private route: ActivatedRoute,
@@ -72,7 +73,7 @@ export class TicketListComponent implements OnInit {
 
     // bind event & action
     this._bindFromFloatingLabel();
-    this.pollData();
+    //this.pollData();
     this._getListData();
 
 
@@ -90,6 +91,10 @@ export class TicketListComponent implements OnInit {
     this.code = val;
   }
   searchBySearchButton(){
+    this._getListData();
+  }
+  searchByStatus(val){
+    this.status = val;
     this._getListData();
   }
 
@@ -214,6 +219,9 @@ export class TicketListComponent implements OnInit {
     }
     if(this.creationUser){
       params['creationUser']= this.creationUser;
+    }
+    if(this.status){
+      params['status']= this.status;
     }
 
 
