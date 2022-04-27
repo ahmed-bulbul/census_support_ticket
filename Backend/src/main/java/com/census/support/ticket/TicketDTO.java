@@ -35,6 +35,10 @@ public class TicketDTO {
     private String holdBy;
     private String holdDuration;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date terminateTime;
+    private String terminateBy;
+
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date solveTime;
@@ -42,6 +46,9 @@ public class TicketDTO {
     private Date receiveTime;
 
     String message;
+
+    //tier two related
+    private String tier2ProblemDescription;
 
 
 
@@ -76,6 +83,9 @@ public class TicketDTO {
         this.receiveTime = ticket.getReceiveTime();
 
         this.solveTime = ticket.getSolveTime();
+        this.terminateTime = ticket.getTerminateTime();
+        this.terminateBy = ticket.getTerminateBy();
+        this.tier2ProblemDescription = ticket.getTier2ProblemDescription();
 
 
         //system logs
@@ -108,6 +118,11 @@ public class TicketDTO {
         this.holdDuration = ticket.getHoldDuration();
         this.receiveTime = ticket.getReceiveTime();
         this.solveTime = ticket.getSolveTime();
+
+        this.terminateTime = ticket.getTerminateTime();
+        this.terminateBy = ticket.getTerminateBy();
+
+
 
 
         //system logs

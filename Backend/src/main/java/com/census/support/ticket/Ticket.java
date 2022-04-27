@@ -59,6 +59,22 @@ public class Ticket {
     private Date terminateTime;
     private String terminateBy;
 
+    //tire 2 related
+    private String tier2ProblemDescription;
+    private String tier2SendBy;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date tier2SendTime;
+    private String tier2ReceiveBy;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date tier2ReceiveTime;
+    private String tier2SolutionType;
+    private String tier2SolutionDescription;
+    private String tier2SolvedBy;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date tier2SolveTime;
+
+
+
 
 
 

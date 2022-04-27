@@ -16,6 +16,7 @@ public class SysMessage {
     public static final String HOLD_STS = "HOLD";
     public static final String RESOLVED_STS = "SOLVED"; //solved
 
+    public static final String SEND_TO_T2_STS = "SEND_TO_T2";
     public static final String RECEIVED_T2_STS = "RECEIVED_T2";
     public static final String HOLD_T2_STS = "HOLD_T2";
     public static final String RESOLVED_T2_STS = "SOLVED_T2"; //solved

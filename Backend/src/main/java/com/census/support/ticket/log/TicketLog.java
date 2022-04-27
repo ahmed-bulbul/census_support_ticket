@@ -44,6 +44,10 @@ public class TicketLog {
     private String holdDuration;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date terminateTime;
+    private String terminateBy;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date solveTime;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date receiveTime;
@@ -82,6 +86,8 @@ public class TicketLog {
         this.holdDuration = entity.getHoldDuration();
         this.receiveTime = entity.getReceiveTime();
         this.solveTime = entity.getSolveTime();
+        this.terminateTime = entity.getTerminateTime();
+        this.terminateBy = entity.getTerminateBy();
 
 
         this.creationDateTime = entity.getCreationDateTime();

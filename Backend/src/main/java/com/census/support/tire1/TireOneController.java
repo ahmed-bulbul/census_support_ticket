@@ -58,6 +58,12 @@ public class TireOneController {
         return tireOneService.terminateTicket(id);
     }
 
+    @PutMapping("/sendToTierTwo/{id}")
+    public ResponseEntity<?> sendToTierTwo(@RequestBody TicketDTO entityDTO,@PathVariable("id") Long id){
+        return tireOneService.sendToTierTwo(entityDTO,id);
+    }
+
+
 
 
 

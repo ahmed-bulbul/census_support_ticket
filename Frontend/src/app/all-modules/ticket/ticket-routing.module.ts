@@ -1,8 +1,10 @@
+import { Tire2ListComponent } from './components/tire2/list/tire2-list.component';
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BbsGuard } from 'src/app/core/guards/bbs.guard';
 import { Tire1Guard } from 'src/app/core/guards/tire1.guard';
+import { Tire2Guard } from 'src/app/core/guards/tire2.guard';
 import { TicketCreateComponent } from './components/create/ticket-create.component';
 import { TicketEditComponent } from './components/edit/ticket-edit.component';
 import { TicketListComponent } from './components/list/ticket-list.component';
@@ -94,6 +96,11 @@ const routes: Routes = [
         path:'tire1/show/:id',
         component:Tire1ShowComponent,
         canActivate:[Tire1Guard]
+      },
+      {
+        path:'tire2/list',
+        component:Tire2ListComponent,
+        canActivate:[Tire2Guard]
       },
 
 
