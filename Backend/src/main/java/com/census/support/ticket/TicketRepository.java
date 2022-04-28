@@ -11,4 +11,6 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> , JpaSpeci
     Ticket getByCode(String code);
 
     List<Ticket> findByStatus(String holdSts);
+
+    List<Ticket> findByStatusAndStatusSequence(String holdSts, long l);
 }
