@@ -59,7 +59,7 @@ public class MessageService {
                 entityInst.setReceiver(entity.getDeviceUserPhone());
                 SetAttributeUpdate.setSysAttributeForCreateUpdate(entityInst,"Create");
                 messageRepository.save(entityInst);
-                System.out.println("SMS sent failed");
+                System.out.println("SMS sent failed"+ jsonObj.getString("message"));
             }
         } catch (Exception e) {
             System.out.println("Error - " + e);
