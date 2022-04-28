@@ -37,22 +37,22 @@ public class AppDefaultUserService {
     public void createRoles(){
 
         if (!roleRepository.findByAuthority(String.valueOf(SystemRole.ROLE_SUPER_ADMIN)).isPresent()) {
-            roleRepository.save(new Role(1L, String.valueOf(SystemRole.ROLE_SUPER_ADMIN), "ROLE_SUPER_ADMIN",new Date(),"SYSTEM"));
+            roleRepository.save(new Role( String.valueOf(SystemRole.ROLE_SUPER_ADMIN), "ROLE_SUPER_ADMIN",new Date(),"SYSTEM"));
         }
         if (!roleRepository.findByAuthority(String.valueOf(SystemRole.ROLE_ADMIN)).isPresent()) {
-            roleRepository.save(new Role(2L, String.valueOf(SystemRole.ROLE_ADMIN), "ROLE_ADMIN",new Date(),"SYSTEM"));
+            roleRepository.save(new Role( String.valueOf(SystemRole.ROLE_ADMIN), "ROLE_ADMIN",new Date(),"SYSTEM"));
         }
         if (!roleRepository.findByAuthority(String.valueOf(SystemRole.ROLE_USER)).isPresent()) {
-            roleRepository.save(new Role(3L,String.valueOf(SystemRole.ROLE_USER), "ROLE_USER",new Date(),"SYSTEM"));
+            roleRepository.save(new Role(String.valueOf(SystemRole.ROLE_USER), "ROLE_USER",new Date(),"SYSTEM"));
         }
         if (!roleRepository.findByAuthority(String.valueOf(SystemRole.ROLE_BBS_USER)).isPresent()) {
-            roleRepository.save(new Role(4L,String.valueOf(SystemRole.ROLE_BBS_USER), "ROLE_BBS_USER",new Date(),"SYSTEM"));
+            roleRepository.save(new Role(String.valueOf(SystemRole.ROLE_BBS_USER), "ROLE_BBS_USER",new Date(),"SYSTEM"));
         }
         if(!roleRepository.findByAuthority(String.valueOf(SystemRole.ROLE_TIRE1_USER)).isPresent()){
-            roleRepository.save(new Role(5L,String.valueOf(SystemRole.ROLE_TIRE1_USER), "ROLE_TIRE1_USER",new Date(),"SYSTEM"));
+            roleRepository.save(new Role(String.valueOf(SystemRole.ROLE_TIRE1_USER), "ROLE_TIRE1_USER",new Date(),"SYSTEM"));
         }
         if(!roleRepository.findByAuthority(String.valueOf(SystemRole.ROLE_TIRE2_USER)).isPresent()){
-            roleRepository.save(new Role(6L,String.valueOf(SystemRole.ROLE_TIRE2_USER), "ROLE_TIRE2_USER",new Date(),"SYSTEM"));
+            roleRepository.save(new Role(String.valueOf(SystemRole.ROLE_TIRE2_USER), "ROLE_TIRE2_USER",new Date(),"SYSTEM"));
         }
     }
 
@@ -155,7 +155,7 @@ public class AppDefaultUserService {
     public void CreateTicketCodeCounter(){
         if (!counterRepository.getByCode("TICKET_CODE_CNT").isPresent()){
             SystemCounter systemCounter = new SystemCounter();
-            systemCounter.setId(1L);
+            //systemCounter.setId(1L);
             systemCounter.setActive(true);
             systemCounter.setCode("TICKET_CODE_CNT");
             systemCounter.setCounterName("Ticket Code");
@@ -176,7 +176,7 @@ public class AppDefaultUserService {
         //Ticket root menu
         if (!menuRepository.findByCode("TICKET").isPresent()) {
             SystemMenu menu = new SystemMenu();
-            menu.setId(1L);
+           // menu.setId(1L);
             menu.setCode("TICKET");
             menu.setDescription("Ticket");
             menu.setOpenUrl("/ticket");
@@ -194,7 +194,7 @@ public class AppDefaultUserService {
         // ticket-BBS child menu
         if (!menuRepository.findByCode("BBS").isPresent()) {
             SystemMenu menu = new SystemMenu();
-            menu.setId(2L);
+          //  menu.setId(2L);
             menu.setCode("BBS");
             menu.setDescription("BBS");
             menu.setOpenUrl("/ticket/bbs/list");
@@ -212,7 +212,7 @@ public class AppDefaultUserService {
         // ticket-TIRE1 child menu
         if (!menuRepository.findByCode("TIER1").isPresent()) {
             SystemMenu menu = new SystemMenu();
-            menu.setId(3L);
+            //menu.setId(3L);
             menu.setCode("TIER1");
             menu.setDescription("Tier1");
             menu.setOpenUrl("/ticket/tire1/list");
@@ -232,7 +232,7 @@ public class AppDefaultUserService {
         // ticket-TIRE2 child menu
         if (!menuRepository.findByCode("TIER2").isPresent()) {
             SystemMenu menu = new SystemMenu();
-            menu.setId(4L);
+           // menu.setId(4L);
             menu.setCode("TIER2");
             menu.setDescription("Tier2");
             menu.setOpenUrl("/ticket/tire2/list");
@@ -252,7 +252,7 @@ public class AppDefaultUserService {
 
         if (!menuRepository.findByCode("User").isPresent()) {
             SystemMenu menu = new SystemMenu();
-            menu.setId(5L);
+            //menu.setId(5L);
             menu.setCode("USER");
             menu.setDescription("User");
             menu.setOpenUrl("/users/user/list");
