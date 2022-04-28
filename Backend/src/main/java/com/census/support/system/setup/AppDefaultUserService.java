@@ -206,7 +206,8 @@ public class AppDefaultUserService {
             menu.setIsActive(true);
             menu.setCreationDateTime(new Date());
             menu.setCreationUser("SYSTEM");
-            menu.setParentMenu((SystemMenu) menuRepository.findByCode("TICKET").get());
+            SystemMenu parentMenu = menuRepository.findByCode("TICKET").get();
+            menu.setParentMenu(parentMenu);
             menuRepository.save(menu);
         }
         // ticket-TIRE1 child menu
@@ -224,7 +225,8 @@ public class AppDefaultUserService {
             menu.setIsActive(true);
             menu.setCreationDateTime(new Date());
             menu.setCreationUser("SYSTEM");
-            menu.setParentMenu((SystemMenu) menuRepository.findByCode("TICKET").get());
+            SystemMenu parentMenu = menuRepository.findByCode("TICKET").get();
+            menu.setParentMenu(parentMenu);
             menuRepository.save(menu);
 
         }
@@ -244,7 +246,8 @@ public class AppDefaultUserService {
             menu.setIsActive(true);
             menu.setCreationDateTime(new Date());
             menu.setCreationUser("SYSTEM");
-            menu.setParentMenu((SystemMenu) menuRepository.findByCode("TICKET").get());
+            SystemMenu parentMenu = menuRepository.findByCode("TICKET").get();
+            menu.setParentMenu(parentMenu);
             menuRepository.save(menu);
 
         }
@@ -275,7 +278,7 @@ public class AppDefaultUserService {
     public void createDefaultUserAndRoles(){
         this.createRoles();
         this.createUser();
-        this.createMenu();
+       // this.createMenu();
         this.CreateTicketCodeCounter();
     }
 

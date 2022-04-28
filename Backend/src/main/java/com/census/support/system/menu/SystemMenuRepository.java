@@ -27,5 +27,5 @@ public interface SystemMenuRepository  extends JpaRepository<SystemMenu, Long> ,
     SystemMenu getByCode(String code);
 
 
-    Optional<Object> findByCode(String dashboard);
+    Optional<SystemMenu> findByCode(String code);
 }
