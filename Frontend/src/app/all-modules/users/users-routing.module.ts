@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { UsersComponent } from './users.component';
 import { UsersListComponent } from './components/list/users-list.component';
 import { UserShowComponent } from './components/show/user-show.component';
+import { UserEditComponent } from './components/edit/user-edit.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,10 @@ const routes: Routes = [
       {
         path:"user/show/:id",
         component:UserShowComponent
+      },
+      {
+        path:"user/edit/:id",
+        component:UserEditComponent
       },
 
       {

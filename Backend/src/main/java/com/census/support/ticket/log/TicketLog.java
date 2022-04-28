@@ -71,6 +71,11 @@ public class TicketLog {
 
 
 
+
+    
+
+
+
     // System log fields
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name = "CREATION_DATETIME")
@@ -115,8 +120,12 @@ public class TicketLog {
         this.tier2SolutionDescription = entity.getTier2SolutionDescription();
         this.tier2SolvedBy = entity.getTier2SolvedBy();
         this.tier2SolveTime = entity.getTier2SolveTime();
+
         this.tier2TerminateTime = entity.getTier2TerminateTime();
         this.tier2TerminateBy = entity.getTier2TerminateBy();
+
+
+
 
 
         this.creationDateTime = entity.getCreationDateTime();

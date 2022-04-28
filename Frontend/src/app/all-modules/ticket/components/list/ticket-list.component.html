@@ -33,12 +33,27 @@
             <label class="focus-label">Code</label>
           </div>
         </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-2 col-12">
+          <div class="form-group form-focus select-focus">
+            <!-- Option dropdown -->
+            <select class="select form-control" (input)="searchByStatus($event.target.value)">
+              <option value="">All Status</option>
+              <option value="OPEN">Open</option>
+              <option value="RECEIVED">Received</option>
+              <option value="HOLD">Hold</option>
+              <option value="SOLVED">Solved</option>
+              <option value="TERMINATE">Terminate</option>
+              </select>
+          </div>
+        </div>
+
 
         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">
           <a class="btn btn-success btn-block" (click)="searchBySearchButton()"> Search  </a>
         </div>
         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">
-          <a class="btn btn-success btn-block" (click)="clearFilter()" >Refresh  <span><i class="fa fa-refresh" aria-hidden="true"></i></span></a>
+          <!-- <a class="btn btn-success btn-block" (click)="clearFilter()" >Refresh  <span><i class="fa fa-refresh" aria-hidden="true"></i></span></a> -->
+
         </div>
       </div>
 

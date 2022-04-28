@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -30,6 +31,9 @@ public class UserService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public ResponseEntity<?> createUser(User createEntity) {
         Optional<User> local = this.repository.findByUsername(createEntity.getUsername());
@@ -102,6 +106,27 @@ public class UserService {
             return new ResponseEntity<>(new BaseResponse(true, "Success", 200, this.roleRepository.findAll()), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new BaseResponse(false, "Role not found", 404), HttpStatus.OK);
+        }
+    }
+
+    public ResponseEntity<?> update(UserDto userDto) {
+        try {
+            Optional<User> entityInst = this.repository.findById(userDto.getId());
+            if (entityInst.isPresent()) {
+                User entity = entityInst.get();
+                entity.setUsername(userDto.getUsername());
+                entity.setPhone(userDto.getPhone());
+                entity.setName(userDto.getName());
+               // entity.setPassword(this.bCryptPasswordEncoder.encode(userDto.getPassword()));
+                entity.setRoles(userDto.getRole().stream().map(roleRepository::getByAuthority).collect(Collectors.toSet()));
+                SetAttributeUpdate.setSysAttributeForCreateUpdate(entity,"Update");
+                this.repository.save(entity);
+                return new ResponseEntity<>(new BaseResponse(true, "User updated successfully", 200, entity), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(new BaseResponse(false, "User not found", 404), HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(new BaseResponse(false, "Something went wrong. "+e.getMessage(), 404), HttpStatus.OK);
         }
     }
 }

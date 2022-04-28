@@ -45,4 +45,9 @@ public class UserController {
         return this.service.getById(id,clientParams);
 
     }
+
+    @PutMapping("/update")
+    public ResponseEntity<?> updateUser(@RequestBody UserDto userDto) {
+        return this.service.update(userDto);
+    }
 }
