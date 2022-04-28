@@ -121,7 +121,7 @@ public class UserService {
                 entity.setRoles(userDto.getRole().stream().map(roleRepository::getByAuthority).collect(Collectors.toSet()));
                 SetAttributeUpdate.setSysAttributeForCreateUpdate(entity,"Update");
                 this.repository.save(entity);
-                return new ResponseEntity<>(new BaseResponse(true, "Success", 200, entity), HttpStatus.OK);
+                return new ResponseEntity<>(new BaseResponse(true, "User updated successfully", 200, entity), HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(new BaseResponse(false, "User not found", 404), HttpStatus.OK);
             }

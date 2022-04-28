@@ -33,26 +33,7 @@
           </div>
         </div>
 
-        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">
-          <div class="form-group form-focus">
-            <div class="cal-icon">
-              <input class="form-control floating datetimepicker" bsDatepicker type="text"
-                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
-                (bsValueChange)="searchByFromDate($event)">
-            </div>
-            <label class="focus-label">From</label>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">
-          <div class="form-group form-focus">
-            <div class="cal-icon">
-              <input class="form-control floating datetimepicker" bsDatepicker type="text"
-                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
-                (bsValueChange)="searchByToDate($event)">
-            </div>
-            <label class="focus-label">To</label>
-          </div>
-        </div>
+        
         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">
           <a class="btn btn-success btn-block" (click)="searchBySearchButton()"> Search </a>
         </div>
