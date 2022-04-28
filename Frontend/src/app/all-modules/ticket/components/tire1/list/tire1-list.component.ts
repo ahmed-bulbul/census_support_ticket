@@ -370,7 +370,7 @@ export class Tire1ListComponent implements OnInit {
           this.spinnerService.hide().then(r => console.log('spinner stopped'));
           this.toastr.success('Ticket send to tier two successfully', 'Success', { positionClass: 'toast-custom' });
           this._getListData();
-          this.myForm2.reset();
+          this.myForm3.reset();
           $("#sendToT2_modal").modal("hide")
         } else {
           this.spinnerService.hide().then(r => console.log('spinner stopped'));
@@ -389,6 +389,7 @@ export class Tire1ListComponent implements OnInit {
   resetFormValues() {
     this.myForm.reset();
     this.myForm2.reset();
+    this.myForm3.reset();
   }
 
 

@@ -52,6 +52,23 @@ public class TicketLog {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date receiveTime;
 
+    //tier two related
+    private String tier2ProblemDescription;
+    private String tier2SendBy;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date tier2SendTime;
+    private String tier2ReceiveBy;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date tier2ReceiveTime;
+    private String tier2SolutionType;
+    private String tier2SolutionDescription;
+    private String tier2SolvedBy;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date tier2SolveTime;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date tier2TerminateTime;
+    private String tier2TerminateBy;
+
 
 
     // System log fields
@@ -88,6 +105,18 @@ public class TicketLog {
         this.solveTime = entity.getSolveTime();
         this.terminateTime = entity.getTerminateTime();
         this.terminateBy = entity.getTerminateBy();
+
+        this.tier2ProblemDescription = entity.getTier2ProblemDescription();
+        this.tier2SendBy = entity.getTier2SendBy();
+        this.tier2SendTime = entity.getTier2SendTime();
+        this.tier2ReceiveBy = entity.getTier2ReceiveBy();
+        this.tier2ReceiveTime = entity.getTier2ReceiveTime();
+        this.tier2SolutionType = entity.getTier2SolutionType();
+        this.tier2SolutionDescription = entity.getTier2SolutionDescription();
+        this.tier2SolvedBy = entity.getTier2SolvedBy();
+        this.tier2SolveTime = entity.getTier2SolveTime();
+        this.tier2TerminateTime = entity.getTier2TerminateTime();
+        this.tier2TerminateBy = entity.getTier2TerminateBy();
 
 
         this.creationDateTime = entity.getCreationDateTime();

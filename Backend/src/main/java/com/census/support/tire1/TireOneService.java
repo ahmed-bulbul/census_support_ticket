@@ -75,6 +75,8 @@ public class TireOneService {
                 p = cb.and(p, cb.notEqual(root.get("status"), SysMessage.RESOLVED_STS));
                 p=cb.and(p,cb.notEqual(root.get("status"),SysMessage.TERMINATE_STS));
                 p=cb.and(p,cb.notEqual(root.get("status"),SysMessage.SEND_TO_T2_STS));
+                p=cb.and(p,cb.notEqual(root.get("status"),SysMessage.RECEIVED_T2_STS));
+                p=cb.and(p,cb.notEqual(root.get("status"),SysMessage.RESOLVED_T2_STS));
 
 
 
