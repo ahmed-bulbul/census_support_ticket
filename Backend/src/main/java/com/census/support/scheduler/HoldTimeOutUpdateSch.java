@@ -25,12 +25,10 @@ public class HoldTimeOutUpdateSch {
         List<Ticket> ticketsSaveList = new LinkedList<>();
         tickets.forEach(ticket -> {
             // subtract between wo time
-            Long diff = ((new Date().getTime() - ticket.getHoldTime().getTime())/1000)/60;
+            long diff = ((new Date().getTime() - ticket.getHoldTime().getTime())/1000)/60;
             diff=Math.abs(diff);
-            Long timeLeftInMin=Long.parseLong(ticket.getHoldDuration())-diff;
+            long timeLeftInMin=Long.parseLong(ticket.getHoldDuration())-diff;
 
-//            System.out.println(diff);
-//            System.out.println("diff : " + timeLeftInMin);
             if(timeLeftInMin<=0){
                 ticket.setStatusSequence(1L);
                 ticketsSaveList.add(ticket);
