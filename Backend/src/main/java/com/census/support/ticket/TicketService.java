@@ -1,8 +1,6 @@
 package com.census.support.ticket;
 
 import com.census.support.helper.response.BaseResponse;
-import com.census.support.message.Message;
-import com.census.support.message.MessageRepository;
 import com.census.support.message.MessageService;
 import com.census.support.system.counter.SystemCounterService;
 import com.census.support.ticket.log.TicketLog;
@@ -20,8 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.transaction.Transactional;
 import java.util.Map;
@@ -36,8 +32,6 @@ public class TicketService {
     private SystemCounterService counterService;
     @Autowired
     private MessageService messageService;
-    @Autowired
-    private MessageRepository messageRepository;
     @Autowired
     private TicketLogRepository ticketLogRepository;
 

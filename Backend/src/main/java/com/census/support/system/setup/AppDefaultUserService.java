@@ -58,8 +58,6 @@ public class AppDefaultUserService {
 
     public void createUser(){
         Role roleSuperAdmin = roleRepository.getRoleByAuthority(String.valueOf(SystemRole.ROLE_SUPER_ADMIN));
-        Role roleAdmin = roleRepository.getRoleByAuthority(String.valueOf(SystemRole.ROLE_ADMIN));
-        Role roleUser = roleRepository.getRoleByAuthority(String.valueOf(SystemRole.ROLE_USER));
         Role roleBbsUser = roleRepository.getRoleByAuthority(String.valueOf(SystemRole.ROLE_BBS_USER));
         Role roleTire1User = roleRepository.getRoleByAuthority(String.valueOf(SystemRole.ROLE_TIRE1_USER));
         Role roleTire2User = roleRepository.getRoleByAuthority(String.valueOf(SystemRole.ROLE_TIRE2_USER));
