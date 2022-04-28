@@ -50,10 +50,7 @@ public class TicketLog {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date receiveTime;
 
-
-
-
-    //tire 2 related
+    //tier two related
     private String tier2ProblemDescription;
     private String tier2SendBy;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -66,6 +63,14 @@ public class TicketLog {
     private String tier2SolvedBy;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date tier2SolveTime;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date tier2TerminateTime;
+    private String tier2TerminateBy;
+
+
+
+
+
 
 
 
@@ -113,6 +118,11 @@ public class TicketLog {
         this.tier2SolutionDescription = entity.getTier2SolutionDescription();
         this.tier2SolvedBy = entity.getTier2SolvedBy();
         this.tier2SolveTime = entity.getTier2SolveTime();
+
+        this.tier2TerminateTime = entity.getTier2TerminateTime();
+        this.tier2TerminateBy = entity.getTier2TerminateBy();
+
+
 
 
 

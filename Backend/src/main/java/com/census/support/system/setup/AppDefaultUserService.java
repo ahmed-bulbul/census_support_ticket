@@ -136,6 +136,20 @@ public class AppDefaultUserService {
             user.setCreationUser("SYSTEM");
             this.userRepository.save(user);
         }
+        //tire2 user2
+        if(!userRepository.findByUsername("tire2-user2").isPresent()){
+            Set<Role> rolesTire2UserSet = new HashSet<>();
+            User user = new User();
+
+            user.setUsername("tire2-user2");
+            user.setPassword(bCryptPasswordEncoder.encode("tire2-user2"));
+            user.setPhone("01678862529");
+            rolesTire2UserSet.add(roleTire2User);
+            user.setRoles(rolesTire2UserSet);
+            user.setCreationDateTime(new Date());
+            user.setCreationUser("SYSTEM");
+            this.userRepository.save(user);
+        }
     }
 
     public void CreateTicketCodeCounter(){

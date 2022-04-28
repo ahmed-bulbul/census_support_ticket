@@ -1,3 +1,4 @@
+import { Tire2ShowComponent } from './components/tire2/show/tire2-show.component';
 import { Tire2ListComponent } from './components/tire2/list/tire2-list.component';
 
 import { NgModule } from '@angular/core';
@@ -100,6 +101,11 @@ const routes: Routes = [
       {
         path:'tire2/list',
         component:Tire2ListComponent,
+        canActivate:[Tire2Guard]
+      },
+      {
+        path:'tire2/show/:id',
+        component:Tire2ShowComponent,
         canActivate:[Tire2Guard]
       },
 

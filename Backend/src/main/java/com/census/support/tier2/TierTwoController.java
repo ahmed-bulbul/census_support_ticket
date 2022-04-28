@@ -36,6 +36,21 @@ public class TierTwoController {
                 page.getTotalPages(),ps.sortDir.equals("asc") ? "desc": "asc",page.getNumber(), Arrays.asList(listData.toArray())), HttpStatus.OK);
     }
 
+    @PutMapping("/stsUpdate/{id}")
+    public ResponseEntity<?> stsUpdate(@PathVariable("id") Long id){
+        return tierTwoService.stsUpdate(id);
+    }
+    @PutMapping("/solveTicket/{id}")
+    public ResponseEntity<?> solveTicket(@RequestBody TicketDTO entityDTO,@PathVariable("id") Long id){
+        return tierTwoService.solveTicket(entityDTO,id);
+    }
+
+    @PutMapping("/terminateTicket/{id}")
+    public ResponseEntity<?> terminateTicket(@PathVariable("id") Long id){
+        return tierTwoService.terminateTicket(id);
+    }
+
+
 
 
 }

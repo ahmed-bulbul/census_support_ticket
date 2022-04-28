@@ -72,6 +72,9 @@ public class Ticket {
     private String tier2SolvedBy;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date tier2SolveTime;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date tier2TerminateTime;
+    private String tier2TerminateBy;
 
 
 
