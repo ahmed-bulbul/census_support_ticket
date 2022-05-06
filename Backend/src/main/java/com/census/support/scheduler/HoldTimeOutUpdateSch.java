@@ -33,12 +33,8 @@ public class HoldTimeOutUpdateSch {
                 ticket.setStatusSequence(1L);
                 ticketsSaveList.add(ticket);
             }
-
-
-
         });
 
         this.ticketRepository.saveAll(ticketsSaveList);
-
     }
 }
