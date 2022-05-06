@@ -6,7 +6,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { LoginService } from 'src/app/login/services/login.services';
 import { environment } from 'src/environments/environment';
-import { SharedService } from '../service/shared.service';
+import { SharedService } from '../../service/shared.service';
 
 @Component({
   selector: 'app-status',

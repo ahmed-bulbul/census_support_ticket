@@ -2,8 +2,10 @@ package com.census.support.acl.user;
 
 import com.census.support.acl.role.Role;
 import com.census.support.acl.role.RoleRepository;
+import com.census.support.acl.security.jwt.payload.request.ChangePasswordRequest;
 import com.census.support.helper.response.BaseResponse;
 import com.census.support.util.SetAttributeUpdate;
+import com.census.support.util.UserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -127,6 +129,27 @@ public class UserService {
             }
         } catch (Exception e) {
             return new ResponseEntity<>(new BaseResponse(false, "Something went wrong. "+e.getMessage(), 404), HttpStatus.OK);
+        }
+    }
+
+    public ResponseEntity<?> changePassword(ChangePasswordRequest changePasswordRequest) {
+        try {
+            Optional<User> entityInst = this.repository.findByUsername(UserUtil.getLoginUser());
+            if (entityInst.isPresent()) {
+                User entity = entityInst.get();
+                if(this.bCryptPasswordEncoder.matches(changePasswordRequest.getOldPassword(),entity.getPassword())){
+                    entity.setPassword(this.bCryptPasswordEncoder.encode(changePasswordRequest.getNewPassword()));
+                    SetAttributeUpdate.setSysAttributeForCreateUpdate(entity,"Update");
+                    this.repository.save(entity);
+                    return new ResponseEntity<>(new BaseResponse(true, "Password changed successfully", 200, entity), HttpStatus.OK);
+                }else{
+                    return new ResponseEntity<>(new BaseResponse(false, "Old password is not correct", 404), HttpStatus.OK);
+                }
+            } else {
+                return new ResponseEntity<>(new BaseResponse(false, "User not found", 404), HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(new BaseResponse(false, "Something went wrong. "+e.getMessage(), 500), HttpStatus.OK);
         }
     }
 }

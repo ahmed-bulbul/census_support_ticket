@@ -1,2 +1,16 @@
-package com.census.support.acl.security.jwt.payload.request;public class ChangePasswordRequest {
+package com.census.support.acl.security.jwt.payload.request;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+
+public class ChangePasswordRequest {
+
+    private String oldPassword;
+    private String newPassword;
 }
+
