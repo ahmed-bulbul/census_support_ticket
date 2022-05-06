@@ -16,6 +16,7 @@ declare var $: any;
 })
 export class Tire1ListComponent implements OnInit {
   public baseUrl = environment.baseUrl;
+  private polling: any;
 
   public pipe = new DatePipe('en-US');
   public myForm: FormGroup;
