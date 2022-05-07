@@ -18,3 +18,8 @@ hostname: dc-posdealers.waltonbd.com
 User : root
 Pass: WalTon!@#
 <user username="admin" password="pipiapp#123" roles="manager-status,manager-gui"/>
+
+
+
+==================Testing=========================
+ctrl + shft + O
