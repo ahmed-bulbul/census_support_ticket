@@ -67,4 +67,7 @@ export class ChangePasswordComponent implements OnInit {
     }
   }
 
+  get f() { return this.changePassword.controls; }
+
+
 }

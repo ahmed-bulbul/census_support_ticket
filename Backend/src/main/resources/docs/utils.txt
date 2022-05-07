@@ -6,3 +6,15 @@ insert  into `system_menu`(`id`,`admin_access_only`,`chk_authorization`,`chk_aut
 (4,NULL,NULL,NULL,'BBS','2022-04-19 13:33:45.085000','bbs-user',NULL,'BBS',NULL,NULL,'','','',NULL,NULL,NULL,'',NULL,NULL,'/ticket/bbs/list',NULL,2,NULL,NULL,'',3),
 (5,NULL,NULL,NULL,'TIRE1','2022-04-19 13:39:43.830000','bbs-user',NULL,'Tire 1',NULL,NULL,'','','',NULL,NULL,NULL,'',NULL,NULL,'/ticket/tire1/list',NULL,3,NULL,NULL,'',3),
 (6,NULL,NULL,NULL,'TIRE2','2022-04-19 14:17:19.506000','super-admin',NULL,'Tire 2',NULL,NULL,'','','',NULL,NULL,NULL,'',NULL,NULL,'/ticket/tire2/list',NULL,4,NULL,NULL,'',3);
+
+
+
+================Deployment Server Information===========================
+
+OS --> CentOS 8
+IP: 192.168.120.121
+REal IP: 103.243.143.21
+hostname: dc-posdealers.waltonbd.com
+User : root
+Pass: WalTon!@#
+<user username="admin" password="pipiapp#123" roles="manager-status,manager-gui"/>
