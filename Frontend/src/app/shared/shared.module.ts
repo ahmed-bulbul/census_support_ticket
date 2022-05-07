@@ -5,11 +5,12 @@ import { SharedRoutingModule } from './shared-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { StatusComponent } from './status/status.component';
+import { StatusComponent } from './components/status/status.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 
 @NgModule({
-  declarations: [StatusComponent],
+  declarations: [StatusComponent, ChangePasswordComponent],
   imports: [
     CommonModule,
     SharedRoutingModule,

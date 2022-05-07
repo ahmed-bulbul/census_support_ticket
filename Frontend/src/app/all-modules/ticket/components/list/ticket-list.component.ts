@@ -73,7 +73,7 @@ export class TicketListComponent implements OnInit {
 
     // bind event & action
     this._bindFromFloatingLabel();
-    //this.pollData();
+    this.pollData();
     this._getListData();
 
 

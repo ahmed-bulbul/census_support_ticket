@@ -24,4 +24,7 @@ public class SysMessage {
     public static final String TERMINATE_T2_STS = "TERMINATE_T2";
 
 
+    public static final String front_end_url = "http://localhost:8080/Census/";
+
+
 }

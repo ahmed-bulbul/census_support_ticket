@@ -1,9 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { StatusComponent } from './status/status.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { StatusComponent } from './components/status/status.component';
 
 const routes: Routes = [
-  { path: 'status' , component: StatusComponent },
+  {
+    path: 'status' , component: StatusComponent
+  },
+  {
+    path: 'change-password', component: ChangePasswordComponent
+  }
 ];
 
 @NgModule({
