@@ -15,6 +15,7 @@ declare var $: any;
 })
 export class Tire2ListComponent implements OnInit {
   public baseUrl = environment.baseUrl;
+  private polling: any;
 
   public pipe = new DatePipe('en-US');
   public myForm: FormGroup;
@@ -129,7 +130,7 @@ export class Tire2ListComponent implements OnInit {
 
   }
   refreshData() {
-    this.listData =
+    this.polling =
       setInterval(() => {
         this.getListData();
 
@@ -342,6 +343,6 @@ export class Tire2ListComponent implements OnInit {
 
 
   ngOnDestroy() {
-    clearInterval(this.listData);
+    clearInterval(this.polling);
   }
 }

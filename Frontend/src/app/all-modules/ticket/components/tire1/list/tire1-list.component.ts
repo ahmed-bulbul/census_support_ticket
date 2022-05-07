@@ -207,7 +207,7 @@ export class Tire1ListComponent implements OnInit {
 
   }
   refreshData() {
-    this.listData =
+    this.polling =
       setInterval(() => {
         this._getListData();
 
@@ -454,7 +454,7 @@ export class Tire1ListComponent implements OnInit {
 
 
   ngOnDestroy() {
-    clearInterval(this.listData);
+    clearInterval(this.polling);
   }
 
 }
