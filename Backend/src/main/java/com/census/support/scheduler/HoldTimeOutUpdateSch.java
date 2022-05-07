@@ -18,13 +18,13 @@ public class HoldTimeOutUpdateSch {
     @Autowired
     private TicketRepository ticketRepository;
 
-    @Scheduled(fixedDelay =6000, initialDelay = 10)
-    public void insertDailyAttendanceDataFromRowData()
+    @Scheduled(fixedDelay =1000, initialDelay = 10)
+    public void HoldTimeOutUpdateSchFunc()
     {
-        List<Ticket> tickets = this.ticketRepository.findByStatus(SysMessage.HOLD_STS);
+        List<Ticket> tickets = this.ticketRepository.findByStatusAndStatusSequence(SysMessage.HOLD_STS,2L);
         List<Ticket> ticketsSaveList = new LinkedList<>();
         tickets.forEach(ticket -> {
-            // subtract between wo time
+            // subtract between two time
             long diff = ((new Date().getTime() - ticket.getHoldTime().getTime())/1000)/60;
             diff=Math.abs(diff);
             long timeLeftInMin=Long.parseLong(ticket.getHoldDuration())-diff;
