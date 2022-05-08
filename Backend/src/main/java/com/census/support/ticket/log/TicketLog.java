@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Setter
@@ -16,7 +17,9 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Table(name = "TICKET_LOG")
-public class TicketLog {
+public class TicketLog implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

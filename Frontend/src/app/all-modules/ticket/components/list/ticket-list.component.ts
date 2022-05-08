@@ -80,6 +80,8 @@ export class TicketListComponent implements OnInit {
     this.pollData();
     this._getListData();
 
+    $('body').addClass('mini-sidebar');
+
 
   }
 
@@ -279,6 +281,8 @@ export class TicketListComponent implements OnInit {
 
   ngOnDestroy() {
     clearInterval(this.polling);
+    $('body').removeClass('mini-sidebar');
+
   }
 
 }

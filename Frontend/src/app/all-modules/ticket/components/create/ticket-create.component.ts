@@ -42,6 +42,7 @@ export class TicketCreateComponent implements OnInit {
         devicePhone: ['', [Validators.required,Validators.maxLength(11),Validators.pattern('^[0-9]*$')]],
         deviceUserId: [''],
         tabletSerialNo: ['', [Validators.required]],
+        imeiNo: [''],
         problemCategory: ['', [Validators.required]],
         problemType: [''],
         problemDescription:[''],

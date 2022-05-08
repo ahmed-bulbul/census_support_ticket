@@ -19,7 +19,15 @@ User : root
 Pass: WalTon!@#
 <user username="admin" password="pipiapp#123" roles="manager-status,manager-gui"/>
 
+===================Test Server Information============================
+OS UBUNTU - 18
+192.168.119.128
+hostname: dc-testapp.waltonbd.com
+user:test and pwd:Walton!@#
+user:root and pwd:Walton!@#
+
 
 
 ==================Testing=========================
 ctrl + shft + O
+
