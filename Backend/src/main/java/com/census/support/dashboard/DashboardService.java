@@ -31,6 +31,11 @@ public class DashboardService {
         return ResponseEntity.ok(jdbcTemplate.queryForObject(sql, Integer.class));
     }
 
+    public ResponseEntity<?> getTerminatedTickets() {
+        String sql = "SELECT COUNT(*) FROM ticket WHERE status = 'TERMINATED'";
+        return ResponseEntity.ok(jdbcTemplate.queryForObject(sql, Integer.class));
+    }
+
 
 //
 //    public ResponseEntity<?> countMaximumTicketSolver() {

@@ -33,7 +33,7 @@ public class MessageService {
             // Send request to the API servers over HTTPS
             SmsServiceUtil.doTrustToCertificates();
             String mobile = entity.getDeviceUserPhone();
-            String sms_body =message+" " + entity.getCode() + ".Check ticket status at 103.243.143.21/census/shared/status?code=" + entity.getCode();
+            String sms_body =message+" " + entity.getCode() + ".Check ticket status at 103.243.143.21/#/census/shared/status?code=" + entity.getCode();
             String charset = "UTF-8";
             String myUrl = String.format("https://wapi.waltonbd.com:444/SMSAPI/public/sms_api?project=BBS&creator=System&mobile="+mobile+"&sms_body=%s",
                     URLEncoder.encode(sms_body, charset));

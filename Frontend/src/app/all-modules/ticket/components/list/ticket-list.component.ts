@@ -103,6 +103,15 @@ export class TicketListComponent implements OnInit {
 
     this.status = val;
     this._getListData();
+
+    if(val!==''){
+      //destroy ng on init
+      this.ngOnDestroy();
+    }else{
+      this.pollData();
+    }
+
+
   }
 
   searchByTabSerialNo(val){

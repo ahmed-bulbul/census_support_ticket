@@ -5,10 +5,11 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { MorrisJsModule } from 'angular-morris-js';
+import { CommonDashboardComponent } from './common-dashboard/common-dashboard.component';
 
 
 @NgModule({
-  declarations: [DashboardComponent, AdminDashboardComponent],
+  declarations: [DashboardComponent, AdminDashboardComponent, CommonDashboardComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,

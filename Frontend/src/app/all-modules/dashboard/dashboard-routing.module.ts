@@ -1,3 +1,4 @@
+import { CommonDashboardComponent } from './common-dashboard/common-dashboard.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
@@ -10,6 +11,7 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       { path: 'admin', component: AdminDashboardComponent },
+      {path:'common',component:CommonDashboardComponent}
 
     ],
   },
