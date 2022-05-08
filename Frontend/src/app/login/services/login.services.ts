@@ -51,7 +51,7 @@ export class LoginService {
     if (this.clearTimeout) {
       clearTimeout(this.clearTimeout);
     }
-    this.toastr.warning("Goodbye", "logout");
+  //  this.toastr.warning("Goodbye", "logout");
     this.router.navigate(["/login"]);
     
 

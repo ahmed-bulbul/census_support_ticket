@@ -18,6 +18,7 @@ public class TicketDTO {
     private String devicePhone;
     private String deviceUserId;
     private String tabletSerialNo;
+    private String imeiNo;
     private String problemCategory;
     private String problemType;
     private String problemDescription;
@@ -80,6 +81,7 @@ public class TicketDTO {
         this.devicePhone = ticket.getDevicePhone();
         this.deviceUserId = ticket.getDeviceUserId();
         this.tabletSerialNo = ticket.getTabletSerialNo();
+        this.imeiNo = ticket.getImeiNo();
         this.problemCategory = ticket.getProblemCategory();
         this.problemType = ticket.getProblemType();
         this.problemDescription = ticket.getProblemDescription();
@@ -128,6 +130,7 @@ public class TicketDTO {
         this.devicePhone = ticket.getDevicePhone();
         this.deviceUserId = ticket.getDeviceUserId();
         this.tabletSerialNo = ticket.getTabletSerialNo();
+        this.imeiNo = ticket.getImeiNo();
         this.problemCategory = ticket.getProblemCategory();
         this.problemType = ticket.getProblemType();
         this.problemDescription = ticket.getProblemDescription();

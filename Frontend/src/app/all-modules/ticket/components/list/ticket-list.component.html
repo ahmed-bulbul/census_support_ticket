@@ -34,6 +34,12 @@
           </div>
         </div>
         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-2 col-12">
+          <div class="form-group form-focus">
+            <input type="text" class="form-control floating" (input)="searchByTabSerialNo($event.target.value)">
+            <label class="focus-label">Tab Serial No</label>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-2 col-12">
           <div class="form-group form-focus select-focus">
             <!-- Option dropdown -->
             <select class="select form-control" (input)="searchByStatus($event.target.value)">
@@ -93,7 +99,7 @@
                   <th>SL</th>
                   <th class="d-none">TB_ROW_ID</th>
                   <th>Code</th>
-                  <th>Device User ID </th>
+                  <th>Tablet Serial No </th>
                   <th>Device User Phone</th>
                   <th>Problem Category </th>
                   <th>Problem Type </th>
@@ -108,7 +114,7 @@
                   <td>{{ ( ((configPgn.pageNum-1) * configPgn.pageSize) + (i+1) ) }}</td>
                   <td class="d-none">{{thisObj.id}}</td>
                   <td>{{thisObj.code}}</td>
-                  <td>{{thisObj.deviceUserId}}</td>
+                  <td  [ngClass]="{'highlight': highlight==true}">{{thisObj.tabletSerialNo}}</td>
                   <td>{{thisObj.deviceUserPhone}}</td>
                   <td>{{thisObj.problemCategory}}</td>
                   <td>{{thisObj.problemType}}</td>

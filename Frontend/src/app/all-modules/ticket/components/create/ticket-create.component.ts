@@ -38,9 +38,9 @@ export class TicketCreateComponent implements OnInit {
 
       this.myForm = this.formBuilder.group({
         id: [''],
-        deviceUserPhone: ['', [Validators.required,Validators.minLength(11)]],
-        devicePhone: ['', [Validators.required,Validators.minLength(11)]],
-        deviceUserId: ['', [Validators.required]],
+        deviceUserPhone: ['', [Validators.required,Validators.maxLength(11),Validators.pattern('^[0-9]*$')]],
+        devicePhone: ['', [Validators.required,Validators.maxLength(11),Validators.pattern('^[0-9]*$')]],
+        deviceUserId: [''],
         tabletSerialNo: ['', [Validators.required]],
         problemCategory: ['', [Validators.required]],
         problemType: [''],

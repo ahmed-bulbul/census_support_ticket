@@ -40,6 +40,7 @@ public class TicketLog {
     private String receivedFromT2;
     private String holdBy;
     private String holdDuration;
+    private String imeiNo;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date terminateTime;

@@ -89,6 +89,13 @@ public class TicketService {
                         p = cb.and(p, cb.equal(root.get("status"), clientParams.get("status")));
                     }
                 }
+
+                if (clientParams.containsKey("tabletSerialNo")) {
+                    if (StringUtils.hasLength(clientParams.get("tabletSerialNo"))) {
+                        // like '%' + statusSequence + '%'
+                        p = cb.and(p, cb.like(root.get("tabletSerialNo"), "%" + clientParams.get("tabletSerialNo") + "%"));
+                    }
+                }
             }
             return p;
         }, pageable);
