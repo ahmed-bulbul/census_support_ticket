@@ -24,6 +24,7 @@ public class Ticket {
     private String devicePhone;
     private String deviceUserId;
     private String tabletSerialNo;
+    private String imeiNo;
     private String problemCategory;
     private String problemType;
 

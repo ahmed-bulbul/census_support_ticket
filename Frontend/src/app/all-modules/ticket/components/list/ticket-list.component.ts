@@ -39,6 +39,10 @@ export class TicketListComponent implements OnInit {
   private code: string;
   private creationUser: string;
   private status : string;
+  private tabletSerialNo: string;
+
+  //highlight the row
+  public highlight:boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -94,14 +98,30 @@ export class TicketListComponent implements OnInit {
     this._getListData();
   }
   searchByStatus(val){
+
     this.status = val;
     this._getListData();
+  }
+
+  searchByTabSerialNo(val){
+    this.spinnerService.show();
+      // if matches highlight the row
+      this.tabletSerialNo = val;
+      if(val.length > 0){
+        this.highlight = true;
+      }else{
+        this.highlight = false;
+      }
+      this._getListData();
+      this.spinnerService.hide();
+
   }
 
   clearFilter(){
     this.code = '';
     $('.filter-row').find('input, select, textarea').val('');
     this._getListData();
+    this.highlight = false;
   }
 
   deleteEntityData(id){
@@ -181,7 +201,7 @@ export class TicketListComponent implements OnInit {
     queryParams.rReqType = 'getListData';
 
 
-    this.spinnerService.show();
+   // this.spinnerService.show();
     this.ticketService.sendGetRequest(apiURL, queryParams).subscribe(
       (response: any) => {
         if(response.status === true){
@@ -189,7 +209,7 @@ export class TicketListComponent implements OnInit {
           this.configPgn.totalItem = response.totalItems;
           this.configPgn.totalItems = response.totalItems;
           this.setDisplayLastSequence();
-          this.spinnerService.hide();
+        //  this.spinnerService.hide();
         }else{
           this.spinnerService.hide();
           this.toastr.info(response.message, 'Info');
@@ -222,6 +242,9 @@ export class TicketListComponent implements OnInit {
     }
     if(this.status){
       params['status']= this.status;
+    }
+    if(this.tabletSerialNo){
+      params['tabletSerialNo']= this.tabletSerialNo;
     }
 
 

@@ -64,9 +64,9 @@
 
                 <div class="form-group">
                   <label> Device Phone</label>
-                  <input type="text" class="form-control" formControlName="devicePhone">
+                  <input type="tel" class="form-control" formControlName="devicePhone" placeholder="017********">
                   <span style="font-size: 12px;" class="text-danger"
-                    *ngIf="f.devicePhone && f.devicePhone.invalid && f.devicePhone.touched">Device Phone not valid</span>
+                    *ngIf="f.devicePhone && f.devicePhone.invalid && f.devicePhone.touched">Device Phone not valid [e.g 017********]</span>
                 </div>
 
                 <div class="form-group">
