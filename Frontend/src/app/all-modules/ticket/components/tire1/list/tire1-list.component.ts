@@ -16,16 +16,20 @@ declare var $: any;
 })
 export class Tire1ListComponent implements OnInit {
   public baseUrl = environment.baseUrl;
+  private polling: any;
 
   public pipe = new DatePipe('en-US');
   public myForm: FormGroup;
   public myForm2: FormGroup;
+  public myForm3: FormGroup;
   public configPgn: any;
   public listData: any = [];
   public editId: any;
   public tempId: any;
   public solveId:any;
   public holdId:any;
+  public terminateId:any;
+  public sendToT2Id: any;
   // Action auth for user
   public authObj: any = {
     create: false,
@@ -77,6 +81,7 @@ export class Tire1ListComponent implements OnInit {
     this.refreshData();
     this._initHoldForm();
     this._initSolveForm();
+    this._initSendToT2Form();
   }
   _initHoldForm() {
 
@@ -91,6 +96,12 @@ export class Tire1ListComponent implements OnInit {
     this.myForm2 = this.formBuilder.group({
       solutionType: ['', [Validators.required]],
       solutionDescription: ['', [Validators.required]],
+    });
+  }
+  _initSendToT2Form()
+  {
+    this.myForm3 = this.formBuilder.group({
+      tier2ProblemDescription: ['', [Validators.required]],
     });
   }
   getDiffTime(t1, t2) {
@@ -148,6 +159,7 @@ export class Tire1ListComponent implements OnInit {
     if (timeLeftInMin > 0) {
       return timeLeftInMin + " min left";
     } else {
+
       return "time over";
     }
 
@@ -195,7 +207,7 @@ export class Tire1ListComponent implements OnInit {
 
   }
   refreshData() {
-    this.listData =
+    this.polling =
       setInterval(() => {
         this._getListData();
 
@@ -312,9 +324,73 @@ export class Tire1ListComponent implements OnInit {
     );
   }
 
+  ticketTerminate(terminateId)
+  {
+    const apiURL = this.baseUrl + '/ticket/tire1/terminateTicket/' + terminateId;
+    const formData: any = {};
+
+
+    this.spinnerService.show();
+    this.ticketService.sendPutRequest(apiURL, formData).subscribe(
+      (response: any) => {
+
+        if(response.status === true){
+          console.log(response);
+          this.spinnerService.hide();
+          $('#terminate_modal').modal('hide');
+          this.toastr.success(response.message, 'Success');
+          this._getListData();
+        }else{
+          this.spinnerService.hide();
+          $('#terminate_modal').modal('hide');
+          this.toastr.info(response.message, 'Info');
+        }
+
+      },
+      (error) => {
+        console.log(error);
+        this.spinnerService.hide();
+      }
+    );
+  }
+
+  ticketSendToTireTwo(sendToT2Id)
+  {
+    if (this.myForm3.invalid) {
+      return;
+    }
+    const apiURL = this.baseUrl + '/ticket/tire1/sendToTierTwo/' + sendToT2Id;
+    let formData: any;
+    formData = Object.assign(this.myForm.value);
+    this.spinnerService.show();
+    this.ticketService.sendPutRequest(apiURL, formData).subscribe(
+      (response: any) => {
+        if (response.status === true) {
+          console.log("======")
+          console.log(response);
+          this.spinnerService.hide().then(r => console.log('spinner stopped'));
+          this.toastr.success('Ticket send to tier two successfully', 'Success', { positionClass: 'toast-custom' });
+          this._getListData();
+          this.myForm3.reset();
+          $("#sendToT2_modal").modal("hide")
+        } else {
+          this.spinnerService.hide().then(r => console.log('spinner stopped'));
+          this.toastr.error(response.message, 'Error');
+        }
+      },
+      (error) => {
+        console.log(error.message);
+        this.toastr.show(error.error.message, 'Show');
+        this.spinnerService.hide().then(r => console.log('spinner stopped'));
+      }
+    );
+
+  }
+
   resetFormValues() {
     this.myForm.reset();
     this.myForm2.reset();
+    this.myForm3.reset();
   }
 
 
@@ -378,7 +454,7 @@ export class Tire1ListComponent implements OnInit {
 
 
   ngOnDestroy() {
-    clearInterval(this.listData);
+    clearInterval(this.polling);
   }
 
 }

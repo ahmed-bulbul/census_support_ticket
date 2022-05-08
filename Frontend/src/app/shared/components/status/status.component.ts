@@ -6,7 +6,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { LoginService } from 'src/app/login/services/login.services';
 import { environment } from 'src/environments/environment';
-import { SharedService } from '../service/shared.service';
+import { SharedService } from '../../service/shared.service';
 
 @Component({
   selector: 'app-status',
@@ -25,7 +25,6 @@ export class StatusComponent implements OnInit {
 
   // search fields for
   private code: string;
-  private creationUser: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -63,7 +62,6 @@ export class StatusComponent implements OnInit {
     const apiURL = this.baseUrl + '/ticket/bbs/getStatus';
 
     let queryParams: any = {};
-    this.creationUser = this.loginService.getUser().username;
     const params = this.getUserQueryParams();
     queryParams = params;
 
@@ -100,9 +98,9 @@ export class StatusComponent implements OnInit {
     if(this.code){
       params[`code`] = this.code;
     }
-    if(this.creationUser){
-      params['creationUser']= this.creationUser;
-    }
+    // if(this.creationUser){
+    //   params['creationUser']= this.creationUser;
+    // }
 
 
     return params;

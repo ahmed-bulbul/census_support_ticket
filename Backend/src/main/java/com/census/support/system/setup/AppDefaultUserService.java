@@ -37,29 +37,27 @@ public class AppDefaultUserService {
     public void createRoles(){
 
         if (!roleRepository.findByAuthority(String.valueOf(SystemRole.ROLE_SUPER_ADMIN)).isPresent()) {
-            roleRepository.save(new Role(1L, String.valueOf(SystemRole.ROLE_SUPER_ADMIN), "ROLE_SUPER_ADMIN",new Date(),"SYSTEM"));
+            roleRepository.save(new Role( String.valueOf(SystemRole.ROLE_SUPER_ADMIN), "ROLE_SUPER_ADMIN",new Date(),"SYSTEM"));
         }
         if (!roleRepository.findByAuthority(String.valueOf(SystemRole.ROLE_ADMIN)).isPresent()) {
-            roleRepository.save(new Role(2L, String.valueOf(SystemRole.ROLE_ADMIN), "ROLE_ADMIN",new Date(),"SYSTEM"));
+            roleRepository.save(new Role( String.valueOf(SystemRole.ROLE_ADMIN), "ROLE_ADMIN",new Date(),"SYSTEM"));
         }
         if (!roleRepository.findByAuthority(String.valueOf(SystemRole.ROLE_USER)).isPresent()) {
-            roleRepository.save(new Role(3L,String.valueOf(SystemRole.ROLE_USER), "ROLE_USER",new Date(),"SYSTEM"));
+            roleRepository.save(new Role(String.valueOf(SystemRole.ROLE_USER), "ROLE_USER",new Date(),"SYSTEM"));
         }
         if (!roleRepository.findByAuthority(String.valueOf(SystemRole.ROLE_BBS_USER)).isPresent()) {
-            roleRepository.save(new Role(4L,String.valueOf(SystemRole.ROLE_BBS_USER), "ROLE_BBS_USER",new Date(),"SYSTEM"));
+            roleRepository.save(new Role(String.valueOf(SystemRole.ROLE_BBS_USER), "ROLE_BBS_USER",new Date(),"SYSTEM"));
         }
         if(!roleRepository.findByAuthority(String.valueOf(SystemRole.ROLE_TIRE1_USER)).isPresent()){
-            roleRepository.save(new Role(5L,String.valueOf(SystemRole.ROLE_TIRE1_USER), "ROLE_TIRE1_USER",new Date(),"SYSTEM"));
+            roleRepository.save(new Role(String.valueOf(SystemRole.ROLE_TIRE1_USER), "ROLE_TIRE1_USER",new Date(),"SYSTEM"));
         }
         if(!roleRepository.findByAuthority(String.valueOf(SystemRole.ROLE_TIRE2_USER)).isPresent()){
-            roleRepository.save(new Role(6L,String.valueOf(SystemRole.ROLE_TIRE2_USER), "ROLE_TIRE2_USER",new Date(),"SYSTEM"));
+            roleRepository.save(new Role(String.valueOf(SystemRole.ROLE_TIRE2_USER), "ROLE_TIRE2_USER",new Date(),"SYSTEM"));
         }
     }
 
     public void createUser(){
         Role roleSuperAdmin = roleRepository.getRoleByAuthority(String.valueOf(SystemRole.ROLE_SUPER_ADMIN));
-        Role roleAdmin = roleRepository.getRoleByAuthority(String.valueOf(SystemRole.ROLE_ADMIN));
-        Role roleUser = roleRepository.getRoleByAuthority(String.valueOf(SystemRole.ROLE_USER));
         Role roleBbsUser = roleRepository.getRoleByAuthority(String.valueOf(SystemRole.ROLE_BBS_USER));
         Role roleTire1User = roleRepository.getRoleByAuthority(String.valueOf(SystemRole.ROLE_TIRE1_USER));
         Role roleTire2User = roleRepository.getRoleByAuthority(String.valueOf(SystemRole.ROLE_TIRE2_USER));
@@ -138,12 +136,26 @@ public class AppDefaultUserService {
             user.setCreationUser("SYSTEM");
             this.userRepository.save(user);
         }
+        //tire2 user2
+        if(!userRepository.findByUsername("tire2-user2").isPresent()){
+            Set<Role> rolesTire2UserSet = new HashSet<>();
+            User user = new User();
+
+            user.setUsername("tire2-user2");
+            user.setPassword(bCryptPasswordEncoder.encode("tire2-user2"));
+            user.setPhone("01678862529");
+            rolesTire2UserSet.add(roleTire2User);
+            user.setRoles(rolesTire2UserSet);
+            user.setCreationDateTime(new Date());
+            user.setCreationUser("SYSTEM");
+            this.userRepository.save(user);
+        }
     }
 
     public void CreateTicketCodeCounter(){
         if (!counterRepository.getByCode("TICKET_CODE_CNT").isPresent()){
             SystemCounter systemCounter = new SystemCounter();
-            systemCounter.setId(1L);
+            //systemCounter.setId(1L);
             systemCounter.setActive(true);
             systemCounter.setCode("TICKET_CODE_CNT");
             systemCounter.setCounterName("Ticket Code");
@@ -164,7 +176,7 @@ public class AppDefaultUserService {
         //Ticket root menu
         if (!menuRepository.findByCode("TICKET").isPresent()) {
             SystemMenu menu = new SystemMenu();
-            menu.setId(1L);
+           // menu.setId(1L);
             menu.setCode("TICKET");
             menu.setDescription("Ticket");
             menu.setOpenUrl("/ticket");
@@ -182,7 +194,7 @@ public class AppDefaultUserService {
         // ticket-BBS child menu
         if (!menuRepository.findByCode("BBS").isPresent()) {
             SystemMenu menu = new SystemMenu();
-            menu.setId(2L);
+          //  menu.setId(2L);
             menu.setCode("BBS");
             menu.setDescription("BBS");
             menu.setOpenUrl("/ticket/bbs/list");
@@ -194,15 +206,16 @@ public class AppDefaultUserService {
             menu.setIsActive(true);
             menu.setCreationDateTime(new Date());
             menu.setCreationUser("SYSTEM");
-            menu.setParentMenu((SystemMenu) menuRepository.findByCode("TICKET").get());
+            SystemMenu parentMenu = menuRepository.findByCode("TICKET").get();
+            menu.setParentMenu(parentMenu);
             menuRepository.save(menu);
         }
         // ticket-TIRE1 child menu
-        if (!menuRepository.findByCode("TIRE1").isPresent()) {
+        if (!menuRepository.findByCode("TIER1").isPresent()) {
             SystemMenu menu = new SystemMenu();
-            menu.setId(3L);
-            menu.setCode("TIRE1");
-            menu.setDescription("Tire1");
+            //menu.setId(3L);
+            menu.setCode("TIER1");
+            menu.setDescription("Tier1");
             menu.setOpenUrl("/ticket/tire1/list");
             menu.setIconHtml("");
             menu.setSequence(3);
@@ -212,17 +225,18 @@ public class AppDefaultUserService {
             menu.setIsActive(true);
             menu.setCreationDateTime(new Date());
             menu.setCreationUser("SYSTEM");
-            menu.setParentMenu((SystemMenu) menuRepository.findByCode("TICKET").get());
+            SystemMenu parentMenu = menuRepository.findByCode("TICKET").get();
+            menu.setParentMenu(parentMenu);
             menuRepository.save(menu);
 
         }
 
         // ticket-TIRE2 child menu
-        if (!menuRepository.findByCode("TIRE2").isPresent()) {
+        if (!menuRepository.findByCode("TIER2").isPresent()) {
             SystemMenu menu = new SystemMenu();
-            menu.setId(4L);
-            menu.setCode("TIRE2");
-            menu.setDescription("Tire2");
+           // menu.setId(4L);
+            menu.setCode("TIER2");
+            menu.setDescription("Tier2");
             menu.setOpenUrl("/ticket/tire2/list");
             menu.setIconHtml("");
             menu.setSequence(4);
@@ -232,15 +246,16 @@ public class AppDefaultUserService {
             menu.setIsActive(true);
             menu.setCreationDateTime(new Date());
             menu.setCreationUser("SYSTEM");
-            menu.setParentMenu((SystemMenu) menuRepository.findByCode("TICKET").get());
+            SystemMenu parentMenu = menuRepository.findByCode("TICKET").get();
+            menu.setParentMenu(parentMenu);
             menuRepository.save(menu);
 
         }
 
 
-        if (!menuRepository.findByCode("User").isPresent()) {
+        /*if (!menuRepository.findByCode("User").isPresent()) {
             SystemMenu menu = new SystemMenu();
-            menu.setId(5L);
+            //menu.setId(5L);
             menu.setCode("USER");
             menu.setDescription("User");
             menu.setOpenUrl("/users/user/list");
@@ -254,7 +269,7 @@ public class AppDefaultUserService {
             menu.setCreationDateTime(new Date());
             menu.setCreationUser("SYSTEM");
             menuRepository.save(menu);
-        }
+        }*/
     }
 
 
@@ -263,7 +278,7 @@ public class AppDefaultUserService {
     public void createDefaultUserAndRoles(){
         this.createRoles();
         this.createUser();
-        this.createMenu();
+       // this.createMenu();
         this.CreateTicketCodeCounter();
     }
 

@@ -33,12 +33,36 @@
             <label class="focus-label">Code</label>
           </div>
         </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-2 col-12">
+          <div class="form-group form-focus">
+            <input type="text" class="form-control floating" (input)="searchByTabSerialNo($event.target.value)">
+            <label class="focus-label">Tab Serial No</label>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-2 col-12">
+          <div class="form-group form-focus select-focus">
+            <!-- Option dropdown -->
+            <select class="select form-control" (input)="searchByStatus($event.target.value)">
+              <option value="">All Status</option>
+              <option value="OPEN">Open</option>
+              <option value="RECEIVED">Received</option>
+              <option value="HOLD">Hold</option>
+              <option value="SOLVED">Solved</option>
+              <option value="TERMINATE">Terminate</option>
+              <option value="SOLVED_T2">Solved T2</option>
+
+
+              </select>
+          </div>
+        </div>
+
 
         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">
           <a class="btn btn-success btn-block" (click)="searchBySearchButton()"> Search  </a>
         </div>
         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">
-          <a class="btn btn-success btn-block" (click)="clearFilter()" >Refresh  <span><i class="fa fa-refresh" aria-hidden="true"></i></span></a>
+          <!-- <a class="btn btn-success btn-block" (click)="clearFilter()" >Refresh  <span><i class="fa fa-refresh" aria-hidden="true"></i></span></a> -->
+
         </div>
       </div>
 
@@ -75,7 +99,7 @@
                   <th>SL</th>
                   <th class="d-none">TB_ROW_ID</th>
                   <th>Code</th>
-                  <th>Device User ID </th>
+                  <th>Tab Serial No </th>
                   <th>Device User Phone</th>
                   <th>Problem Category </th>
                   <th>Problem Type </th>
@@ -90,7 +114,7 @@
                   <td>{{ ( ((configPgn.pageNum-1) * configPgn.pageSize) + (i+1) ) }}</td>
                   <td class="d-none">{{thisObj.id}}</td>
                   <td>{{thisObj.code}}</td>
-                  <td>{{thisObj.deviceUserId}}</td>
+                  <td  [ngClass]="{'highlight': highlight==true}">{{thisObj.tabletSerialNo}}</td>
                   <td>{{thisObj.deviceUserPhone}}</td>
                   <td>{{thisObj.problemCategory}}</td>
                   <td>{{thisObj.problemType}}</td>

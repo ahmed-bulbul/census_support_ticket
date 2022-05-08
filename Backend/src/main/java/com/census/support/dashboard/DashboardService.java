@@ -17,7 +17,7 @@ public class DashboardService {
     }
 
     public ResponseEntity<?> getReceivedTickets() {
-        String sql = "SELECT COUNT(*) FROM ticket WHERE status = 'RECEIVED'";
+        String sql = "SELECT COUNT(*) FROM ticket WHERE status = 'RECEIVED' or status = 'RECEIVED_T2'";
         return ResponseEntity.ok(jdbcTemplate.queryForObject(sql, Integer.class));
     }
 
@@ -27,7 +27,19 @@ public class DashboardService {
     }
 
     public ResponseEntity<?> getResolvedTickets() {
-        String sql = "SELECT COUNT(*) FROM ticket WHERE status = 'RESOLVED'";
+        String sql = "SELECT COUNT(*) FROM ticket WHERE status = 'SOLVED' OR status = 'SOLVED_T2'";
         return ResponseEntity.ok(jdbcTemplate.queryForObject(sql, Integer.class));
     }
+
+    public ResponseEntity<?> getTerminatedTickets() {
+        String sql = "SELECT COUNT(*) FROM ticket WHERE status = 'TERMINATED'";
+        return ResponseEntity.ok(jdbcTemplate.queryForObject(sql, Integer.class));
+    }
+
+
+//
+//    public ResponseEntity<?> countMaximumTicketSolver() {
+//        String sql = "SELECT COUNT(*) FROM ticket WHERE status = 'SOLVED' GROUP BY solved_by ORDER BY COUNT(*) DESC LIMIT 1";
+//        return ResponseEntity.ok(jdbcTemplate.queryForObject(sql, Integer.class));
+//    }
 }

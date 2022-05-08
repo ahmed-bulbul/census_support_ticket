@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -32,7 +33,7 @@ public class MessageService {
             // Send request to the API servers over HTTPS
             SmsServiceUtil.doTrustToCertificates();
             String mobile = entity.getDeviceUserPhone();
-            String sms_body =message+" " + entity.getCode() + "  .Check ticket status at http://census.com/shared/status?code=" + entity.getCode();
+            String sms_body =message+" " + entity.getCode() + ".Check ticket status at 103.243.143.21/#/census/shared/status?code=" + entity.getCode();
             String charset = "UTF-8";
             String myUrl = String.format("https://wapi.waltonbd.com:444/SMSAPI/public/sms_api?project=BBS&creator=System&mobile="+mobile+"&sms_body=%s",
                     URLEncoder.encode(sms_body, charset));
@@ -58,7 +59,7 @@ public class MessageService {
                 entityInst.setReceiver(entity.getDeviceUserPhone());
                 SetAttributeUpdate.setSysAttributeForCreateUpdate(entityInst,"Create");
                 messageRepository.save(entityInst);
-                System.out.println("SMS sent failed");
+                System.out.println("SMS sent failed"+ jsonObj.getString("message"));
             }
         } catch (Exception e) {
             System.out.println("Error - " + e);
@@ -73,9 +74,10 @@ public class MessageService {
             Optional<Ticket> ticket = ticketRepository.findById(id);
 
             if (ticket.isPresent()) {
-                List<Message> entityList = messageRepository.findByTicket(ticket);
-                if (entityList.size() > 0) {
-                    return new ResponseEntity<>(new BaseResponse(true, "Message found successfully", 200, entityList.toArray()), HttpStatus.OK);
+                List<MessageDTO> dtoList = messageRepository.findByTicket(ticket).stream().map(MessageDTO::new)
+                        .collect(Collectors.toList());
+                if (dtoList.size() > 0) {
+                    return new ResponseEntity<>(new BaseResponse(true, "Message found successfully", 200, dtoList.toArray()), HttpStatus.OK);
                 } else {
                     return new ResponseEntity<>(new BaseResponse(false, "Message not found", 404), HttpStatus.OK);
                 }

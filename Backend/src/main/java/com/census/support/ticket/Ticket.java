@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
@@ -16,13 +17,18 @@ import java.util.Date;
 @Entity
 @Table(name = "TICKET")
 @EntityListeners(TicketListener.class)
-public class Ticket {
+public class Ticket implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String deviceUserPhone;
+    private String devicePhone;
     private String deviceUserId;
     private String tabletSerialNo;
+    private String imeiNo;
     private String problemCategory;
     private String problemType;
 
@@ -55,7 +61,27 @@ public class Ticket {
     private String receiveDuration;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Date solvedTime;
+    private Date terminateTime;
+    private String terminateBy;
+
+    //tire 2 related
+    private String tier2ProblemDescription;
+    private String tier2SendBy;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date tier2SendTime;
+    private String tier2ReceiveBy;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date tier2ReceiveTime;
+    private String tier2SolutionType;
+    private String tier2SolutionDescription;
+    private String tier2SolvedBy;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date tier2SolveTime;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date tier2TerminateTime;
+    private String tier2TerminateBy;
+
+
 
 
 

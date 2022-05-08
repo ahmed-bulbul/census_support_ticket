@@ -12,7 +12,7 @@ ng g m [ModuleName] --routing
 
 #For Generate Dist
 
-ng build --prod --base-href="/hrms/" --deploy-url="/hrms/"
+ng build --prod --base-href="/census/" --deploy-url="/census/"
 
 # For github published
 ng build --prod --output-path docs --base-href /hrms

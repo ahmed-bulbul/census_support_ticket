@@ -48,4 +48,12 @@ public class DashboardController {
         return dashboardService.getResolvedTickets();
     }
 
+    // get terminated tickets
+    @GetMapping("/getTerminatedTickets")
+    public ResponseEntity<?> getTerminatedTickets() {
+        return dashboardService.getTerminatedTickets();
+    }
+
+
+
 }

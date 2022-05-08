@@ -1,1 +1,150 @@
-<p>user-edit works!</p>
+<!-- Page Content -->
+<div class="content container-fluid">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="page-title">User</h3>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/dashboard">Home</a></li>
+          <li class="breadcrumb-item active">User</li>
+          <li class="breadcrumb-item active">Update</li>
+        </ul>
+      </div>
+      <div class="col-auto float-right ml-auto">
+        <a class="btn add-btn" routerLink="/users/user/list"><i class="fa fa-share"></i> Back To List</a>
+      </div>
+    </div>
+  </div>
+  <!-- /Page Header -->
+
+
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <!-- <div class="card-header"> -->
+        <!-- <h4 class="card-title mb-0">Payroll Item Value</h4> -->
+        <!-- </div>  -->
+        <div class="card-body">
+          <form novalidate (ngSubmit)="updateForm()" [formGroup]="myForm">
+
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>ID</label>
+                  <input type="text" class="form-control" formControlName="id" readonly>
+                </div>
+                <div class="form-group">
+                  <label>Username</label>
+                  <input type="text" class="form-control" formControlName="username">
+                  <span style="font-size: 12px;" class="text-danger"
+                    *ngIf="f.username && f.username.invalid && f.username.touched">Username not valid</span>
+                </div>
+
+                <!-- <div class="form-group">
+                  <label>Email</label>
+                  <input type="email" class="form-control" formControlName="email">
+                  <span style="font-size: 12px;" class="text-danger"
+                    *ngIf="f.email && f.email.invalid && f.email.touched">Email not valid</span>
+                </div> -->
+
+
+<!--                <div class="form-group">-->
+<!--                  <label>Password</label>-->
+
+<!--                  <input type="password" class="form-control" formControlName="password">-->
+<!--                  <span style="font-size: 12px;" class="text-danger"-->
+<!--                    *ngIf="f.password && f.password.invalid && f.password.touched">Password not valid[min-->
+<!--                    length:4]</span>-->
+<!--                </div>-->
+
+
+              </div>
+              <div class="col-md-6">
+
+
+
+                <div class="form-group">
+                  <label>Phone</label>
+                  <input type="text" class="form-control" formControlName="phone">
+                  <span style="font-size: 12px;" class="text-danger"
+                    *ngIf="f.phone && f.phone.invalid && f.phone.touched">Phone not valid</span>
+                </div>
+
+
+
+<!--                <div class="form-group">-->
+<!--                  <label>Confirm Password</label>-->
+<!--                  <input [ngClass]="{ 'is-invalid': isSubmitted && f.confirmPassword.errors }" type="password"-->
+<!--                    class="form-control" formControlName="confirmPassword">-->
+<!--                  <span style="font-size: 12px;" class="text-danger"-->
+<!--                    *ngIf="f.confirmPassword && f.confirmPassword.invalid && f.confirmPassword.touched ">Password does-->
+<!--                    not matched </span>-->
+<!--                </div>-->
+
+
+
+              </div> <br> <br> <br>
+
+              <div class="form-group">
+                <label>Roles: &nbsp; &nbsp; </label>
+                <label>
+                    <input (click)="checkRole($event,'ROLE_SUPER_ADMIN')"  id="ROLE_SUPER_ADMIN_ID"
+                       type="checkbox"> &nbsp; Super Admin &nbsp; &nbsp;
+
+                      <input  (click)="checkRole($event,'ROLE_ADMIN')" id="ROLE_ADMIN_ID"
+                       type="checkbox">&nbsp; Admin  &nbsp; &nbsp;
+
+
+                      <input  (click)="checkRole($event,'ROLE_USER')" id="ROLE_USER_ID"
+                       type="checkbox"> &nbsp; User &nbsp; &nbsp;
+
+                       <input  (click)="checkRole($event,'ROLE_BBS_USER')" id="ROLE_BBS_USER"
+                       type="checkbox"> &nbsp; BBS USER &nbsp; &nbsp;
+
+                       <input  (click)="checkRole($event,'ROLE_TIRE1_USER')" id="ROLE_TIRE1_USER"
+                       type="checkbox"> &nbsp; TIER1 USER &nbsp; &nbsp;
+
+                       <input  (click)="checkRole($event,'ROLE_TIRE2_USER')" id="ROLE_TIRE2_USER"
+                       type="checkbox"> &nbsp; TIER2 USER &nbsp; &nbsp;
+
+                </label>
+              </div>
+
+
+            </div>
+
+
+
+
+            <div class="text-right">
+              <a class="btn btn-warning btn-ripple" routerLink="/users/user/list"><i class="fa fa-share"></i>
+                Cancel</a>
+              &nbsp; &nbsp;
+              <button type="button" class="btn btn-secondary btn-ripple" (click)="resetFormValues()">
+                <i class="fa fa-undo" aria-hidden="true"></i> Reset
+              </button>
+              &nbsp; &nbsp;
+              <button type="submit" class="btn btn-primary btn-ripple" [disabled]="!myForm.valid">
+                <i class="fa fa-check" aria-hidden="true"></i> Save &nbsp;&nbsp;&nbsp;
+              </button>
+            </div>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<!-- /Page Content -->
+
+
+<ngx-spinner bdColor="rgba(255,255,255,0.5)" size="medium" color="#667eea" type="ball-clip-rotate" [fullScreen]="false">
+  <p style="color: black"> Processing... </p>
+</ngx-spinner>

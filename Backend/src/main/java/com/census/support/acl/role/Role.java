@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
@@ -15,11 +16,14 @@ import java.util.Date;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "ROLE")
-public class Role {
+@Table(name = "ACL_ROLE")
+public class Role implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ")
+    @SequenceGenerator(name = "SEQ", sequenceName = "ROLE_SEQ")
     @Column(name = "ID")
     private Long id;
     private String authority;
@@ -37,8 +41,8 @@ public class Role {
     @Column(name = "LAST_UPDATE_USER")
     private String lastUpdateUser;
 
-    public Role(Long id, String authority, String description, Date creationDateTime, String creationUser) {
-        this.id = id;
+    public Role( String authority, String description, Date creationDateTime, String creationUser) {
+
         this.authority = authority;
         this.description = description;
         this.creationDateTime=creationDateTime;

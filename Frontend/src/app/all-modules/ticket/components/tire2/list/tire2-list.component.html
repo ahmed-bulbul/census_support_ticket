@@ -1,0 +1,241 @@
+
+<!-- Page Content -->
+<div class="content container-fluid">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="page-title">Ticket ( Tier 2 ) </h3>
+        <ul class="breadcrumb">
+        </ul>
+      </div>
+      <!-- <div class="col-auto float-right ml-auto">
+              <div class="btn-group btn-group">
+                  <button class="btn btn-white">Excel</button>
+                  <button class="btn btn-white">PDF</button>
+                  <button class="btn btn-white"><i class="fa fa-print fa-lg"></i> Print</button>
+              </div>
+          </div> -->
+    </div>
+  </div>
+  <!-- /Page Header -->
+
+  <!-- Search Filter -->
+  <div class="card mb-2" style="background-color:transparent;">
+    <div class="card-body p-3">
+
+      <div class="row filter-row">
+
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-2 col-12">
+          <div class="form-group form-focus">
+            <input type="text" class="form-control floating" (input)="searchByCode($event.target.value)">
+            <label class="focus-label">Code</label>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">
+          <a class="btn btn-success btn-block" (click)="searchBySearchButton()"> Search  </a>
+        </div>
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">
+          <a class="btn btn-success btn-block" (click)="clearFilter()" >Refresh  <span><i class="fa fa-refresh" aria-hidden="true"></i></span></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- /Search Filter -->
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="card">
+
+        <div class="card-header">
+          <div class="card-tools">
+            <a routerLink="/ticket/bbs/create" class="btn btn-outline-primary"><i class="fa fa-plus"></i> New
+              &nbsp;&nbsp;&nbsp;</a>
+          </div>
+        </div>
+
+        <div class="card-body">
+
+          <div class="table-responsive">
+
+            <div class="d-flex justify-content-start pb-1">
+              <div class="pgn-displayDataInfo">
+                <span class="page-item disabled">Displaying ( {{ ( ((configPgn.pageNum-1) * configPgn.pageSize) + (1) )
+                  }} to {{configPgn.pngDiplayLastSeq}} of {{configPgn.totalItem}} ) entries</span>
+              </div>
+            </div>
+
+            <table id="genListTable" class="table table-striped custom-table">
+              <thead>
+                <tr>
+                  <th>SL</th>
+                  <th class="d-none">TB_ROW_ID</th>
+                  <th>Code</th>
+                  <th>Problem Type </th>
+                  <th>Ticket Rise Time </th>
+                  <th>Tier One Send Time </th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let thisObj of listData | paginate : configPgn; let i = index"
+                  [class.active]="i == currentIndex">
+
+                  <td>{{ ( ((configPgn.pageNum-1) * configPgn.pageSize) + (i+1) ) }}</td>
+                  <td class="d-none">{{thisObj.id}}</td>
+                  <td>{{thisObj.code}}</td>
+                  <td >{{thisObj.problemType}}</td>
+                  <td >{{thisObj.creationDateTime|date:"HH:mm a"}} <small> ({{getDiffTime(currentTime,thisObj.creationDateTime)}})</small></td>
+                  <td >{{thisObj.tier2SendTime|date:"HH:mm a"}}<small> ({{getDiffTime(currentTime,thisObj.tier2SendTime)}})</small></td>
+                  <td>
+                    <a  class="btn btn-sm btn-primary" routerLink="/ticket/tire2/show/{{thisObj.id}}"><i
+                      class="fa fa-eye m-r-5"></i></a> &nbsp;
+                      <a *ngIf="thisObj.status=='SEND_TO_T2'" class="btn btn-sm btn-success" (click)="ticketReceive(thisObj.id)">Receive</a> &nbsp;
+                      <a *ngIf="thisObj.status=='RECEIVED_T2'||thisObj.status=='HOLD'" class="btn btn-sm btn-info" data-toggle="modal" data-target="#solve_modal" (click)="solveId = thisObj.id">Solved</a> &nbsp;
+                      <a *ngIf="thisObj.status=='RECEIVED_T2'||thisObj.status=='HOLD'" class="btn btn-sm btn-info" style="background-color: blueviolet;" data-toggle="modal" data-target="#terminate_modal" (click)="terminateId = thisObj.id">Terminate</a> &nbsp;
+                  </td>
+                </tr>
+
+                <tr *ngIf="listData.length === 0">
+                  <td colspan="10">
+                    <h5 style="text-align: center;">No data found</h5>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <div class="d-flex justify-content-end ">
+
+              <div>
+                Items per Page
+                <select (change)="handlePageSizeChange($event)" class="pgn-pageSizeOption" formControlName="pageSize">
+                  <option *ngFor="let size of configPgn.pageSizes" [value]="size">
+                    {{ size }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="pgn-pageSliceCt">
+                <pagination-controls responsive="true" previousLabel="Prev" nextLabel="Next"
+                  (pageChange)="handlePageChange($event)">
+                </pagination-controls>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- Solve Modal -->
+<div class="modal custom-modal fade" id="solve_modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <h3>Solve Item</h3>
+        </div>
+        <div class="card-body">
+          <form novalidate (ngSubmit)="ticketSolve(solveId)" [formGroup]="myForm">
+
+            <div class="form-group">
+              <label>Solution Type</label>
+              <select class="form-control" formControlName="tier2SolutionType">
+                <option value="">Select Solution Type</option>
+                <option value="Adapter Change">Adapter Change</option>
+                <option value="Battery Change">Battery Change</option>
+                <option value="Body Repair">Body Repair</option>
+                <option value="Cable Change">Cable Change</option>
+                <option value="Camera  Change">Camera Change</option>
+                <option value="Casing Change">Casing Change</option>
+                <option value="Checked and Deliverede">Checked and Deliverede</option>
+                <option value="Display Change">Display Change</option>
+                <option value="Dust Clean">Dust Clean</option>
+                <option value="Earpiece Change">Earpiece Change</option>
+                <option value="Factory Reset">Factory Reset</option>
+                <option value="IEMI Write">IEMI Write</option>
+                <option value="Long Time Charge">Long Time Charge</option>
+                <option value="Mic Change">Mic Change</option>
+                <option value="Motherboard Change">Motherboard Change</option>
+                <option value="Motherboard Repair">Motherboard Repair</option>
+                <option value="OS Install">OS Install</option>
+                <option value="Port Change">Port Change</option>
+                <option value="Reassemble">Reassemble</option>
+                <option value="Replace">Replace</option>
+                <option value="Settings Change">Settings Change</option>
+                <option value="Slot Change">Slot Change</option>
+                <option value="Speaker Change">Speaker Change</option>
+                <option value="Genuine OS Key">Genuine OS Key</option>
+                <option value="MAC Address Write">MAC Address Write</option>
+                <option value="Keyboard Change">Keyboard Change</option>
+                <option value="Button Change">Button Change</option>
+              </select>
+            </div>
+
+
+            <div class="form-group">
+              <label>Solution Description</label>
+              <textarea class="form-control" formControlName="tier2SolutionDescription" rows="2"></textarea>
+            </div>
+            <div class="text-right">
+              <button class="btn btn-warning btn-ripple" data-dismiss="modal"><i class="fa fa-share"></i>
+                Cancel</button>
+              &nbsp; &nbsp;
+              <button type="button" class="btn btn-secondary btn-ripple" (click)="resetFormValues()">
+                <i class="fa fa-undo" aria-hidden="true"></i> Reset
+              </button>
+              &nbsp; &nbsp;
+              <!-- [disabled]="!myForm.valid" -->
+              <button [disabled]="!myForm.valid" type="submit" class="btn btn-primary btn-ripple" >
+                <i class="fa fa-check" aria-hidden="true"></i> Save &nbsp;&nbsp;&nbsp;
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Solve Modal -->
+<!-- Terminate Modal -->
+<div class="modal custom-modal fade" id="terminate_modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <h3>Terminate Item</h3>
+          <p>Are you sure want to Terminate?</p>
+        </div>
+        <div class="modal-btn delete-action">
+          <div class="row">
+            <div class="col-6">
+              <a class="btn btn-primary continue-btn" (click)="ticketTerminate(terminateId)">Terminate</a>
+            </div>
+            <div class="col-6">
+              <a data-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Terminate Modal -->
+
+
+
+
+<ngx-spinner bdColor="rgba(255,255,255,0.5)" size="medium" color="#667eea" type="ball-clip-rotate" [fullScreen]="false">
+  <p style="color: black"> Processing... </p>
+</ngx-spinner>

@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  baseUrl:"http://192.128.134.88:9002/api",
-  contextPath:'hrms/'
+  baseUrl:"http://103.243.143.21:8080/census_api",
+  contextPath:'census/'
 
 };
 

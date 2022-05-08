@@ -17,6 +17,12 @@ export class SidebarComponent implements OnInit {
 
   baseUrl = environment.baseUrl;
   public menuData: SafeHtml;
+  public role_super_admin:boolean = false;
+  public role_bbs_user:boolean = false;
+  public role_tier1_user:boolean = false;
+  public role_tier2_user:boolean = false;
+
+
 
 
   urlComplete = {
@@ -78,6 +84,7 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
 
     const self = this;
+    this._setRole();
 
 
     this._getPermittedMenu();
@@ -115,6 +122,15 @@ export class SidebarComponent implements OnInit {
 
 
   }
+
+  _setRole(){
+    let authorities = this.loginService.getLoginUserRole();
+    if(authorities.includes('ROLE_SUPER_ADMIN')){
+      this.role_super_admin = true;
+    }
+  }
+
+
 
 
   navigateRouterLink(event) {
@@ -170,6 +186,12 @@ export class SidebarComponent implements OnInit {
     <li class="menu-title">
       <span>Config</span>
     </li>
+    <li>
+    <a class="routerlink" href="/users/user/list">
+        <i class="las la-circle"></i>
+        <span>Users</span>
+    </a>
+</li>
     <li>
         <a class="routerlink" href="/system/menu/list">
             <i class="las la-circle"></i>
@@ -297,12 +319,18 @@ export class SidebarComponent implements OnInit {
       // append response
 
       let menuStr = this._hardCodeMenuString();
-      $('#_leftMenuContainer').append( menuStr );
+      if(this.role_super_admin===true){
+        $('#_leftMenuContainer').append( menuStr );
+      }
 
       menuStr = this._generateMenuHTML( response.data );
       $('#_leftMenuContainer').append( menuStr );
 
-      $('#_leftMenuContainer').append( this._menuHTML_structure() );
+      if(this.role_super_admin){
+        $('#_leftMenuContainer').append( this._menuHTML_structure() );
+      }
+
+
       $('i.la-sm').css('font-size', '.875em');
 
 

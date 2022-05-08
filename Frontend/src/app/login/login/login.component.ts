@@ -83,14 +83,14 @@ export class LoginComponent implements OnInit {
         }else if(authorities.includes("ROLE_TIRE1_USER")){
           this.toastr.success('You are now authenticated','Success', { positionClass:'toast-custom' })
           this.spinnerService.hide();
-          this.router.navigate(['/dashboard/admin2']);
+          this.router.navigate(['/ticket/tire1/list']);
           this.loginService.loginStatusSubject.next(true);
         }
 
         else if(authorities.includes("ROLE_TIRE2_USER")){
           this.toastr.success('You are now authenticated','Success', { positionClass:'toast-custom' })
           this.spinnerService.hide();
-          this.router.navigate(['/dashboard/admin3']);
+          this.router.navigate(['/ticket/tire2/list']);
           this.loginService.loginStatusSubject.next(true);
         }
 

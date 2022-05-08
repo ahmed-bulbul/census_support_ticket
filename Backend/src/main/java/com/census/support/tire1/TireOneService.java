@@ -72,7 +72,12 @@ public class TireOneService {
                     }
                 }
 
-                p = cb.and(p, cb.notEqual(root.get("status"), "SOLVED"));
+                p = cb.and(p, cb.notEqual(root.get("status"), SysMessage.RESOLVED_STS));
+                p=cb.and(p,cb.notEqual(root.get("status"),SysMessage.TERMINATE_STS));
+                p=cb.and(p,cb.notEqual(root.get("status"),SysMessage.SEND_TO_T2_STS));
+                p=cb.and(p,cb.notEqual(root.get("status"),SysMessage.RECEIVED_T2_STS));
+                p=cb.and(p,cb.notEqual(root.get("status"),SysMessage.RESOLVED_T2_STS));
+                p=cb.and(p,cb.notEqual(root.get("status"),SysMessage.TERMINATE_T2_STS));
 
 
 
@@ -127,7 +132,7 @@ public class TireOneService {
                 ticket.setHoldDuration(entityDTO.getHoldDuration());
                 ticket.setSolutionType(entityDTO.getSolutionType());
                 ticket.setSolutionDescription(entityDTO.getSolutionDescription());
-                ticket.setStatusSequence(1L);
+                ticket.setStatusSequence(2L);
                 ticketRepository.save(ticket);
                 return new ResponseEntity<>(new BaseResponse(true, "Ticket Hold successfully", 200), HttpStatus.OK);
             }
@@ -154,6 +159,50 @@ public class TireOneService {
                 //send user ticket created message
                 messageService.sendTicketCreatedMessage(ticket, SysMessage.SOLVED_MSG);
                 return new ResponseEntity<>(new BaseResponse(true, "Ticket solved successfully", 200), HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(new BaseResponse(false, "Ticket not found", 404), HttpStatus.OK);
+            }
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(new BaseResponse(false, "Error: " + e.getMessage(), 500), HttpStatus.OK);
+        }
+    }
+    @Transactional
+    public ResponseEntity<?> terminateTicket(Long id) {
+        try {
+            Ticket ticket = ticketRepository.findById(id).orElse(null);
+            if (ticket != null) {
+                ticket.setStatus(SysMessage.TERMINATE_STS);
+                ticket.setTerminateBy(UserUtil.getLoginUser()); //terminate by
+                ticket.setTerminateTime(new Date());
+                ticketRepository.save(ticket);
+                //send user ticket terminate message
+                messageService.sendTicketCreatedMessage(ticket, SysMessage.TERMINATE_MSG);
+                return new ResponseEntity<>(new BaseResponse(true, "Ticket terminated successfully", 200), HttpStatus.OK);
+
+
+            }
+            else {
+                return new ResponseEntity<>(new BaseResponse(false, "Ticket not found", 404), HttpStatus.OK);
+            }
+        }
+        catch (Exception e) {
+            return new ResponseEntity<>(new BaseResponse(false, "Error: " + e.getMessage(), 500), HttpStatus.OK);
+        }
+    }
+
+
+    public ResponseEntity<?> sendToTierTwo(TicketDTO entityDTO, Long id) {
+        try {
+            Ticket ticket = ticketRepository.findById(id).orElse(null);
+            if (ticket != null) {
+                ticket.setStatus(SysMessage.SEND_TO_T2_STS);
+                ticket.setTier2SendBy(UserUtil.getLoginUser());
+                ticket.setTier2SendTime(new Date());
+                ticket.setTier2ProblemDescription(entityDTO.getTier2ProblemDescription());
+                ticketRepository.save(ticket);
+                return new ResponseEntity<>(new BaseResponse(true, "Ticket send to Tier Two successfully", 200), HttpStatus.OK);
             }
             else {
                 return new ResponseEntity<>(new BaseResponse(false, "Ticket not found", 404), HttpStatus.OK);

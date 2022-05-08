@@ -6,7 +6,7 @@
   <div class="page-header">
     <div class="row align-items-center">
       <div class="col">
-        <h3 class="page-title">Ticket ( Tire 1 ) </h3>
+        <h3 class="page-title">Ticket ( Tier 1 ) </h3>
         <ul class="breadcrumb">
         </ul>
       </div>
@@ -102,7 +102,8 @@
                     <a *ngIf="thisObj.status=='OPEN'" class="btn btn-sm btn-success" (click)="ticketReceive(thisObj.id)">Receive</a> &nbsp;
                     <a *ngIf="thisObj.status=='RECEIVED'" class="btn btn-sm btn-warning"  data-toggle="modal" data-target="#hold_modal" (click)="holdId = thisObj.id">Hold</a> &nbsp;
                     <a *ngIf="thisObj.status=='RECEIVED'||thisObj.status=='HOLD'" class="btn btn-sm btn-info" data-toggle="modal" data-target="#solve_modal" (click)="solveId = thisObj.id">Solved</a> &nbsp;
-                    <a *ngIf="thisObj.status=='RECEIVED'||thisObj.status=='HOLD'" class="btn btn-sm btn-primary">Send To Tire 2</a> &nbsp;
+                    <a *ngIf="thisObj.status=='RECEIVED'||thisObj.status=='HOLD'" class="btn btn-sm btn-info" style="background-color: blueviolet;" data-toggle="modal" data-target="#terminate_modal" (click)="terminateId = thisObj.id">Terminate</a> &nbsp;
+                    <a *ngIf="thisObj.status=='RECEIVED'||thisObj.status=='HOLD'" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#sendToT2_modal" (click)="sendToT2Id = thisObj.id">Send To Tire 2</a> &nbsp;
 
 
                   </td>
@@ -161,11 +162,35 @@
               <label>Solution Type</label>
               <select class="form-control" formControlName="solutionType">
                 <option value="">Select Solution Type</option>
-                <option value="1">Solution 1</option>
-                <option value="2">Solution 2</option>
+                <option value="Adapter Change">Adapter Change</option>
+                <option value="Battery Change">Battery Change</option>
+                <option value="Body Repair">Body Repair</option>
+                <option value="Cable Change">Cable Change</option>
+                <option value="Camera  Change">Camera Change</option>
+                <option value="Casing Change">Casing Change</option>
+                <option value="Checked and Deliverede">Checked and Deliverede</option>
+                <option value="Display Change">Display Change</option>
+                <option value="Dust Clean">Dust Clean</option>
+                <option value="Earpiece Change">Earpiece Change</option>
+                <option value="Factory Reset">Factory Reset</option>
+                <option value="IEMI Write">IEMI Write</option>
+                <option value="Long Time Charge">Long Time Charge</option>
+                <option value="Mic Change">Mic Change</option>
+                <option value="Motherboard Change">Motherboard Change</option>
+                <option value="Motherboard Repair">Motherboard Repair</option>
+                <option value="OS Install">OS Install</option>
+                <option value="Port Change">Port Change</option>
+                <option value="Reassemble">Reassemble</option>
+                <option value="Replace">Replace</option>
+                <option value="Settings Change">Settings Change</option>
+                <option value="Slot Change">Slot Change</option>
+                <option value="Speaker Change">Speaker Change</option>
+                <option value="Genuine OS Key">Genuine OS Key</option>
+                <option value="MAC Address Write">MAC Address Write</option>
+                <option value="Keyboard Change">Keyboard Change</option>
+                <option value="Button Change">Button Change</option>
               </select>
             </div>
-
 
             <div class="form-group">
               <label>Solution Description</label>
@@ -210,8 +235,33 @@
               <label>Solution Type</label>
               <select class="form-control" formControlName="solutionType">
                 <option value="">Select Solution Type</option>
-                <option value="1">Solution 1</option>
-                <option value="2">Solution 2</option>
+                <option value="Adapter Change">Adapter Change</option>
+                <option value="Battery Change">Battery Change</option>
+                <option value="Body Repair">Body Repair</option>
+                <option value="Cable Change">Cable Change</option>
+                <option value="Camera  Change">Camera Change</option>
+                <option value="Casing Change">Casing Change</option>
+                <option value="Checked and Deliverede">Checked and Deliverede</option>
+                <option value="Display Change">Display Change</option>
+                <option value="Dust Clean">Dust Clean</option>
+                <option value="Earpiece Change">Earpiece Change</option>
+                <option value="Factory Reset">Factory Reset</option>
+                <option value="IEMI Write">IEMI Write</option>
+                <option value="Long Time Charge">Long Time Charge</option>
+                <option value="Mic Change">Mic Change</option>
+                <option value="Motherboard Change">Motherboard Change</option>
+                <option value="Motherboard Repair">Motherboard Repair</option>
+                <option value="OS Install">OS Install</option>
+                <option value="Port Change">Port Change</option>
+                <option value="Reassemble">Reassemble</option>
+                <option value="Replace">Replace</option>
+                <option value="Settings Change">Settings Change</option>
+                <option value="Slot Change">Slot Change</option>
+                <option value="Speaker Change">Speaker Change</option>
+                <option value="Genuine OS Key">Genuine OS Key</option>
+                <option value="MAC Address Write">MAC Address Write</option>
+                <option value="Keyboard Change">Keyboard Change</option>
+                <option value="Button Change">Button Change</option>
               </select>
             </div>
 
@@ -239,6 +289,76 @@
   </div>
 </div>
 <!-- /Solve Modal -->
+
+<!-- sendToTire2 Modal -->
+<div class="modal custom-modal fade" id="sendToT2_modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <h3>Send To Tier Two Item</h3>
+        </div>
+        <div class="card-body">
+          <form novalidate (ngSubmit)="ticketSendToTireTwo(sendToT2Id)" [formGroup]="myForm3">
+
+            <!-- <div class="form-group">
+              <label>Solution Type</label>
+              <select class="form-control" formControlName="solutionType">
+                <option value="">Select Solution Type</option>
+                <option value="1">Solution 1</option>
+                <option value="2">Solution 2</option>
+              </select>
+            </div> -->
+
+
+            <div class="form-group">
+              <label>Problem Description</label>
+              <textarea class="form-control" formControlName="tier2ProblemDescription" rows="2"></textarea>
+            </div>
+            <div class="text-right">
+              <button class="btn btn-warning btn-ripple" data-dismiss="modal"><i class="fa fa-share"></i>
+                Cancel</button>
+              &nbsp; &nbsp;
+              <button type="button" class="btn btn-secondary btn-ripple" (click)="resetFormValues()">
+                <i class="fa fa-undo" aria-hidden="true"></i> Reset
+              </button>
+              &nbsp; &nbsp;
+              <button [disabled]="!myForm3.valid" type="submit" class="btn btn-primary btn-ripple" >
+                <i class="fa fa-check" aria-hidden="true"></i> Save &nbsp;&nbsp;&nbsp;
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /sendToTire2 Modal -->
+
+<!-- Terminate Modal -->
+<div class="modal custom-modal fade" id="terminate_modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <h3>Terminate Item</h3>
+          <p>Are you sure want to Terminate?</p>
+        </div>
+        <div class="modal-btn delete-action">
+          <div class="row">
+            <div class="col-6">
+              <a class="btn btn-primary continue-btn" (click)="ticketTerminate(terminateId)">Terminate</a>
+            </div>
+            <div class="col-6">
+              <a data-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Terminate Modal -->
 
 
 

@@ -1,7 +1,5 @@
 package com.census.support.ticket.log;
 
-
-import com.census.support.acl.user.User;
 import com.census.support.ticket.Ticket;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +8,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Setter
@@ -18,12 +17,15 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Table(name = "TICKET_LOG")
-public class TicketLog {
+public class TicketLog implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String deviceUserPhone;
+    private String devicePhone;
     private String deviceUserId;
     private String tabletSerialNo;
     private String problemCategory;
@@ -41,11 +43,38 @@ public class TicketLog {
     private String receivedFromT2;
     private String holdBy;
     private String holdDuration;
+    private String imeiNo;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date terminateTime;
+    private String terminateBy;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date solveTime;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date receiveTime;
+
+    //tier two related
+    private String tier2ProblemDescription;
+    private String tier2SendBy;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date tier2SendTime;
+    private String tier2ReceiveBy;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date tier2ReceiveTime;
+    private String tier2SolutionType;
+    private String tier2SolutionDescription;
+    private String tier2SolvedBy;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date tier2SolveTime;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date tier2TerminateTime;
+    private String tier2TerminateBy;
+
+
+
+
+
 
 
 
@@ -64,6 +93,7 @@ public class TicketLog {
     public TicketLog(Ticket entity, String action) {
         this.deviceUserPhone = entity.getDeviceUserPhone();
         this.deviceUserId = entity.getDeviceUserId();
+        this.devicePhone = entity.getDevicePhone();
         this.tabletSerialNo = entity.getTabletSerialNo();
         this.problemCategory = entity.getProblemCategory();
         this.problemType = entity.getProblemType();
@@ -80,6 +110,24 @@ public class TicketLog {
         this.holdDuration = entity.getHoldDuration();
         this.receiveTime = entity.getReceiveTime();
         this.solveTime = entity.getSolveTime();
+        this.terminateTime = entity.getTerminateTime();
+        this.terminateBy = entity.getTerminateBy();
+
+        this.tier2ProblemDescription = entity.getTier2ProblemDescription();
+        this.tier2SendBy = entity.getTier2SendBy();
+        this.tier2SendTime = entity.getTier2SendTime();
+        this.tier2ReceiveBy = entity.getTier2ReceiveBy();
+        this.tier2ReceiveTime = entity.getTier2ReceiveTime();
+        this.tier2SolutionType = entity.getTier2SolutionType();
+        this.tier2SolutionDescription = entity.getTier2SolutionDescription();
+        this.tier2SolvedBy = entity.getTier2SolvedBy();
+        this.tier2SolveTime = entity.getTier2SolveTime();
+
+        this.tier2TerminateTime = entity.getTier2TerminateTime();
+        this.tier2TerminateBy = entity.getTier2TerminateBy();
+
+
+
 
 
         this.creationDateTime = entity.getCreationDateTime();

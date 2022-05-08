@@ -4,6 +4,7 @@ package com.census.support.acl.auth;
 import com.census.support.acl.role.Role;
 import com.census.support.acl.role.RoleRepository;
 import com.census.support.acl.security.jwt.config.JwtUtils;
+import com.census.support.acl.security.jwt.payload.request.ChangePasswordRequest;
 import com.census.support.acl.security.jwt.payload.request.LoginRequest;
 import com.census.support.acl.security.jwt.payload.request.SignupRequest;
 import com.census.support.acl.security.jwt.payload.response.JwtResponse;
@@ -180,5 +181,11 @@ public class AuthController {
 //        refreshTokenService.deleteByUserId(logOutRequest.getUserId());
 //        return ResponseEntity.ok(new BaseResponse(true,"Logout successfully!",200));
 //    }
+
+    // change password
+    @PutMapping("/changePassword")
+    public ResponseEntity<?> changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest) {
+        return userService.changePassword(changePasswordRequest);
+    }
 
 }

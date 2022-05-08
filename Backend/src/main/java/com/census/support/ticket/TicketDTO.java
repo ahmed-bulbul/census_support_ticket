@@ -15,8 +15,10 @@ public class TicketDTO {
 
     private Long id;
     private String deviceUserPhone;
+    private String devicePhone;
     private String deviceUserId;
     private String tabletSerialNo;
+    private String imeiNo;
     private String problemCategory;
     private String problemType;
     private String problemDescription;
@@ -34,6 +36,10 @@ public class TicketDTO {
     private String holdBy;
     private String holdDuration;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date terminateTime;
+    private String terminateBy;
+
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date solveTime;
@@ -41,6 +47,23 @@ public class TicketDTO {
     private Date receiveTime;
 
     String message;
+
+    //tier two related
+    private String tier2ProblemDescription;
+    private String tier2SendBy;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date tier2SendTime;
+    private String tier2ReceiveBy;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date tier2ReceiveTime;
+    private String tier2SolutionType;
+    private String tier2SolutionDescription;
+    private String tier2SolvedBy;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date tier2SolveTime;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date tier2TerminateTime;
+    private String tier2TerminateBy;
 
 
 
@@ -55,8 +78,10 @@ public class TicketDTO {
     public TicketDTO(Ticket ticket) {
         this.id = ticket.getId();
         this.deviceUserPhone = ticket.getDeviceUserPhone();
+        this.devicePhone = ticket.getDevicePhone();
         this.deviceUserId = ticket.getDeviceUserId();
         this.tabletSerialNo = ticket.getTabletSerialNo();
+        this.imeiNo = ticket.getImeiNo();
         this.problemCategory = ticket.getProblemCategory();
         this.problemType = ticket.getProblemType();
         this.problemDescription = ticket.getProblemDescription();
@@ -74,6 +99,21 @@ public class TicketDTO {
         this.receiveTime = ticket.getReceiveTime();
 
         this.solveTime = ticket.getSolveTime();
+        this.terminateTime = ticket.getTerminateTime();
+        this.terminateBy = ticket.getTerminateBy();
+
+        this.tier2ProblemDescription = ticket.getTier2ProblemDescription();
+        this.tier2SendBy = ticket.getTier2SendBy();
+        this.tier2SendTime = ticket.getTier2SendTime();
+        this.tier2ReceiveBy = ticket.getTier2ReceiveBy();
+        this.tier2ReceiveTime = ticket.getTier2ReceiveTime();
+        this.tier2SolutionType = ticket.getTier2SolutionType();
+        this.tier2SolutionDescription = ticket.getTier2SolutionDescription();
+        this.tier2SolvedBy = ticket.getTier2SolvedBy();
+        this.tier2SolveTime = ticket.getTier2SolveTime();
+        this.tier2TerminateTime = ticket.getTier2TerminateTime();
+        this.tier2TerminateBy = ticket.getTier2TerminateBy();
+
 
 
         //system logs
@@ -87,8 +127,10 @@ public class TicketDTO {
 
         this.id = ticket.getId();
         this.deviceUserPhone = ticket.getDeviceUserPhone();
+        this.devicePhone = ticket.getDevicePhone();
         this.deviceUserId = ticket.getDeviceUserId();
         this.tabletSerialNo = ticket.getTabletSerialNo();
+        this.imeiNo = ticket.getImeiNo();
         this.problemCategory = ticket.getProblemCategory();
         this.problemType = ticket.getProblemType();
         this.problemDescription = ticket.getProblemDescription();
@@ -105,6 +147,24 @@ public class TicketDTO {
         this.holdDuration = ticket.getHoldDuration();
         this.receiveTime = ticket.getReceiveTime();
         this.solveTime = ticket.getSolveTime();
+
+        this.terminateTime = ticket.getTerminateTime();
+        this.terminateBy = ticket.getTerminateBy();
+
+
+        this.tier2ProblemDescription = ticket.getTier2ProblemDescription();
+        this.tier2SendBy = ticket.getTier2SendBy();
+        this.tier2SendTime = ticket.getTier2SendTime();
+        this.tier2ReceiveBy = ticket.getTier2ReceiveBy();
+        this.tier2ReceiveTime = ticket.getTier2ReceiveTime();
+        this.tier2SolutionType = ticket.getTier2SolutionType();
+        this.tier2SolutionDescription = ticket.getTier2SolutionDescription();
+        this.tier2SolvedBy = ticket.getTier2SolvedBy();
+        this.tier2SolveTime = ticket.getTier2SolveTime();
+        this.tier2TerminateTime = ticket.getTier2TerminateTime();
+        this.tier2TerminateBy = ticket.getTier2TerminateBy();
+
+
 
 
         //system logs

@@ -1,7 +1,9 @@
+import { CommonDashboardComponent } from './common-dashboard/common-dashboard.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AdminGuard } from 'src/app/core/guards/admin.guard';
 
 
 const routes: Routes = [
@@ -9,7 +11,8 @@ const routes: Routes = [
     path: '',
     component: DashboardComponent,
     children: [
-      { path: 'admin', component: AdminDashboardComponent },
+      { path: 'admin', component: AdminDashboardComponent,canActivate:[AdminGuard] },
+      {path:'common',component:CommonDashboardComponent}
 
     ],
   },

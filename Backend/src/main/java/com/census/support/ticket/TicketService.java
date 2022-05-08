@@ -1,8 +1,6 @@
 package com.census.support.ticket;
 
 import com.census.support.helper.response.BaseResponse;
-import com.census.support.message.Message;
-import com.census.support.message.MessageRepository;
 import com.census.support.message.MessageService;
 import com.census.support.system.counter.SystemCounterService;
 import com.census.support.ticket.log.TicketLog;
@@ -20,8 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.transaction.Transactional;
 import java.util.Map;
@@ -37,8 +33,6 @@ public class TicketService {
     @Autowired
     private MessageService messageService;
     @Autowired
-    private MessageRepository messageRepository;
-    @Autowired
     private TicketLogRepository ticketLogRepository;
 
 
@@ -52,7 +46,7 @@ public class TicketService {
                 return new ResponseEntity<>(new BaseResponse(false, "Ticket already exists", 302), HttpStatus.OK);
             }else {
                 SetAttributeUpdate.setSysAttributeForCreateUpdate(entity,"Create");
-                entity.setStatusSequence(2L);
+                entity.setStatusSequence(3L);
                 ticketRepository.save(entity);
                 try {
                     //send user ticket created message
@@ -90,12 +84,18 @@ public class TicketService {
                     }
                 }
 
-//                if (clientParams.containsKey("code")) {
-//                    if (StringUtils.hasLength(clientParams.get("code"))) {
-//                        Message message = messageRepository.getByCode(clientParams.get("code"));
-//                        p=cb.and(p,cb.equal(joinMessage.get("ticket"),message));
-//                    }
-//                }
+                if (clientParams.containsKey("status")) {
+                    if (StringUtils.hasLength(clientParams.get("status"))) {
+                        p = cb.and(p, cb.equal(root.get("status"), clientParams.get("status")));
+                    }
+                }
+
+                if (clientParams.containsKey("tabletSerialNo")) {
+                    if (StringUtils.hasLength(clientParams.get("tabletSerialNo"))) {
+                        // like '%' + statusSequence + '%'
+                        p = cb.and(p, cb.like(root.get("tabletSerialNo"), "%" + clientParams.get("tabletSerialNo") + "%"));
+                    }
+                }
             }
             return p;
         }, pageable);

@@ -12,6 +12,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { DatePipe } from '@angular/common';
 import { authInterceptorProviders } from './core/interceptors/auth.interceptor';
+
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
+
 @NgModule({
   declarations: [
     AppComponent
@@ -33,7 +37,8 @@ import { authInterceptorProviders } from './core/interceptors/auth.interceptor';
   ],
   providers: [
     authInterceptorProviders,
-    DatePipe
+    DatePipe,
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })
