@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import javax.persistence.criteria.Predicate;
 import java.util.Date;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class TierTwoService {
@@ -44,16 +45,16 @@ public class TierTwoService {
                     p = cb.and(p, cb.equal(root.get("status"), clientParams.get("status")));
                 }
             }
-           // p=cb.or(p,cb.equal(root.get("status"),SysMessage.RECEIVED_T2_STS));
+            // p=cb.or(p,cb.equal(root.get("status"),SysMessage.RECEIVED_T2_STS));
 
             if (clientParams.containsKey("tier2ReceiveBy")) {
                 if (StringUtils.hasLength(clientParams.get("tier2ReceiveBy"))) {
-                    p = cb.or(p, cb.equal(root.get("tier2ReceiveBy"),  clientParams.get("tier2ReceiveBy")));
+                    p = cb.or(p, cb.equal(root.get("tier2ReceiveBy"), clientParams.get("tier2ReceiveBy")));
 
                 }
             }
-            p=cb.and(p,cb.notEqual(root.get("status"),SysMessage.RESOLVED_T2_STS));
-            p=cb.and(p,cb.notEqual(root.get("status"),SysMessage.TERMINATE_T2_STS));
+            p = cb.and(p, cb.notEqual(root.get("status"), SysMessage.RESOLVED_T2_STS));
+            p = cb.and(p, cb.notEqual(root.get("status"), SysMessage.TERMINATE_T2_STS));
 
             return p;
         }, pageable);
@@ -70,12 +71,10 @@ public class TierTwoService {
                 ticket.setTier2ReceiveTime(new Date());
                 ticketRepository.save(ticket);
                 return new ResponseEntity<>(new BaseResponse(true, "Ticket receive successfully", 200), HttpStatus.OK);
-            }
-            else {
+            } else {
                 return new ResponseEntity<>(new BaseResponse(false, "Ticket not found", 404), HttpStatus.OK);
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return new ResponseEntity<>(new BaseResponse(false, "Error: " + e.getMessage(), 500), HttpStatus.OK);
         }
 
@@ -95,12 +94,10 @@ public class TierTwoService {
                 //send user ticket created message
                 messageService.sendTicketCreatedMessage(ticket, SysMessage.SOLVED_MSG);
                 return new ResponseEntity<>(new BaseResponse(true, "Ticket solved successfully", 200), HttpStatus.OK);
-            }
-            else {
+            } else {
                 return new ResponseEntity<>(new BaseResponse(false, "Ticket not found", 404), HttpStatus.OK);
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return new ResponseEntity<>(new BaseResponse(false, "Error: " + e.getMessage(), 500), HttpStatus.OK);
         }
     }
@@ -118,13 +115,26 @@ public class TierTwoService {
                 return new ResponseEntity<>(new BaseResponse(true, "Ticket terminated successfully", 200), HttpStatus.OK);
 
 
-            }
-            else {
+            } else {
                 return new ResponseEntity<>(new BaseResponse(false, "Ticket not found", 404), HttpStatus.OK);
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return new ResponseEntity<>(new BaseResponse(false, "Error: " + e.getMessage(), 500), HttpStatus.OK);
         }
+    }
+
+    public ResponseEntity<?> getById(Long id) {
+        try {
+            Optional<Ticket> entity = ticketRepository.findById(id);
+            if (entity.isPresent()) {
+                TicketDTO dto = new TicketDTO(entity.get());
+                return new ResponseEntity<>(new BaseResponse(true, "Ticket found successfully", 200, dto), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(new BaseResponse(false, "Ticket not found", 404), HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(new BaseResponse(false, "Something went wrong: " + e.getMessage(), 500), HttpStatus.OK);
+        }
+
     }
 }
