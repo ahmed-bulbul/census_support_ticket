@@ -187,6 +187,12 @@ export class SidebarComponent implements OnInit {
       <span>Config</span>
     </li>
     <li>
+    <a class="routerlink" href="/users/user/list">
+        <i class="las la-circle"></i>
+        <span>Users</span>
+    </a>
+</li>
+    <li>
         <a class="routerlink" href="/system/menu/list">
             <i class="las la-circle"></i>
             <span>System Menu</span>
@@ -318,7 +324,6 @@ export class SidebarComponent implements OnInit {
       }
 
       menuStr = this._generateMenuHTML( response.data );
-      console.log("menuStr: " + menuStr);
       $('#_leftMenuContainer').append( menuStr );
 
       if(this.role_super_admin){
