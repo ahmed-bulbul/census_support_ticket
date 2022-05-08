@@ -50,6 +50,12 @@ public class TierTwoController {
         return tierTwoService.terminateTicket(id);
     }
 
+    @GetMapping("/get/{id}")
+    public ResponseEntity<?> getById(@PathVariable("id") Long id){
+        return tierTwoService.getById(id);
+    }
+
+
 
 
 
