@@ -51,7 +51,6 @@ export class LoginService {
     if (this.clearTimeout) {
       clearTimeout(this.clearTimeout);
     }
-    this.router.navigate(["/login"]);
     return true;
   }
 
