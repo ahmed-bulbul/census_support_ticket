@@ -253,7 +253,7 @@ public class AppDefaultUserService {
         }
 
 
-        if (!menuRepository.findByCode("User").isPresent()) {
+        /*if (!menuRepository.findByCode("User").isPresent()) {
             SystemMenu menu = new SystemMenu();
             //menu.setId(5L);
             menu.setCode("USER");
@@ -269,7 +269,7 @@ public class AppDefaultUserService {
             menu.setCreationDateTime(new Date());
             menu.setCreationUser("SYSTEM");
             menuRepository.save(menu);
-        }
+        }*/
     }
 
 

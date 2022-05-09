@@ -1,1 +1,46 @@
-<p>common-dashboard works!</p>
+<!-- Page Content -->
+<div class="content container-fluid">
+  <div class="row">
+      <div class="col-md-12">
+          <div class="welcome-box">
+              <div class="welcome-img">
+                  <img alt="" src="assets/img/w_logo.png">
+              </div>
+              <div class="welcome-det">
+                  <h3>Welcome, {{user.username}}</h3>
+                  <p>{{myDate | date:'fullDate'}}</p>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="row">
+      <div class="col-lg-8 col-md-8">
+          <section class="dash-section">
+              <h1 class="dash-sec-title">Today</h1>
+              <div class="dash-sec-content">
+                  <div class="dash-info-list">
+                      <a  class="dash-card text-danger">
+                          <div class="dash-card-container">
+                              <div class="dash-card-icon">
+                                  <i class="fa fa-ticket"></i>
+                              </div>
+                              <div class="dash-card-content">
+                                  <p>Some tickets are rised</p>
+                              </div>
+                              <div class="dash-card-avatars">
+                                  <div class="e-avatar"><img src="assets/img/profiles/avatar-9.jpg" alt=""></div>
+                              </div>
+                          </div>
+                      </a>
+                  </div>
+              </div>
+          </section>
+
+
+      </div>
+
+  </div>
+
+</div>
+<!-- /Page Content -->

@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -22,6 +22,7 @@ export class Tire1ListComponent implements OnInit {
   public myForm: FormGroup;
   public myForm2: FormGroup;
   public myForm3: FormGroup;
+  public myFromGroup:FormGroup;
   public configPgn: any;
   public listData: any = [];
   public editId: any;
@@ -84,6 +85,14 @@ export class Tire1ListComponent implements OnInit {
     this._initSendToT2Form();
   }
   _initHoldForm() {
+
+
+         // set init params
+         this.myFromGroup = new FormGroup({
+          pageSize: new FormControl()
+        });
+        this.myFromGroup.get('pageSize').setValue(this.configPgn.pageSize);
+
 
     this.myForm = this.formBuilder.group({
       solutionType: ['', [Validators.required]],

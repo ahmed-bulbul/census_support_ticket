@@ -19,6 +19,9 @@ export class AdminDashboardComponent implements OnInit {
   public totalReceivedTickets = 0;
   public totalHoldTickets = 0;
   public totalResolvedTickets = 0;
+  public totalTerminatedTickets = 0;
+  public totalSendToTier2Tickets = 0;
+  public totakOpenTickets = 0;
 
 
   constructor(
@@ -38,6 +41,9 @@ export class AdminDashboardComponent implements OnInit {
       this.getTotalReceivedTicket();
       this.getTotalHoldTicket();
       this.getTotalResolvedTicket();
+      this.getTotalTerminatedTicketst();
+      this.getTotalSendToTier2Ticketst();
+      this.getTotalOpenTicketst();
 
     },2000);
   }
@@ -101,6 +107,53 @@ export class AdminDashboardComponent implements OnInit {
       }
     );
   }
+
+  //get total terminated ticket
+  getTotalTerminatedTicketst() {
+    const apiURL = this.baseUrl + '/dashboard/getTerminatedTickets';
+    let queryParams: any = {};
+
+    this.dashboardService.sendGetRequest(apiURL, queryParams).subscribe(
+      (response: any) => {
+        this.totalTerminatedTickets = response;
+      },
+      (error) => {
+        console.log(error)
+      }
+    );
+  }
+
+  //get total send to tier 2 ticket
+  getTotalSendToTier2Ticketst() {
+    const apiURL = this.baseUrl + '/dashboard/getSendToTier2Tickets';
+    let queryParams: any = {};
+
+    this.dashboardService.sendGetRequest(apiURL, queryParams).subscribe(
+      (response: any) => {
+        this.totalSendToTier2Tickets = response;
+      },
+      (error) => {
+        console.log(error)
+      }
+    );
+  }
+
+  //get Total Open Tickets
+  getTotalOpenTicketst() {
+    const apiURL = this.baseUrl + '/dashboard/getTotalOpenTickets';
+    let queryParams: any = {};
+
+    this.dashboardService.sendGetRequest(apiURL, queryParams).subscribe(
+      (response: any) => {
+        this.totakOpenTickets = response;
+      },
+      (error) => {
+        console.log(error)
+      }
+    );
+  }
+
+
 
   ngOnDestroy() {
     clearInterval(this.polling);

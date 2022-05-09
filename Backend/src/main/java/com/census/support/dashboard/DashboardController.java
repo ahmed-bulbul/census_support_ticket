@@ -54,6 +54,18 @@ public class DashboardController {
         return dashboardService.getTerminatedTickets();
     }
 
+    //get Send to tier 2 tickets
+    @GetMapping("/getSendToTier2Tickets")
+    public ResponseEntity<?> getSendToTier2Tickets() {
+        return dashboardService.getSendToTier2Tickets();
+    }
+
+    //get total Open tickets
+    @GetMapping("/getTotalOpenTickets")
+    public ResponseEntity<?> getTotalOpenTickets() {
+        return dashboardService.getTotalOpenTickets();
+    }
+
 
 
 }

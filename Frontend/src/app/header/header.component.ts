@@ -119,12 +119,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(["/pages/search"]);
   }
 
-
-
-
   //custom
   public logout() {
     this.login.logout();
+    this.router.navigate(["/login"]);
   }
 
 
