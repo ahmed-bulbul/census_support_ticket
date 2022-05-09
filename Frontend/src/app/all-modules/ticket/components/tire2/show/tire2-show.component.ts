@@ -34,7 +34,6 @@ export class Tire2ShowComponent implements OnInit {
   }
 
   _getFormData(){
-
     const id =  this.route.snapshot.params.id;
     const apiURL = this.baseUrl + '/ticket/tire2/get/' + id;
 
