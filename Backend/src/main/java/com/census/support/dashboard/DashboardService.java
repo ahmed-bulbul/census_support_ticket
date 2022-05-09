@@ -32,7 +32,17 @@ public class DashboardService {
     }
 
     public ResponseEntity<?> getTerminatedTickets() {
-        String sql = "SELECT COUNT(*) FROM ticket WHERE status = 'TERMINATED'";
+        String sql = "SELECT COUNT(*) FROM ticket WHERE status = 'TERMINATE' OR status = 'TERMINATE_T2'";
+        return ResponseEntity.ok(jdbcTemplate.queryForObject(sql, Integer.class));
+    }
+
+    public ResponseEntity<?> getSendToTier2Tickets() {
+        String sql = "SELECT COUNT(*) FROM ticket WHERE status = 'SEND_TO_T2'";
+        return ResponseEntity.ok(jdbcTemplate.queryForObject(sql, Integer.class));
+    }
+
+    public ResponseEntity<?> getTotalOpenTickets() {
+        String sql = "SELECT COUNT(*) FROM ticket WHERE status = 'OPEN'";
         return ResponseEntity.ok(jdbcTemplate.queryForObject(sql, Integer.class));
     }
 

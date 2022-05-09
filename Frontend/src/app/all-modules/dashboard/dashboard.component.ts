@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener, NgZone } from "@angular/core";
 import { Router, Event, NavigationEnd } from "@angular/router";
+import { LoginService } from "src/app/login/services/login.services";
 
 @Component({
   selector: "app-dashboard",
@@ -14,7 +15,8 @@ export class DashboardComponent implements OnInit {
     this.innerHeight = window.innerHeight + "px";
   }
 
-  constructor(private ngZone: NgZone, private router: Router) {
+  constructor(private ngZone: NgZone, private router: Router,private loginService: LoginService) {
+
     window.onresize = (e) => {
       this.ngZone.run(() => {
         this.innerHeight = window.innerHeight + "px";
@@ -24,7 +26,14 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.router.navigateByUrl("/dashboard/common");
+
+  
+    let authorities = this.loginService.getLoginUserRole();
+    if(authorities.includes("ROLE_SUPER_ADMIN")){
+      this.router.navigateByUrl("/dashboard/admin");
+    }else{
+      this.router.navigateByUrl("/dashboard/common");
+    }
   }
 
   onResize(event) {
