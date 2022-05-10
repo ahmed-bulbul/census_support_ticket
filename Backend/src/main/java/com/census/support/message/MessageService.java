@@ -2,7 +2,6 @@ package com.census.support.message;
 
 import com.census.support.helper.response.BaseResponse;
 import com.census.support.ticket.Ticket;
-import com.census.support.ticket.TicketDTO;
 import com.census.support.ticket.TicketRepository;
 import com.census.support.util.SetAttributeUpdate;
 import com.census.support.util.SmsServiceUtil;
@@ -33,11 +32,16 @@ public class MessageService {
             // Send request to the API servers over HTTPS
             SmsServiceUtil.doTrustToCertificates();
             String mobile = entity.getDeviceUserPhone();
-            String sms_body =message+" " + entity.getCode() + ".Check ticket status at 103.243.143.21/#/census/shared/status?code=" + entity.getCode();
+            String project = "BBS";
+            String creator = "System";
+            String sms_body =message+" " + entity.getCode() + ".Check ticket status at 103.243.143.21/census/#/shared/status?code=" + entity.getCode();
             String charset = "UTF-8";
-            String myUrl = String.format("https://wapi.waltonbd.com:444/SMSAPI/public/sms_api?project=BBS&creator=System&mobile="+mobile+"&sms_body=%s",
-                    URLEncoder.encode(sms_body, charset));
+            String myUrl = String.format("https://wapi.waltonbd.com:444/SMSAPI/public/sms_api?project=BBS&creator=System&mobile=%s&sms_body=%s",
+                    URLEncoder.encode(project, charset), URLEncoder.encode(creator, charset), URLEncoder.encode(mobile, charset), URLEncoder.encode(sms_body, charset));
+
+
             String results = SmsServiceUtil.doHttpUrlConnectionAction(myUrl);
+            System.out.println(results);
             JSONObject jsonObj = new JSONObject(results);
             String status = jsonObj.getString("message");
             if (status.equals("SUCCESS")) {
