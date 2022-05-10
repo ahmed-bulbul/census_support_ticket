@@ -31,6 +31,7 @@ export class Tire1ListComponent implements OnInit {
   public holdId:any;
   public terminateId:any;
   public sendToT2Id: any;
+  public tabletSerialNo:any;
   // Action auth for user
   public authObj: any = {
     create: false,
@@ -226,6 +227,9 @@ export class Tire1ListComponent implements OnInit {
 
   searchByCode(val) {
     this.code = val;
+  }
+  searchByTabletSerialNo(val) {
+    this.tabletSerialNo = val;
   }
   searchBySearchButton() {
     this._getListData();
@@ -430,6 +434,10 @@ export class Tire1ListComponent implements OnInit {
     if (this.receivedFromT1) {
       params['receivedFromT1'] = this.receivedFromT1;
     }
+    if (this.tabletSerialNo) {
+      params['tabletSerialNo'] = this.tabletSerialNo;
+    }
+
 
 
     return params;

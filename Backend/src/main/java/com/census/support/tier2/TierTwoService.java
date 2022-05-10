@@ -39,23 +39,36 @@ public class TierTwoService {
         Page<Ticket> entities = ticketRepository.findAll((Specification<Ticket>) (root, cq, cb) -> {
 
             Predicate p = cb.conjunction();
-
-            if (clientParams.containsKey("status")) {
-                if (StringUtils.hasLength(clientParams.get("status"))) {
-                    p = cb.and(p, cb.equal(root.get("status"), clientParams.get("status")));
+            if (!clientParams.isEmpty()) {
+                if (clientParams.containsKey("code")) {
+                    if (StringUtils.hasLength(clientParams.get("code"))) {
+                        p = cb.and(p, cb.equal(root.get("code"), clientParams.get("code")));
+                    }
                 }
-            }
-            // p=cb.or(p,cb.equal(root.get("status"),SysMessage.RECEIVED_T2_STS));
 
-            if (clientParams.containsKey("tier2ReceiveBy")) {
-                if (StringUtils.hasLength(clientParams.get("tier2ReceiveBy"))) {
-                    p = cb.or(p, cb.equal(root.get("tier2ReceiveBy"), clientParams.get("tier2ReceiveBy")));
-
+                if (clientParams.containsKey("status")) {
+                    if (StringUtils.hasLength(clientParams.get("status"))) {
+                        p = cb.and(p, cb.equal(root.get("status"), clientParams.get("status")));
+                    }
                 }
-            }
-            p = cb.and(p, cb.notEqual(root.get("status"), SysMessage.RESOLVED_T2_STS));
-            p = cb.and(p, cb.notEqual(root.get("status"), SysMessage.TERMINATE_T2_STS));
+                // p=cb.or(p,cb.equal(root.get("status"),SysMessage.RECEIVED_T2_STS));
 
+                if (clientParams.containsKey("tier2ReceiveBy")) {
+                    if (StringUtils.hasLength(clientParams.get("tier2ReceiveBy"))) {
+                        p = cb.or(p, cb.equal(root.get("tier2ReceiveBy"), clientParams.get("tier2ReceiveBy")));
+
+                    }
+                }
+                if (clientParams.containsKey("tabletSerialNo")) {
+                    if (StringUtils.hasLength(clientParams.get("tabletSerialNo"))) {
+                        // like '%' + statusSequence + '%'
+                        p = cb.and(p, cb.like(root.get("tabletSerialNo"), "%" + clientParams.get("tabletSerialNo") + "%"));
+                    }
+                }
+                p = cb.and(p, cb.notEqual(root.get("status"), SysMessage.RESOLVED_T2_STS));
+                p = cb.and(p, cb.notEqual(root.get("status"), SysMessage.TERMINATE_T2_STS));
+
+            }
             return p;
         }, pageable);
 
