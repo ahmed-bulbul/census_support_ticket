@@ -34,6 +34,13 @@
           </div>
         </div>
 
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-2 col-12">
+          <div class="form-group form-focus">
+            <input type="text" class="form-control floating" (input)="searchByTabletSerialNo($event.target.value)">
+            <label class="focus-label">Tab Serial No</label>
+          </div>
+        </div>
+
         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">
           <a class="btn btn-success btn-block" (click)="searchBySearchButton()"> Search  </a>
         </div>
@@ -75,6 +82,7 @@
                   <th>SL</th>
                   <th class="d-none">TB_ROW_ID</th>
                   <th>Code</th>
+                  <th>Tablet Serial No</th>
                   <th>Problem Type </th>
                   <th>Status</th>
                   <th>Action</th>
@@ -87,6 +95,7 @@
                   <td>{{ ( ((configPgn.pageNum-1) * configPgn.pageSize) + (i+1) ) }}</td>
                   <td class="d-none">{{thisObj.id}}</td>
                   <td>{{thisObj.code}}</td>
+                  <td>{{thisObj.tabletSerialNo}}</td>
                   <td >{{thisObj.problemType}}</td>
                   <td >
                     <!-- <span style="color: rgb(170, 155, 72);" *ngIf="thisObj.status=='HOLD'" class="">{{thisObj.status}} <small>{{getDiffTime(currentTime,thisObj.holdTime)}} </small></span> -->

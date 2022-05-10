@@ -29,6 +29,7 @@ export class Tire2ListComponent implements OnInit {
   public holdId:any;
   public terminateId:any;
   public sendToT2Id: any;
+  public tabletSerialNo:any;
   // Action auth for user
   public authObj: any = {
     create: false,
@@ -273,6 +274,9 @@ export class Tire2ListComponent implements OnInit {
   searchByCode(val) {
     this.code = val;
   }
+  searchByTabletSerialNo(val) {
+    this.tabletSerialNo = val;
+  }
   searchBySearchButton() {
     this.getListData();
   }
@@ -308,6 +312,9 @@ export class Tire2ListComponent implements OnInit {
     }
     if (this.tier2ReceiveBy) {
       params['tier2ReceiveBy'] = this.tier2ReceiveBy;
+    }
+    if (this.tabletSerialNo) {
+      params['tabletSerialNo'] = this.tabletSerialNo;
     }
 
 

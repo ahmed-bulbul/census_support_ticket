@@ -71,6 +71,12 @@ public class TireOneService {
 
                     }
                 }
+                if (clientParams.containsKey("tabletSerialNo")) {
+                    if (StringUtils.hasLength(clientParams.get("tabletSerialNo"))) {
+                        // like '%' + statusSequence + '%'
+                        p = cb.and(p, cb.like(root.get("tabletSerialNo"), "%" + clientParams.get("tabletSerialNo") + "%"));
+                    }
+                }
 
                 p = cb.and(p, cb.notEqual(root.get("status"), SysMessage.RESOLVED_STS));
                 p=cb.and(p,cb.notEqual(root.get("status"),SysMessage.TERMINATE_STS));
