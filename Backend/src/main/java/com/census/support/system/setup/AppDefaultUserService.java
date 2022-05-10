@@ -150,6 +150,43 @@ public class AppDefaultUserService {
             user.setCreationUser("SYSTEM");
             this.userRepository.save(user);
         }
+
+
+    }
+
+    //generate Multi-User
+    private void generateMultiUser(String roleName, int numberOfUser,String usernamePrefix, int startNumber){
+
+        if(!userRepository.findByUsername(usernamePrefix+startNumber).isPresent()){
+
+            Role role = roleRepository.getRoleByAuthority(roleName);
+            if (role == null) {
+                throw new RuntimeException("Role is not found. Please add role first.");
+            }
+            // loop to generate user
+            for (int i = startNumber; i <=numberOfUser; i++) {
+                Set<Role> roles = new HashSet<>();
+                User user = new User();
+                roles.add(role);
+                user.setRoles(roles);
+                user.setUsername(usernamePrefix + startNumber);
+                user.setPassword(bCryptPasswordEncoder.encode(usernamePrefix + startNumber));
+                user.setCreationDateTime(new Date());
+                user.setCreationUser("SYSTEM");
+                this.userRepository.save(user);
+                startNumber++;
+            }
+
+            System.out.println("Generate " + numberOfUser + " user with role " + roleName + " successfully.");
+
+        }else{
+            System.out.println("User with username " + usernamePrefix + startNumber + " already exists.");
+        }
+
+
+
+
+
     }
 
     public void CreateTicketCodeCounter(){
@@ -280,6 +317,8 @@ public class AppDefaultUserService {
         this.createUser();
        // this.createMenu();
         this.CreateTicketCodeCounter();
+        // generate multiple users
+        //this.generateMultiUser("ROLE_BBS_USER",40,"noc-user",1);
     }
 
 
