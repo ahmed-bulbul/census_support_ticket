@@ -34,8 +34,8 @@ public class MessageService {
             String mobile = entity.getDeviceUserPhone();
             String project = "BBS";
             String creator = "System";
-            String checkUrl = "http://103.243.143.21:8080/census/#/shared/status?code="+entity.getCode()+" ";
-            String sms_body =message + " " + checkUrl +" ";
+            String checkUrl ="http://paipaipos.waltonbd.com:8080/census/#/shared/status?code="+entity.getCode()+" ";
+            String sms_body =message+entity.getCode();
             String charset = "UTF-8";
             System.out.println("Sending SMS to: " + mobile);
             String myUrl = String.format("https://wapi.waltonbd.com:444/SMSAPI/public/sms_api?project=%s&creator=%s&mobile=%s&sms_body=%s",
