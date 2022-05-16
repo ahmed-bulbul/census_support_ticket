@@ -7,6 +7,14 @@ insert  into `system_menu`(`id`,`admin_access_only`,`chk_authorization`,`chk_aut
 (5,NULL,NULL,NULL,'TIRE1','2022-04-19 13:39:43.830000','bbs-user',NULL,'Tire 1',NULL,NULL,'','','',NULL,NULL,NULL,'',NULL,NULL,'/ticket/tire1/list',NULL,3,NULL,NULL,'',3),
 (6,NULL,NULL,NULL,'TIRE2','2022-04-19 14:17:19.506000','super-admin',NULL,'Tire 2',NULL,NULL,'','','',NULL,NULL,NULL,'',NULL,NULL,'/ticket/tire2/list',NULL,4,NULL,NULL,'',3);
 
+======================Batch Executor Helper Query==========================
+SELECT COUNT(*) FROM tablet_info;
+
+delete from tablet_info;
+
+select * from tablet_info where imei1 = '353612752527411';
+
+select max(id) from tablet_info;
 
 
 ================Deployment Server Information===========================

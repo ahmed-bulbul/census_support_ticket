@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6c7182c4-d264-406e-a933-ca78416773f5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/census/support/message/MessageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/census/support/message/MessageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/app/shared/status/status.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/shared/status/status.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/app/shared/status/status.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/shared/status/status.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/census/support/system/setup/AppDefaultUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/census/support/system/setup/AppDefaultUserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,6 +116,7 @@
       <workItem from="1650258958004" duration="10857000" />
       <workItem from="1650338011061" duration="3112000" />
       <workItem from="1650770162642" duration="48000" />
+      <workItem from="1652259714658" duration="24000" />
     </task>
     <servers />
   </component>

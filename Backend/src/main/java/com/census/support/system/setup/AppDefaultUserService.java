@@ -183,10 +183,6 @@ public class AppDefaultUserService {
             System.out.println("User with username " + usernamePrefix + startNumber + " already exists.");
         }
 
-
-
-
-
     }
 
     public void CreateTicketCodeCounter(){
@@ -315,7 +311,7 @@ public class AppDefaultUserService {
     public void createDefaultUserAndRoles(){
         this.createRoles();
         this.createUser();
-       // this.createMenu();
+        //this.createMenu();
         this.CreateTicketCodeCounter();
         // generate multiple users
         //this.generateMultiUser("ROLE_BBS_USER",40,"noc-user",1);

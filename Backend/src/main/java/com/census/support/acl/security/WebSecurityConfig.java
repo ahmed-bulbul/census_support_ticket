@@ -72,7 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/ticket/bbs/**").hasAnyAuthority("ROLE_BBS_USER","ROLE_SUPER_ADMIN")
                 .antMatchers("/ticket/tire1/**").hasAnyAuthority("ROLE_TIRE1_USER","ROLE_SUPER_ADMIN")
                 .antMatchers("/ticket/tire2/**").hasAnyAuthority("ROLE_TIRE2_USER","ROLE_SUPER_ADMIN")
-                .antMatchers("/acl/user/**").hasAnyAuthority("ROLE_SUPER_ADMIN")
+                .antMatchers("/acl/user/**","/jobs/**").hasAnyAuthority("ROLE_SUPER_ADMIN")
                 .anyRequest()
                 .authenticated();
 
