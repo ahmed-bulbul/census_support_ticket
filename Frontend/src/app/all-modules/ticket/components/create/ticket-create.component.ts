@@ -131,10 +131,15 @@ export class TicketCreateComponent implements OnInit {
       this.simNo = val;
       this.barCode='';
     }
+
+
+
   }
   searchByBarCodeNo(val){
-    this.barCode = val;
-    this.simNo='';
+    if(val>0){
+      this.barCode = val;
+      this.simNo='';
+    }
   }
 
   search(){
@@ -144,7 +149,6 @@ export class TicketCreateComponent implements OnInit {
     if(this.barCode.length>0){
       this._searchBySimNoOrBarCode("barCode");
     }
-
   }
 
   _searchBySimNoOrBarCode(type){
@@ -183,6 +187,10 @@ export class TicketCreateComponent implements OnInit {
         }else if(response.status === false){
           this.spinnerService.hide().then(r => console.log('spinner stopped'));
           //reset form
+          $('#devicePhone').attr('readonly', false);
+          $('#imeiNo2').attr('readonly', false);
+          $('#imeiNo').attr('readonly', false);
+          $('#tabletSerialNo').attr('readonly', false);
           this.myForm.reset();
           this.toastr.info(response.message, 'Info');
         }

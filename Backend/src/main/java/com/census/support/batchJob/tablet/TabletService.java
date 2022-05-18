@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class TabletService {
@@ -23,7 +25,9 @@ public class TabletService {
 
     public ResponseEntity<?> searchTabletByBarCode(String barCode) {
         try {
-            System.out.println("barCode: " + barCode);
+            if(barCode.length() < 8 ){
+                return new ResponseEntity<>(new BaseResponse(false, "Enter at least 8 digits/characters ", HttpStatus.NOT_FOUND.value()), HttpStatus.OK);
+            }
             Tablet tablet = tabletRepository.getByBarCode(barCode);
             if (tablet == null) {
                 return new ResponseEntity<>(new BaseResponse(false, "Tablet not found", HttpStatus.NOT_FOUND.value()), HttpStatus.OK);

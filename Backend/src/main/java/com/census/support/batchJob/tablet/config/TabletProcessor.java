@@ -16,15 +16,15 @@ public class TabletProcessor implements ItemProcessor<Tablet,Tablet> {
         Date date1 = sdf.parse("2022-05-15 00:00:00");
 
         //applying condition to filter the data
-        if(item.getDeliveryDate().after(date1)){
-            System.out.println("Item is processed: " + item);
-            return item;
-        }else {
-            System.out.println("Item is skipped: " + item);
-            return null;
-        }
+//        if(item.getDeliveryDate().after(date1)){
+//            System.out.println("Item is processed: " + item);
+//            return item;
+//        }else {
+//            System.out.println("Item is skipped: " + item);
+//            return null;
+//        }
 
-       // return item;
+        return item;
 
     }
 }
