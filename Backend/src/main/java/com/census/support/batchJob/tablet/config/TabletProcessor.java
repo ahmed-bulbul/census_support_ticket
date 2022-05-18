@@ -17,8 +17,10 @@ public class TabletProcessor implements ItemProcessor<Tablet,Tablet> {
 
         //applying condition to filter the data
         if(item.getDeliveryDate().after(date1)){
+            System.out.println("Item is processed: " + item);
             return item;
         }else {
+            System.out.println("Item is skipped: " + item);
             return null;
         }
 
