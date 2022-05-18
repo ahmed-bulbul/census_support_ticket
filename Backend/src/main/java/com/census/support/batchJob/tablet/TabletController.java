@@ -9,20 +9,22 @@ import org.springframework.batch.core.repository.JobExecutionAlreadyRunningExcep
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/jobs")
-public class JobController {
+@CrossOrigin("*")
+public class TabletController {
 
     @Autowired
     private JobLauncher jobLauncher;
     @Autowired
     private Job job;
 
-    @PostMapping("/importTablets")
+    @Autowired
+    private TabletService tabletService;
+
+    @PostMapping("/job/importTablets")
     public void importCsvToDBJob() {
         JobParameters jobParameters = new JobParametersBuilder()
                 .addLong("startAt", System.currentTimeMillis()).toJobParameters();
@@ -31,5 +33,17 @@ public class JobController {
         } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException | JobParametersInvalidException e) {
             e.printStackTrace();
         }
+    }
+
+    // search by simNo or barCode
+    @GetMapping("/searchTabletBySimNo")
+    public ResponseEntity<?> searchTabletBySimNo(@RequestParam String simNo) {
+       return tabletService.searchTabletBySimNo(simNo);
+    }
+
+    //search Tablet by barCode
+    @GetMapping("/searchTabletByBarCode")
+    public ResponseEntity<?> searchTabletByBarCode(@RequestParam String barCode) {
+        return tabletService.searchTabletByBarCode(barCode);
     }
 }

@@ -1,4 +1,4 @@
-package com.census.support.batchJob.config;
+package com.census.support.batchJob.tablet.config;
 
 
 import com.census.support.batchJob.tablet.Tablet;

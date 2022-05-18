@@ -44,6 +44,7 @@ public class TicketLog implements Serializable {
     private String holdBy;
     private String holdDuration;
     private String imeiNo;
+    private String imeiNo2;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date terminateTime;
@@ -94,6 +95,8 @@ public class TicketLog implements Serializable {
         this.deviceUserPhone = entity.getDeviceUserPhone();
         this.deviceUserId = entity.getDeviceUserId();
         this.devicePhone = entity.getDevicePhone();
+        this.imeiNo = entity.getImeiNo();
+        this.imeiNo2 = entity.getImeiNo2();
         this.tabletSerialNo = entity.getTabletSerialNo();
         this.problemCategory = entity.getProblemCategory();
         this.problemType = entity.getProblemType();
