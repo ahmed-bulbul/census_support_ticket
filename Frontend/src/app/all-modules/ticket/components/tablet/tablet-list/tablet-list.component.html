@@ -6,7 +6,7 @@
   <div class="page-header">
     <div class="row align-items-center">
       <div class="col">
-        <h3 class="page-title">Ticket </h3>
+        <h3 class="page-title">Tablet Info </h3>
         <ul class="breadcrumb">
         </ul>
       </div>
@@ -30,35 +30,14 @@
         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-2 col-12">
           <div class="form-group form-focus">
             <input type="text" class="form-control floating" (input)="searchByCode($event.target.value)">
-            <label class="focus-label">Code</label>
+            <label class="focus-label">Barcode</label>
           </div>
         </div>
-        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-2 col-12">
-          <div class="form-group form-focus">
-            <input type="text" class="form-control floating" (input)="searchByTabSerialNo($event.target.value)">
-            <label class="focus-label">Tab Serial No</label>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-2 col-12">
-          <div class="form-group form-focus select-focus">
-            <!-- Option dropdown -->
-            <select class="select form-control" (input)="searchByStatus($event.target.value)">
-              <option value="">All Status</option>
-              <option value="OPEN">Open</option>
-              <option value="RECEIVED">Received</option>
-              <option value="HOLD">Hold</option>
-              <option value="SOLVED">Solved</option>
-              <option value="TERMINATE">Terminate</option>
-              <option value="SOLVED_T2">Solved T2</option>
 
-
-              </select>
-          </div>
-        </div>
 
 
         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">
-          <a class="btn btn-success btn-block" (click)="searchBySearchButton()"> Search  </a>
+          <a class="btn btn-success btn-block" (click)="btnSearch()"> Search  </a>
         </div>
         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">
           <!-- <a class="btn btn-success btn-block" (click)="clearFilter()" >Refresh  <span><i class="fa fa-refresh" aria-hidden="true"></i></span></a> -->
@@ -75,12 +54,7 @@
 
       <div class="card">
 
-        <div class="card-header">
-          <div class="card-tools">
-            <a routerLink="/ticket/bbs/create" class="btn btn-outline-primary"><i class="fa fa-plus"></i> New
-              &nbsp;&nbsp;&nbsp;</a>
-          </div>
-        </div>
+
 
         <div class="card-body">
 
@@ -98,13 +72,11 @@
                 <tr>
                   <th>SL</th>
                   <th class="d-none">TB_ROW_ID</th>
-                  <th>Code</th>
-                  <th>Tab Serial No </th>
-                  <th>User Phone</th>
-                  <th>Problem Type </th>
-                  <th>Status</th>
-                  <th>Created By </th>
-                  <th>Action</th>
+                  <th>Bar Code</th>
+                  <th>IMEI1 </th>
+                  <th>IMEI2</th>
+                  <th>Sim No</th>
+                  <th>Delivery Date</th>
                 </tr>
               </thead>
               <tbody>
@@ -113,27 +85,15 @@
 
                   <td>{{ ( ((configPgn.pageNum-1) * configPgn.pageSize) + (i+1) ) }}</td>
                   <td class="d-none">{{thisObj.id}}</td>
-                  <td>{{thisObj.code}}</td>
-                  <td  [ngClass]="{'highlight': highlight==true}">{{thisObj.tabletSerialNo}}</td>
-                  <td>{{thisObj.deviceUserPhone}}</td>
-                  <td>{{thisObj.problemType}}</td>
+                  <td>{{thisObj.barCode}}</td>
+                  <td>{{thisObj.imei1}}</td>
+                  <td>{{thisObj.imei2}}</td>
                   <td>
-                    <span class="badge badge-success ml-auto">{{thisObj.status}}</span>
+                    {{thisObj.simNo}}
                   </td>
-                  <td>{{thisObj.creationUser}}</td>
+                  <td>{{thisObj.deliveryDate | date}}</td>
 
-                  <td>
-                    <a  class="btn btn-sm btn-primary" routerLink="/ticket/bbs/show/{{thisObj.id}}"><i
-                        class="fa fa-eye m-r-5"></i>View</a> &nbsp;
-                    <a *ngIf="thisObj.status=='OPEN'" class="btn btn-sm btn-info" routerLink="/ticket/bbs/edit/{{thisObj.id}}"><i
-                        class="fa fa-pencil m-r-5"></i></a>&nbsp;&nbsp;
-                    <a  *ngIf="thisObj.status=='OPEN'" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_entity"
-                      (click)="tempId = thisObj.id">
-                      <i class="fa fa-trash-o m-r-5"></i>
-                    </a> &nbsp;
-                    <a  class="btn btn-sm btn-secondary" routerLink="/shared/status" [queryParams]="{code: thisObj.code}"><i
-                      class="fa fa-history m-r-5"></i>Log</a>
-                  </td>
+
                 </tr>
 
                 <tr *ngIf="listData.length === 0">
@@ -177,7 +137,7 @@
 
 
 <!-- Delete Modal -->
-<div class="modal custom-modal fade" id="delete_entity" role="dialog">
+<!-- <div class="modal custom-modal fade" id="delete_entity" role="dialog">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-body">
@@ -198,7 +158,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <!-- /Delete Modal -->
 
 

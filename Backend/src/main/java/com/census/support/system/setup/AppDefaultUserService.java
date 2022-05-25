@@ -183,10 +183,6 @@ public class AppDefaultUserService {
             System.out.println("User with username " + usernamePrefix + startNumber + " already exists.");
         }
 
-
-
-
-
     }
 
     public void CreateTicketCodeCounter(){
@@ -202,7 +198,7 @@ public class AppDefaultUserService {
             systemCounter.setPrefix("T");
             systemCounter.setPrefixSeparator("-");
             systemCounter.setStep(1);
-            systemCounter.setCounterWidth(9);
+            systemCounter.setCounterWidth(7);
             counterRepository.save(systemCounter);
         }
     }
@@ -315,7 +311,7 @@ public class AppDefaultUserService {
     public void createDefaultUserAndRoles(){
         this.createRoles();
         this.createUser();
-       // this.createMenu();
+        //this.createMenu();
         this.CreateTicketCodeCounter();
         // generate multiple users
         //this.generateMultiUser("ROLE_BBS_USER",40,"noc-user",1);

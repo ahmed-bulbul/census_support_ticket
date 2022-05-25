@@ -30,145 +30,188 @@
         <div class="card-body">
           <form novalidate (ngSubmit)="myFormSubmit()" [formGroup]="myForm">
 
-
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>User Phone</label>
-                  <input type="text" class="form-control" formControlName="deviceUserPhone" placeholder="017********">
-                  <span style="font-size: 12px;" class="text-danger"
-                    *ngIf="f.deviceUserPhone && f.deviceUserPhone.invalid && f.deviceUserPhone.touched">User Phone not valid [e.g 017********] </span>
-                </div>
-
-                <div class="form-group">
-                  <label>Tab IMEI No</label>
-                  <input type="text" class="form-control" formControlName="imeiNo">
-                  <span style="font-size: 12px;" class="text-danger"
-                    *ngIf="f.imeiNo && f.imeiNo.invalid && f.imeiNo.touched">IMEI not valid</span>
-                </div>
-
-                <div class="form-group">
-                  <label>Device User Id</label>
-                  <input type="text" class="form-control" formControlName="deviceUserId">
-                  <span style="font-size: 12px;" class="text-danger"
-                    *ngIf="f.deviceUserId && f.deviceUserId.invalid && f.deviceUserId.touched">Device User Id not valid</span>
-                </div>
-
-                <div class="form-group" >
-                  <label>Problem Category</label>
-                  <select class="select form-control" formControlName="problemCategory">
-                    <option value="">-Select Category-</option>
-                    <option value="ADMINSTRITIVE"> Administritive </option>
-                    <option value="TECHNICAL"> Technical </option>
-
-                  </select>
-                </div>
-
-
-
-              </div>
-              <div class="col-md-6">
-
-                <div class="form-group">
-                  <label> Device Phone</label>
-                  <input type="tel" class="form-control" formControlName="devicePhone" placeholder="017********">
-                  <span style="font-size: 12px;" class="text-danger"
-                    *ngIf="f.devicePhone && f.devicePhone.invalid && f.devicePhone.touched">Device Phone not valid [e.g 017********]</span>
-                </div>
-
-                <div class="form-group">
-                  <label>Tab Serial No</label>
-                  <input type="text" class="form-control" formControlName="tabletSerialNo">
-                  <span style="font-size: 12px;" class="text-danger"
-                    *ngIf="f.tabletSerialNo && f.tabletSerialNo.invalid && f.tabletSerialNo.touched">Tablet Serial No required</span>
-                </div>
-
-                <div class="form-group" >
-                  <label>Problem Type</label>
-                  <select class="select form-control" formControlName="problemType">
-                    <option value="">-Select Type-</option>
-                    <option value="Auto Off/Screen Out"> Auto Off/Screen Out </option>
-                    <option value="Auto Restart"> Auto Restart </option>
-
-                    <option value="Bluetooth"> Bluetooth </option>
-                    <option value="Button/ Key"> Button/ Key </option>
-                    <option value="Call Drop"> Call Drop </option>
-                    <option value="Camera"> Camera </option>
-                    <option value="Charger Missing/ Damage"> Charger Missing/ Damage </option>
-                    <option value="Charging"> Charging </option>
-                    <option value="Color/Brightness"> Color/Brightness </option>
-                    <option value="Display Dot Pixel"> Display Dot Pixel </option>
-                    <option value="Display Fading"> Display Fading </option>
-                    <option value="Display Fluctuation/ Flickering"> Display Fluctuation/ Flickering </option>
-                    <option value="Display H/V Line"> Display H/V Line </option>
-                    <option value="Earpiece Sound"> Earpiece Sound </option>
-                    <option value="Hang/ Slow"> Hang/ Slow </option>
-                    <option value="Headphone Jack/ Port"> Headphone Jack/ Port </option>
-                    <option value="Key Auto Work"> Key Auto Work </option>
-
-
-
-                    <option value="Key Not Work"> Key Not Work </option>
-                    <option value="Liquid damage"> Liquid damage </option>
-                    <option value="Memory Slot"> Memory Slot </option>
-                    <option value="Mic Sound"> Mic Sound </option>
-                    <option value="No Backup"> No Backup </option>
-                    <option value="No Display"> No Display </option>
-                    <option value="No Power"> No Power </option>
-                    <option value="No Problem Found (NTF)"> No Problem Found (NTF) </option>
-
-                    <option value="Noise"> Noise </option>
-                    <option value="Over Heat"> Over Heat </option>
-                    <option value="Physical Damage/ Broken/ Button Gose In"> Physical Damage/ Broken/ Button Gose In </option>
-                    <option value="Ringer/Speaker Sound"> Ringer/Speaker Sound </option>
-                    <option value="Sensor"> Sensor </option>
-                    <option value="SIM Slot"> SIM Slot </option>
-                    <option value="Software"> Software </option>
-                    <option value="Touch Screen"> Touch Screen </option>
-
-                    <option value="USB Port"> USB Port </option>
-                    <option value="Vibration"> Vibration </option>
-                    <option value="Wi-Fi/ Network"> Wi-Fi/ Network </option>
-                    <option value="Ringer/Speaker Sound"> Ringer/Speaker Sound </option>
-                    <option value="Sensor"> Sensor </option>
-                    <option value="SIM Slot"> SIM Slot </option>
-                    <option value="MAC Address"> MAC Address </option>
-                    <option value="Body Scratch"> Body Scratch </option>
-                    <option value="Others"> Others </option>
-
-
-                  </select>
-                </div>
-
-
-
-                <div class="form-group" >
-                  <label>Problem Description</label>
-                  <!-- input type text area -->
-                  <textarea class="form-control" rows="5" formControlName="problemDescription"></textarea>
-                </div>
-
-
-              </div>
-
-            </div>
-
             <div class="row">
 
-            </div>
-            <br> <br>
-            <div class="text-right">
-              <a class="btn btn-warning btn-ripple" routerLink="/system/menu/list"><i class="fa fa-share"></i>
-                Cancel</a>
-              &nbsp; &nbsp;
-              <button type="button" class="btn btn-secondary btn-ripple" (click)="resetFormValues()">
-                <i class="fa fa-undo" aria-hidden="true"></i> Reset
-              </button>
-              &nbsp; &nbsp;
-              <button type="submit" class="btn btn-primary btn-ripple" [disabled]="!myForm.valid">
-                <i class="fa fa-check" aria-hidden="true"></i> Save &nbsp;&nbsp;&nbsp;
-              </button>
-            </div>
+              <div class="col-md-5">
+                <!-- select search type  -->
+                <div class="form-group form-focus">
+                  <select class="form-control floating"
+                    (change)="onChangeTicketType($event.target.value)">
+                    <option value="BARCODE">Search By Serial No</option>
+                    <option value="SIMNO">Search By Sim No</option>
+
+                  </select>
+
+                </div>
+                </div>
+
+                <div class="col-md-4" *ngIf="searchBySimNo">
+                  <div class="form-group form-focus">
+                    <input type="text" class="form-control floating" (input)="searchBySimNoOrSnNo($event.target.value)">
+                    <label class="focus-label">Search By Sim No. e.g 017*****</label>
+                  </div>
+                </div>
+
+                <div class="col-md-4" *ngIf="searchByBarCode">
+                  <div class="form-group form-focus">
+                    <input type="text" class="form-control floating" (input)="searchByBarCodeNo($event.target.value)">
+                    <label class="focus-label">Search By Serial No </label>
+                  </div>
+                </div>
+
+
+                <!-- search Button -->
+                <div class="col-md-2">
+                  <a class="btn btn-success btn-block" (click)="search()"> Search </a>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>User Phone</label>
+                    <input type="text" class="form-control" formControlName="deviceUserPhone" placeholder="017********">
+                    <span style="font-size: 12px;" class="text-danger"
+                      *ngIf="f.deviceUserPhone && f.deviceUserPhone.invalid && f.deviceUserPhone.touched">User Phone not
+                      valid [e.g 017********] </span>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Tab IMEI No 1</label>
+                    <input type="text" class="form-control" formControlName="imeiNo" id="imeiNo">
+                    <span style="font-size: 12px;" class="text-danger"
+                      *ngIf="f.imeiNo && f.imeiNo.invalid && f.imeiNo.touched">IMEI not valid</span>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Tab IMEI No 2</label>
+                    <input type="text" class="form-control" formControlName="imeiNo2" id="imeiNo2">
+                    <span style="font-size: 12px;" class="text-danger"
+                      *ngIf="f.imeiNo2 && f.imeiNo2.invalid && f.imeiNo2.touched">IMEI 2 not valid</span>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Problem Category</label>
+                    <select class="select form-control" formControlName="problemCategory">
+                      <option value="">-Select Category-</option>
+                      <option value="ADMINSTRITIVE"> Administritive </option>
+                      <option value="TECHNICAL"> Technical </option>
+
+                    </select>
+                  </div>
+
+
+
+                </div>
+                <div class="col-md-6">
+
+                  <div class="form-group">
+                    <label> Device Phone</label>
+                    <input type="tel" class="form-control" id="devicePhone" formControlName="devicePhone" placeholder="017********">
+                    <span style="font-size: 12px;" class="text-danger"
+                      *ngIf="f.devicePhone && f.devicePhone.invalid && f.devicePhone.touched">Device Phone not valid
+                      [e.g 017********]</span>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Tab Serial No</label>
+                    <input type="text" class="form-control" id="tabletSerialNo" formControlName="tabletSerialNo">
+                    <span style="font-size: 12px;" class="text-danger"
+                      *ngIf="f.tabletSerialNo && f.tabletSerialNo.invalid && f.tabletSerialNo.touched">Tablet Serial No
+                      required</span>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Problem Type</label>
+                    <select class="select form-control" formControlName="problemType">
+                      <option value="">-Select Type-</option>
+                      <option value="Auto Off/Screen Out"> Auto Off/Screen Out </option>
+                      <option value="Auto Restart"> Auto Restart </option>
+
+                      <option value="Bluetooth"> Bluetooth </option>
+                      <option value="Button/ Key"> Button/ Key </option>
+                      <option value="Call Drop"> Call Drop </option>
+                      <option value="Camera"> Camera </option>
+                      <option value="Charger Missing/ Damage"> Charger Missing/ Damage </option>
+                      <option value="Charging"> Charging </option>
+                      <option value="Color/Brightness"> Color/Brightness </option>
+                      <option value="Display Dot Pixel"> Display Dot Pixel </option>
+                      <option value="Display Fading"> Display Fading </option>
+                      <option value="Display Fluctuation/ Flickering"> Display Fluctuation/ Flickering </option>
+                      <option value="Display H/V Line"> Display H/V Line </option>
+                      <option value="Earpiece Sound"> Earpiece Sound </option>
+                      <option value="Hang/ Slow"> Hang/ Slow </option>
+                      <option value="Headphone Jack/ Port"> Headphone Jack/ Port </option>
+                      <option value="Key Auto Work"> Key Auto Work </option>
+
+
+
+                      <option value="Key Not Work"> Key Not Work </option>
+                      <option value="Liquid damage"> Liquid damage </option>
+                      <option value="Memory Slot"> Memory Slot </option>
+                      <option value="Mic Sound"> Mic Sound </option>
+                      <option value="No Backup"> No Backup </option>
+                      <option value="No Display"> No Display </option>
+                      <option value="No Power"> No Power </option>
+                      <option value="No Problem Found (NTF)"> No Problem Found (NTF) </option>
+
+                      <option value="Noise"> Noise </option>
+                      <option value="Over Heat"> Over Heat </option>
+                      <option value="Physical Damage/ Broken/ Button Gose In"> Physical Damage/ Broken/ Button Gose In
+                      </option>
+                      <option value="Ringer/Speaker Sound"> Ringer/Speaker Sound </option>
+                      <option value="Sensor"> Sensor </option>
+                      <option value="SIM Slot"> SIM Slot </option>
+                      <option value="Software"> Software </option>
+                      <option value="Touch Screen"> Touch Screen </option>
+
+                      <option value="USB Port"> USB Port </option>
+                      <option value="Vibration"> Vibration </option>
+                      <option value="Wi-Fi/ Network"> Wi-Fi/ Network </option>
+                      <option value="Ringer/Speaker Sound"> Ringer/Speaker Sound </option>
+                      <option value="Sensor"> Sensor </option>
+                      <option value="SIM Slot"> SIM Slot </option>
+                      <option value="MAC Address"> MAC Address </option>
+                      <option value="Body Scratch"> Body Scratch </option>
+                      <option value="Others"> Others </option>
+
+
+                    </select>
+                  </div>
+
+
+
+                  <div class="form-group">
+                    <label>Problem Description</label>
+                    <!-- input type text area -->
+                    <textarea class="form-control" rows="5" formControlName="problemDescription"></textarea>
+                    <span style="font-size: 12px;" class="text-danger"
+                      *ngIf="f.problemDescription && f.problemDescription.invalid && f.problemDescription.touched">Description is required
+                      </span>
+                  </div>
+
+
+                </div>
+
+              </div>
+
+              <div class="row">
+
+              </div>
+              <br> <br>
+              <div class="text-right">
+                <a class="btn btn-warning btn-ripple" routerLink="/system/menu/list"><i class="fa fa-share"></i>
+                  Cancel</a>
+                &nbsp; &nbsp;
+                <button type="button" class="btn btn-secondary btn-ripple" (click)="resetFormValues()">
+                  <i class="fa fa-undo" aria-hidden="true"></i> Reset
+                </button>
+                &nbsp; &nbsp;
+                <button type="submit" class="btn btn-primary btn-ripple" [disabled]="!myForm.valid">
+                  <i class="fa fa-check" aria-hidden="true"></i> Save &nbsp;&nbsp;&nbsp;
+                </button>
+              </div>
 
 
           </form>

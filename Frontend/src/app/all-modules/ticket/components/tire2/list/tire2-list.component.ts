@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -19,6 +19,7 @@ export class Tire2ListComponent implements OnInit {
 
   public pipe = new DatePipe('en-US');
   public myForm: FormGroup;
+  public myFromGroup:FormGroup;
   public myForm2: FormGroup;
   public myForm3: FormGroup;
   public configPgn: any;
@@ -79,6 +80,13 @@ export class Tire2ListComponent implements OnInit {
     this.getListData();
     this.refreshData();
     this._initSolveForm();
+
+          // set init params
+          this.myFromGroup = new FormGroup({
+            pageSize: new FormControl()
+          });
+          this.myFromGroup.get('pageSize').setValue(this.configPgn.pageSize);
+
   }
 
   _initSolveForm() {

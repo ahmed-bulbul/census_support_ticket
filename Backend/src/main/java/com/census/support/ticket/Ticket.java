@@ -29,6 +29,7 @@ public class Ticket implements Serializable {
     private String deviceUserId;
     private String tabletSerialNo;
     private String imeiNo;
+    private String imeiNo2;
     private String problemCategory;
     private String problemType;
 

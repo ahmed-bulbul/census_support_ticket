@@ -1,48 +1,32 @@
-import { id } from './../../../../../assets/all-modules-data/id';
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { environment } from 'src/environments/environment';
-import { TicketService } from '../../service/ticket.service';
 import { LoginService } from 'src/app/login/services/login.services';
+import { environment } from 'src/environments/environment';
+import { TicketService } from '../../../service/ticket.service';
+
 
 declare const $: any;
 @Component({
-  selector: 'app-ticket-list',
-  templateUrl: './ticket-list.component.html',
-  styleUrls: ['./ticket-list.component.css']
+  selector: 'app-tablet-list',
+  templateUrl: './tablet-list.component.html',
+  styleUrls: ['./tablet-list.component.css']
 })
-export class TicketListComponent implements OnInit {
+export class TabletListComponent implements OnInit {
 
   public baseUrl = environment.baseUrl;
   private polling: any;
 
   public pipe = new DatePipe('en-US');
   public myFromGroup: FormGroup;
-
   public configPgn: any;
   public listData: any = [];
-  public editId: any;
-  public tempId: any;
-  // Action auth for user
-  public authObj: any = {
-    create: false,
-    read: false,
-    update: false,
-    delete: false
-  };
 
-  // search fields for
-  private code: string;
-  private creationUser: string;
-  private status : string;
-  private tabletSerialNo: string;
-
-  //highlight the row
-  public highlight:boolean = false;
+    // search fields for
+    private barCode: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -65,113 +49,21 @@ export class TicketListComponent implements OnInit {
       currentPage: 1,
       totalItems: 50
     };
-  }
+   }
 
   ngOnInit(): void {
 
-     // set init params
-     this.myFromGroup = new FormGroup({
+    // set init params
+    this.myFromGroup = new FormGroup({
       pageSize: new FormControl()
     });
     this.myFromGroup.get('pageSize').setValue(this.configPgn.pageSize);
 
     // bind event & action
     this._bindFromFloatingLabel();
-    this.pollData();
     this._getListData();
 
-    $('body').addClass('mini-sidebar');
-
-
-  }
-
-  pollData () {
-    this.polling = setInterval(() => {
-      this._getListData();
-
-
-    },20000);
-  }
-
-  searchByCode(val) {
-    if(val.length > 0){
-      if(val.substr(0,2)!=='T-'){
-        val = 'T-'+val;
-      }
-      this.code = val;
-    }
-  }
-  searchBySearchButton(){
-    this._getListData();
-  }
-  searchByStatus(val){
-
-    this.status = val;
-    this._getListData();
-
-    if(val!==''){
-      //destroy ng on init
-      this.ngOnDestroy();
-    }else{
-      this.pollData();
-    }
-
-
-  }
-
-  searchByTabSerialNo(val){
-    this.spinnerService.show();
-      // if matches highlight the row
-      this.tabletSerialNo = val;
-      if(val.length > 0){
-        this.highlight = true;
-      }else{
-        this.highlight = false;
-      }
-      this._getListData();
-      this.spinnerService.hide();
-
-  }
-
-  clearFilter(){
-    this.code = '';
-    $('.filter-row').find('input, select, textarea').val('');
-    this._getListData();
-    this.highlight = false;
-  }
-
-  deleteEntityData(id){
-
-    const apiURL = this.baseUrl + '/ticket/bbs/delete/' + id;
-    console.log(apiURL);
-
-    const formData: any = {};
-    formData.rEntityName = 'User';
-    formData.rActiveOperation = 'delete';
-
-    this.spinnerService.show();
-    this.ticketService.sendDeleteRequest(apiURL, formData).subscribe(
-      (response: any) => {
-
-        if(response.status === true){
-          console.log(response);
-          this.spinnerService.hide();
-          $('#delete_entity').modal('hide');
-          this.toastr.success(response.message, 'Success');
-          this._getListData();
-        }else{
-          this.spinnerService.hide();
-          $('#delete_entity').modal('hide');
-          this.toastr.info(response.message, 'Info');
-        }
-
-      },
-      (error) => {
-        console.log(error);
-        this.spinnerService.hide();
-      }
-    );
-
+    // $('body').addClass('mini-sidebar');
   }
 
   _bindFromFloatingLabel(){
@@ -200,20 +92,28 @@ export class TicketListComponent implements OnInit {
 
   }
 
+  searchByCode(barCode: string){
+    this.barCode = barCode;
+  }
+
+  btnSearch(){
+    this._getListData();
+  }
+
   public _getSearchData() {
     this._getListData();
 
   }
 
+
   _getListData(){
-    const apiURL = this.baseUrl + '/ticket/bbs/getList';
+    const apiURL = this.baseUrl + '/tabletInfo/getList';
 
     let queryParams: any = {};
-   // this.creationUser = this.loginService.getUser().username;
     const params = this.getUserQueryParams(this.configPgn.pageNum, this.configPgn.pageSize);
     queryParams = params;
 
-    queryParams.rEntityName = 'Ticket';
+    queryParams.rEntityName = 'Tablet';
     queryParams.rReqType = 'getListData';
 
 
@@ -250,23 +150,13 @@ export class TicketListComponent implements OnInit {
     }
 
     // push other attributes
-    if(this.code){
-      params[`code`] = this.code;
+    if(this.barCode){
+      params[`barCode`] = this.barCode;
     }
-    if(this.creationUser){
-      params['creationUser']= this.creationUser;
-    }
-    if(this.status){
-      params['status']= this.status;
-    }
-    if(this.tabletSerialNo){
-      params['tabletSerialNo']= this.tabletSerialNo;
-    }
-
-
     return params;
 
   }
+
 
   // pagination handling methods start -----------------------------------------------------------------------
   setDisplayLastSequence(){
@@ -298,5 +188,6 @@ export class TicketListComponent implements OnInit {
     $('body').removeClass('mini-sidebar');
 
   }
+
 
 }

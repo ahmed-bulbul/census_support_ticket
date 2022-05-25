@@ -17,6 +17,7 @@ import { Tire1ListComponent } from './components/tire1/list/tire1-list.component
 import { Tire1ShowComponent } from './components/tire1/show/tire1-show.component';
 import { Tire2ListComponent } from './components/tire2/list/tire2-list.component';
 import { Tire2ShowComponent } from './components/tire2/show/tire2-show.component';
+import { TabletListComponent } from './components/tablet/tablet-list/tablet-list.component';
 
 
 
@@ -25,7 +26,7 @@ import { Tire2ShowComponent } from './components/tire2/show/tire2-show.component
 @NgModule({
 
 
-  declarations: [TicketComponent, TicketCreateComponent, TicketListComponent, TicketEditComponent, TicketShowComponent,Tire1ListComponent, Tire1ShowComponent, Tire2ShowComponent, Tire2ListComponent],
+  declarations: [TicketComponent, TicketCreateComponent, TicketListComponent, TicketEditComponent, TicketShowComponent,Tire1ListComponent, Tire1ShowComponent, Tire2ShowComponent, Tire2ListComponent, TabletListComponent],
 
   imports: [
     CommonModule,
