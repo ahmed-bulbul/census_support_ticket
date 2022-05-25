@@ -119,7 +119,7 @@
 
             <div class="d-flex justify-content-end ">
 
-              <div>
+              <div [formGroup]="myFromGroup">
                 Items per Page
                 <select (change)="handlePageSizeChange($event)" class="pgn-pageSizeOption" formControlName="pageSize">
                   <option *ngFor="let size of configPgn.pageSizes" [value]="size">

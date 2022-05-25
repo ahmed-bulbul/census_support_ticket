@@ -198,7 +198,7 @@ public class AppDefaultUserService {
             systemCounter.setPrefix("T");
             systemCounter.setPrefixSeparator("-");
             systemCounter.setStep(1);
-            systemCounter.setCounterWidth(9);
+            systemCounter.setCounterWidth(7);
             counterRepository.save(systemCounter);
         }
     }

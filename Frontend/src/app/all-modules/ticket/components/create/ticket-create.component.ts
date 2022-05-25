@@ -52,11 +52,11 @@ export class TicketCreateComponent implements OnInit {
         devicePhone: ['', [Validators.maxLength(13),Validators.pattern('^[0-9]*$')]],
         deviceUserId: [''],
         tabletSerialNo: ['', [Validators.required]],
-        imeiNo: [''],
-        imeiNo2: [''],
+        imeiNo: ['', [Validators.required]],
+        imeiNo2: ['', [Validators.required]],
         problemCategory: ['', [Validators.required]],
         problemType: [''],
-        problemDescription:[''],
+        problemDescription:['', [Validators.required]],
         code: [''],
         createdBy:[''],
         status:[''],
@@ -136,7 +136,7 @@ export class TicketCreateComponent implements OnInit {
 
   }
   searchByBarCodeNo(val){
-    if(val>0){
+    if(val.length>0){
       this.barCode = val;
       this.simNo='';
     }

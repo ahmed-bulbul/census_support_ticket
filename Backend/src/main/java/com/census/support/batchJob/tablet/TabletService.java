@@ -1,12 +1,23 @@
 package com.census.support.batchJob.tablet;
 
 import com.census.support.helper.response.BaseResponse;
+import com.census.support.ticket.Ticket;
+import com.census.support.ticket.TicketDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import javax.persistence.Table;
+import javax.persistence.criteria.Predicate;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -36,6 +47,25 @@ public class TabletService {
         }catch (Exception e){
             return new ResponseEntity<>(new BaseResponse(false, " Something went wrong : "+e.getMessage(), HttpStatus.NOT_FOUND.value()), HttpStatus.OK);
         }
+    }
 
+    public Page<TabletDTO> getAllPaginatedLists(Map<String, String> clientParams, int pageNum, int pageSize, String sortField, String sortDir) {
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() : Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(pageNum - 1, pageSize, sort);
+        Page<Tablet> entities = tabletRepository.findAll((Specification<Tablet>) (root, cq, cb) -> {
+
+            Predicate p = cb.conjunction();
+            if (!clientParams.isEmpty()) {
+
+                if (clientParams.containsKey("barCode")) {
+                    if (StringUtils.hasLength(clientParams.get("barCode"))) {
+                        p = cb.and(p, cb.like(root.get("barCode"), "%" + clientParams.get("barCode") + "%"));
+                    }
+                }
+            }
+            return p;
+        }, pageable);
+        return entities.map(TabletDTO::new);
     }
 }

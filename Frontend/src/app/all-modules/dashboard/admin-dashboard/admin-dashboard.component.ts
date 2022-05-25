@@ -45,7 +45,7 @@ export class AdminDashboardComponent implements OnInit {
       this.getTotalSendToTier2Ticketst();
       this.getTotalOpenTicketst();
 
-    },5000);
+    },50000);
   }
 
   // getTotalTicket

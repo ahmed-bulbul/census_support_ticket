@@ -69,6 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/api/test/**")
                 .permitAll()
+                .antMatchers("/tabletInfo/**").hasAnyAuthority("ROLE_SUPER_ADMIN","ROLE_BBS_USER","ROLE_TIRE1_USER","ROLE_TIRE2_USER")
                 .antMatchers("/ticket/bbs/**","/searchTablet/**","/searchTabletByBarCode" ).hasAnyAuthority("ROLE_BBS_USER","ROLE_SUPER_ADMIN")
                 .antMatchers("/ticket/tire1/**").hasAnyAuthority("ROLE_TIRE1_USER","ROLE_SUPER_ADMIN")
                 .antMatchers("/ticket/tire2/**").hasAnyAuthority("ROLE_TIRE2_USER","ROLE_SUPER_ADMIN")

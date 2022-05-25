@@ -178,6 +178,38 @@ export class SidebarComponent implements OnInit {
     return menuStr;
   }
 
+  _tabletMenuString() {
+
+    const menuStr = `
+    <li class="submenu">
+      <a href="javascript:"><i class="la la-tablet"></i> <span>Tablet</span> <span class="menu-arrow"></span></a>
+      <ul style="display: none;">
+        <li><a class="routerlink" href="/ticket/tablet/list">List</a></li>
+      </ul>
+    </li>
+    `;
+
+    return menuStr;
+  }
+
+  _ticketMenuString() {
+
+    const menuStr = `
+    <li class="submenu">
+      <a href="javascript:"><i class="la la-ticket"></i> <span>Ticket</span> <span class="menu-arrow"></span></a>
+      <ul style="display: none;">
+        <li><a class="routerlink" href="/ticket/bbs/list">BBS</a></li>
+        <li><a class="routerlink" href="/ticket/tire1/list">Tier1</a></li>
+        <li><a class="routerlink" href="/ticket/tire2/list">Tier2</a></li>
+        <li><a class="routerlink" href="/ticket/tablet/list">Tablet</a></li>
+      </ul>
+    </li>
+    `;
+
+    return menuStr;
+  }
+
+
   // we need to follow like this
   // during dynamic rendering by recursive function
   _menuHTML_structure(){
@@ -187,17 +219,12 @@ export class SidebarComponent implements OnInit {
       <span>Config</span>
     </li>
     <li>
-    <a class="routerlink" href="/users/user/list">
-        <i class="las la-circle"></i>
-        <span>Users</span>
-    </a>
-</li>
-    <li>
-        <a class="routerlink" href="/system/menu/list">
-            <i class="las la-circle"></i>
-            <span>System Menu</span>
-        </a>
+      <a class="routerlink" href="/users/user/list">
+          <i class="las la-circle"></i>
+          <span>Users</span>
+      </a>
     </li>
+
     `;
 
     return menuHTML_template;
@@ -323,8 +350,19 @@ export class SidebarComponent implements OnInit {
         $('#_leftMenuContainer').append( menuStr );
       }
 
-      menuStr = this._generateMenuHTML( response.data );
-      $('#_leftMenuContainer').append( menuStr );
+      menuStr = this._ticketMenuString();
+      if(this.role_super_admin===true || this.role_bbs_user===true || this.role_tier1_user===true || this.role_tier2_user===true){
+        $('#_leftMenuContainer').append( menuStr );
+      }
+
+      // menuStr = this._tabletMenuString();
+      // if(this.role_super_admin===true || this.role_bbs_user===true || this.role_tier1_user===true || this.role_tier2_user===true){
+      //   $('#_leftMenuContainer').append( menuStr );
+      // }
+
+
+      // menuStr = this._generateMenuHTML( response.data );
+      // $('#_leftMenuContainer').append( menuStr );
 
       if(this.role_super_admin){
         $('#_leftMenuContainer').append( this._menuHTML_structure() );

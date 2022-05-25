@@ -41,6 +41,14 @@ export class AuthInterceptor implements HttpInterceptor{
         }else if(err.status === 404){
             this.router.navigate(['error/error404']);
         }
+        //server down
+        else if(err.status === 0){
+          this.toastr.info('Server is not responding. Please try again later.','info',{
+              timeOut:5000
+          })
+          this.router.navigate(['error/error500']);
+
+        }
         return throwError(err);
     }
 

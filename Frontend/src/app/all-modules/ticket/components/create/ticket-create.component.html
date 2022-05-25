@@ -186,6 +186,9 @@
                     <label>Problem Description</label>
                     <!-- input type text area -->
                     <textarea class="form-control" rows="5" formControlName="problemDescription"></textarea>
+                    <span style="font-size: 12px;" class="text-danger"
+                      *ngIf="f.problemDescription && f.problemDescription.invalid && f.problemDescription.touched">Description is required
+                      </span>
                   </div>
 
 

@@ -69,6 +69,12 @@ xx-.form-control:focus {
 input.ng-invalid{
     border-left: 1.5px solid red;
 }
+select.ng-invalid{
+    border-left: 1.5px solid red;
+}
+textarea.ng-invalid{
+    border-left: 1.5px solid red;
+}
 
 
 .big-checkbox {width: 20px; height: 20px;}

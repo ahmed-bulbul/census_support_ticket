@@ -5,17 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6c7182c4-d264-406e-a933-ca78416773f5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Backend/src/main/java/com/census/support/batchJob/tablet/TabletService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/census/support/acl/security/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/census/support/acl/security/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/census/support/batchJob/config/SpringBatchConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/census/support/batchJob/tablet/config/SpringBatchConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/census/support/batchJob/config/TabletProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/census/support/batchJob/tablet/config/TabletProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/census/support/batchJob/tablet/JobController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/census/support/batchJob/tablet/TabletController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/census/support/batchJob/tablet/TabletRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/census/support/batchJob/tablet/TabletRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/census/support/ticket/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/census/support/ticket/Ticket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/census/support/ticket/TicketDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/census/support/ticket/TicketDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/main/java/com/census/support/ticket/log/TicketLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/java/com/census/support/ticket/log/TicketLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/app/all-modules/ticket/components/create/ticket-create.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/all-modules/ticket/components/create/ticket-create.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/app/all-modules/ticket/components/create/ticket-create.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/all-modules/ticket/components/create/ticket-create.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/main/resources/docs/utils.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/main/resources/docs/utils.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,6 +120,8 @@
       <workItem from="1650770162642" duration="48000" />
       <workItem from="1652259714658" duration="24000" />
       <workItem from="1652848780178" duration="42000" />
+      <workItem from="1653306046543" duration="5000" />
+      <workItem from="1653448366810" duration="41000" />
     </task>
     <servers />
   </component>

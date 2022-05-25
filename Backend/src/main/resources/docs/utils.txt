@@ -39,3 +39,19 @@ user:root and pwd:Walton!@#
 ==================Unit Testing=========================
 ctrl + shft + O
 
+==============Tocat user set up===============
+<role rolename="manager-gui"/>
+  <role rolename="manager-script"/>
+  <role rolename="manager-jmx"/>
+  <role rolename="manager-status"/>
+  <user username="admin" password="pipiapp#123" roles="manager-status,manager-gui"/>
+
+===============Requirements====================
+Problem Category [required
+problem description [required]
+Search not woking - 10 digits
+user phone number,created by
+All list show BBS LIST
+All tab list data show an UI
+Ticket number only 5 digits
+

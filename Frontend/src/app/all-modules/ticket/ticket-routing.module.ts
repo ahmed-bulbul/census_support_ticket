@@ -1,3 +1,4 @@
+import { UserGuard } from './../../core/guards/user.guard';
 import { Tire2ShowComponent } from './components/tire2/show/tire2-show.component';
 import { Tire2ListComponent } from './components/tire2/list/tire2-list.component';
 
@@ -17,6 +18,8 @@ import { Tire1ShowComponent } from './components/tire1/show/tire1-show.component
 
 
 import { TicketComponent } from './ticket.component';
+import { TabletListComponent } from './components/tablet/tablet-list/tablet-list.component';
+
 
 const routes: Routes = [
   {
@@ -45,49 +48,6 @@ const routes: Routes = [
         canActivate:[BbsGuard]
       },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       {
         path:'tire1/list',
         component:Tire1ListComponent,
@@ -108,6 +68,12 @@ const routes: Routes = [
         component:Tire2ShowComponent,
         canActivate:[Tire2Guard]
       },
+
+      {
+        path:'tablet/list',
+        component:TabletListComponent,
+        canActivate:[UserGuard]
+      }
 
 
 
