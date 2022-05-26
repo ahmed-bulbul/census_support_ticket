@@ -31,7 +31,15 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.loginService.getUser();
-    this.pollData();
+
+    this.getTotalTicket();
+    this.getTotalReceivedTicket();
+    this.getTotalHoldTicket();
+    this.getTotalResolvedTicket();
+    this.getTotalTerminatedTicketst();
+    this.getTotalSendToTier2Ticketst();
+    this.getTotalOpenTicketst();
+   // this.pollData();
 
   }
 

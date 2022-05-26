@@ -63,6 +63,11 @@ public class TabletService {
                         p = cb.and(p, cb.like(root.get("barCode"), "%" + clientParams.get("barCode") + "%"));
                     }
                 }
+                if(clientParams.containsKey("simNo")){
+                    if(StringUtils.hasLength(clientParams.get("simNo"))){
+                        p = cb.and(p, cb.like(root.get("simNo"), "%" + clientParams.get("simNo") + "%"));
+                    }
+                }
             }
             return p;
         }, pageable);

@@ -128,6 +128,16 @@ export class SidebarComponent implements OnInit {
     if(authorities.includes('ROLE_SUPER_ADMIN')){
       this.role_super_admin = true;
     }
+    if(authorities.includes('ROLE_BBS_USER')){
+      this.role_bbs_user = true;
+    }
+    if(authorities.includes('ROLE_TIER1_USER')){
+      this.role_tier1_user = true;
+    }
+    if(authorities.includes('ROLE_TIER2_USER')){
+      this.role_tier2_user = true;
+    }
+    
   }
 
 

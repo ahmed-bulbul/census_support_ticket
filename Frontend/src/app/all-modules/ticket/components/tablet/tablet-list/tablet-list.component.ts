@@ -25,8 +25,13 @@ export class TabletListComponent implements OnInit {
   public configPgn: any;
   public listData: any = [];
 
-    // search fields for
-    private barCode: string;
+  // search fields for
+  private barCode: string;
+  private simNo: string;
+
+  //enabled search option
+  public searchByBarCode:boolean = true;
+  public searchBySimNo:boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -93,7 +98,18 @@ export class TabletListComponent implements OnInit {
   }
 
   searchByCode(barCode: string){
-    this.barCode = barCode;
+    if(barCode.length>0){
+      this.barCode = barCode;
+    }
+  }
+  searchBySimNumber(simNo: string){
+    if(simNo.length>0){
+      //if val not start with 88 then add 88
+      if(!simNo.startsWith('88')){
+        simNo = '88'+simNo;
+      }
+      this.simNo = simNo;
+    }
   }
 
   btnSearch(){
@@ -153,8 +169,24 @@ export class TabletListComponent implements OnInit {
     if(this.barCode){
       params[`barCode`] = this.barCode;
     }
+
+    if(this.simNo){
+      params[`simNo`] = this.simNo;
+    }
+
     return params;
 
+  }
+
+  onChangeTicketType(val){
+    if(val==='BARCODE'){
+      this.searchByBarCode = true;
+      this.searchBySimNo = false;
+    }
+    else if(val==='SIMNO'){
+      this.searchBySimNo = true;
+      this.searchByBarCode = false;
+    }
   }
 
 

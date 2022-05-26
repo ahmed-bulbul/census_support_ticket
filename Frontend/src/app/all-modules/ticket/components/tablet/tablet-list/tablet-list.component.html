@@ -27,21 +27,33 @@
 
       <div class="row filter-row">
 
+        <!-- input type select -->
         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-2 col-12">
-          <div class="form-group form-focus">
-            <input type="text" class="form-control floating" (input)="searchByCode($event.target.value)">
-            <label class="focus-label">Barcode</label>
+          <div class="form-group form-focus select-focus">
+            <!-- Option dropdown -->
+            <select class="select form-control" (change)="onChangeTicketType($event.target.value)">
+              <option value="BARCODE">Search By Serial No</option>
+              <option value="SIMNO">Search By Sim No</option>
+            </select>
           </div>
         </div>
 
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-2 col-12" *ngIf="searchByBarCode">
+          <div class="form-group form-focus">
+            <input type="text" class="form-control floating" (input)="searchByCode($event.target.value)">
+            <label class="focus-label">Sl No</label>
+          </div>
+        </div>
 
+        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-2 col-12" *ngIf="searchBySimNo">
+          <div class="form-group form-focus">
+            <input type="text" class="form-control floating" (input)="searchBySimNumber($event.target.value)">
+            <label class="focus-label">Sim No</label>
+          </div>
+        </div>
 
         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">
           <a class="btn btn-success btn-block" (click)="btnSearch()"> Search  </a>
-        </div>
-        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">
-          <!-- <a class="btn btn-success btn-block" (click)="clearFilter()" >Refresh  <span><i class="fa fa-refresh" aria-hidden="true"></i></span></a> -->
-
         </div>
       </div>
 
@@ -72,7 +84,7 @@
                 <tr>
                   <th>SL</th>
                   <th class="d-none">TB_ROW_ID</th>
-                  <th>Bar Code</th>
+                  <th>Serial No</th>
                   <th>IMEI1 </th>
                   <th>IMEI2</th>
                   <th>Sim No</th>

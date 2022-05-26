@@ -31,7 +31,7 @@ export class AdminGuard implements CanActivate {
         return true;
     }
     this.toastr.info("You are not authorized to access this page");
-    this.router.navigate(['/dashboard/common']);
+   // this.router.navigate(['/dashboard/common']);
     return false;
   }
 
