@@ -94,12 +94,7 @@ export class TicketListComponent implements OnInit {
   }
 
   searchByCode(val) {
-    if(val.length > 0){
-      if(val.substr(0,2)!=='T-'){
-        val = 'T-'+val;
-      }
-      this.code = val;
-    }
+    this.code = val;
   }
   searchBySearchButton(){
     this._getListData();
@@ -135,6 +130,9 @@ export class TicketListComponent implements OnInit {
 
   clearFilter(){
     this.code = '';
+    this.creationUser = '';
+    this.status = '';
+    this.tabletSerialNo = '';
     $('.filter-row').find('input, select, textarea').val('');
     this._getListData();
     this.highlight = false;

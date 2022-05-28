@@ -33,7 +33,11 @@ public class SpringBatchConfig {
     @Bean
     public FlatFileItemReader<Tablet> reader() {
         FlatFileItemReader<Tablet> itemReader = new FlatFileItemReader<>();
-        itemReader.setResource(new FileSystemResource("src/main/resources/BBS_TAB.csv"));
+        itemReader.setResource(new FileSystemResource("src/main/resources/BBS.csv"));
+       // itemReader.setResource(new FileSystemResource("src/main/resources/1_2_TAB-LIST.csv"));
+//        itemReader.setResource(new FileSystemResource("src/main/resources/2_1_TAB-LIST.csv"));
+//        itemReader.setResource(new FileSystemResource("src/main/resources/2_2_TAB-LIST.csv"));
+       // itemReader.setResource(new FileSystemResource("src/main/resources/3_1_TAB-LIST.csv"));
         itemReader.setName("csvReader");
         itemReader.setLinesToSkip(1);
         itemReader.setLineMapper(lineMapper());
@@ -46,7 +50,8 @@ public class SpringBatchConfig {
         DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
         lineTokenizer.setDelimiter(",");
         lineTokenizer.setStrict(false);
-        lineTokenizer.setNames("barCode", "imei1", "imei2", "simNo", "deliveryDate");
+//        lineTokenizer.setNames("barCode", "imei1", "imei2", "simNo", "deliveryDate");
+        lineTokenizer.setNames("barCode","deliveryDate", "imei1", "imei2", "simNo");
 
         BeanWrapperFieldSetMapper<Tablet> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
         fieldSetMapper.setTargetType(Tablet.class);

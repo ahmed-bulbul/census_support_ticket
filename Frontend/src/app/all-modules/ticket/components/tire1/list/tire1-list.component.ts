@@ -182,7 +182,7 @@ export class Tire1ListComponent implements OnInit {
 
     let queryParams: any = {};
     this.problemCategory = "TECHNICAL";
-    this.status = "OPEN";
+    this.status = "";
     this.receivedFromT1 = this.loginService.getUser().username;
     const params = this.getUserQueryParams(this.configPgn.pageNum, this.configPgn.pageSize);
     queryParams = params;

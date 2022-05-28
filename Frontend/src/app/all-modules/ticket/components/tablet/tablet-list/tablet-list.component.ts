@@ -98,21 +98,32 @@ export class TabletListComponent implements OnInit {
   }
 
   searchByCode(barCode: string){
-    if(barCode.length>0){
-      this.barCode = barCode;
-    }
+    // ignore space before and after
+    barCode = barCode.trim();
+    this.barCode = barCode;
+    this.simNo = '';
   }
   searchBySimNumber(simNo: string){
-    if(simNo.length>0){
+    // ignore space before and after
+    simNo = simNo.trim();
       //if val not start with 88 then add 88
       if(!simNo.startsWith('88')){
         simNo = '88'+simNo;
       }
       this.simNo = simNo;
-    }
+
+      this.barCode = '';
   }
 
   btnSearch(){
+    this._getListData();
+  }
+
+  clearFilter(){
+    this.barCode = '';
+    this.simNo = '';
+    this.searchByBarCode = true;
+    this.searchBySimNo = false;
     this._getListData();
   }
 

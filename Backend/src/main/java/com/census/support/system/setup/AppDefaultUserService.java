@@ -94,13 +94,13 @@ public class AppDefaultUserService {
         }
 
         //tire1 user
-        if(!userRepository.findByUsername("tire1-user").isPresent()){
+        if(!userRepository.findByUsername("tier1-user").isPresent()){
             Set<Role> rolesTire1UserSet = new HashSet<>();
             User user = new User();
 
-            user.setUsername("tire1-user");
-            user.setPassword(bCryptPasswordEncoder.encode("tire1-user"));
-            user.setPhone("01678862526");
+            user.setUsername("tier1-user");
+            user.setPassword(bCryptPasswordEncoder.encode("tier1-user"));
+            user.setPhone("01578862526");
             rolesTire1UserSet.add(roleTire1User);
             user.setRoles(rolesTire1UserSet);
             user.setCreationDateTime(new Date());
@@ -108,13 +108,13 @@ public class AppDefaultUserService {
             this.userRepository.save(user);
         }
         //tire1 user2
-        if(!userRepository.findByUsername("tire1-user2").isPresent()){
+        if(!userRepository.findByUsername("tier1-user2").isPresent()){
             Set<Role> rolesTire1UserSet = new HashSet<>();
             User user = new User();
 
-            user.setUsername("tire1-user2");
-            user.setPassword(bCryptPasswordEncoder.encode("tire1-user2"));
-            user.setPhone("01678862528");
+            user.setUsername("tier1-user2");
+            user.setPassword(bCryptPasswordEncoder.encode("tier1-user2"));
+            user.setPhone("01578862528");
             rolesTire1UserSet.add(roleTire1User);
             user.setRoles(rolesTire1UserSet);
             user.setCreationDateTime(new Date());
@@ -123,13 +123,13 @@ public class AppDefaultUserService {
         }
 
         //tire2 user
-        if(!userRepository.findByUsername("tire2-user").isPresent()){
+        if(!userRepository.findByUsername("tier2-user").isPresent()){
             Set<Role> rolesTire2UserSet = new HashSet<>();
             User user = new User();
 
-            user.setUsername("tire2-user");
-            user.setPassword(bCryptPasswordEncoder.encode("tire2-user"));
-            user.setPhone("01678862527");
+            user.setUsername("tier2-user");
+            user.setPassword(bCryptPasswordEncoder.encode("tier2-user"));
+            user.setPhone("01578862527");
             rolesTire2UserSet.add(roleTire2User);
             user.setRoles(rolesTire2UserSet);
             user.setCreationDateTime(new Date());
@@ -137,13 +137,13 @@ public class AppDefaultUserService {
             this.userRepository.save(user);
         }
         //tire2 user2
-        if(!userRepository.findByUsername("tire2-user2").isPresent()){
+        if(!userRepository.findByUsername("tier2-user2").isPresent()){
             Set<Role> rolesTire2UserSet = new HashSet<>();
             User user = new User();
 
-            user.setUsername("tire2-user2");
-            user.setPassword(bCryptPasswordEncoder.encode("tire2-user2"));
-            user.setPhone("01678862529");
+            user.setUsername("tier2-user2");
+            user.setPassword(bCryptPasswordEncoder.encode("tier2-user2"));
+            user.setPhone("01578862529");
             rolesTire2UserSet.add(roleTire2User);
             user.setRoles(rolesTire2UserSet);
             user.setCreationDateTime(new Date());
@@ -314,7 +314,7 @@ public class AppDefaultUserService {
         //this.createMenu();
         this.CreateTicketCodeCounter();
         // generate multiple users
-        //this.generateMultiUser("ROLE_BBS_USER",40,"noc-user",1);
+     //   this.generateMultiUser("ROLE_BBS_USER",130,"noc-user",90);
     }
 
 

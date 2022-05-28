@@ -75,6 +75,10 @@ public class TicketService {
 
                 if (clientParams.containsKey("code")) {
                     if (StringUtils.hasLength(clientParams.get("code"))) {
+                        //if code  not start with T- then add T-
+                        if (!clientParams.get("code").startsWith("T-")) {
+                            clientParams.put("code", "T-" + clientParams.get("code"));
+                        }
                         p = cb.and(p, cb.equal(root.get("code"), clientParams.get("code")));
                     }
                 }
