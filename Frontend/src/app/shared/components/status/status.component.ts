@@ -58,6 +58,7 @@ export class StatusComponent implements OnInit {
 
 
 
+
   _getListData(){
     const apiURL = this.baseUrl + '/ticket/bbs/getStatus';
 

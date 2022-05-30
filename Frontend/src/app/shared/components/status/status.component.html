@@ -11,7 +11,11 @@
 
                       <!-- <small class="text-justify" id="time"></small>  -->
                     </div>
+
+
                       <h3 class="text-center"> Search By Ticket Number  </h3>
+
+
                       <input (input)="searchByCode($event.target.value)" type="text" class="form-control floating" placeholder=" Enter Ticket No. "> <br> <br>
                       <div class="table-responsive">
                           <table class="table table-hover">
@@ -36,6 +40,10 @@
                               </tbody>
                           </table>
                       </div>
+                      <!-- Back to list a tag -->
+                     <div class="col-auto float-right ml-auto">
+                      <a class="btn add-btn" routerLink="/ticket/bbs/list"><i class="fa fa-share"></i> Back To List</a>
+                    </div>
                   </div>
               </div>
           </div>

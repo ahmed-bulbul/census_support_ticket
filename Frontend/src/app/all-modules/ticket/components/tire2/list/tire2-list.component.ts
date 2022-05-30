@@ -290,6 +290,7 @@ export class Tire2ListComponent implements OnInit {
   }
   clearFilter() {
     this.code = '';
+    this.tabletSerialNo = '';
     $('.filter-row').find('input, select, textarea').val('');
     this.getListData();
   }
@@ -315,7 +316,7 @@ export class Tire2ListComponent implements OnInit {
     if (this.problemCategory) {
       params['problemCategory'] = this.problemCategory;
     }
-    if (this.problemCategory) {
+    if (this.status) {
       params['status'] = this.status;
     }
     if (this.tier2ReceiveBy) {

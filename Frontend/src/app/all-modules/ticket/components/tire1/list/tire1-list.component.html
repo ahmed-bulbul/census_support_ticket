@@ -44,8 +44,8 @@
         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">
           <a class="btn btn-success btn-block" (click)="searchBySearchButton()"> Search  </a>
         </div>
-        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">
-          <a class="btn btn-success btn-block" (click)="clearFilter()" >Refresh  <span><i class="fa fa-refresh" aria-hidden="true"></i></span></a>
+        <div class="col-sm-6 col-md-3 col-lg-1 col-xl-1 col-12">
+          <a class="btn btn-success btn-block" (click)="clearFilter()" ><span><i class="fa fa-refresh" aria-hidden="true"></i></span></a>
         </div>
       </div>
 
@@ -203,11 +203,11 @@
 
             <div class="form-group">
               <label>Solution Description</label>
-              <textarea class="form-control" formControlName="solutionDescription" rows="2"></textarea>
+              <textarea class="form-control" formControlName="solutionDescription" rows="2" ></textarea>
             </div>
             <div class="form-group">
               <label>Hold Duration</label>
-              <input type="number" class="form-control" formControlName="holdDuration">
+              <input type="number" class="form-control" formControlName="holdDuration" placeholder="eg. 1 [means 1 minute]">
             </div>
 
             <div class="text-right">

@@ -182,7 +182,6 @@ export class Tire1ListComponent implements OnInit {
 
     let queryParams: any = {};
     this.problemCategory = "TECHNICAL";
-    this.status = "";
     this.receivedFromT1 = this.loginService.getUser().username;
     const params = this.getUserQueryParams(this.configPgn.pageNum, this.configPgn.pageSize);
     queryParams = params;
@@ -221,7 +220,7 @@ export class Tire1ListComponent implements OnInit {
       setInterval(() => {
         this._getListData();
 
-      }, 6000);
+      }, 10000);
   }
 
 
@@ -236,6 +235,7 @@ export class Tire1ListComponent implements OnInit {
   }
   clearFilter() {
     this.code = '';
+    this.tabletSerialNo = '';
     $('.filter-row').find('input, select, textarea').val('');
     this._getListData();
   }
@@ -427,9 +427,6 @@ export class Tire1ListComponent implements OnInit {
     }
     if (this.problemCategory) {
       params['problemCategory'] = this.problemCategory;
-    }
-    if (this.problemCategory) {
-      params['status'] = this.status;
     }
     if (this.receivedFromT1) {
       params['receivedFromT1'] = this.receivedFromT1;
