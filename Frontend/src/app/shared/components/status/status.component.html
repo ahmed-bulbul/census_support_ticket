@@ -25,6 +25,7 @@
                                       <th>Problem Type</th>
                                       <th>Phone</th>
                                       <th>Status</th>
+                                      <th>Transaction By</th>
                                   </tr>
                               </thead>
                               <tbody>
@@ -34,6 +35,39 @@
                                       <td>{{thisObj.deviceUserPhone}}</td>
                                       <td>
                                         <label class="badge badge-success">{{thisObj.status}}</label>
+                                      </td>
+                                      <td>
+                                        <label *ngIf="thisObj.status==='OPEN' " class="badge badge-info"><i class="fa fa-folder-open"></i> {{thisObj.creationUser}}</label>
+
+                                        <label *ngIf="thisObj.status==='RECEIVED' " class="badge badge-primary"><i class="fa fa-get-pocket"></i> {{thisObj.receivedFromT1}}</label>
+
+                                        <label *ngIf="thisObj.status==='HOLD' " class="badge badge-warning">{{thisObj.holdBy}}</label>
+
+                                        <label *ngIf="thisObj.status==='SOLVED' " class="badge badge-success">
+                                         <!-- check icon -->
+                                         <i class="fa fa-check-circle"></i>
+                                          {{thisObj.solvedBy}}</label>
+
+                                        <label *ngIf="thisObj.status==='SOLVED_T2' " class="badge badge-secondary"><i class="fa fa-check-circle"></i> {{thisObj.tier2SolvedBy}}</label>
+
+
+                                        <label *ngIf="thisObj.status==='SEND_TO_T2' " class="badge badge-dark">
+                                          <i class="fa fa-paper-plane"></i> {{thisObj.tier2SendBy}}</label>
+
+
+                                        <label *ngIf="thisObj.status==='RECEIVED_T2' " class="badge badge-primary"><i class="fa fa-get-pocket"></i> {{thisObj.tier2ReceiveBy}}</label>
+
+                                        <label *ngIf="thisObj.status==='TERMINATE' " class="badge badge-warning"><i class="fa fa-times"></i> {{thisObj.terminateBy}}</label>
+
+
+
+
+
+
+
+
+
+
                                       </td>
                                   </tr>
 

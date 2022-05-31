@@ -81,7 +81,7 @@
               <div class="form-group">
                 <label class="col-form-label">Creation Time</label>
                 <div class="">
-                  <span>{{myFormData.creationDateTime}}</span>
+                  <span>{{myFormData.creationDateTime | date: 'yyyy/MM/dd hh:mm:ss a' }}</span>
                 </div>
               </div>
               <div class="form-group">
@@ -94,7 +94,7 @@
               <div class="form-group">
                 <label class="col-form-label">Last Update Time</label>
                 <div class="">
-                  <span>{{myFormData.lastUpdateDateTime}}</span>
+                  <span>{{myFormData.lastUpdateDateTime | date: 'yyyy/MM/dd hh:mm:ss a' }}</span>
                 </div>
               </div>
               <div class="form-group">
@@ -106,11 +106,11 @@
 
             </fieldset>
 
-            <div class="text-right">
+            <!-- <div class="text-right">
               <a class="btn btn-primary btn-ripple" routerLink="/payroll/element-value/list"><i class="fa fa-share"></i>
                 Close</a>
               &nbsp;
-            </div>
+            </div> -->
 
 
           </form>
