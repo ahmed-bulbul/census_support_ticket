@@ -91,7 +91,11 @@ export class UserCreateComponent implements OnInit {
           console.log(response);
           this.spinnerService.hide();
           this.router.navigate(["/users/user/list"], {relativeTo: this.route});
-        }else{
+        }else if(response.status == false){
+          this.spinnerService.hide();
+          this.toastr.info(response.message, 'Info');
+        }
+        else{
           this.spinnerService.hide();
           this.toastr.error(response.message, 'Error');
         }

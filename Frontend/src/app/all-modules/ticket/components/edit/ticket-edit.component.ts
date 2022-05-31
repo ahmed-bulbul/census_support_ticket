@@ -40,7 +40,6 @@ export class TicketEditComponent implements OnInit {
     this.myForm = this.formBuilder.group({
       id: [''],
       deviceUserPhone: ['', [Validators.required,Validators.minLength(11)]],
-      deviceUserId: ['', [Validators.required]],
       tabletSerialNo: ['', [Validators.required]],
       problemCategory: ['', [Validators.required]],
       problemType: [''],

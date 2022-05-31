@@ -5,7 +5,7 @@
   <div class="page-header">
     <div class="row align-items-center">
       <div class="col">
-        <h3 class="page-title">Ticket ( Tire 1 )</h3>
+        <h3 class="page-title">Ticket ( Tier 1 )</h3>
         <ul class="breadcrumb">
           <li class="breadcrumb-item"><a routerLink="/dashboard">Home</a></li>
           <li class="breadcrumb-item active"><a routerLink="/system/menu/list">Ticket</a></li>
@@ -41,14 +41,9 @@
                       <span>: &nbsp;</span><span>{{myFormData.code}}</span>
                     </div>
                   </div>
+
                   <div class="form-group row">
-                    <label class="col-form-label col-md-2">Device User ID</label>
-                    <div class="col-md-10">
-                      <span>: &nbsp;</span><span>{{myFormData.deviceUserId}}</span>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-form-label col-md-2">Device User Phone</label>
+                    <label class="col-form-label col-md-2">User Phone</label>
                     <div class="col-md-10">
                       <span>: &nbsp;</span><span>{{myFormData.deviceUserPhone}}</span>
                     </div>
@@ -181,13 +176,6 @@
               </div>
 
             </fieldset>
-
-            <div class="text-right">
-              <a class="btn btn-primary btn-ripple" routerLink="/ticket/tire1/list"><i class="fa fa-share"></i>
-                Close</a>
-              &nbsp;
-            </div>
-
 
           </form>
         </div>

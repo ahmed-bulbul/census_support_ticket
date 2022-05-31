@@ -47,6 +47,7 @@ public class TicketService {
             }else {
                 SetAttributeUpdate.setSysAttributeForCreateUpdate(entity,"Create");
                 entity.setStatusSequence(3L);
+                entity.setProblemCategory("TECHNICAL");
                 ticketRepository.save(entity);
                 try {
                     //send user ticket created message

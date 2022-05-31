@@ -374,8 +374,9 @@ export class Tire1ListComponent implements OnInit {
     }
     const apiURL = this.baseUrl + '/ticket/tire1/sendToTierTwo/' + sendToT2Id;
     let formData: any;
-    formData = Object.assign(this.myForm.value);
+    formData = Object.assign(this.myForm3.value);
     this.spinnerService.show();
+    console.log(formData);
     this.ticketService.sendPutRequest(apiURL, formData).subscribe(
       (response: any) => {
         if (response.status === true) {

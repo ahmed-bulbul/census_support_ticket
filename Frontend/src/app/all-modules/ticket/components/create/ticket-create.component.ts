@@ -54,7 +54,7 @@ export class TicketCreateComponent implements OnInit {
         tabletSerialNo: ['', [Validators.required]],
         imeiNo: ['', [Validators.required]],
         imeiNo2: ['', [Validators.required]],
-        problemCategory: ['', [Validators.required]],
+        problemCategory: [''],
         problemType: [''],
         problemDescription:['', [Validators.required]],
         code: [''],

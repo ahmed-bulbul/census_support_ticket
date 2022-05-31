@@ -94,7 +94,7 @@
                       *ngIf="f.imeiNo2 && f.imeiNo2.invalid && f.imeiNo2.touched">IMEI 2 not valid</span>
                   </div>
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label>Problem Category</label>
                     <select class="select form-control" formControlName="problemCategory">
                       <option value="">-Select Category-</option>
@@ -102,7 +102,7 @@
                       <option value="TECHNICAL"> Technical </option>
 
                     </select>
-                  </div>
+                  </div> -->
 
 
 
@@ -132,10 +132,10 @@
                       <option value="Auto Off/Screen Out"> Auto Off/Screen Out </option>
                       <option value="Auto Restart"> Auto Restart </option>
 
-                      <option value="Bluetooth"> Bluetooth </option>
+                      <!-- <option value="Bluetooth"> Bluetooth </option> -->
                       <option value="Button/ Key"> Button/ Key </option>
-                      <option value="Call Drop"> Call Drop </option>
-                      <option value="Camera"> Camera </option>
+                      <!-- <option value="Call Drop"> Call Drop </option>
+                      <option value="Camera"> Camera </option> -->
                       <option value="Charger Missing/ Damage"> Charger Missing/ Damage </option>
                       <option value="Charging"> Charging </option>
                       <option value="Color/Brightness"> Color/Brightness </option>
@@ -204,7 +204,7 @@
               </div>
               <br> <br>
               <div class="text-right">
-                <a class="btn btn-warning btn-ripple" routerLink="/system/menu/list"><i class="fa fa-share"></i>
+                <a class="btn btn-warning btn-ripple" routerLink="/ticket/bbs/list"><i class="fa fa-share"></i>
                   Cancel</a>
                 &nbsp; &nbsp;
                 <button type="button" class="btn btn-secondary btn-ripple" (click)="resetFormValues()">
