@@ -152,4 +152,19 @@ public class UserService {
             return new ResponseEntity<>(new BaseResponse(false, "Something went wrong. "+e.getMessage(), 500), HttpStatus.OK);
         }
     }
+
+    public ResponseEntity<?> delete(Long id) {
+        try {
+            Optional<User> entityInst = this.repository.findById(id);
+            if (entityInst.isPresent()) {
+                User entity = entityInst.get();
+                this.repository.delete(entity);
+                return new ResponseEntity<>(new BaseResponse(true, "User deleted successfully", 200, entity), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(new BaseResponse(false, "User not found", 404), HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(new BaseResponse(false, "Something went wrong. "+e.getMessage(), 500), HttpStatus.OK);
+        }
+    }
 }

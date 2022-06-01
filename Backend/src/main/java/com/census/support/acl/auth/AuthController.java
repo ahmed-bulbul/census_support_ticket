@@ -143,6 +143,7 @@ public class AuthController {
                     }
                     roles.add(tire1UserRole);
 
+
                 }else if(String.valueOf(SystemRole.ROLE_TIRE2_USER).equals(role)){
                     Role tire2UserRole = roleRepository.getRoleByAuthority(String.valueOf(SystemRole.ROLE_TIRE2_USER));
                     if (tire2UserRole == null) {
@@ -152,6 +153,7 @@ public class AuthController {
                             e.printStackTrace();
                         }
                     }
+                    roles.add(tire2UserRole);
                 }
                 else {
                     Role userRole = roleRepository.getRoleByAuthority(String.valueOf(SystemRole.ROLE_USER));

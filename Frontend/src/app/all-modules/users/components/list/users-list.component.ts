@@ -133,7 +133,7 @@ export class UsersListComponent implements OnInit {
   }
 
   deleteEnityData(dataId){
-    let apiURL = this.baseUrl + "/user/delete/" + dataId;
+    let apiURL = this.baseUrl + "/acl/user/delete/" + dataId;
     console.log(apiURL);
 
     let formData: any = {};

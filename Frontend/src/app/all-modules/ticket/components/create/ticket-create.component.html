@@ -30,11 +30,11 @@
         <div class="card-body">
           <form novalidate (ngSubmit)="myFormSubmit()" [formGroup]="myForm">
 
-            <div class="row">
+            <div class="row" style="border: 1px dotted #ddd; padding-top: 14px;">
 
               <div class="col-md-5">
                 <!-- select search type  -->
-                <div class="form-group form-focus">
+                <div class="form-group">
                   <select class="form-control floating"
                     (change)="onChangeTicketType($event.target.value)">
                     <option value="BARCODE">Search By Serial No</option>
@@ -46,16 +46,16 @@
                 </div>
 
                 <div class="col-md-4" *ngIf="searchBySimNo">
-                  <div class="form-group form-focus">
-                    <input type="text" class="form-control floating" (input)="searchBySimNoOrSnNo($event.target.value)">
-                    <label class="focus-label">Search By Sim No. e.g 017*****</label>
+                  <div class="form-group">
+                    <input type="text" class="form-control " (input)="searchBySimNoOrSnNo($event.target.value)" placeholder="Search By Sim No. e.g 017*****">
+                    <!-- <label class="focus-label">Search By Sim No. e.g 017*****</label> -->
                   </div>
                 </div>
 
                 <div class="col-md-4" *ngIf="searchByBarCode">
-                  <div class="form-group form-focus">
-                    <input type="text" class="form-control floating" (input)="searchByBarCodeNo($event.target.value)">
-                    <label class="focus-label">Search By Serial No </label>
+                  <div class="form-group">
+                    <input type="text" class="form-control floating" (input)="searchByBarCodeNo($event.target.value)" placeholder="Search By Serial No">
+                    <!-- <label class="focus-label">Search By Serial No </label> -->
                   </div>
                 </div>
 
@@ -66,8 +66,7 @@
                 </div>
             </div>
 
-
-
+            <br>
 
 
               <div class="row">
@@ -168,6 +167,9 @@
                       <option value="SIM Slot"> SIM Slot </option>
                       <option value="Software"> Software </option>
                       <option value="Touch Screen"> Touch Screen </option>
+
+                      <option value="DATE & TIME"> Date & Time </option>
+                      <option value="CAPT APPS"> CAPT Apps</option>
 
                       <option value="USB Port"> USB Port </option>
                       <option value="Vibration"> Vibration </option>
