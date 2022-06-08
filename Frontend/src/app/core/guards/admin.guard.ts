@@ -26,7 +26,7 @@ export class AdminGuard implements CanActivate {
 
     let authorities = this.login.getLoginUserRole();
 
-    if(this.login.isLoggedIn() && (authorities.includes("ROLE_SUPER_ADMIN")) ){
+    if(this.login.isLoggedIn() && (authorities.includes("ROLE_SUPER_ADMIN")) || (authorities.includes("ROLE_BBS_USER"))  ){
 
         return true;
     }

@@ -25,6 +25,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
         prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
@@ -52,6 +53,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors()
@@ -65,7 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/acl/login","/acl/register","/acl/roles","/ticket/bbs/getStatus","/dashboard","/message")
+                .antMatchers("/acl/login", "/",  "/acl/register","/acl/roles","/ticket/bbs/getStatus","/dashboard","/message")
                 .permitAll()
                 .antMatchers("/api/test/**")
                 .permitAll()

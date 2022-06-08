@@ -14,4 +14,6 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
     Optional<Message> findByTicketCode(String code);
 
     List<Message> findByTicket(Optional<Ticket> ticket);
+
+    List<Message> findByStatus(String pending);
 }

@@ -85,6 +85,7 @@
                   <th>Tablet Serial No</th>
                   <th>Problem Type </th>
                   <th>Status</th>
+                  <th>Received By</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -104,6 +105,7 @@
                     <span style="color: rgb(7, 107, 110);" *ngIf="thisObj.status=='OPEN'"  class="">{{thisObj.status}} <small>  {{getDiffTime(currentTime,thisObj.creationDateTime)}}</small> </span>
                     <span style="color: rgb(16, 228, 34);" *ngIf="thisObj.status=='SOLVED'"  class="">{{thisObj.status}} <small>  {{getDiffTime(currentTime,thisObj.solveTime)}}</small> </span>
                   </td>
+                  <th>{{thisObj.receivedFromT1}}</th>
 
                   <td>
                     <a  class="btn btn-sm btn-primary" routerLink="/ticket/tire1/show/{{thisObj.id}}"><i
@@ -174,10 +176,12 @@
                 <option value="Adapter Change">Adapter Change</option>
                 <option value="Battery Change">Battery Change</option>
                 <option value="Body Repair">Body Repair</option>
+                <option value="CAPI Apps">CAPI Apps</option>
                 <option value="Cable Change">Cable Change</option>
                 <option value="Camera  Change">Camera Change</option>
                 <option value="Casing Change">Casing Change</option>
                 <option value="Checked and Deliverede">Checked and Deliverede</option>
+                <option value="DATE & TIME"> Date & Time </option>
                 <option value="Display Change">Display Change</option>
                 <option value="Dust Clean">Dust Clean</option>
                 <option value="Earpiece Change">Earpiece Change</option>
@@ -198,6 +202,7 @@
                 <option value="MAC Address Write">MAC Address Write</option>
                 <option value="Keyboard Change">Keyboard Change</option>
                 <option value="Button Change">Button Change</option>
+                <option value="Others">Others</option>
               </select>
             </div>
 
@@ -244,13 +249,16 @@
               <label>Solution Type</label>
               <select class="form-control" formControlName="solutionType">
                 <option value="">Select Solution Type</option>
+                <option value="">Select Solution Type</option>
                 <option value="Adapter Change">Adapter Change</option>
                 <option value="Battery Change">Battery Change</option>
                 <option value="Body Repair">Body Repair</option>
+                <option value="CAPI Apps">CAPI Apps</option>
                 <option value="Cable Change">Cable Change</option>
                 <option value="Camera  Change">Camera Change</option>
                 <option value="Casing Change">Casing Change</option>
                 <option value="Checked and Deliverede">Checked and Deliverede</option>
+                <option value="DATE & TIME"> Date & Time </option>
                 <option value="Display Change">Display Change</option>
                 <option value="Dust Clean">Dust Clean</option>
                 <option value="Earpiece Change">Earpiece Change</option>
@@ -271,6 +279,7 @@
                 <option value="MAC Address Write">MAC Address Write</option>
                 <option value="Keyboard Change">Keyboard Change</option>
                 <option value="Button Change">Button Change</option>
+                <option value="Others">Others</option>
               </select>
             </div>
 

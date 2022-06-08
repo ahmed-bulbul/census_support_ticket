@@ -43,8 +43,8 @@
         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">
           <a class="btn btn-success btn-block" (click)="searchBySearchButton()"> Search  </a>
         </div>
-        <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">
-          <a class="btn btn-success btn-block" (click)="clearFilter()" >Refresh  <span><i class="fa fa-refresh" aria-hidden="true"></i></span></a>
+        <div class="col-sm-6 col-md-1 col-lg-1 col-xl-1 col-12">
+          <a class="btn btn-success btn-block" (click)="clearFilter()" > <span><i class="fa fa-refresh" aria-hidden="true"></i></span></a>
         </div>
       </div>
 
@@ -85,6 +85,7 @@
                   <th>Problem Type </th>
                   <th>Ticket Rise Time </th>
                   <th>Tier One Send Time </th>
+                  <th>Received By</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -99,6 +100,7 @@
                   <td >{{thisObj.problemType}}</td>
                   <td >{{thisObj.creationDateTime|date:"HH:mm a"}} <small> ({{getDiffTime(currentTime,thisObj.creationDateTime)}})</small></td>
                   <td >{{thisObj.tier2SendTime|date:"HH:mm a"}}<small> ({{getDiffTime(currentTime,thisObj.tier2SendTime)}})</small></td>
+                  <td>{{thisObj.tier2ReceiveBy}} </td>
                   <td>
                     <a  class="btn btn-sm btn-primary" routerLink="/ticket/tire2/show/{{thisObj.id}}"><i
                       class="fa fa-eye m-r-5"></i></a> &nbsp;
@@ -164,10 +166,12 @@
                 <option value="Adapter Change">Adapter Change</option>
                 <option value="Battery Change">Battery Change</option>
                 <option value="Body Repair">Body Repair</option>
+                <option value="CAPI Apps">CAPI Apps</option>
                 <option value="Cable Change">Cable Change</option>
                 <option value="Camera  Change">Camera Change</option>
                 <option value="Casing Change">Casing Change</option>
                 <option value="Checked and Deliverede">Checked and Deliverede</option>
+                <option value="DATE & TIME"> Date & Time </option>
                 <option value="Display Change">Display Change</option>
                 <option value="Dust Clean">Dust Clean</option>
                 <option value="Earpiece Change">Earpiece Change</option>
@@ -188,6 +192,7 @@
                 <option value="MAC Address Write">MAC Address Write</option>
                 <option value="Keyboard Change">Keyboard Change</option>
                 <option value="Button Change">Button Change</option>
+                <option value="Others">Others</option>
               </select>
             </div>
 

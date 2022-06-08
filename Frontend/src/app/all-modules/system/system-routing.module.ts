@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MenuGuard } from 'src/app/core/guards/menu.guard';
+import { LogListComponent } from './components/log/log-list.component';
 import { MenuCreateComponent } from './components/menu/create/menu-create.component';
 import { MenuEditComponent } from './components/menu/edit/menu-edit.component';
 import { MenuListComponent } from './components/menu/list/menu-list.component';
@@ -31,6 +32,11 @@ const routes: Routes = [
       {
         path:'menu/edit/:id',
         component:MenuEditComponent,
+        canActivate:[MenuGuard]
+      },
+      {
+        path:'visitor/list',
+        component:LogListComponent,
         canActivate:[MenuGuard]
       },
 

@@ -2,10 +2,13 @@ package com.census.support.tire1;
 
 import com.census.support.acl.user.User;
 import com.census.support.helper.response.BaseResponse;
+import com.census.support.message.Message;
+import com.census.support.message.MessageRepository;
 import com.census.support.message.MessageService;
 import com.census.support.ticket.Ticket;
 import com.census.support.ticket.TicketDTO;
 import com.census.support.ticket.TicketRepository;
+import com.census.support.util.SetAttributeUpdate;
 import com.census.support.util.SysMessage;
 import com.census.support.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,8 @@ public class TireOneService {
     private TicketRepository ticketRepository;
     @Autowired
     private MessageService messageService;
+    @Autowired
+    private MessageRepository messageRepository;
 
     public Page<TicketDTO> getAllPaginatedLists(Map<String, String> clientParams, int pageNum, int pageSize, String sortField, String sortDir) {
 
@@ -61,13 +66,15 @@ public class TireOneService {
 
                 if (clientParams.containsKey("status")) {
                     if (StringUtils.hasLength(clientParams.get("status"))) {
+//                        p = cb.or(p, cb.equal(root.get("status"), clientParams.get("status")));
                         p = cb.and(p, cb.equal(root.get("status"), clientParams.get("status")));
                     }
                 }
 
                 if (clientParams.containsKey("receivedFromT1")) {
                     if (StringUtils.hasLength(clientParams.get("receivedFromT1"))) {
-                        p = cb.or(p, cb.equal(root.get("receivedFromT1"),  clientParams.get("receivedFromT1")));
+                       p = cb.or(p, cb.equal(root.get("receivedFromT1"),  clientParams.get("receivedFromT1")));
+                       // p = cb.and(p, cb.equal(root.get("receivedFromT1"),  clientParams.get("receivedFromT1")));
 
                     }
                 }
@@ -97,15 +104,15 @@ public class TireOneService {
     public ResponseEntity<?> stsUpdate(Long id) {
         try {
             Ticket ticket = ticketRepository.findById(id).orElse(null);
-            if (ticket != null) {
+            if (ticket != null && !ticket.getStatus().equals("RECEIVED")) {
                 ticket.setStatus("RECEIVED");
                 ticket.setReceivedFromT1(UserUtil.getLoginUser());
                 ticket.setReceiveTime(new Date());
                 ticketRepository.save(ticket);
-                return new ResponseEntity<>(new BaseResponse(true, "Ticket receive successfully", 200), HttpStatus.OK);
+                return new ResponseEntity<>(new BaseResponse(true, "Ticket received successfully", 200), HttpStatus.OK);
             }
             else {
-                return new ResponseEntity<>(new BaseResponse(false, "Ticket not found", 404), HttpStatus.OK);
+                return new ResponseEntity<>(new BaseResponse(false, "Ticket not found or already received", 404), HttpStatus.OK);
             }
         }
         catch (Exception e) {
@@ -163,7 +170,15 @@ public class TireOneService {
                 ticket.setSolutionDescription(entityDTO.getSolutionDescription());
                 ticketRepository.save(ticket);
                 //send user ticket created message
-                messageService.sendTicketCreatedMessage(ticket, SysMessage.SOLVED_MSG);
+                Message messageQueue = new Message();
+                messageQueue.setBody(SysMessage.SOLVED_MSG+ " " + ticket.getCode());
+                messageQueue.setTicket(ticket);
+                messageQueue.setStatus("PENDING");
+                messageQueue.setReceiver(ticket.getDeviceUserPhone());
+                messageQueue.setTicketCode(ticket.getCode());
+                SetAttributeUpdate.setSysAttributeForCreateUpdate(messageQueue,"Create");
+                messageRepository.save(messageQueue);
+              //  messageService.sendTicketCreatedMessage(ticket, SysMessage.SOLVED_MSG);
                 return new ResponseEntity<>(new BaseResponse(true, "Ticket solved successfully", 200), HttpStatus.OK);
             }
             else {
@@ -184,7 +199,7 @@ public class TireOneService {
                 ticket.setTerminateTime(new Date());
                 ticketRepository.save(ticket);
                 //send user ticket terminate message
-                messageService.sendTicketCreatedMessage(ticket, SysMessage.TERMINATE_MSG);
+               // messageService.sendTicketCreatedMessage(ticket, SysMessage.TERMINATE_MSG);
                 return new ResponseEntity<>(new BaseResponse(true, "Ticket terminated successfully", 200), HttpStatus.OK);
 
 

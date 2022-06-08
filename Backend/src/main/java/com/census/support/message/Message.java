@@ -18,7 +18,7 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne( fetch = FetchType.EAGER)
+    @ManyToOne
     private Ticket ticket;
     private String ticketCode;
 

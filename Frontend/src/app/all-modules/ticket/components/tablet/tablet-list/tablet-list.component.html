@@ -29,7 +29,7 @@
 
         <!-- input type select -->
         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-2 col-12">
-          <div class="form-group form-focus select-focus">
+          <div class="form-group select-focus">
             <!-- Option dropdown -->
             <select class="select form-control" (change)="onChangeTicketType($event.target.value)">
               <option value="BARCODE">Search By Serial No</option>
@@ -39,22 +39,25 @@
         </div>
 
         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-2 col-12" *ngIf="searchByBarCode">
-          <div class="form-group form-focus">
-            <input type="text" class="form-control floating" (input)="searchByCode($event.target.value)">
-            <label class="focus-label">Sl No</label>
+          <div class="form-group ">
+            <input type="text" class="form-control floating" (input)="searchByCode($event.target.value)" placeholder="Sl No">
+            <!-- <label class="focus-label">Sl No</label> -->
           </div>
         </div>
 
         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-2 col-12" *ngIf="searchBySimNo">
-          <div class="form-group form-focus">
-            <input type="text" class="form-control floating" (input)="searchBySimNumber($event.target.value)">
-            <label class="focus-label">Sim No</label>
+          <div class="form-group">
+            <input type="text" class="form-control floating" (input)="searchBySimNumber($event.target.value)" placeholder="Sim No">
+            <!-- <label class="focus-label">Sim No</label> -->
           </div>
         </div>
 
         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-12">
           <a class="btn btn-success btn-block" (click)="btnSearch()"> Search  </a>
         </div>
+
+
+
         <!-- <div class="col-sm-6 col-md-1 col-lg-1 col-xl-1 col-12">
           <a class="btn btn-success btn-block" (click)="clearFilter()" ><span><i class="fa fa-refresh" aria-hidden="true"></i></span></a>
         </div> -->

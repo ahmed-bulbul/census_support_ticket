@@ -12,10 +12,11 @@ import { DataTablesModule } from 'angular-datatables';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { LogListComponent } from './components/log/log-list.component';
 
 
 @NgModule({
-  declarations: [SystemComponent, MenuCreateComponent, MenuEditComponent, MenuListComponent, MenuShowComponent],
+  declarations: [SystemComponent, MenuCreateComponent, MenuEditComponent, MenuListComponent, MenuShowComponent, LogListComponent],
   imports: [
     CommonModule,
     SystemRoutingModule,

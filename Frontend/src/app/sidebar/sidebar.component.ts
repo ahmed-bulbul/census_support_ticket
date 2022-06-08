@@ -233,6 +233,10 @@ export class SidebarComponent implements OnInit {
           <i class="las la-circle"></i>
           <span>Users</span>
       </a>
+      <a class="routerlink" href="/system/visitor/list">
+          <i class="las la-circle"></i>
+          <span>Visitors</span>
+      </a>
     </li>
 
     `;
@@ -356,7 +360,7 @@ export class SidebarComponent implements OnInit {
       // append response
 
       let menuStr = this._hardCodeMenuString();
-      if(this.role_super_admin===true){
+      if(this.role_super_admin===true || this.role_bbs_user===true){
         $('#_leftMenuContainer').append( menuStr );
       }
 

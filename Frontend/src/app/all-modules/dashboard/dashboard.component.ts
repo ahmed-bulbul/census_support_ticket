@@ -27,9 +27,9 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
 
-  
+
     let authorities = this.loginService.getLoginUserRole();
-    if(authorities.includes("ROLE_SUPER_ADMIN")){
+    if(authorities.includes("ROLE_SUPER_ADMIN") || authorities.includes("ROLE_BBS_USER")){
       this.router.navigateByUrl("/dashboard/admin");
     }else{
       this.router.navigateByUrl("/dashboard/common");

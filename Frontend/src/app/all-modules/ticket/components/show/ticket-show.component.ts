@@ -80,7 +80,7 @@ export class TicketShowComponent implements OnInit {
             console.log(this.msgListData);
           }else{
             this.spinnerService.hide();
-            this.toastr.info(response.message, 'info');
+            //this.toastr.info(response.message, 'info');
           }
         },
         error => {

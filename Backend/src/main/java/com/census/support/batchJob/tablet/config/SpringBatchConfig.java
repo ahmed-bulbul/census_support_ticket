@@ -33,7 +33,7 @@ public class SpringBatchConfig {
     @Bean
     public FlatFileItemReader<Tablet> reader() {
         FlatFileItemReader<Tablet> itemReader = new FlatFileItemReader<>();
-        itemReader.setResource(new FileSystemResource("src/main/resources/BBS.csv"));
+        itemReader.setResource(new FileSystemResource("src/main/resources/bbsall.csv"));
        // itemReader.setResource(new FileSystemResource("src/main/resources/1_2_TAB-LIST.csv"));
 //        itemReader.setResource(new FileSystemResource("src/main/resources/2_1_TAB-LIST.csv"));
 //        itemReader.setResource(new FileSystemResource("src/main/resources/2_2_TAB-LIST.csv"));
@@ -51,7 +51,7 @@ public class SpringBatchConfig {
         lineTokenizer.setDelimiter(",");
         lineTokenizer.setStrict(false);
 //        lineTokenizer.setNames("barCode", "imei1", "imei2", "simNo", "deliveryDate");
-        lineTokenizer.setNames("barCode","deliveryDate", "imei1", "imei2", "simNo");
+        lineTokenizer.setNames("barCode", "imei1", "imei2", "simNo","deliveryDate");
 
         BeanWrapperFieldSetMapper<Tablet> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
         fieldSetMapper.setTargetType(Tablet.class);

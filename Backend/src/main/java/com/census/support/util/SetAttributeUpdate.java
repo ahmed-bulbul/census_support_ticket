@@ -10,14 +10,17 @@ import java.util.Date;
 public class SetAttributeUpdate {
     public static void setSysAttributeForCreateUpdate(Object entityInst, String activeOperation)  {
 
+        Date date = new Date(System.currentTimeMillis());
+
         if (activeOperation.equals("Create")) {
             try {
                 entityInst.getClass().getMethod("setCreationUser", String.class).invoke(entityInst, UserUtil.getLoginUser());
             } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                 e.printStackTrace();
             }
+
             try {
-                entityInst.getClass().getMethod("setCreationDateTime", Date.class).invoke(entityInst, new Date());
+                entityInst.getClass().getMethod("setCreationDateTime", Date.class).invoke(entityInst, date);
             } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                 e.printStackTrace();
             }
@@ -29,7 +32,7 @@ public class SetAttributeUpdate {
                 e.printStackTrace();
             }
             try {
-                entityInst.getClass().getMethod("setLastUpdateDateTime", Date.class).invoke(entityInst, new Date());
+                entityInst.getClass().getMethod("setLastUpdateDateTime", Date.class).invoke(entityInst, date);
             } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                 e.printStackTrace();
             }

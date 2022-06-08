@@ -182,6 +182,7 @@ export class Tire1ListComponent implements OnInit {
 
     let queryParams: any = {};
     this.problemCategory = "TECHNICAL";
+    this.status = "OPEN";
     this.receivedFromT1 = this.loginService.getUser().username;
     const params = this.getUserQueryParams(this.configPgn.pageNum, this.configPgn.pageSize);
     queryParams = params;
@@ -215,23 +216,67 @@ export class Tire1ListComponent implements OnInit {
 
 
   }
+
+_getListDataForSearch(){
+  const apiURL = this.baseUrl + '/ticket/tire1/getList';
+
+    let queryParams: any = {};
+    this.problemCategory = "TECHNICAL";
+    // this.status = "OPEN";
+    // this.receivedFromT1 = this.loginService.getUser().username;
+    const params = this.getUserQueryParams(this.configPgn.pageNum, this.configPgn.pageSize);
+    queryParams = params;
+
+    queryParams.rEntityName = 'Ticket';
+    queryParams.rReqType = 'getListData';
+
+
+
+    //this.spinnerService.show();
+    this.ticketService.sendGetRequest(apiURL, queryParams).subscribe(
+      (response: any) => {
+        if (response.status === true) {
+          this.listData = response.data;
+          this.configPgn.totalItem = response.totalItems;
+          this.configPgn.totalItems = response.totalItems;
+          this.setDisplayLastSequence();
+          // this.spinnerService.hide();
+
+
+        } else {
+          this.spinnerService.hide();
+          this.toastr.info(response.message, 'Info');
+        }
+
+      },
+      (error) => {
+        console.log(error)
+      }
+    );
+}
+
   refreshData() {
     this.polling =
       setInterval(() => {
         this._getListData();
 
-      }, 10000);
+      }, 120000);
   }
 
 
   searchByCode(val) {
     this.code = val;
+    this.status='';
+    this.receivedFromT1='';
   }
   searchByTabletSerialNo(val) {
     this.tabletSerialNo = val;
+    this.status='';
+    this.receivedFromT1='';
+    this.code='';
   }
   searchBySearchButton() {
-    this._getListData();
+    this._getListDataForSearch();
   }
   clearFilter() {
     this.code = '';
@@ -422,6 +467,9 @@ export class Tire1ListComponent implements OnInit {
     // push other attributes
     if (this.code) {
       params[`code`] = this.code;
+    }
+    if (this.status) {
+      params[`status`] = this.status;
     }
     if (this.creationUser) {
       params['creationUser'] = this.creationUser;

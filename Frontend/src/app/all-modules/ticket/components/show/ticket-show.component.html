@@ -50,6 +50,13 @@
                   </div>
 
                   <div class="form-group row">
+                    <label class="col-form-label col-md-2">Device Phone</label>
+                    <div class="col-md-10">
+                      <span>: &nbsp;</span><span>{{myFormData.devicePhone}}</span>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
                     <label class="col-form-label col-md-2">Creation User</label>
                     <div class="col-md-10">
                       <span>: &nbsp;</span><span>{{myFormData.creationUser}}</span>
@@ -104,8 +111,9 @@
                                 <td>{{item.body}}</td>
                                 <td>{{item.creationDateTime  | date: 'yyyy/MM/dd hh:mm:ss a'}} </td>
                                 <td>
-                                  <span *ngIf="item.status == 'SENT'"><i class="fa fa-check-circle text-success"></i></span>
-                                  <span *ngIf="item.status == 'FAILED'"><i class="fa fa-exclamation-circle text-danger" aria-hidden="true"></i></span>
+                                  <span *ngIf="item.status == 'SENT'" class="text-success"><i class="fa fa-check-circle text-success"></i> Sent</span>
+                                  <span *ngIf="item.status == 'FAILED'" class="text-danger"><i class="fa fa-exclamation-circle text-danger" aria-hidden="true"></i> Failed</span>
+                                  <span *ngIf="item.status == 'PENDING'" class="text-danger"><i class="fa fa-clock-o text-danger" aria-hidden="true"></i> Pending</span>
                                 </td>
                               </tr>
                             </tbody>

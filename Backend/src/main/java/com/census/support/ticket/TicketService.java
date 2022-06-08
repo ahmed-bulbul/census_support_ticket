@@ -1,12 +1,14 @@
 package com.census.support.ticket;
 
 import com.census.support.helper.response.BaseResponse;
-import com.census.support.message.MessageService;
+import com.census.support.message.Message;
+import com.census.support.message.MessageRepository;
 import com.census.support.system.counter.SystemCounterService;
 import com.census.support.ticket.log.TicketLog;
 import com.census.support.ticket.log.TicketLogRepository;
 import com.census.support.util.SetAttributeUpdate;
 import com.census.support.util.SysMessage;
+import com.census.support.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,6 +22,8 @@ import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.Predicate;
 import javax.transaction.Transactional;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 
@@ -31,9 +35,9 @@ public class TicketService {
     @Autowired
     private SystemCounterService counterService;
     @Autowired
-    private MessageService messageService;
-    @Autowired
     private TicketLogRepository ticketLogRepository;
+    @Autowired
+    private MessageRepository messageRepository;
 
 
 
@@ -45,13 +49,22 @@ public class TicketService {
             if (ticket != null) {
                 return new ResponseEntity<>(new BaseResponse(false, "Ticket already exists", 302), HttpStatus.OK);
             }else {
-                SetAttributeUpdate.setSysAttributeForCreateUpdate(entity,"Create");
+                //SetAttributeUpdate.setSysAttributeForCreateUpdate(entity,"Create");
+                entity = this.setAttributeForCreateUpdate(entity,"Create");
                 entity.setStatusSequence(3L);
                 entity.setProblemCategory("TECHNICAL");
                 ticketRepository.save(entity);
                 try {
                     //send user ticket created message
-                    messageService.sendTicketCreatedMessage(entity, SysMessage.OPEN_MSG);
+                    Message messageQueue = new Message();
+                    messageQueue.setBody(SysMessage.OPEN_MSG+" "+entity.getCode());
+                    messageQueue.setTicket(entity);
+                    messageQueue.setStatus("PENDING");
+                    messageQueue.setReceiver(entity.getDeviceUserPhone());
+                    messageQueue.setTicketCode(entity.getCode());
+                    SetAttributeUpdate.setSysAttributeForCreateUpdate(messageQueue,"Create");
+                    messageRepository.save(messageQueue);
+                    //messageService.sendTicketCreatedMessage(entity, SysMessage.OPEN_MSG);
                     return new ResponseEntity<>(new BaseResponse(true, "Ticket created successfully", 201), HttpStatus.OK);
                 }catch (Exception e){
                     return new ResponseEntity<>(new BaseResponse(false, "Ticket created successfully but failed to send message: "
@@ -62,6 +75,24 @@ public class TicketService {
             return new ResponseEntity<>(new BaseResponse(false, "Ticket creation failed: "+e.getMessage(), 500), HttpStatus.OK);
         }
     }
+
+
+    public Ticket setAttributeForCreateUpdate(Ticket entityInst, String activeOperation) {
+        if (activeOperation.equals("Create")) {
+            //entityInst.setCreationDateTime(new Date());
+            Date date = new Date(System.currentTimeMillis());
+            entityInst.setCreationDateTime(date);
+            entityInst.setCreationUser(UserUtil.getLoginUser());
+        }
+        else if (activeOperation.equals("Update")) {
+            //entityInst.setLastUpdateDateTime(new Date());
+            Date date = new Date(System.currentTimeMillis());
+            entityInst.setLastUpdateDateTime(date);
+            entityInst.setLastUpdateUser(UserUtil.getLoginUser());
+        }
+        return entityInst;
+    }
+
 
 
     public Page<TicketDTO> getAllPaginatedLists(Map<String, String> clientParams, int pageNum, int pageSize,

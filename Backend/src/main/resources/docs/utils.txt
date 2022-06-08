@@ -34,6 +34,9 @@ hostname: dc-testapp.waltonbd.com
 user:test and pwd:Walton!@#
 user:root and pwd:Walton!@#
 
+#linux command for showing server time
+timedatectl
+super-admin-pass: 784sXh
 
 
 ==================Unit Testing=========================
@@ -55,3 +58,14 @@ All list show BBS LIST
 All tab list data show an UI
 Ticket number only 5 digits
 
+=============== Required Query =================
+
+
+select id, creation_datetime,status from ticket
+where  creation_datetime > '07-JUN-22 07.00.00.000000000 AM' and creation_datetime < '07-JUN-22 12.25.00.000000000 PM';
+
+select  (a.CREATION_DATETIME) from visitor a ,TICKET b
+where 1=1
+and upper(a.CREATION_USER)=upper(b.CREATION_USER)
+and username like 'noc%'
+and username <>'noc-user1'

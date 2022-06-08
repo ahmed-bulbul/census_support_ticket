@@ -27,7 +27,7 @@ public class MessageService {
     private TicketRepository ticketRepository;
 
 
-    public void sendTicketCreatedMessage(Ticket entity,String message) {
+    public void sendTicketCreatedMessage(Ticket entity,Message message) {
         try {
             // Send request to the API servers over HTTPS
             SmsServiceUtil.doTrustToCertificates();
@@ -51,25 +51,15 @@ public class MessageService {
             JSONObject jsonObj = new JSONObject(results);
             String status = jsonObj.getString("message");
             if (status.equals("SUCCESS")) {
-                Message entityInst = new Message();
-                entityInst.setBody(sms_body);
-                entityInst.setTicket(entity);
-                entityInst.setTicketCode(entity.getCode());
-                entityInst.setStatus("SENT");
-                entityInst.setReceiver(entity.getDeviceUserPhone());
-                SetAttributeUpdate.setSysAttributeForCreateUpdate(entityInst,"Create");
-                messageRepository.save(entityInst);
+                message.setStatus("SENT");
+                SetAttributeUpdate.setSysAttributeForCreateUpdate(message,"Update");
+                messageRepository.saveAndFlush(message);
                 System.out.println("SMS sent successfully");
             }else {
-                Message entityInst = new Message();
-                entityInst.setBody(sms_body);
-                entityInst.setTicket(entity);
-                entityInst.setTicketCode(entity.getCode());
-                entityInst.setStatus("FAILED");
-                entityInst.setReceiver(entity.getDeviceUserPhone());
-                SetAttributeUpdate.setSysAttributeForCreateUpdate(entityInst,"Create");
-                messageRepository.save(entityInst);
-                System.out.println("SMS sent failed"+ jsonObj.getString("message"));
+                message.setStatus("FAILED");
+                SetAttributeUpdate.setSysAttributeForCreateUpdate(message,"Update");
+                messageRepository.saveAndFlush(message);
+               // System.out.println("SMS sent failed"+ jsonObj.getString("message"));
             }
         } catch (Exception e) {
             System.out.println("Error - " + e);
