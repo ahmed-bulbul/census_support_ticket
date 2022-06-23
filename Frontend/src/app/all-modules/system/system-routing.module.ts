@@ -6,6 +6,7 @@ import { MenuCreateComponent } from './components/menu/create/menu-create.compon
 import { MenuEditComponent } from './components/menu/edit/menu-edit.component';
 import { MenuListComponent } from './components/menu/list/menu-list.component';
 import { MenuShowComponent } from './components/menu/show/menu-show.component';
+import { TestSubsComponent } from './components/subscriptions/test-subs.component';
 import { SystemComponent } from './system.component';
 
 const routes: Routes = [
@@ -39,6 +40,11 @@ const routes: Routes = [
         component:LogListComponent,
         canActivate:[MenuGuard]
       },
+
+      {
+        path:'subs',
+        component:TestSubsComponent,
+      }
 
 
     ]

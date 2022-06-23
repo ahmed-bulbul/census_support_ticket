@@ -15,6 +15,7 @@ import com.census.support.acl.user.UserService;
 import com.census.support.helper.exception.ResourceNotFoundException;
 import com.census.support.helper.response.BaseResponse;
 import com.census.support.system.constants.SystemRole;
+import com.census.support.util.OnlineUsersCounter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -188,6 +189,13 @@ public class AuthController {
     @PutMapping("/changePassword")
     public ResponseEntity<?> changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest) {
         return userService.changePassword(changePasswordRequest);
+    }
+
+    // get current active user
+    @GetMapping("/getActiveUser")
+    public ResponseEntity<?> getActiveUser() {
+        int count= OnlineUsersCounter.getNumberOfUsersOnline();
+            return ResponseEntity.ok(new BaseResponse(true, "Active user: " + count, 200));
     }
 
 }

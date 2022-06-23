@@ -13,10 +13,11 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LogListComponent } from './components/log/log-list.component';
+import { TestSubsComponent } from './components/subscriptions/test-subs.component';
 
 
 @NgModule({
-  declarations: [SystemComponent, MenuCreateComponent, MenuEditComponent, MenuListComponent, MenuShowComponent, LogListComponent],
+  declarations: [SystemComponent, MenuCreateComponent, MenuEditComponent, MenuListComponent, MenuShowComponent, LogListComponent, TestSubsComponent],
   imports: [
     CommonModule,
     SystemRoutingModule,
